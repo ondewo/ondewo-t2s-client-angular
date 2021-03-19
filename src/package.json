@@ -1,0 +1,23 @@
+{
+  "name": "@ondewo/t2s-client-angular",
+  "version": "1.4.0",
+  "description": "Ondewo natural language understanding client library for angular",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
+    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler"
+  },
+  "author": "ONDEWO GmbH",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@angular/common": ">=8.0.0",
+    "@angular/core": ">=8.0.0"
+  },
+  "dependencies": {
+    "@ngx-grpc/common": "^0.3.1",
+    "@ngx-grpc/core": "^0.3.1",
+    "google-protobuf": "^3.11.4",
+    "grpc-web": "^1.0.7",
+    "tslib": "^1.10.0"
+  }
+}
