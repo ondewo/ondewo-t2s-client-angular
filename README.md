@@ -1,4 +1,4 @@
-# Ondewo S2T Client Angular #
+# Ondewo T2S Client Angular #
 
 This package contains a grpc client used to access and communicate the ONDEWO-T2S API.
 It was also configured as an Angular npm package so it can be easily added to any Angular project.
