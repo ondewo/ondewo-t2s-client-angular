@@ -5,6 +5,7 @@
 
 ### New Features
 * Compatible with ONDEWO-T2S 1.5.* GRPC server
+* Upgraded from ngx-grpc 0.3.1 to 2.1.0
 
 ***
 
