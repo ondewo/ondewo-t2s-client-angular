@@ -20,6 +20,6 @@
   },
   "repository": {
     "type": "git",
-    "directory": "https://github.com/ondewo/ondewo-s2t-client-angular.git"
+    "directory": "https://github.com/ondewo/ondewo-t2s-client-angular.git"
   }
 }
