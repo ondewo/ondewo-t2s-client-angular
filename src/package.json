@@ -5,8 +5,9 @@
   "keywords": ["ondewo", "t2s", "api", "client", "ngx-grpc", "grpc"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "git submodule update --init --recursive --remote && docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
-    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler"
+    "build": "git submodule update --recursive --remote && docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
+    "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
+    "publish-npm": "npm publish ../npm --access public"
   },
   "author": "ONDEWO GmbH",
   "homepage": "https://ondewo.com/",
