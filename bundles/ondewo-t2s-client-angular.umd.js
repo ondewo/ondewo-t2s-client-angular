@@ -1,33 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('google-protobuf'), require('@angular/core'), require('@ngx-grpc/common'), require('@ngx-grpc/core')) :
-    typeof define === 'function' && define.amd ? define('@ondewo/t2s-client-angular', ['exports', 'google-protobuf', '@angular/core', '@ngx-grpc/common', '@ngx-grpc/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ondewo = global.ondewo || {}, global.ondewo['t2s-client-angular'] = {}), global.googleProtobuf, global.ng.core, global.common, global.i2));
-}(this, (function (exports, googleProtobuf, i0, common, i2) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ngx-grpc/common'), require('google-protobuf'), require('@angular/core'), require('@ngx-grpc/core'), require('@ngx-grpc/well-known-types')) :
+    typeof define === 'function' && define.amd ? define('@ondewo/t2s-client-angular', ['exports', '@ngx-grpc/common', 'google-protobuf', '@angular/core', '@ngx-grpc/core', '@ngx-grpc/well-known-types'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ondewo = global.ondewo || {}, global.ondewo['t2s-client-angular'] = {}), global.common, global.googleProtobuf, global.ng.core, global.i2, global.googleProtobuf000));
+}(this, (function (exports, common, googleProtobuf, i0, i2, googleProtobuf000) { 'use strict';
 
-    function _interopNamespace(e) {
-        if (e && e.__esModule) return e;
-        var n = Object.create(null);
-        if (e) {
-            Object.keys(e).forEach(function (k) {
-                if (k !== 'default') {
-                    var d = Object.getOwnPropertyDescriptor(e, k);
-                    Object.defineProperty(n, k, d.get ? d : {
-                        enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
-                    });
-                }
-            });
-        }
-        n['default'] = e;
-        return Object.freeze(n);
-    }
-
-    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
-    var i2__namespace = /*#__PURE__*/_interopNamespace(i2);
-
-    exports.AudioFormat = void 0;
+    /* tslint:disable */
     (function (AudioFormat) {
         AudioFormat[AudioFormat["wav"] = 0] = "wav";
         AudioFormat[AudioFormat["flac"] = 1] = "flac";
@@ -37,94 +14,110 @@
         AudioFormat[AudioFormat["ogg"] = 5] = "ogg";
         AudioFormat[AudioFormat["wma"] = 6] = "wma";
     })(exports.AudioFormat || (exports.AudioFormat = {}));
+    /**
+     * Message implementation for ondewo.t2s.SynthesizeRequest
+     */
     exports.SynthesizeRequest = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param SynthesizeRequest value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of SynthesizeRequest to deeply clone from
          */
-        function SynthesizeRequest(value) {
-            value = value || {};
-            this.t2sPipelineId = value.t2sPipelineId;
-            this.text = value.text;
-            this.lengthScale = value.lengthScale;
-            this.noiseScale = value.noiseScale;
-            this.sampleRate = value.sampleRate;
-            this.pcm = value.pcm;
-            this.audioFormat = value.audioFormat;
+        function SynthesizeRequest(_value) {
+            _value = _value || {};
+            this.t2sPipelineId = _value.t2sPipelineId;
+            this.text = _value.text;
+            this.lengthScale = _value.lengthScale;
+            this.noiseScale = _value.noiseScale;
+            this.sampleRate = _value.sampleRate;
+            this.pcm = _value.pcm;
+            this.audioFormat = _value.audioFormat;
             SynthesizeRequest.refineValues(this);
         }
-        SynthesizeRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            SynthesizeRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        SynthesizeRequest.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        SynthesizeRequest.deserializeBinary = function (bytes) {
             var instance = new SynthesizeRequest();
-            SynthesizeRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            SynthesizeRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        SynthesizeRequest.refineValues = function (instance) {
-            instance.t2sPipelineId = instance.t2sPipelineId || '';
-            instance.text = instance.text || '';
-            instance.lengthScale = instance.lengthScale || 0;
-            instance.noiseScale = instance.noiseScale || 0;
-            instance.sampleRate = instance.sampleRate || 0;
-            instance.pcm = instance.pcm || 0;
-            instance.audioFormat = instance.audioFormat || 0;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        SynthesizeRequest.refineValues = function (_instance) {
+            _instance.t2sPipelineId = _instance.t2sPipelineId || '';
+            _instance.text = _instance.text || '';
+            _instance.lengthScale = _instance.lengthScale || 0;
+            _instance.noiseScale = _instance.noiseScale || 0;
+            _instance.sampleRate = _instance.sampleRate || 0;
+            _instance.pcm = _instance.pcm || 0;
+            _instance.audioFormat = _instance.audioFormat || 0;
         };
-        SynthesizeRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        SynthesizeRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.t2sPipelineId = reader.readString();
+                        _instance.t2sPipelineId = _reader.readString();
                         break;
                     case 2:
-                        instance.text = reader.readString();
+                        _instance.text = _reader.readString();
                         break;
                     case 3:
-                        instance.lengthScale = reader.readFloat();
+                        _instance.lengthScale = _reader.readFloat();
                         break;
                     case 4:
-                        instance.noiseScale = reader.readFloat();
+                        _instance.noiseScale = _reader.readFloat();
                         break;
                     case 5:
-                        instance.sampleRate = reader.readInt32();
+                        _instance.sampleRate = _reader.readInt32();
                         break;
                     case 6:
-                        instance.pcm = reader.readEnum();
+                        _instance.pcm = _reader.readEnum();
                         break;
                     case 7:
-                        instance.audioFormat = reader.readEnum();
+                        _instance.audioFormat = _reader.readEnum();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            SynthesizeRequest.refineValues(instance);
+            SynthesizeRequest.refineValues(_instance);
         };
-        SynthesizeRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.t2sPipelineId) {
-                writer.writeString(1, instance.t2sPipelineId);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        SynthesizeRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.t2sPipelineId) {
+                _writer.writeString(1, _instance.t2sPipelineId);
             }
-            if (instance.text) {
-                writer.writeString(2, instance.text);
+            if (_instance.text) {
+                _writer.writeString(2, _instance.text);
             }
-            if (instance.lengthScale) {
-                writer.writeFloat(3, instance.lengthScale);
+            if (_instance.lengthScale) {
+                _writer.writeFloat(3, _instance.lengthScale);
             }
-            if (instance.noiseScale) {
-                writer.writeFloat(4, instance.noiseScale);
+            if (_instance.noiseScale) {
+                _writer.writeFloat(4, _instance.noiseScale);
             }
-            if (instance.sampleRate) {
-                writer.writeInt32(5, instance.sampleRate);
+            if (_instance.sampleRate) {
+                _writer.writeInt32(5, _instance.sampleRate);
             }
-            if (instance.pcm) {
-                writer.writeEnum(6, instance.pcm);
+            if (_instance.pcm) {
+                _writer.writeEnum(6, _instance.pcm);
             }
-            if (instance.audioFormat) {
-                writer.writeEnum(7, instance.audioFormat);
+            if (_instance.audioFormat) {
+                _writer.writeEnum(7, _instance.audioFormat);
             }
         };
         Object.defineProperty(SynthesizeRequest.prototype, "t2sPipelineId", {
@@ -197,6 +190,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        SynthesizeRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            SynthesizeRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         SynthesizeRequest.prototype.toObject = function () {
             return {
                 t2sPipelineId: this.t2sPipelineId,
@@ -208,111 +213,150 @@
                 audioFormat: this.audioFormat
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         SynthesizeRequest.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        SynthesizeRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a, _b;
+            return {
+                t2sPipelineId: this.t2sPipelineId,
+                text: this.text,
+                lengthScale: this.lengthScale,
+                noiseScale: this.noiseScale,
+                sampleRate: this.sampleRate,
+                pcm: SynthesizeRequest.Pcm[(_a = this.pcm) !== null && _a !== void 0 ? _a : 0],
+                audioFormat: exports.AudioFormat[(_b = this.audioFormat) !== null && _b !== void 0 ? _b : 0]
+            };
+        };
         return SynthesizeRequest;
     }());
+    exports.SynthesizeRequest.id = 'ondewo.t2s.SynthesizeRequest';
     (function (SynthesizeRequest) {
         var Pcm;
         (function (Pcm) {
-            Pcm[Pcm["pcm16"] = 0] = "pcm16";
-            Pcm[Pcm["pcm24"] = 1] = "pcm24";
-            Pcm[Pcm["pcm32"] = 2] = "pcm32";
-            Pcm[Pcm["pcmS8"] = 3] = "pcmS8";
-            Pcm[Pcm["pcmU8"] = 4] = "pcmU8";
-            Pcm[Pcm["float"] = 5] = "float";
-            Pcm[Pcm["double"] = 6] = "double";
+            Pcm[Pcm["PCM_16"] = 0] = "PCM_16";
+            Pcm[Pcm["PCM_24"] = 1] = "PCM_24";
+            Pcm[Pcm["PCM_32"] = 2] = "PCM_32";
+            Pcm[Pcm["PCM_S8"] = 3] = "PCM_S8";
+            Pcm[Pcm["PCM_U8"] = 4] = "PCM_U8";
+            Pcm[Pcm["FLOAT"] = 5] = "FLOAT";
+            Pcm[Pcm["DOUBLE"] = 6] = "DOUBLE";
         })(Pcm = SynthesizeRequest.Pcm || (SynthesizeRequest.Pcm = {}));
     })(exports.SynthesizeRequest || (exports.SynthesizeRequest = {}));
+    /**
+     * Message implementation for ondewo.t2s.SynthesizeResponse
+     */
     var SynthesizeResponse = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param SynthesizeResponse value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of SynthesizeResponse to deeply clone from
          */
-        function SynthesizeResponse(value) {
-            value = value || {};
-            this.audio = value.audio;
-            this.generationTime = value.generationTime;
-            this.audioLength = value.audioLength;
-            this.t2sPipelineId = value.t2sPipelineId;
-            this.audioFormat = value.audioFormat;
-            this.text = value.text;
-            this.sampleRate = value.sampleRate;
+        function SynthesizeResponse(_value) {
+            _value = _value || {};
+            this.audio = _value.audio;
+            this.generationTime = _value.generationTime;
+            this.audioLength = _value.audioLength;
+            this.t2sPipelineId = _value.t2sPipelineId;
+            this.audioFormat = _value.audioFormat;
+            this.text = _value.text;
+            this.sampleRate = _value.sampleRate;
             SynthesizeResponse.refineValues(this);
         }
-        SynthesizeResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            SynthesizeResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        SynthesizeResponse.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        SynthesizeResponse.deserializeBinary = function (bytes) {
             var instance = new SynthesizeResponse();
-            SynthesizeResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            SynthesizeResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        SynthesizeResponse.refineValues = function (instance) {
-            instance.audio = instance.audio || new Uint8Array();
-            instance.generationTime = instance.generationTime || 0;
-            instance.audioLength = instance.audioLength || 0;
-            instance.t2sPipelineId = instance.t2sPipelineId || '';
-            instance.audioFormat = instance.audioFormat || 0;
-            instance.text = instance.text || '';
-            instance.sampleRate = instance.sampleRate || 0;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        SynthesizeResponse.refineValues = function (_instance) {
+            _instance.audio = _instance.audio || new Uint8Array();
+            _instance.generationTime = _instance.generationTime || 0;
+            _instance.audioLength = _instance.audioLength || 0;
+            _instance.t2sPipelineId = _instance.t2sPipelineId || '';
+            _instance.audioFormat = _instance.audioFormat || 0;
+            _instance.text = _instance.text || '';
+            _instance.sampleRate = _instance.sampleRate || 0;
         };
-        SynthesizeResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        SynthesizeResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.audio = reader.readBytes();
+                        _instance.audio = _reader.readBytes();
                         break;
                     case 2:
-                        instance.generationTime = reader.readFloat();
+                        _instance.generationTime = _reader.readFloat();
                         break;
                     case 3:
-                        instance.audioLength = reader.readFloat();
+                        _instance.audioLength = _reader.readFloat();
                         break;
                     case 4:
-                        instance.t2sPipelineId = reader.readString();
+                        _instance.t2sPipelineId = _reader.readString();
                         break;
                     case 5:
-                        instance.audioFormat = reader.readEnum();
+                        _instance.audioFormat = _reader.readEnum();
                         break;
                     case 6:
-                        instance.text = reader.readString();
+                        _instance.text = _reader.readString();
                         break;
                     case 7:
-                        instance.sampleRate = reader.readInt32();
+                        _instance.sampleRate = _reader.readInt32();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            SynthesizeResponse.refineValues(instance);
+            SynthesizeResponse.refineValues(_instance);
         };
-        SynthesizeResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.audio && instance.audio.length) {
-                writer.writeBytes(1, instance.audio);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        SynthesizeResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.audio && _instance.audio.length) {
+                _writer.writeBytes(1, _instance.audio);
             }
-            if (instance.generationTime) {
-                writer.writeFloat(2, instance.generationTime);
+            if (_instance.generationTime) {
+                _writer.writeFloat(2, _instance.generationTime);
             }
-            if (instance.audioLength) {
-                writer.writeFloat(3, instance.audioLength);
+            if (_instance.audioLength) {
+                _writer.writeFloat(3, _instance.audioLength);
             }
-            if (instance.t2sPipelineId) {
-                writer.writeString(4, instance.t2sPipelineId);
+            if (_instance.t2sPipelineId) {
+                _writer.writeString(4, _instance.t2sPipelineId);
             }
-            if (instance.audioFormat) {
-                writer.writeEnum(5, instance.audioFormat);
+            if (_instance.audioFormat) {
+                _writer.writeEnum(5, _instance.audioFormat);
             }
-            if (instance.text) {
-                writer.writeString(6, instance.text);
+            if (_instance.text) {
+                _writer.writeString(6, _instance.text);
             }
-            if (instance.sampleRate) {
-                writer.writeInt32(7, instance.sampleRate);
+            if (_instance.sampleRate) {
+                _writer.writeInt32(7, _instance.sampleRate);
             }
         };
         Object.defineProperty(SynthesizeResponse.prototype, "audio", {
@@ -385,6 +429,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        SynthesizeResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            SynthesizeResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         SynthesizeResponse.prototype.toObject = function () {
             return {
                 audio: this.audio ? this.audio.subarray(0) : new Uint8Array(),
@@ -396,83 +452,122 @@
                 sampleRate: this.sampleRate
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         SynthesizeResponse.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        SynthesizeResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                audio: this.audio ? common.uint8ArrayToBase64(this.audio) : '',
+                generationTime: this.generationTime,
+                audioLength: this.audioLength,
+                t2sPipelineId: this.t2sPipelineId,
+                audioFormat: exports.AudioFormat[(_a = this.audioFormat) !== null && _a !== void 0 ? _a : 0],
+                text: this.text,
+                sampleRate: this.sampleRate
+            };
+        };
         return SynthesizeResponse;
     }());
+    SynthesizeResponse.id = 'ondewo.t2s.SynthesizeResponse';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sPipelinesRequest
+     */
     var ListT2sPipelinesRequest = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param ListT2sPipelinesRequest value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sPipelinesRequest to deeply clone from
          */
-        function ListT2sPipelinesRequest(value) {
-            value = value || {};
-            this.languages = (value.languages || []).slice();
-            this.speakerSexes = (value.speakerSexes || []).slice();
-            this.pipelineOwners = (value.pipelineOwners || []).slice();
-            this.speakerNames = (value.speakerNames || []).slice();
-            this.domains = (value.domains || []).slice();
+        function ListT2sPipelinesRequest(_value) {
+            _value = _value || {};
+            this.languages = (_value.languages || []).slice();
+            this.speakerSexes = (_value.speakerSexes || []).slice();
+            this.pipelineOwners = (_value.pipelineOwners || []).slice();
+            this.speakerNames = (_value.speakerNames || []).slice();
+            this.domains = (_value.domains || []).slice();
             ListT2sPipelinesRequest.refineValues(this);
         }
-        ListT2sPipelinesRequest.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ListT2sPipelinesRequest.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ListT2sPipelinesRequest.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sPipelinesRequest.deserializeBinary = function (bytes) {
             var instance = new ListT2sPipelinesRequest();
-            ListT2sPipelinesRequest.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            ListT2sPipelinesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        ListT2sPipelinesRequest.refineValues = function (instance) {
-            instance.languages = instance.languages || [];
-            instance.speakerSexes = instance.speakerSexes || [];
-            instance.pipelineOwners = instance.pipelineOwners || [];
-            instance.speakerNames = instance.speakerNames || [];
-            instance.domains = instance.domains || [];
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sPipelinesRequest.refineValues = function (_instance) {
+            _instance.languages = _instance.languages || [];
+            _instance.speakerSexes = _instance.speakerSexes || [];
+            _instance.pipelineOwners = _instance.pipelineOwners || [];
+            _instance.speakerNames = _instance.speakerNames || [];
+            _instance.domains = _instance.domains || [];
         };
-        ListT2sPipelinesRequest.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sPipelinesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        (instance.languages = instance.languages || []).push(reader.readString());
+                        (_instance.languages = _instance.languages || []).push(_reader.readString());
                         break;
                     case 2:
-                        (instance.speakerSexes = instance.speakerSexes || []).push(reader.readString());
+                        (_instance.speakerSexes = _instance.speakerSexes || []).push(_reader.readString());
                         break;
                     case 3:
-                        (instance.pipelineOwners = instance.pipelineOwners || []).push(reader.readString());
+                        (_instance.pipelineOwners = _instance.pipelineOwners || []).push(_reader.readString());
                         break;
                     case 4:
-                        (instance.speakerNames = instance.speakerNames || []).push(reader.readString());
+                        (_instance.speakerNames = _instance.speakerNames || []).push(_reader.readString());
                         break;
                     case 5:
-                        (instance.domains = instance.domains || []).push(reader.readString());
+                        (_instance.domains = _instance.domains || []).push(_reader.readString());
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            ListT2sPipelinesRequest.refineValues(instance);
+            ListT2sPipelinesRequest.refineValues(_instance);
         };
-        ListT2sPipelinesRequest.toBinaryWriter = function (instance, writer) {
-            if (instance.languages && instance.languages.length) {
-                writer.writeRepeatedString(1, instance.languages);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sPipelinesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.languages && _instance.languages.length) {
+                _writer.writeRepeatedString(1, _instance.languages);
             }
-            if (instance.speakerSexes && instance.speakerSexes.length) {
-                writer.writeRepeatedString(2, instance.speakerSexes);
+            if (_instance.speakerSexes && _instance.speakerSexes.length) {
+                _writer.writeRepeatedString(2, _instance.speakerSexes);
             }
-            if (instance.pipelineOwners && instance.pipelineOwners.length) {
-                writer.writeRepeatedString(3, instance.pipelineOwners);
+            if (_instance.pipelineOwners && _instance.pipelineOwners.length) {
+                _writer.writeRepeatedString(3, _instance.pipelineOwners);
             }
-            if (instance.speakerNames && instance.speakerNames.length) {
-                writer.writeRepeatedString(4, instance.speakerNames);
+            if (_instance.speakerNames && _instance.speakerNames.length) {
+                _writer.writeRepeatedString(4, _instance.speakerNames);
             }
-            if (instance.domains && instance.domains.length) {
-                writer.writeRepeatedString(5, instance.domains);
+            if (_instance.domains && _instance.domains.length) {
+                _writer.writeRepeatedString(5, _instance.domains);
             }
         };
         Object.defineProperty(ListT2sPipelinesRequest.prototype, "languages", {
@@ -525,6 +620,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sPipelinesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sPipelinesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         ListT2sPipelinesRequest.prototype.toObject = function () {
             return {
                 languages: (this.languages || []).slice(),
@@ -534,53 +641,89 @@
                 domains: (this.domains || []).slice()
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         ListT2sPipelinesRequest.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sPipelinesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                languages: (this.languages || []).slice(),
+                speakerSexes: (this.speakerSexes || []).slice(),
+                pipelineOwners: (this.pipelineOwners || []).slice(),
+                speakerNames: (this.speakerNames || []).slice(),
+                domains: (this.domains || []).slice()
+            };
+        };
         return ListT2sPipelinesRequest;
     }());
+    ListT2sPipelinesRequest.id = 'ondewo.t2s.ListT2sPipelinesRequest';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sPipelinesResponse
+     */
     var ListT2sPipelinesResponse = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param ListT2sPipelinesResponse value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sPipelinesResponse to deeply clone from
          */
-        function ListT2sPipelinesResponse(value) {
-            value = value || {};
-            this.pipelines = (value.pipelines || []).map(function (m) { return new Text2SpeechConfig(m); });
+        function ListT2sPipelinesResponse(_value) {
+            _value = _value || {};
+            this.pipelines = (_value.pipelines || []).map(function (m) { return new Text2SpeechConfig(m); });
             ListT2sPipelinesResponse.refineValues(this);
         }
-        ListT2sPipelinesResponse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            ListT2sPipelinesResponse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        ListT2sPipelinesResponse.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sPipelinesResponse.deserializeBinary = function (bytes) {
             var instance = new ListT2sPipelinesResponse();
-            ListT2sPipelinesResponse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            ListT2sPipelinesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        ListT2sPipelinesResponse.refineValues = function (instance) {
-            instance.pipelines = instance.pipelines || [];
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sPipelinesResponse.refineValues = function (_instance) {
+            _instance.pipelines = _instance.pipelines || [];
         };
-        ListT2sPipelinesResponse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sPipelinesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
                         var messageInitializer1 = new Text2SpeechConfig();
-                        reader.readMessage(messageInitializer1, Text2SpeechConfig.fromBinaryReader);
-                        (instance.pipelines = instance.pipelines || []).push(messageInitializer1);
+                        _reader.readMessage(messageInitializer1, Text2SpeechConfig.deserializeBinaryFromReader);
+                        (_instance.pipelines = _instance.pipelines || []).push(messageInitializer1);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            ListT2sPipelinesResponse.refineValues(instance);
+            ListT2sPipelinesResponse.refineValues(_instance);
         };
-        ListT2sPipelinesResponse.toBinaryWriter = function (instance, writer) {
-            if (instance.pipelines && instance.pipelines.length) {
-                writer.writeRepeatedMessage(1, instance.pipelines, Text2SpeechConfig.toBinaryWriter);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sPipelinesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.pipelines && _instance.pipelines.length) {
+                _writer.writeRepeatedMessage(1, _instance.pipelines, Text2SpeechConfig.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(ListT2sPipelinesResponse.prototype, "pipelines", {
@@ -593,56 +736,644 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sPipelinesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sPipelinesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         ListT2sPipelinesResponse.prototype.toObject = function () {
             return {
                 pipelines: (this.pipelines || []).map(function (m) { return m.toObject(); })
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         ListT2sPipelinesResponse.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sPipelinesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                pipelines: (this.pipelines || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
         return ListT2sPipelinesResponse;
     }());
-    var T2sPipelineId = /** @class */ (function () {
+    ListT2sPipelinesResponse.id = 'ondewo.t2s.ListT2sPipelinesResponse';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sLanguagesRequest
+     */
+    var ListT2sLanguagesRequest = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param T2sPipelineId value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sLanguagesRequest to deeply clone from
          */
-        function T2sPipelineId(value) {
-            value = value || {};
-            this.id = value.id;
-            T2sPipelineId.refineValues(this);
+        function ListT2sLanguagesRequest(_value) {
+            _value = _value || {};
+            this.speakerSexes = (_value.speakerSexes || []).slice();
+            this.pipelineOwners = (_value.pipelineOwners || []).slice();
+            this.speakerNames = (_value.speakerNames || []).slice();
+            this.domains = (_value.domains || []).slice();
+            ListT2sLanguagesRequest.refineValues(this);
         }
-        T2sPipelineId.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            T2sPipelineId.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        T2sPipelineId.fromBinary = function (bytes) {
-            var instance = new T2sPipelineId();
-            T2sPipelineId.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sLanguagesRequest.deserializeBinary = function (bytes) {
+            var instance = new ListT2sLanguagesRequest();
+            ListT2sLanguagesRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        T2sPipelineId.refineValues = function (instance) {
-            instance.id = instance.id || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sLanguagesRequest.refineValues = function (_instance) {
+            _instance.speakerSexes = _instance.speakerSexes || [];
+            _instance.pipelineOwners = _instance.pipelineOwners || [];
+            _instance.speakerNames = _instance.speakerNames || [];
+            _instance.domains = _instance.domains || [];
         };
-        T2sPipelineId.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sLanguagesRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.id = reader.readString();
+                        (_instance.speakerSexes = _instance.speakerSexes || []).push(_reader.readString());
+                        break;
+                    case 2:
+                        (_instance.pipelineOwners = _instance.pipelineOwners || []).push(_reader.readString());
+                        break;
+                    case 3:
+                        (_instance.speakerNames = _instance.speakerNames || []).push(_reader.readString());
+                        break;
+                    case 4:
+                        (_instance.domains = _instance.domains || []).push(_reader.readString());
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            T2sPipelineId.refineValues(instance);
+            ListT2sLanguagesRequest.refineValues(_instance);
         };
-        T2sPipelineId.toBinaryWriter = function (instance, writer) {
-            if (instance.id) {
-                writer.writeString(1, instance.id);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sLanguagesRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.speakerSexes && _instance.speakerSexes.length) {
+                _writer.writeRepeatedString(1, _instance.speakerSexes);
+            }
+            if (_instance.pipelineOwners && _instance.pipelineOwners.length) {
+                _writer.writeRepeatedString(2, _instance.pipelineOwners);
+            }
+            if (_instance.speakerNames && _instance.speakerNames.length) {
+                _writer.writeRepeatedString(3, _instance.speakerNames);
+            }
+            if (_instance.domains && _instance.domains.length) {
+                _writer.writeRepeatedString(4, _instance.domains);
+            }
+        };
+        Object.defineProperty(ListT2sLanguagesRequest.prototype, "speakerSexes", {
+            get: function () {
+                return this._speakerSexes;
+            },
+            set: function (value) {
+                this._speakerSexes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sLanguagesRequest.prototype, "pipelineOwners", {
+            get: function () {
+                return this._pipelineOwners;
+            },
+            set: function (value) {
+                this._pipelineOwners = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sLanguagesRequest.prototype, "speakerNames", {
+            get: function () {
+                return this._speakerNames;
+            },
+            set: function (value) {
+                this._speakerNames = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sLanguagesRequest.prototype, "domains", {
+            get: function () {
+                return this._domains;
+            },
+            set: function (value) {
+                this._domains = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sLanguagesRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sLanguagesRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListT2sLanguagesRequest.prototype.toObject = function () {
+            return {
+                speakerSexes: (this.speakerSexes || []).slice(),
+                pipelineOwners: (this.pipelineOwners || []).slice(),
+                speakerNames: (this.speakerNames || []).slice(),
+                domains: (this.domains || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListT2sLanguagesRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sLanguagesRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                speakerSexes: (this.speakerSexes || []).slice(),
+                pipelineOwners: (this.pipelineOwners || []).slice(),
+                speakerNames: (this.speakerNames || []).slice(),
+                domains: (this.domains || []).slice()
+            };
+        };
+        return ListT2sLanguagesRequest;
+    }());
+    ListT2sLanguagesRequest.id = 'ondewo.t2s.ListT2sLanguagesRequest';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sLanguagesResponse
+     */
+    var ListT2sLanguagesResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sLanguagesResponse to deeply clone from
+         */
+        function ListT2sLanguagesResponse(_value) {
+            _value = _value || {};
+            this.languages = (_value.languages || []).slice();
+            ListT2sLanguagesResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sLanguagesResponse.deserializeBinary = function (bytes) {
+            var instance = new ListT2sLanguagesResponse();
+            ListT2sLanguagesResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sLanguagesResponse.refineValues = function (_instance) {
+            _instance.languages = _instance.languages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sLanguagesResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.languages = _instance.languages || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListT2sLanguagesResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sLanguagesResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.languages && _instance.languages.length) {
+                _writer.writeRepeatedString(1, _instance.languages);
+            }
+        };
+        Object.defineProperty(ListT2sLanguagesResponse.prototype, "languages", {
+            get: function () {
+                return this._languages;
+            },
+            set: function (value) {
+                this._languages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sLanguagesResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sLanguagesResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListT2sLanguagesResponse.prototype.toObject = function () {
+            return {
+                languages: (this.languages || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListT2sLanguagesResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sLanguagesResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                languages: (this.languages || []).slice()
+            };
+        };
+        return ListT2sLanguagesResponse;
+    }());
+    ListT2sLanguagesResponse.id = 'ondewo.t2s.ListT2sLanguagesResponse';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sDomainsRequest
+     */
+    var ListT2sDomainsRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sDomainsRequest to deeply clone from
+         */
+        function ListT2sDomainsRequest(_value) {
+            _value = _value || {};
+            this.speakerSexes = (_value.speakerSexes || []).slice();
+            this.pipelineOwners = (_value.pipelineOwners || []).slice();
+            this.speakerNames = (_value.speakerNames || []).slice();
+            this.languages = (_value.languages || []).slice();
+            ListT2sDomainsRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sDomainsRequest.deserializeBinary = function (bytes) {
+            var instance = new ListT2sDomainsRequest();
+            ListT2sDomainsRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sDomainsRequest.refineValues = function (_instance) {
+            _instance.speakerSexes = _instance.speakerSexes || [];
+            _instance.pipelineOwners = _instance.pipelineOwners || [];
+            _instance.speakerNames = _instance.speakerNames || [];
+            _instance.languages = _instance.languages || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sDomainsRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.speakerSexes = _instance.speakerSexes || []).push(_reader.readString());
+                        break;
+                    case 2:
+                        (_instance.pipelineOwners = _instance.pipelineOwners || []).push(_reader.readString());
+                        break;
+                    case 3:
+                        (_instance.speakerNames = _instance.speakerNames || []).push(_reader.readString());
+                        break;
+                    case 4:
+                        (_instance.languages = _instance.languages || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListT2sDomainsRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sDomainsRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.speakerSexes && _instance.speakerSexes.length) {
+                _writer.writeRepeatedString(1, _instance.speakerSexes);
+            }
+            if (_instance.pipelineOwners && _instance.pipelineOwners.length) {
+                _writer.writeRepeatedString(2, _instance.pipelineOwners);
+            }
+            if (_instance.speakerNames && _instance.speakerNames.length) {
+                _writer.writeRepeatedString(3, _instance.speakerNames);
+            }
+            if (_instance.languages && _instance.languages.length) {
+                _writer.writeRepeatedString(4, _instance.languages);
+            }
+        };
+        Object.defineProperty(ListT2sDomainsRequest.prototype, "speakerSexes", {
+            get: function () {
+                return this._speakerSexes;
+            },
+            set: function (value) {
+                this._speakerSexes = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sDomainsRequest.prototype, "pipelineOwners", {
+            get: function () {
+                return this._pipelineOwners;
+            },
+            set: function (value) {
+                this._pipelineOwners = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sDomainsRequest.prototype, "speakerNames", {
+            get: function () {
+                return this._speakerNames;
+            },
+            set: function (value) {
+                this._speakerNames = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ListT2sDomainsRequest.prototype, "languages", {
+            get: function () {
+                return this._languages;
+            },
+            set: function (value) {
+                this._languages = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sDomainsRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sDomainsRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListT2sDomainsRequest.prototype.toObject = function () {
+            return {
+                speakerSexes: (this.speakerSexes || []).slice(),
+                pipelineOwners: (this.pipelineOwners || []).slice(),
+                speakerNames: (this.speakerNames || []).slice(),
+                languages: (this.languages || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListT2sDomainsRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sDomainsRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                speakerSexes: (this.speakerSexes || []).slice(),
+                pipelineOwners: (this.pipelineOwners || []).slice(),
+                speakerNames: (this.speakerNames || []).slice(),
+                languages: (this.languages || []).slice()
+            };
+        };
+        return ListT2sDomainsRequest;
+    }());
+    ListT2sDomainsRequest.id = 'ondewo.t2s.ListT2sDomainsRequest';
+    /**
+     * Message implementation for ondewo.t2s.ListT2sDomainsResponse
+     */
+    var ListT2sDomainsResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListT2sDomainsResponse to deeply clone from
+         */
+        function ListT2sDomainsResponse(_value) {
+            _value = _value || {};
+            this.domains = (_value.domains || []).slice();
+            ListT2sDomainsResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListT2sDomainsResponse.deserializeBinary = function (bytes) {
+            var instance = new ListT2sDomainsResponse();
+            ListT2sDomainsResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListT2sDomainsResponse.refineValues = function (_instance) {
+            _instance.domains = _instance.domains || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListT2sDomainsResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.domains = _instance.domains || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListT2sDomainsResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListT2sDomainsResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.domains && _instance.domains.length) {
+                _writer.writeRepeatedString(1, _instance.domains);
+            }
+        };
+        Object.defineProperty(ListT2sDomainsResponse.prototype, "domains", {
+            get: function () {
+                return this._domains;
+            },
+            set: function (value) {
+                this._domains = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListT2sDomainsResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListT2sDomainsResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListT2sDomainsResponse.prototype.toObject = function () {
+            return {
+                domains: (this.domains || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListT2sDomainsResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListT2sDomainsResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                domains: (this.domains || []).slice()
+            };
+        };
+        return ListT2sDomainsResponse;
+    }());
+    ListT2sDomainsResponse.id = 'ondewo.t2s.ListT2sDomainsResponse';
+    /**
+     * Message implementation for ondewo.t2s.T2sPipelineId
+     */
+    var T2sPipelineId = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of T2sPipelineId to deeply clone from
+         */
+        function T2sPipelineId(_value) {
+            _value = _value || {};
+            this.id = _value.id;
+            T2sPipelineId.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        T2sPipelineId.deserializeBinary = function (bytes) {
+            var instance = new T2sPipelineId();
+            T2sPipelineId.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        T2sPipelineId.refineValues = function (_instance) {
+            _instance.id = _instance.id || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        T2sPipelineId.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.id = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            T2sPipelineId.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        T2sPipelineId.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.id) {
+                _writer.writeString(1, _instance.id);
             }
         };
         Object.defineProperty(T2sPipelineId.prototype, "id", {
@@ -655,108 +1386,152 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        T2sPipelineId.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            T2sPipelineId.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         T2sPipelineId.prototype.toObject = function () {
             return {
                 id: this.id
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         T2sPipelineId.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        T2sPipelineId.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                id: this.id
+            };
+        };
         return T2sPipelineId;
     }());
+    T2sPipelineId.id = 'ondewo.t2s.T2sPipelineId';
+    /**
+     * Message implementation for ondewo.t2s.Text2SpeechConfig
+     */
     var Text2SpeechConfig = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Text2SpeechConfig value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Text2SpeechConfig to deeply clone from
          */
-        function Text2SpeechConfig(value) {
-            value = value || {};
-            this.id = value.id;
-            this.description = value.description
-                ? new Description(value.description)
+        function Text2SpeechConfig(_value) {
+            _value = _value || {};
+            this.id = _value.id;
+            this.description = _value.description
+                ? new Description(_value.description)
                 : undefined;
-            this.active = value.active;
-            this.inference = value.inference
-                ? new Inference(value.inference)
+            this.active = _value.active;
+            this.inference = _value.inference
+                ? new Inference(_value.inference)
                 : undefined;
-            this.normalization = value.normalization
-                ? new Normalization(value.normalization)
+            this.normalization = _value.normalization
+                ? new Normalization(_value.normalization)
                 : undefined;
-            this.postprocessing = value.postprocessing
-                ? new Postprocessing(value.postprocessing)
+            this.postprocessing = _value.postprocessing
+                ? new Postprocessing(_value.postprocessing)
                 : undefined;
             Text2SpeechConfig.refineValues(this);
         }
-        Text2SpeechConfig.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Text2SpeechConfig.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Text2SpeechConfig.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Text2SpeechConfig.deserializeBinary = function (bytes) {
             var instance = new Text2SpeechConfig();
-            Text2SpeechConfig.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Text2SpeechConfig.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Text2SpeechConfig.refineValues = function (instance) {
-            instance.id = instance.id || '';
-            instance.description = instance.description || undefined;
-            instance.active = instance.active || false;
-            instance.inference = instance.inference || undefined;
-            instance.normalization = instance.normalization || undefined;
-            instance.postprocessing = instance.postprocessing || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Text2SpeechConfig.refineValues = function (_instance) {
+            _instance.id = _instance.id || '';
+            _instance.description = _instance.description || undefined;
+            _instance.active = _instance.active || false;
+            _instance.inference = _instance.inference || undefined;
+            _instance.normalization = _instance.normalization || undefined;
+            _instance.postprocessing = _instance.postprocessing || undefined;
         };
-        Text2SpeechConfig.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Text2SpeechConfig.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.id = reader.readString();
+                        _instance.id = _reader.readString();
                         break;
                     case 2:
-                        instance.description = new Description();
-                        reader.readMessage(instance.description, Description.fromBinaryReader);
+                        _instance.description = new Description();
+                        _reader.readMessage(_instance.description, Description.deserializeBinaryFromReader);
                         break;
                     case 3:
-                        instance.active = reader.readBool();
+                        _instance.active = _reader.readBool();
                         break;
                     case 4:
-                        instance.inference = new Inference();
-                        reader.readMessage(instance.inference, Inference.fromBinaryReader);
+                        _instance.inference = new Inference();
+                        _reader.readMessage(_instance.inference, Inference.deserializeBinaryFromReader);
                         break;
                     case 5:
-                        instance.normalization = new Normalization();
-                        reader.readMessage(instance.normalization, Normalization.fromBinaryReader);
+                        _instance.normalization = new Normalization();
+                        _reader.readMessage(_instance.normalization, Normalization.deserializeBinaryFromReader);
                         break;
                     case 6:
-                        instance.postprocessing = new Postprocessing();
-                        reader.readMessage(instance.postprocessing, Postprocessing.fromBinaryReader);
+                        _instance.postprocessing = new Postprocessing();
+                        _reader.readMessage(_instance.postprocessing, Postprocessing.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Text2SpeechConfig.refineValues(instance);
+            Text2SpeechConfig.refineValues(_instance);
         };
-        Text2SpeechConfig.toBinaryWriter = function (instance, writer) {
-            if (instance.id) {
-                writer.writeString(1, instance.id);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Text2SpeechConfig.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.id) {
+                _writer.writeString(1, _instance.id);
             }
-            if (instance.description) {
-                writer.writeMessage(2, instance.description, Description.toBinaryWriter);
+            if (_instance.description) {
+                _writer.writeMessage(2, _instance.description, Description.serializeBinaryToWriter);
             }
-            if (instance.active) {
-                writer.writeBool(3, instance.active);
+            if (_instance.active) {
+                _writer.writeBool(3, _instance.active);
             }
-            if (instance.inference) {
-                writer.writeMessage(4, instance.inference, Inference.toBinaryWriter);
+            if (_instance.inference) {
+                _writer.writeMessage(4, _instance.inference, Inference.serializeBinaryToWriter);
             }
-            if (instance.normalization) {
-                writer.writeMessage(5, instance.normalization, Normalization.toBinaryWriter);
+            if (_instance.normalization) {
+                _writer.writeMessage(5, _instance.normalization, Normalization.serializeBinaryToWriter);
             }
-            if (instance.postprocessing) {
-                writer.writeMessage(6, instance.postprocessing, Postprocessing.toBinaryWriter);
+            if (_instance.postprocessing) {
+                _writer.writeMessage(6, _instance.postprocessing, Postprocessing.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Text2SpeechConfig.prototype, "id", {
@@ -819,6 +1594,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Text2SpeechConfig.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Text2SpeechConfig.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Text2SpeechConfig.prototype.toObject = function () {
             return {
                 id: this.id,
@@ -833,91 +1620,134 @@
                     : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Text2SpeechConfig.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Text2SpeechConfig.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                id: this.id,
+                description: this.description
+                    ? this.description.toProtobufJSON(options)
+                    : null,
+                active: this.active,
+                inference: this.inference ? this.inference.toProtobufJSON(options) : null,
+                normalization: this.normalization
+                    ? this.normalization.toProtobufJSON(options)
+                    : null,
+                postprocessing: this.postprocessing
+                    ? this.postprocessing.toProtobufJSON(options)
+                    : null
+            };
+        };
         return Text2SpeechConfig;
     }());
+    Text2SpeechConfig.id = 'ondewo.t2s.Text2SpeechConfig';
+    /**
+     * Message implementation for ondewo.t2s.Description
+     */
     var Description = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Description value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Description to deeply clone from
          */
-        function Description(value) {
-            value = value || {};
-            this.language = value.language;
-            this.speakerSex = value.speakerSex;
-            this.pipelineOwner = value.pipelineOwner;
-            this.comments = value.comments;
-            this.speakerName = value.speakerName;
-            this.domain = value.domain;
+        function Description(_value) {
+            _value = _value || {};
+            this.language = _value.language;
+            this.speakerSex = _value.speakerSex;
+            this.pipelineOwner = _value.pipelineOwner;
+            this.comments = _value.comments;
+            this.speakerName = _value.speakerName;
+            this.domain = _value.domain;
             Description.refineValues(this);
         }
-        Description.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Description.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Description.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Description.deserializeBinary = function (bytes) {
             var instance = new Description();
-            Description.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Description.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Description.refineValues = function (instance) {
-            instance.language = instance.language || '';
-            instance.speakerSex = instance.speakerSex || '';
-            instance.pipelineOwner = instance.pipelineOwner || '';
-            instance.comments = instance.comments || '';
-            instance.speakerName = instance.speakerName || '';
-            instance.domain = instance.domain || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Description.refineValues = function (_instance) {
+            _instance.language = _instance.language || '';
+            _instance.speakerSex = _instance.speakerSex || '';
+            _instance.pipelineOwner = _instance.pipelineOwner || '';
+            _instance.comments = _instance.comments || '';
+            _instance.speakerName = _instance.speakerName || '';
+            _instance.domain = _instance.domain || '';
         };
-        Description.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Description.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.language = reader.readString();
+                        _instance.language = _reader.readString();
                         break;
                     case 2:
-                        instance.speakerSex = reader.readString();
+                        _instance.speakerSex = _reader.readString();
                         break;
                     case 3:
-                        instance.pipelineOwner = reader.readString();
+                        _instance.pipelineOwner = _reader.readString();
                         break;
                     case 4:
-                        instance.comments = reader.readString();
+                        _instance.comments = _reader.readString();
                         break;
                     case 5:
-                        instance.speakerName = reader.readString();
+                        _instance.speakerName = _reader.readString();
                         break;
                     case 6:
-                        instance.domain = reader.readString();
+                        _instance.domain = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Description.refineValues(instance);
+            Description.refineValues(_instance);
         };
-        Description.toBinaryWriter = function (instance, writer) {
-            if (instance.language) {
-                writer.writeString(1, instance.language);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Description.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.language) {
+                _writer.writeString(1, _instance.language);
             }
-            if (instance.speakerSex) {
-                writer.writeString(2, instance.speakerSex);
+            if (_instance.speakerSex) {
+                _writer.writeString(2, _instance.speakerSex);
             }
-            if (instance.pipelineOwner) {
-                writer.writeString(3, instance.pipelineOwner);
+            if (_instance.pipelineOwner) {
+                _writer.writeString(3, _instance.pipelineOwner);
             }
-            if (instance.comments) {
-                writer.writeString(4, instance.comments);
+            if (_instance.comments) {
+                _writer.writeString(4, _instance.comments);
             }
-            if (instance.speakerName) {
-                writer.writeString(5, instance.speakerName);
+            if (_instance.speakerName) {
+                _writer.writeString(5, _instance.speakerName);
             }
-            if (instance.domain) {
-                writer.writeString(6, instance.domain);
+            if (_instance.domain) {
+                _writer.writeString(6, _instance.domain);
             }
         };
         Object.defineProperty(Description.prototype, "language", {
@@ -980,6 +1810,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Description.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Description.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Description.prototype.toObject = function () {
             return {
                 language: this.language,
@@ -990,71 +1832,108 @@
                 domain: this.domain
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Description.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Description.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                language: this.language,
+                speakerSex: this.speakerSex,
+                pipelineOwner: this.pipelineOwner,
+                comments: this.comments,
+                speakerName: this.speakerName,
+                domain: this.domain
+            };
+        };
         return Description;
     }());
+    Description.id = 'ondewo.t2s.Description';
+    /**
+     * Message implementation for ondewo.t2s.Inference
+     */
     var Inference = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Inference value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Inference to deeply clone from
          */
-        function Inference(value) {
-            value = value || {};
-            this.type = value.type;
-            this.compositeInference = value.compositeInference
-                ? new CompositeInference(value.compositeInference)
+        function Inference(_value) {
+            _value = _value || {};
+            this.type = _value.type;
+            this.compositeInference = _value.compositeInference
+                ? new CompositeInference(_value.compositeInference)
                 : undefined;
-            this.caching = value.caching ? new Caching(value.caching) : undefined;
+            this.caching = _value.caching ? new Caching(_value.caching) : undefined;
             Inference.refineValues(this);
         }
-        Inference.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Inference.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Inference.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Inference.deserializeBinary = function (bytes) {
             var instance = new Inference();
-            Inference.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Inference.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Inference.refineValues = function (instance) {
-            instance.type = instance.type || '';
-            instance.compositeInference = instance.compositeInference || undefined;
-            instance.caching = instance.caching || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Inference.refineValues = function (_instance) {
+            _instance.type = _instance.type || '';
+            _instance.compositeInference = _instance.compositeInference || undefined;
+            _instance.caching = _instance.caching || undefined;
         };
-        Inference.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Inference.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.type = reader.readString();
+                        _instance.type = _reader.readString();
                         break;
                     case 2:
-                        instance.compositeInference = new CompositeInference();
-                        reader.readMessage(instance.compositeInference, CompositeInference.fromBinaryReader);
+                        _instance.compositeInference = new CompositeInference();
+                        _reader.readMessage(_instance.compositeInference, CompositeInference.deserializeBinaryFromReader);
                         break;
                     case 3:
-                        instance.caching = new Caching();
-                        reader.readMessage(instance.caching, Caching.fromBinaryReader);
+                        _instance.caching = new Caching();
+                        _reader.readMessage(_instance.caching, Caching.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Inference.refineValues(instance);
+            Inference.refineValues(_instance);
         };
-        Inference.toBinaryWriter = function (instance, writer) {
-            if (instance.type) {
-                writer.writeString(1, instance.type);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Inference.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.type) {
+                _writer.writeString(1, _instance.type);
             }
-            if (instance.compositeInference) {
-                writer.writeMessage(2, instance.compositeInference, CompositeInference.toBinaryWriter);
+            if (_instance.compositeInference) {
+                _writer.writeMessage(2, _instance.compositeInference, CompositeInference.serializeBinaryToWriter);
             }
-            if (instance.caching) {
-                writer.writeMessage(3, instance.caching, Caching.toBinaryWriter);
+            if (_instance.caching) {
+                _writer.writeMessage(3, _instance.caching, Caching.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Inference.prototype, "type", {
@@ -1087,6 +1966,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Inference.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Inference.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Inference.prototype.toObject = function () {
             return {
                 type: this.type,
@@ -1096,63 +1987,99 @@
                 caching: this.caching ? this.caching.toObject() : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Inference.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Inference.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                type: this.type,
+                compositeInference: this.compositeInference
+                    ? this.compositeInference.toProtobufJSON(options)
+                    : null,
+                caching: this.caching ? this.caching.toProtobufJSON(options) : null
+            };
+        };
         return Inference;
     }());
+    Inference.id = 'ondewo.t2s.Inference';
+    /**
+     * Message implementation for ondewo.t2s.CompositeInference
+     */
     var CompositeInference = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param CompositeInference value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CompositeInference to deeply clone from
          */
-        function CompositeInference(value) {
-            value = value || {};
-            this.text2mel = value.text2mel ? new Text2Mel(value.text2mel) : undefined;
-            this.mel2audio = value.mel2audio
-                ? new Mel2Audio(value.mel2audio)
+        function CompositeInference(_value) {
+            _value = _value || {};
+            this.text2mel = _value.text2mel ? new Text2Mel(_value.text2mel) : undefined;
+            this.mel2audio = _value.mel2audio
+                ? new Mel2Audio(_value.mel2audio)
                 : undefined;
             CompositeInference.refineValues(this);
         }
-        CompositeInference.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            CompositeInference.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        CompositeInference.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CompositeInference.deserializeBinary = function (bytes) {
             var instance = new CompositeInference();
-            CompositeInference.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            CompositeInference.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        CompositeInference.refineValues = function (instance) {
-            instance.text2mel = instance.text2mel || undefined;
-            instance.mel2audio = instance.mel2audio || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CompositeInference.refineValues = function (_instance) {
+            _instance.text2mel = _instance.text2mel || undefined;
+            _instance.mel2audio = _instance.mel2audio || undefined;
         };
-        CompositeInference.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CompositeInference.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.text2mel = new Text2Mel();
-                        reader.readMessage(instance.text2mel, Text2Mel.fromBinaryReader);
+                        _instance.text2mel = new Text2Mel();
+                        _reader.readMessage(_instance.text2mel, Text2Mel.deserializeBinaryFromReader);
                         break;
                     case 2:
-                        instance.mel2audio = new Mel2Audio();
-                        reader.readMessage(instance.mel2audio, Mel2Audio.fromBinaryReader);
+                        _instance.mel2audio = new Mel2Audio();
+                        _reader.readMessage(_instance.mel2audio, Mel2Audio.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            CompositeInference.refineValues(instance);
+            CompositeInference.refineValues(_instance);
         };
-        CompositeInference.toBinaryWriter = function (instance, writer) {
-            if (instance.text2mel) {
-                writer.writeMessage(1, instance.text2mel, Text2Mel.toBinaryWriter);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CompositeInference.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.text2mel) {
+                _writer.writeMessage(1, _instance.text2mel, Text2Mel.serializeBinaryToWriter);
             }
-            if (instance.mel2audio) {
-                writer.writeMessage(2, instance.mel2audio, Mel2Audio.toBinaryWriter);
+            if (_instance.mel2audio) {
+                _writer.writeMessage(2, _instance.mel2audio, Mel2Audio.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(CompositeInference.prototype, "text2mel", {
@@ -1175,77 +2102,122 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CompositeInference.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CompositeInference.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         CompositeInference.prototype.toObject = function () {
             return {
                 text2mel: this.text2mel ? this.text2mel.toObject() : undefined,
                 mel2audio: this.mel2audio ? this.mel2audio.toObject() : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         CompositeInference.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CompositeInference.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                text2mel: this.text2mel ? this.text2mel.toProtobufJSON(options) : null,
+                mel2audio: this.mel2audio ? this.mel2audio.toProtobufJSON(options) : null
+            };
+        };
         return CompositeInference;
     }());
+    CompositeInference.id = 'ondewo.t2s.CompositeInference';
+    /**
+     * Message implementation for ondewo.t2s.Text2Mel
+     */
     var Text2Mel = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Text2Mel value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Text2Mel to deeply clone from
          */
-        function Text2Mel(value) {
-            value = value || {};
-            this.type = value.type;
-            this.glowTts = value.glowTts ? new GlowTTS(value.glowTts) : undefined;
-            this.glowTtsTriton = value.glowTtsTriton
-                ? new GlowTTSTriton(value.glowTtsTriton)
+        function Text2Mel(_value) {
+            _value = _value || {};
+            this.type = _value.type;
+            this.glowTts = _value.glowTts ? new GlowTTS(_value.glowTts) : undefined;
+            this.glowTtsTriton = _value.glowTtsTriton
+                ? new GlowTTSTriton(_value.glowTtsTriton)
                 : undefined;
             Text2Mel.refineValues(this);
         }
-        Text2Mel.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Text2Mel.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Text2Mel.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Text2Mel.deserializeBinary = function (bytes) {
             var instance = new Text2Mel();
-            Text2Mel.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Text2Mel.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Text2Mel.refineValues = function (instance) {
-            instance.type = instance.type || '';
-            instance.glowTts = instance.glowTts || undefined;
-            instance.glowTtsTriton = instance.glowTtsTriton || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Text2Mel.refineValues = function (_instance) {
+            _instance.type = _instance.type || '';
+            _instance.glowTts = _instance.glowTts || undefined;
+            _instance.glowTtsTriton = _instance.glowTtsTriton || undefined;
         };
-        Text2Mel.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Text2Mel.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.type = reader.readString();
+                        _instance.type = _reader.readString();
                         break;
                     case 3:
-                        instance.glowTts = new GlowTTS();
-                        reader.readMessage(instance.glowTts, GlowTTS.fromBinaryReader);
+                        _instance.glowTts = new GlowTTS();
+                        _reader.readMessage(_instance.glowTts, GlowTTS.deserializeBinaryFromReader);
                         break;
                     case 4:
-                        instance.glowTtsTriton = new GlowTTSTriton();
-                        reader.readMessage(instance.glowTtsTriton, GlowTTSTriton.fromBinaryReader);
+                        _instance.glowTtsTriton = new GlowTTSTriton();
+                        _reader.readMessage(_instance.glowTtsTriton, GlowTTSTriton.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Text2Mel.refineValues(instance);
+            Text2Mel.refineValues(_instance);
         };
-        Text2Mel.toBinaryWriter = function (instance, writer) {
-            if (instance.type) {
-                writer.writeString(1, instance.type);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Text2Mel.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.type) {
+                _writer.writeString(1, _instance.type);
             }
-            if (instance.glowTts) {
-                writer.writeMessage(3, instance.glowTts, GlowTTS.toBinaryWriter);
+            if (_instance.glowTts) {
+                _writer.writeMessage(3, _instance.glowTts, GlowTTS.serializeBinaryToWriter);
             }
-            if (instance.glowTtsTriton) {
-                writer.writeMessage(4, instance.glowTtsTriton, GlowTTSTriton.toBinaryWriter);
+            if (_instance.glowTtsTriton) {
+                _writer.writeMessage(4, _instance.glowTtsTriton, GlowTTSTriton.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Text2Mel.prototype, "type", {
@@ -1278,6 +2250,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Text2Mel.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Text2Mel.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Text2Mel.prototype.toObject = function () {
             return {
                 type: this.type,
@@ -1287,99 +2271,135 @@
                     : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Text2Mel.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Text2Mel.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                type: this.type,
+                glowTts: this.glowTts ? this.glowTts.toProtobufJSON(options) : null,
+                glowTtsTriton: this.glowTtsTriton
+                    ? this.glowTtsTriton.toProtobufJSON(options)
+                    : null
+            };
+        };
         return Text2Mel;
     }());
+    Text2Mel.id = 'ondewo.t2s.Text2Mel';
+    /**
+     * Message implementation for ondewo.t2s.GlowTTS
+     */
     var GlowTTS = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param GlowTTS value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GlowTTS to deeply clone from
          */
-        function GlowTTS(value) {
-            value = value || {};
-            this.batchSize = value.batchSize;
-            this.useGpu = value.useGpu;
-            this.lengthScale = value.lengthScale;
-            this.noiseScale = value.noiseScale;
-            this.path = value.path;
-            this.cleaners = (value.cleaners || []).slice();
-            this.paramConfigPath = value.paramConfigPath;
+        function GlowTTS(_value) {
+            _value = _value || {};
+            this.batchSize = _value.batchSize;
+            this.useGpu = _value.useGpu;
+            this.lengthScale = _value.lengthScale;
+            this.noiseScale = _value.noiseScale;
+            this.path = _value.path;
+            this.cleaners = (_value.cleaners || []).slice();
+            this.paramConfigPath = _value.paramConfigPath;
             GlowTTS.refineValues(this);
         }
-        GlowTTS.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GlowTTS.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GlowTTS.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GlowTTS.deserializeBinary = function (bytes) {
             var instance = new GlowTTS();
-            GlowTTS.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            GlowTTS.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        GlowTTS.refineValues = function (instance) {
-            instance.batchSize = instance.batchSize || '0';
-            instance.useGpu = instance.useGpu || false;
-            instance.lengthScale = instance.lengthScale || 0;
-            instance.noiseScale = instance.noiseScale || 0;
-            instance.path = instance.path || '';
-            instance.cleaners = instance.cleaners || [];
-            instance.paramConfigPath = instance.paramConfigPath || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GlowTTS.refineValues = function (_instance) {
+            _instance.batchSize = _instance.batchSize || '0';
+            _instance.useGpu = _instance.useGpu || false;
+            _instance.lengthScale = _instance.lengthScale || 0;
+            _instance.noiseScale = _instance.noiseScale || 0;
+            _instance.path = _instance.path || '';
+            _instance.cleaners = _instance.cleaners || [];
+            _instance.paramConfigPath = _instance.paramConfigPath || '';
         };
-        GlowTTS.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GlowTTS.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.batchSize = reader.readInt64String();
+                        _instance.batchSize = _reader.readInt64String();
                         break;
                     case 2:
-                        instance.useGpu = reader.readBool();
+                        _instance.useGpu = _reader.readBool();
                         break;
                     case 3:
-                        instance.lengthScale = reader.readFloat();
+                        _instance.lengthScale = _reader.readFloat();
                         break;
                     case 4:
-                        instance.noiseScale = reader.readFloat();
+                        _instance.noiseScale = _reader.readFloat();
                         break;
                     case 5:
-                        instance.path = reader.readString();
+                        _instance.path = _reader.readString();
                         break;
                     case 6:
-                        (instance.cleaners = instance.cleaners || []).push(reader.readString());
+                        (_instance.cleaners = _instance.cleaners || []).push(_reader.readString());
                         break;
                     case 7:
-                        instance.paramConfigPath = reader.readString();
+                        _instance.paramConfigPath = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            GlowTTS.refineValues(instance);
+            GlowTTS.refineValues(_instance);
         };
-        GlowTTS.toBinaryWriter = function (instance, writer) {
-            if (instance.batchSize) {
-                writer.writeInt64String(1, instance.batchSize);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GlowTTS.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.batchSize) {
+                _writer.writeInt64String(1, _instance.batchSize);
             }
-            if (instance.useGpu) {
-                writer.writeBool(2, instance.useGpu);
+            if (_instance.useGpu) {
+                _writer.writeBool(2, _instance.useGpu);
             }
-            if (instance.lengthScale) {
-                writer.writeFloat(3, instance.lengthScale);
+            if (_instance.lengthScale) {
+                _writer.writeFloat(3, _instance.lengthScale);
             }
-            if (instance.noiseScale) {
-                writer.writeFloat(4, instance.noiseScale);
+            if (_instance.noiseScale) {
+                _writer.writeFloat(4, _instance.noiseScale);
             }
-            if (instance.path) {
-                writer.writeString(5, instance.path);
+            if (_instance.path) {
+                _writer.writeString(5, _instance.path);
             }
-            if (instance.cleaners && instance.cleaners.length) {
-                writer.writeRepeatedString(6, instance.cleaners);
+            if (_instance.cleaners && _instance.cleaners.length) {
+                _writer.writeRepeatedString(6, _instance.cleaners);
             }
-            if (instance.paramConfigPath) {
-                writer.writeString(7, instance.paramConfigPath);
+            if (_instance.paramConfigPath) {
+                _writer.writeString(7, _instance.paramConfigPath);
             }
         };
         Object.defineProperty(GlowTTS.prototype, "batchSize", {
@@ -1452,6 +2472,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GlowTTS.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GlowTTS.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         GlowTTS.prototype.toObject = function () {
             return {
                 batchSize: this.batchSize,
@@ -1463,107 +2495,145 @@
                 paramConfigPath: this.paramConfigPath
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         GlowTTS.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GlowTTS.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                batchSize: this.batchSize,
+                useGpu: this.useGpu,
+                lengthScale: this.lengthScale,
+                noiseScale: this.noiseScale,
+                path: this.path,
+                cleaners: (this.cleaners || []).slice(),
+                paramConfigPath: this.paramConfigPath
+            };
+        };
         return GlowTTS;
     }());
+    GlowTTS.id = 'ondewo.t2s.GlowTTS';
+    /**
+     * Message implementation for ondewo.t2s.GlowTTSTriton
+     */
     var GlowTTSTriton = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param GlowTTSTriton value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GlowTTSTriton to deeply clone from
          */
-        function GlowTTSTriton(value) {
-            value = value || {};
-            this.batchSize = value.batchSize;
-            this.lengthScale = value.lengthScale;
-            this.noiseScale = value.noiseScale;
-            this.cleaners = (value.cleaners || []).slice();
-            this.maxTextLength = value.maxTextLength;
-            this.paramConfigPath = value.paramConfigPath;
-            this.tritonUrl = value.tritonUrl;
-            this.tritonModelName = value.tritonModelName;
+        function GlowTTSTriton(_value) {
+            _value = _value || {};
+            this.batchSize = _value.batchSize;
+            this.lengthScale = _value.lengthScale;
+            this.noiseScale = _value.noiseScale;
+            this.cleaners = (_value.cleaners || []).slice();
+            this.maxTextLength = _value.maxTextLength;
+            this.paramConfigPath = _value.paramConfigPath;
+            this.tritonUrl = _value.tritonUrl;
+            this.tritonModelName = _value.tritonModelName;
             GlowTTSTriton.refineValues(this);
         }
-        GlowTTSTriton.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            GlowTTSTriton.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        GlowTTSTriton.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GlowTTSTriton.deserializeBinary = function (bytes) {
             var instance = new GlowTTSTriton();
-            GlowTTSTriton.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            GlowTTSTriton.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        GlowTTSTriton.refineValues = function (instance) {
-            instance.batchSize = instance.batchSize || '0';
-            instance.lengthScale = instance.lengthScale || 0;
-            instance.noiseScale = instance.noiseScale || 0;
-            instance.cleaners = instance.cleaners || [];
-            instance.maxTextLength = instance.maxTextLength || '0';
-            instance.paramConfigPath = instance.paramConfigPath || '';
-            instance.tritonUrl = instance.tritonUrl || '';
-            instance.tritonModelName = instance.tritonModelName || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GlowTTSTriton.refineValues = function (_instance) {
+            _instance.batchSize = _instance.batchSize || '0';
+            _instance.lengthScale = _instance.lengthScale || 0;
+            _instance.noiseScale = _instance.noiseScale || 0;
+            _instance.cleaners = _instance.cleaners || [];
+            _instance.maxTextLength = _instance.maxTextLength || '0';
+            _instance.paramConfigPath = _instance.paramConfigPath || '';
+            _instance.tritonUrl = _instance.tritonUrl || '';
+            _instance.tritonModelName = _instance.tritonModelName || '';
         };
-        GlowTTSTriton.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GlowTTSTriton.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.batchSize = reader.readInt64String();
+                        _instance.batchSize = _reader.readInt64String();
                         break;
                     case 2:
-                        instance.lengthScale = reader.readFloat();
+                        _instance.lengthScale = _reader.readFloat();
                         break;
                     case 3:
-                        instance.noiseScale = reader.readFloat();
+                        _instance.noiseScale = _reader.readFloat();
                         break;
                     case 4:
-                        (instance.cleaners = instance.cleaners || []).push(reader.readString());
+                        (_instance.cleaners = _instance.cleaners || []).push(_reader.readString());
                         break;
                     case 5:
-                        instance.maxTextLength = reader.readInt64String();
+                        _instance.maxTextLength = _reader.readInt64String();
                         break;
                     case 6:
-                        instance.paramConfigPath = reader.readString();
+                        _instance.paramConfigPath = _reader.readString();
                         break;
                     case 7:
-                        instance.tritonUrl = reader.readString();
+                        _instance.tritonUrl = _reader.readString();
                         break;
                     case 8:
-                        instance.tritonModelName = reader.readString();
+                        _instance.tritonModelName = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            GlowTTSTriton.refineValues(instance);
+            GlowTTSTriton.refineValues(_instance);
         };
-        GlowTTSTriton.toBinaryWriter = function (instance, writer) {
-            if (instance.batchSize) {
-                writer.writeInt64String(1, instance.batchSize);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GlowTTSTriton.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.batchSize) {
+                _writer.writeInt64String(1, _instance.batchSize);
             }
-            if (instance.lengthScale) {
-                writer.writeFloat(2, instance.lengthScale);
+            if (_instance.lengthScale) {
+                _writer.writeFloat(2, _instance.lengthScale);
             }
-            if (instance.noiseScale) {
-                writer.writeFloat(3, instance.noiseScale);
+            if (_instance.noiseScale) {
+                _writer.writeFloat(3, _instance.noiseScale);
             }
-            if (instance.cleaners && instance.cleaners.length) {
-                writer.writeRepeatedString(4, instance.cleaners);
+            if (_instance.cleaners && _instance.cleaners.length) {
+                _writer.writeRepeatedString(4, _instance.cleaners);
             }
-            if (instance.maxTextLength) {
-                writer.writeInt64String(5, instance.maxTextLength);
+            if (_instance.maxTextLength) {
+                _writer.writeInt64String(5, _instance.maxTextLength);
             }
-            if (instance.paramConfigPath) {
-                writer.writeString(6, instance.paramConfigPath);
+            if (_instance.paramConfigPath) {
+                _writer.writeString(6, _instance.paramConfigPath);
             }
-            if (instance.tritonUrl) {
-                writer.writeString(7, instance.tritonUrl);
+            if (_instance.tritonUrl) {
+                _writer.writeString(7, _instance.tritonUrl);
             }
-            if (instance.tritonModelName) {
-                writer.writeString(8, instance.tritonModelName);
+            if (_instance.tritonModelName) {
+                _writer.writeString(8, _instance.tritonModelName);
             }
         };
         Object.defineProperty(GlowTTSTriton.prototype, "batchSize", {
@@ -1646,6 +2716,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GlowTTSTriton.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GlowTTSTriton.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         GlowTTSTriton.prototype.toObject = function () {
             return {
                 batchSize: this.batchSize,
@@ -1658,82 +2740,121 @@
                 tritonModelName: this.tritonModelName
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         GlowTTSTriton.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GlowTTSTriton.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                batchSize: this.batchSize,
+                lengthScale: this.lengthScale,
+                noiseScale: this.noiseScale,
+                cleaners: (this.cleaners || []).slice(),
+                maxTextLength: this.maxTextLength,
+                paramConfigPath: this.paramConfigPath,
+                tritonUrl: this.tritonUrl,
+                tritonModelName: this.tritonModelName
+            };
+        };
         return GlowTTSTriton;
     }());
+    GlowTTSTriton.id = 'ondewo.t2s.GlowTTSTriton';
+    /**
+     * Message implementation for ondewo.t2s.Mel2Audio
+     */
     var Mel2Audio = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Mel2Audio value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Mel2Audio to deeply clone from
          */
-        function Mel2Audio(value) {
-            value = value || {};
-            this.type = value.type;
-            this.mbMelganTriton = value.mbMelganTriton
-                ? new MbMelganTriton(value.mbMelganTriton)
+        function Mel2Audio(_value) {
+            _value = _value || {};
+            this.type = _value.type;
+            this.mbMelganTriton = _value.mbMelganTriton
+                ? new MbMelganTriton(_value.mbMelganTriton)
                 : undefined;
-            this.hifiGan = value.hifiGan ? new HiFiGan(value.hifiGan) : undefined;
-            this.hifiGanTriton = value.hifiGanTriton
-                ? new HiFiGanTriton(value.hifiGanTriton)
+            this.hifiGan = _value.hifiGan ? new HiFiGan(_value.hifiGan) : undefined;
+            this.hifiGanTriton = _value.hifiGanTriton
+                ? new HiFiGanTriton(_value.hifiGanTriton)
                 : undefined;
             Mel2Audio.refineValues(this);
         }
-        Mel2Audio.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Mel2Audio.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Mel2Audio.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Mel2Audio.deserializeBinary = function (bytes) {
             var instance = new Mel2Audio();
-            Mel2Audio.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Mel2Audio.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Mel2Audio.refineValues = function (instance) {
-            instance.type = instance.type || '';
-            instance.mbMelganTriton = instance.mbMelganTriton || undefined;
-            instance.hifiGan = instance.hifiGan || undefined;
-            instance.hifiGanTriton = instance.hifiGanTriton || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Mel2Audio.refineValues = function (_instance) {
+            _instance.type = _instance.type || '';
+            _instance.mbMelganTriton = _instance.mbMelganTriton || undefined;
+            _instance.hifiGan = _instance.hifiGan || undefined;
+            _instance.hifiGanTriton = _instance.hifiGanTriton || undefined;
         };
-        Mel2Audio.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Mel2Audio.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.type = reader.readString();
+                        _instance.type = _reader.readString();
                         break;
                     case 2:
-                        instance.mbMelganTriton = new MbMelganTriton();
-                        reader.readMessage(instance.mbMelganTriton, MbMelganTriton.fromBinaryReader);
+                        _instance.mbMelganTriton = new MbMelganTriton();
+                        _reader.readMessage(_instance.mbMelganTriton, MbMelganTriton.deserializeBinaryFromReader);
                         break;
                     case 3:
-                        instance.hifiGan = new HiFiGan();
-                        reader.readMessage(instance.hifiGan, HiFiGan.fromBinaryReader);
+                        _instance.hifiGan = new HiFiGan();
+                        _reader.readMessage(_instance.hifiGan, HiFiGan.deserializeBinaryFromReader);
                         break;
                     case 4:
-                        instance.hifiGanTriton = new HiFiGanTriton();
-                        reader.readMessage(instance.hifiGanTriton, HiFiGanTriton.fromBinaryReader);
+                        _instance.hifiGanTriton = new HiFiGanTriton();
+                        _reader.readMessage(_instance.hifiGanTriton, HiFiGanTriton.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Mel2Audio.refineValues(instance);
+            Mel2Audio.refineValues(_instance);
         };
-        Mel2Audio.toBinaryWriter = function (instance, writer) {
-            if (instance.type) {
-                writer.writeString(1, instance.type);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Mel2Audio.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.type) {
+                _writer.writeString(1, _instance.type);
             }
-            if (instance.mbMelganTriton) {
-                writer.writeMessage(2, instance.mbMelganTriton, MbMelganTriton.toBinaryWriter);
+            if (_instance.mbMelganTriton) {
+                _writer.writeMessage(2, _instance.mbMelganTriton, MbMelganTriton.serializeBinaryToWriter);
             }
-            if (instance.hifiGan) {
-                writer.writeMessage(3, instance.hifiGan, HiFiGan.toBinaryWriter);
+            if (_instance.hifiGan) {
+                _writer.writeMessage(3, _instance.hifiGan, HiFiGan.serializeBinaryToWriter);
             }
-            if (instance.hifiGanTriton) {
-                writer.writeMessage(4, instance.hifiGanTriton, HiFiGanTriton.toBinaryWriter);
+            if (_instance.hifiGanTriton) {
+                _writer.writeMessage(4, _instance.hifiGanTriton, HiFiGanTriton.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Mel2Audio.prototype, "type", {
@@ -1776,6 +2897,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Mel2Audio.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Mel2Audio.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Mel2Audio.prototype.toObject = function () {
             return {
                 type: this.type,
@@ -1788,75 +2921,114 @@
                     : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Mel2Audio.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Mel2Audio.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                type: this.type,
+                mbMelganTriton: this.mbMelganTriton
+                    ? this.mbMelganTriton.toProtobufJSON(options)
+                    : null,
+                hifiGan: this.hifiGan ? this.hifiGan.toProtobufJSON(options) : null,
+                hifiGanTriton: this.hifiGanTriton
+                    ? this.hifiGanTriton.toProtobufJSON(options)
+                    : null
+            };
+        };
         return Mel2Audio;
     }());
+    Mel2Audio.id = 'ondewo.t2s.Mel2Audio';
+    /**
+     * Message implementation for ondewo.t2s.HiFiGan
+     */
     var HiFiGan = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param HiFiGan value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of HiFiGan to deeply clone from
          */
-        function HiFiGan(value) {
-            value = value || {};
-            this.useGpu = value.useGpu;
-            this.batchSize = value.batchSize;
-            this.configPath = value.configPath;
-            this.modelPath = value.modelPath;
+        function HiFiGan(_value) {
+            _value = _value || {};
+            this.useGpu = _value.useGpu;
+            this.batchSize = _value.batchSize;
+            this.configPath = _value.configPath;
+            this.modelPath = _value.modelPath;
             HiFiGan.refineValues(this);
         }
-        HiFiGan.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            HiFiGan.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        HiFiGan.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        HiFiGan.deserializeBinary = function (bytes) {
             var instance = new HiFiGan();
-            HiFiGan.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            HiFiGan.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        HiFiGan.refineValues = function (instance) {
-            instance.useGpu = instance.useGpu || false;
-            instance.batchSize = instance.batchSize || '0';
-            instance.configPath = instance.configPath || '';
-            instance.modelPath = instance.modelPath || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        HiFiGan.refineValues = function (_instance) {
+            _instance.useGpu = _instance.useGpu || false;
+            _instance.batchSize = _instance.batchSize || '0';
+            _instance.configPath = _instance.configPath || '';
+            _instance.modelPath = _instance.modelPath || '';
         };
-        HiFiGan.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        HiFiGan.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.useGpu = reader.readBool();
+                        _instance.useGpu = _reader.readBool();
                         break;
                     case 2:
-                        instance.batchSize = reader.readInt64String();
+                        _instance.batchSize = _reader.readInt64String();
                         break;
                     case 3:
-                        instance.configPath = reader.readString();
+                        _instance.configPath = _reader.readString();
                         break;
                     case 4:
-                        instance.modelPath = reader.readString();
+                        _instance.modelPath = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            HiFiGan.refineValues(instance);
+            HiFiGan.refineValues(_instance);
         };
-        HiFiGan.toBinaryWriter = function (instance, writer) {
-            if (instance.useGpu) {
-                writer.writeBool(1, instance.useGpu);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        HiFiGan.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.useGpu) {
+                _writer.writeBool(1, _instance.useGpu);
             }
-            if (instance.batchSize) {
-                writer.writeInt64String(2, instance.batchSize);
+            if (_instance.batchSize) {
+                _writer.writeInt64String(2, _instance.batchSize);
             }
-            if (instance.configPath) {
-                writer.writeString(3, instance.configPath);
+            if (_instance.configPath) {
+                _writer.writeString(3, _instance.configPath);
             }
-            if (instance.modelPath) {
-                writer.writeString(4, instance.modelPath);
+            if (_instance.modelPath) {
+                _writer.writeString(4, _instance.modelPath);
             }
         };
         Object.defineProperty(HiFiGan.prototype, "useGpu", {
@@ -1899,6 +3071,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        HiFiGan.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            HiFiGan.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         HiFiGan.prototype.toObject = function () {
             return {
                 useGpu: this.useGpu,
@@ -1907,67 +3091,102 @@
                 modelPath: this.modelPath
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         HiFiGan.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        HiFiGan.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                useGpu: this.useGpu,
+                batchSize: this.batchSize,
+                configPath: this.configPath,
+                modelPath: this.modelPath
+            };
+        };
         return HiFiGan;
     }());
+    HiFiGan.id = 'ondewo.t2s.HiFiGan';
+    /**
+     * Message implementation for ondewo.t2s.HiFiGanTriton
+     */
     var HiFiGanTriton = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param HiFiGanTriton value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of HiFiGanTriton to deeply clone from
          */
-        function HiFiGanTriton(value) {
-            value = value || {};
-            this.configPath = value.configPath;
-            this.tritonModelName = value.tritonModelName;
-            this.tritonUrl = value.tritonUrl;
+        function HiFiGanTriton(_value) {
+            _value = _value || {};
+            this.configPath = _value.configPath;
+            this.tritonModelName = _value.tritonModelName;
+            this.tritonUrl = _value.tritonUrl;
             HiFiGanTriton.refineValues(this);
         }
-        HiFiGanTriton.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            HiFiGanTriton.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        HiFiGanTriton.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        HiFiGanTriton.deserializeBinary = function (bytes) {
             var instance = new HiFiGanTriton();
-            HiFiGanTriton.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            HiFiGanTriton.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        HiFiGanTriton.refineValues = function (instance) {
-            instance.configPath = instance.configPath || '';
-            instance.tritonModelName = instance.tritonModelName || '';
-            instance.tritonUrl = instance.tritonUrl || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        HiFiGanTriton.refineValues = function (_instance) {
+            _instance.configPath = _instance.configPath || '';
+            _instance.tritonModelName = _instance.tritonModelName || '';
+            _instance.tritonUrl = _instance.tritonUrl || '';
         };
-        HiFiGanTriton.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        HiFiGanTriton.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.configPath = reader.readString();
+                        _instance.configPath = _reader.readString();
                         break;
                     case 2:
-                        instance.tritonModelName = reader.readString();
+                        _instance.tritonModelName = _reader.readString();
                         break;
                     case 3:
-                        instance.tritonUrl = reader.readString();
+                        _instance.tritonUrl = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            HiFiGanTriton.refineValues(instance);
+            HiFiGanTriton.refineValues(_instance);
         };
-        HiFiGanTriton.toBinaryWriter = function (instance, writer) {
-            if (instance.configPath) {
-                writer.writeString(1, instance.configPath);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        HiFiGanTriton.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.configPath) {
+                _writer.writeString(1, _instance.configPath);
             }
-            if (instance.tritonModelName) {
-                writer.writeString(2, instance.tritonModelName);
+            if (_instance.tritonModelName) {
+                _writer.writeString(2, _instance.tritonModelName);
             }
-            if (instance.tritonUrl) {
-                writer.writeString(3, instance.tritonUrl);
+            if (_instance.tritonUrl) {
+                _writer.writeString(3, _instance.tritonUrl);
             }
         };
         Object.defineProperty(HiFiGanTriton.prototype, "configPath", {
@@ -2000,6 +3219,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        HiFiGanTriton.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            HiFiGanTriton.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         HiFiGanTriton.prototype.toObject = function () {
             return {
                 configPath: this.configPath,
@@ -2007,75 +3238,109 @@
                 tritonUrl: this.tritonUrl
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         HiFiGanTriton.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        HiFiGanTriton.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                configPath: this.configPath,
+                tritonModelName: this.tritonModelName,
+                tritonUrl: this.tritonUrl
+            };
+        };
         return HiFiGanTriton;
     }());
+    HiFiGanTriton.id = 'ondewo.t2s.HiFiGanTriton';
+    /**
+     * Message implementation for ondewo.t2s.MbMelganTriton
+     */
     var MbMelganTriton = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param MbMelganTriton value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of MbMelganTriton to deeply clone from
          */
-        function MbMelganTriton(value) {
-            value = value || {};
-            this.configPath = value.configPath;
-            this.statsPath = value.statsPath;
-            this.tritonModelName = value.tritonModelName;
-            this.tritonUrl = value.tritonUrl;
+        function MbMelganTriton(_value) {
+            _value = _value || {};
+            this.configPath = _value.configPath;
+            this.statsPath = _value.statsPath;
+            this.tritonModelName = _value.tritonModelName;
+            this.tritonUrl = _value.tritonUrl;
             MbMelganTriton.refineValues(this);
         }
-        MbMelganTriton.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            MbMelganTriton.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        MbMelganTriton.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        MbMelganTriton.deserializeBinary = function (bytes) {
             var instance = new MbMelganTriton();
-            MbMelganTriton.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            MbMelganTriton.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        MbMelganTriton.refineValues = function (instance) {
-            instance.configPath = instance.configPath || '';
-            instance.statsPath = instance.statsPath || '';
-            instance.tritonModelName = instance.tritonModelName || '';
-            instance.tritonUrl = instance.tritonUrl || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        MbMelganTriton.refineValues = function (_instance) {
+            _instance.configPath = _instance.configPath || '';
+            _instance.statsPath = _instance.statsPath || '';
+            _instance.tritonModelName = _instance.tritonModelName || '';
+            _instance.tritonUrl = _instance.tritonUrl || '';
         };
-        MbMelganTriton.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        MbMelganTriton.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.configPath = reader.readString();
+                        _instance.configPath = _reader.readString();
                         break;
                     case 2:
-                        instance.statsPath = reader.readString();
+                        _instance.statsPath = _reader.readString();
                         break;
                     case 3:
-                        instance.tritonModelName = reader.readString();
+                        _instance.tritonModelName = _reader.readString();
                         break;
                     case 4:
-                        instance.tritonUrl = reader.readString();
+                        _instance.tritonUrl = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            MbMelganTriton.refineValues(instance);
+            MbMelganTriton.refineValues(_instance);
         };
-        MbMelganTriton.toBinaryWriter = function (instance, writer) {
-            if (instance.configPath) {
-                writer.writeString(1, instance.configPath);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        MbMelganTriton.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.configPath) {
+                _writer.writeString(1, _instance.configPath);
             }
-            if (instance.statsPath) {
-                writer.writeString(2, instance.statsPath);
+            if (_instance.statsPath) {
+                _writer.writeString(2, _instance.statsPath);
             }
-            if (instance.tritonModelName) {
-                writer.writeString(3, instance.tritonModelName);
+            if (_instance.tritonModelName) {
+                _writer.writeString(3, _instance.tritonModelName);
             }
-            if (instance.tritonUrl) {
-                writer.writeString(4, instance.tritonUrl);
+            if (_instance.tritonUrl) {
+                _writer.writeString(4, _instance.tritonUrl);
             }
         };
         Object.defineProperty(MbMelganTriton.prototype, "configPath", {
@@ -2118,6 +3383,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        MbMelganTriton.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            MbMelganTriton.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         MbMelganTriton.prototype.toObject = function () {
             return {
                 configPath: this.configPath,
@@ -2126,91 +3403,126 @@
                 tritonUrl: this.tritonUrl
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         MbMelganTriton.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        MbMelganTriton.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                configPath: this.configPath,
+                statsPath: this.statsPath,
+                tritonModelName: this.tritonModelName,
+                tritonUrl: this.tritonUrl
+            };
+        };
         return MbMelganTriton;
     }());
+    MbMelganTriton.id = 'ondewo.t2s.MbMelganTriton';
+    /**
+     * Message implementation for ondewo.t2s.Caching
+     */
     var Caching = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Caching value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Caching to deeply clone from
          */
-        function Caching(value) {
-            value = value || {};
-            this.active = value.active;
-            this.memoryCacheMaxSize = value.memoryCacheMaxSize;
-            this.samplingRate = value.samplingRate;
-            this.loadCache = value.loadCache;
-            this.saveCache = value.saveCache;
-            this.cacheSaveDir = value.cacheSaveDir;
+        function Caching(_value) {
+            _value = _value || {};
+            this.active = _value.active;
+            this.memoryCacheMaxSize = _value.memoryCacheMaxSize;
+            this.samplingRate = _value.samplingRate;
+            this.loadCache = _value.loadCache;
+            this.saveCache = _value.saveCache;
+            this.cacheSaveDir = _value.cacheSaveDir;
             Caching.refineValues(this);
         }
-        Caching.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Caching.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Caching.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Caching.deserializeBinary = function (bytes) {
             var instance = new Caching();
-            Caching.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Caching.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Caching.refineValues = function (instance) {
-            instance.active = instance.active || false;
-            instance.memoryCacheMaxSize = instance.memoryCacheMaxSize || '0';
-            instance.samplingRate = instance.samplingRate || '0';
-            instance.loadCache = instance.loadCache || false;
-            instance.saveCache = instance.saveCache || false;
-            instance.cacheSaveDir = instance.cacheSaveDir || '';
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Caching.refineValues = function (_instance) {
+            _instance.active = _instance.active || false;
+            _instance.memoryCacheMaxSize = _instance.memoryCacheMaxSize || '0';
+            _instance.samplingRate = _instance.samplingRate || '0';
+            _instance.loadCache = _instance.loadCache || false;
+            _instance.saveCache = _instance.saveCache || false;
+            _instance.cacheSaveDir = _instance.cacheSaveDir || '';
         };
-        Caching.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Caching.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.active = reader.readBool();
+                        _instance.active = _reader.readBool();
                         break;
                     case 2:
-                        instance.memoryCacheMaxSize = reader.readInt64String();
+                        _instance.memoryCacheMaxSize = _reader.readInt64String();
                         break;
                     case 3:
-                        instance.samplingRate = reader.readInt64String();
+                        _instance.samplingRate = _reader.readInt64String();
                         break;
                     case 4:
-                        instance.loadCache = reader.readBool();
+                        _instance.loadCache = _reader.readBool();
                         break;
                     case 5:
-                        instance.saveCache = reader.readBool();
+                        _instance.saveCache = _reader.readBool();
                         break;
                     case 6:
-                        instance.cacheSaveDir = reader.readString();
+                        _instance.cacheSaveDir = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Caching.refineValues(instance);
+            Caching.refineValues(_instance);
         };
-        Caching.toBinaryWriter = function (instance, writer) {
-            if (instance.active) {
-                writer.writeBool(1, instance.active);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Caching.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.active) {
+                _writer.writeBool(1, _instance.active);
             }
-            if (instance.memoryCacheMaxSize) {
-                writer.writeInt64String(2, instance.memoryCacheMaxSize);
+            if (_instance.memoryCacheMaxSize) {
+                _writer.writeInt64String(2, _instance.memoryCacheMaxSize);
             }
-            if (instance.samplingRate) {
-                writer.writeInt64String(3, instance.samplingRate);
+            if (_instance.samplingRate) {
+                _writer.writeInt64String(3, _instance.samplingRate);
             }
-            if (instance.loadCache) {
-                writer.writeBool(4, instance.loadCache);
+            if (_instance.loadCache) {
+                _writer.writeBool(4, _instance.loadCache);
             }
-            if (instance.saveCache) {
-                writer.writeBool(5, instance.saveCache);
+            if (_instance.saveCache) {
+                _writer.writeBool(5, _instance.saveCache);
             }
-            if (instance.cacheSaveDir) {
-                writer.writeString(6, instance.cacheSaveDir);
+            if (_instance.cacheSaveDir) {
+                _writer.writeString(6, _instance.cacheSaveDir);
             }
         };
         Object.defineProperty(Caching.prototype, "active", {
@@ -2273,6 +3585,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Caching.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Caching.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Caching.prototype.toObject = function () {
             return {
                 active: this.active,
@@ -2283,59 +3607,104 @@
                 cacheSaveDir: this.cacheSaveDir
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Caching.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Caching.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                active: this.active,
+                memoryCacheMaxSize: this.memoryCacheMaxSize,
+                samplingRate: this.samplingRate,
+                loadCache: this.loadCache,
+                saveCache: this.saveCache,
+                cacheSaveDir: this.cacheSaveDir
+            };
+        };
         return Caching;
     }());
+    Caching.id = 'ondewo.t2s.Caching';
+    /**
+     * Message implementation for ondewo.t2s.Normalization
+     */
     var Normalization = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Normalization value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Normalization to deeply clone from
          */
-        function Normalization(value) {
-            value = value || {};
-            this.language = value.language;
-            this.pipeline = (value.pipeline || []).slice();
+        function Normalization(_value) {
+            _value = _value || {};
+            this.language = _value.language;
+            this.pipeline = (_value.pipeline || []).slice();
+            this.customPhonemizerId = _value.customPhonemizerId;
             Normalization.refineValues(this);
         }
-        Normalization.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Normalization.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Normalization.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Normalization.deserializeBinary = function (bytes) {
             var instance = new Normalization();
-            Normalization.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Normalization.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Normalization.refineValues = function (instance) {
-            instance.language = instance.language || '';
-            instance.pipeline = instance.pipeline || [];
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Normalization.refineValues = function (_instance) {
+            _instance.language = _instance.language || '';
+            _instance.pipeline = _instance.pipeline || [];
+            _instance.customPhonemizerId = _instance.customPhonemizerId || '';
         };
-        Normalization.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Normalization.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.language = reader.readString();
+                        _instance.language = _reader.readString();
                         break;
                     case 2:
-                        (instance.pipeline = instance.pipeline || []).push(reader.readString());
+                        (_instance.pipeline = _instance.pipeline || []).push(_reader.readString());
+                        break;
+                    case 3:
+                        _instance.customPhonemizerId = _reader.readString();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Normalization.refineValues(instance);
+            Normalization.refineValues(_instance);
         };
-        Normalization.toBinaryWriter = function (instance, writer) {
-            if (instance.language) {
-                writer.writeString(1, instance.language);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Normalization.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.language) {
+                _writer.writeString(1, _instance.language);
             }
-            if (instance.pipeline && instance.pipeline.length) {
-                writer.writeRepeatedString(2, instance.pipeline);
+            if (_instance.pipeline && _instance.pipeline.length) {
+                _writer.writeRepeatedString(2, _instance.pipeline);
+            }
+            if (_instance.customPhonemizerId) {
+                _writer.writeString(3, _instance.customPhonemizerId);
             }
         };
         Object.defineProperty(Normalization.prototype, "language", {
@@ -2358,94 +3727,151 @@
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(Normalization.prototype, "customPhonemizerId", {
+            get: function () {
+                return this._customPhonemizerId;
+            },
+            set: function (value) {
+                this._customPhonemizerId = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Normalization.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Normalization.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Normalization.prototype.toObject = function () {
             return {
                 language: this.language,
-                pipeline: (this.pipeline || []).slice()
+                pipeline: (this.pipeline || []).slice(),
+                customPhonemizerId: this.customPhonemizerId
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Normalization.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Normalization.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                language: this.language,
+                pipeline: (this.pipeline || []).slice(),
+                customPhonemizerId: this.customPhonemizerId
+            };
+        };
         return Normalization;
     }());
+    Normalization.id = 'ondewo.t2s.Normalization';
+    /**
+     * Message implementation for ondewo.t2s.Postprocessing
+     */
     var Postprocessing = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Postprocessing value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Postprocessing to deeply clone from
          */
-        function Postprocessing(value) {
-            value = value || {};
-            this.silenceSecs = value.silenceSecs;
-            this.pipeline = (value.pipeline || []).slice();
-            this.logmmse = value.logmmse ? new Logmnse(value.logmmse) : undefined;
-            this.wiener = value.wiener ? new Wiener(value.wiener) : undefined;
-            this.apodization = value.apodization
-                ? new Apodization(value.apodization)
+        function Postprocessing(_value) {
+            _value = _value || {};
+            this.silenceSecs = _value.silenceSecs;
+            this.pipeline = (_value.pipeline || []).slice();
+            this.logmmse = _value.logmmse ? new Logmnse(_value.logmmse) : undefined;
+            this.wiener = _value.wiener ? new Wiener(_value.wiener) : undefined;
+            this.apodization = _value.apodization
+                ? new Apodization(_value.apodization)
                 : undefined;
             Postprocessing.refineValues(this);
         }
-        Postprocessing.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Postprocessing.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Postprocessing.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Postprocessing.deserializeBinary = function (bytes) {
             var instance = new Postprocessing();
-            Postprocessing.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Postprocessing.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Postprocessing.refineValues = function (instance) {
-            instance.silenceSecs = instance.silenceSecs || 0;
-            instance.pipeline = instance.pipeline || [];
-            instance.logmmse = instance.logmmse || undefined;
-            instance.wiener = instance.wiener || undefined;
-            instance.apodization = instance.apodization || undefined;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Postprocessing.refineValues = function (_instance) {
+            _instance.silenceSecs = _instance.silenceSecs || 0;
+            _instance.pipeline = _instance.pipeline || [];
+            _instance.logmmse = _instance.logmmse || undefined;
+            _instance.wiener = _instance.wiener || undefined;
+            _instance.apodization = _instance.apodization || undefined;
         };
-        Postprocessing.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Postprocessing.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.silenceSecs = reader.readFloat();
+                        _instance.silenceSecs = _reader.readFloat();
                         break;
                     case 2:
-                        (instance.pipeline = instance.pipeline || []).push(reader.readString());
+                        (_instance.pipeline = _instance.pipeline || []).push(_reader.readString());
                         break;
                     case 3:
-                        instance.logmmse = new Logmnse();
-                        reader.readMessage(instance.logmmse, Logmnse.fromBinaryReader);
+                        _instance.logmmse = new Logmnse();
+                        _reader.readMessage(_instance.logmmse, Logmnse.deserializeBinaryFromReader);
                         break;
                     case 4:
-                        instance.wiener = new Wiener();
-                        reader.readMessage(instance.wiener, Wiener.fromBinaryReader);
+                        _instance.wiener = new Wiener();
+                        _reader.readMessage(_instance.wiener, Wiener.deserializeBinaryFromReader);
                         break;
                     case 5:
-                        instance.apodization = new Apodization();
-                        reader.readMessage(instance.apodization, Apodization.fromBinaryReader);
+                        _instance.apodization = new Apodization();
+                        _reader.readMessage(_instance.apodization, Apodization.deserializeBinaryFromReader);
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Postprocessing.refineValues(instance);
+            Postprocessing.refineValues(_instance);
         };
-        Postprocessing.toBinaryWriter = function (instance, writer) {
-            if (instance.silenceSecs) {
-                writer.writeFloat(1, instance.silenceSecs);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Postprocessing.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.silenceSecs) {
+                _writer.writeFloat(1, _instance.silenceSecs);
             }
-            if (instance.pipeline && instance.pipeline.length) {
-                writer.writeRepeatedString(2, instance.pipeline);
+            if (_instance.pipeline && _instance.pipeline.length) {
+                _writer.writeRepeatedString(2, _instance.pipeline);
             }
-            if (instance.logmmse) {
-                writer.writeMessage(3, instance.logmmse, Logmnse.toBinaryWriter);
+            if (_instance.logmmse) {
+                _writer.writeMessage(3, _instance.logmmse, Logmnse.serializeBinaryToWriter);
             }
-            if (instance.wiener) {
-                writer.writeMessage(4, instance.wiener, Wiener.toBinaryWriter);
+            if (_instance.wiener) {
+                _writer.writeMessage(4, _instance.wiener, Wiener.serializeBinaryToWriter);
             }
-            if (instance.apodization) {
-                writer.writeMessage(5, instance.apodization, Apodization.toBinaryWriter);
+            if (_instance.apodization) {
+                _writer.writeMessage(5, _instance.apodization, Apodization.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Postprocessing.prototype, "silenceSecs", {
@@ -2498,6 +3924,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Postprocessing.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Postprocessing.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Postprocessing.prototype.toObject = function () {
             return {
                 silenceSecs: this.silenceSecs,
@@ -2507,67 +3945,105 @@
                 apodization: this.apodization ? this.apodization.toObject() : undefined
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Postprocessing.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Postprocessing.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                silenceSecs: this.silenceSecs,
+                pipeline: (this.pipeline || []).slice(),
+                logmmse: this.logmmse ? this.logmmse.toProtobufJSON(options) : null,
+                wiener: this.wiener ? this.wiener.toProtobufJSON(options) : null,
+                apodization: this.apodization
+                    ? this.apodization.toProtobufJSON(options)
+                    : null
+            };
+        };
         return Postprocessing;
     }());
+    Postprocessing.id = 'ondewo.t2s.Postprocessing';
+    /**
+     * Message implementation for ondewo.t2s.Logmnse
+     */
     var Logmnse = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Logmnse value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Logmnse to deeply clone from
          */
-        function Logmnse(value) {
-            value = value || {};
-            this.initialNoise = value.initialNoise;
-            this.windowSize = value.windowSize;
-            this.noiseThreshold = value.noiseThreshold;
+        function Logmnse(_value) {
+            _value = _value || {};
+            this.initialNoise = _value.initialNoise;
+            this.windowSize = _value.windowSize;
+            this.noiseThreshold = _value.noiseThreshold;
             Logmnse.refineValues(this);
         }
-        Logmnse.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Logmnse.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Logmnse.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Logmnse.deserializeBinary = function (bytes) {
             var instance = new Logmnse();
-            Logmnse.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Logmnse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Logmnse.refineValues = function (instance) {
-            instance.initialNoise = instance.initialNoise || '0';
-            instance.windowSize = instance.windowSize || '0';
-            instance.noiseThreshold = instance.noiseThreshold || 0;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Logmnse.refineValues = function (_instance) {
+            _instance.initialNoise = _instance.initialNoise || '0';
+            _instance.windowSize = _instance.windowSize || '0';
+            _instance.noiseThreshold = _instance.noiseThreshold || 0;
         };
-        Logmnse.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Logmnse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.initialNoise = reader.readInt64String();
+                        _instance.initialNoise = _reader.readInt64String();
                         break;
                     case 2:
-                        instance.windowSize = reader.readInt64String();
+                        _instance.windowSize = _reader.readInt64String();
                         break;
                     case 3:
-                        instance.noiseThreshold = reader.readFloat();
+                        _instance.noiseThreshold = _reader.readFloat();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Logmnse.refineValues(instance);
+            Logmnse.refineValues(_instance);
         };
-        Logmnse.toBinaryWriter = function (instance, writer) {
-            if (instance.initialNoise) {
-                writer.writeInt64String(1, instance.initialNoise);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Logmnse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.initialNoise) {
+                _writer.writeInt64String(1, _instance.initialNoise);
             }
-            if (instance.windowSize) {
-                writer.writeInt64String(2, instance.windowSize);
+            if (_instance.windowSize) {
+                _writer.writeInt64String(2, _instance.windowSize);
             }
-            if (instance.noiseThreshold) {
-                writer.writeFloat(3, instance.noiseThreshold);
+            if (_instance.noiseThreshold) {
+                _writer.writeFloat(3, _instance.noiseThreshold);
             }
         };
         Object.defineProperty(Logmnse.prototype, "initialNoise", {
@@ -2600,6 +4076,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Logmnse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Logmnse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Logmnse.prototype.toObject = function () {
             return {
                 initialNoise: this.initialNoise,
@@ -2607,83 +4095,117 @@
                 noiseThreshold: this.noiseThreshold
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Logmnse.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Logmnse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                initialNoise: this.initialNoise,
+                windowSize: this.windowSize,
+                noiseThreshold: this.noiseThreshold
+            };
+        };
         return Logmnse;
     }());
+    Logmnse.id = 'ondewo.t2s.Logmnse';
+    /**
+     * Message implementation for ondewo.t2s.Wiener
+     */
     var Wiener = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Wiener value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Wiener to deeply clone from
          */
-        function Wiener(value) {
-            value = value || {};
-            this.frameLen = value.frameLen;
-            this.lpcOrder = value.lpcOrder;
-            this.iterations = value.iterations;
-            this.alpha = value.alpha;
-            this.thresh = value.thresh;
+        function Wiener(_value) {
+            _value = _value || {};
+            this.frameLen = _value.frameLen;
+            this.lpcOrder = _value.lpcOrder;
+            this.iterations = _value.iterations;
+            this.alpha = _value.alpha;
+            this.thresh = _value.thresh;
             Wiener.refineValues(this);
         }
-        Wiener.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Wiener.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Wiener.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Wiener.deserializeBinary = function (bytes) {
             var instance = new Wiener();
-            Wiener.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Wiener.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Wiener.refineValues = function (instance) {
-            instance.frameLen = instance.frameLen || '0';
-            instance.lpcOrder = instance.lpcOrder || '0';
-            instance.iterations = instance.iterations || '0';
-            instance.alpha = instance.alpha || 0;
-            instance.thresh = instance.thresh || 0;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Wiener.refineValues = function (_instance) {
+            _instance.frameLen = _instance.frameLen || '0';
+            _instance.lpcOrder = _instance.lpcOrder || '0';
+            _instance.iterations = _instance.iterations || '0';
+            _instance.alpha = _instance.alpha || 0;
+            _instance.thresh = _instance.thresh || 0;
         };
-        Wiener.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Wiener.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.frameLen = reader.readInt64String();
+                        _instance.frameLen = _reader.readInt64String();
                         break;
                     case 2:
-                        instance.lpcOrder = reader.readInt64String();
+                        _instance.lpcOrder = _reader.readInt64String();
                         break;
                     case 3:
-                        instance.iterations = reader.readInt64String();
+                        _instance.iterations = _reader.readInt64String();
                         break;
                     case 4:
-                        instance.alpha = reader.readFloat();
+                        _instance.alpha = _reader.readFloat();
                         break;
                     case 5:
-                        instance.thresh = reader.readFloat();
+                        _instance.thresh = _reader.readFloat();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Wiener.refineValues(instance);
+            Wiener.refineValues(_instance);
         };
-        Wiener.toBinaryWriter = function (instance, writer) {
-            if (instance.frameLen) {
-                writer.writeInt64String(1, instance.frameLen);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Wiener.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.frameLen) {
+                _writer.writeInt64String(1, _instance.frameLen);
             }
-            if (instance.lpcOrder) {
-                writer.writeInt64String(2, instance.lpcOrder);
+            if (_instance.lpcOrder) {
+                _writer.writeInt64String(2, _instance.lpcOrder);
             }
-            if (instance.iterations) {
-                writer.writeInt64String(3, instance.iterations);
+            if (_instance.iterations) {
+                _writer.writeInt64String(3, _instance.iterations);
             }
-            if (instance.alpha) {
-                writer.writeFloat(4, instance.alpha);
+            if (_instance.alpha) {
+                _writer.writeFloat(4, _instance.alpha);
             }
-            if (instance.thresh) {
-                writer.writeFloat(5, instance.thresh);
+            if (_instance.thresh) {
+                _writer.writeFloat(5, _instance.thresh);
             }
         };
         Object.defineProperty(Wiener.prototype, "frameLen", {
@@ -2736,6 +4258,18 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Wiener.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Wiener.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Wiener.prototype.toObject = function () {
             return {
                 frameLen: this.frameLen,
@@ -2745,51 +4279,87 @@
                 thresh: this.thresh
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Wiener.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Wiener.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                frameLen: this.frameLen,
+                lpcOrder: this.lpcOrder,
+                iterations: this.iterations,
+                alpha: this.alpha,
+                thresh: this.thresh
+            };
+        };
         return Wiener;
     }());
+    Wiener.id = 'ondewo.t2s.Wiener';
+    /**
+     * Message implementation for ondewo.t2s.Apodization
+     */
     var Apodization = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Apodization value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Apodization to deeply clone from
          */
-        function Apodization(value) {
-            value = value || {};
-            this.apodizationSecs = value.apodizationSecs;
+        function Apodization(_value) {
+            _value = _value || {};
+            this.apodizationSecs = _value.apodizationSecs;
             Apodization.refineValues(this);
         }
-        Apodization.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Apodization.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Apodization.fromBinary = function (bytes) {
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Apodization.deserializeBinary = function (bytes) {
             var instance = new Apodization();
-            Apodization.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+            Apodization.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Apodization.refineValues = function (instance) {
-            instance.apodizationSecs = instance.apodizationSecs || 0;
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Apodization.refineValues = function (_instance) {
+            _instance.apodizationSecs = _instance.apodizationSecs || 0;
         };
-        Apodization.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Apodization.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
                     case 1:
-                        instance.apodizationSecs = reader.readFloat();
+                        _instance.apodizationSecs = _reader.readFloat();
                         break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Apodization.refineValues(instance);
+            Apodization.refineValues(_instance);
         };
-        Apodization.toBinaryWriter = function (instance, writer) {
-            if (instance.apodizationSecs) {
-                writer.writeFloat(1, instance.apodizationSecs);
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Apodization.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.apodizationSecs) {
+                _writer.writeFloat(1, _instance.apodizationSecs);
             }
         };
         Object.defineProperty(Apodization.prototype, "apodizationSecs", {
@@ -2802,259 +4372,1389 @@
             enumerable: false,
             configurable: true
         });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Apodization.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Apodization.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
         Apodization.prototype.toObject = function () {
             return {
                 apodizationSecs: this.apodizationSecs
             };
         };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
         Apodization.prototype.toJSON = function () {
             return this.toObject();
         };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Apodization.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                apodizationSecs: this.apodizationSecs
+            };
+        };
         return Apodization;
     }());
+    Apodization.id = 'ondewo.t2s.Apodization';
 
-    var Empty = /** @class */ (function () {
+    /**
+     * Message implementation for ondewo.t2s.PhonemizerId
+     */
+    var PhonemizerId = /** @class */ (function () {
         /**
-         * Creates an object and applies default Protobuf values
-         * @param Empty value
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of PhonemizerId to deeply clone from
          */
-        function Empty(value) {
-            value = value || {};
-            Empty.refineValues(this);
+        function PhonemizerId(_value) {
+            _value = _value || {};
+            this.id = _value.id;
+            PhonemizerId.refineValues(this);
         }
-        Empty.toBinary = function (instance) {
-            var writer = new googleProtobuf.BinaryWriter();
-            Empty.toBinaryWriter(instance, writer);
-            return writer.getResultBuffer();
-        };
-        Empty.fromBinary = function (bytes) {
-            var instance = new Empty();
-            Empty.fromBinaryReader(instance, new googleProtobuf.BinaryReader(bytes));
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        PhonemizerId.deserializeBinary = function (bytes) {
+            var instance = new PhonemizerId();
+            PhonemizerId.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
             return instance;
         };
-        Empty.refineValues = function (instance) { };
-        Empty.fromBinaryReader = function (instance, reader) {
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        PhonemizerId.refineValues = function (_instance) {
+            _instance.id = _instance.id || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        PhonemizerId.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
                     break;
-                switch (reader.getFieldNumber()) {
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.id = _reader.readString();
+                        break;
                     default:
-                        reader.skipField();
+                        _reader.skipField();
                 }
             }
-            Empty.refineValues(instance);
+            PhonemizerId.refineValues(_instance);
         };
-        Empty.toBinaryWriter = function (instance, writer) { };
-        Empty.prototype.toObject = function () {
-            return {};
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        PhonemizerId.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.id) {
+                _writer.writeString(1, _instance.id);
+            }
         };
-        Empty.prototype.toJSON = function () {
+        Object.defineProperty(PhonemizerId.prototype, "id", {
+            get: function () {
+                return this._id;
+            },
+            set: function (value) {
+                this._id = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        PhonemizerId.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            PhonemizerId.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        PhonemizerId.prototype.toObject = function () {
+            return {
+                id: this.id
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        PhonemizerId.prototype.toJSON = function () {
             return this.toObject();
         };
-        return Empty;
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        PhonemizerId.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                id: this.id
+            };
+        };
+        return PhonemizerId;
     }());
+    PhonemizerId.id = 'ondewo.t2s.PhonemizerId';
+    /**
+     * Message implementation for ondewo.t2s.CustomPhonemizerProto
+     */
+    var CustomPhonemizerProto = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CustomPhonemizerProto to deeply clone from
+         */
+        function CustomPhonemizerProto(_value) {
+            _value = _value || {};
+            this.id = _value.id;
+            this.maps = (_value.maps || []).map(function (m) { return new Map(m); });
+            CustomPhonemizerProto.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CustomPhonemizerProto.deserializeBinary = function (bytes) {
+            var instance = new CustomPhonemizerProto();
+            CustomPhonemizerProto.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CustomPhonemizerProto.refineValues = function (_instance) {
+            _instance.id = _instance.id || '';
+            _instance.maps = _instance.maps || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CustomPhonemizerProto.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.id = _reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new Map();
+                        _reader.readMessage(messageInitializer2, Map.deserializeBinaryFromReader);
+                        (_instance.maps = _instance.maps || []).push(messageInitializer2);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CustomPhonemizerProto.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CustomPhonemizerProto.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.id) {
+                _writer.writeString(1, _instance.id);
+            }
+            if (_instance.maps && _instance.maps.length) {
+                _writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CustomPhonemizerProto.prototype, "id", {
+            get: function () {
+                return this._id;
+            },
+            set: function (value) {
+                this._id = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CustomPhonemizerProto.prototype, "maps", {
+            get: function () {
+                return this._maps;
+            },
+            set: function (value) {
+                this._maps = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CustomPhonemizerProto.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CustomPhonemizerProto.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CustomPhonemizerProto.prototype.toObject = function () {
+            return {
+                id: this.id,
+                maps: (this.maps || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CustomPhonemizerProto.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CustomPhonemizerProto.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                id: this.id,
+                maps: (this.maps || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return CustomPhonemizerProto;
+    }());
+    CustomPhonemizerProto.id = 'ondewo.t2s.CustomPhonemizerProto';
+    /**
+     * Message implementation for ondewo.t2s.Map
+     */
+    var Map = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of Map to deeply clone from
+         */
+        function Map(_value) {
+            _value = _value || {};
+            this.word = _value.word;
+            this.phonemeGroups = _value.phonemeGroups;
+            Map.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        Map.deserializeBinary = function (bytes) {
+            var instance = new Map();
+            Map.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        Map.refineValues = function (_instance) {
+            _instance.word = _instance.word || '';
+            _instance.phonemeGroups = _instance.phonemeGroups || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        Map.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.word = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.phonemeGroups = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            Map.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        Map.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.word) {
+                _writer.writeString(1, _instance.word);
+            }
+            if (_instance.phonemeGroups) {
+                _writer.writeString(2, _instance.phonemeGroups);
+            }
+        };
+        Object.defineProperty(Map.prototype, "word", {
+            get: function () {
+                return this._word;
+            },
+            set: function (value) {
+                this._word = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Map.prototype, "phonemeGroups", {
+            get: function () {
+                return this._phonemeGroups;
+            },
+            set: function (value) {
+                this._phonemeGroups = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        Map.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            Map.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        Map.prototype.toObject = function () {
+            return {
+                word: this.word,
+                phonemeGroups: this.phonemeGroups
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        Map.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        Map.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                word: this.word,
+                phonemeGroups: this.phonemeGroups
+            };
+        };
+        return Map;
+    }());
+    Map.id = 'ondewo.t2s.Map';
+    /**
+     * Message implementation for ondewo.t2s.ListCustomPhonemizerResponse
+     */
+    var ListCustomPhonemizerResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListCustomPhonemizerResponse to deeply clone from
+         */
+        function ListCustomPhonemizerResponse(_value) {
+            _value = _value || {};
+            this.phonemizers = (_value.phonemizers || []).map(function (m) { return new CustomPhonemizerProto(m); });
+            ListCustomPhonemizerResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListCustomPhonemizerResponse.deserializeBinary = function (bytes) {
+            var instance = new ListCustomPhonemizerResponse();
+            ListCustomPhonemizerResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListCustomPhonemizerResponse.refineValues = function (_instance) {
+            _instance.phonemizers = _instance.phonemizers || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListCustomPhonemizerResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new CustomPhonemizerProto();
+                        _reader.readMessage(messageInitializer1, CustomPhonemizerProto.deserializeBinaryFromReader);
+                        (_instance.phonemizers = _instance.phonemizers || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListCustomPhonemizerResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListCustomPhonemizerResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.phonemizers && _instance.phonemizers.length) {
+                _writer.writeRepeatedMessage(1, _instance.phonemizers, CustomPhonemizerProto.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(ListCustomPhonemizerResponse.prototype, "phonemizers", {
+            get: function () {
+                return this._phonemizers;
+            },
+            set: function (value) {
+                this._phonemizers = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListCustomPhonemizerResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListCustomPhonemizerResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListCustomPhonemizerResponse.prototype.toObject = function () {
+            return {
+                phonemizers: (this.phonemizers || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListCustomPhonemizerResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListCustomPhonemizerResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                phonemizers: (this.phonemizers || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return ListCustomPhonemizerResponse;
+    }());
+    ListCustomPhonemizerResponse.id = 'ondewo.t2s.ListCustomPhonemizerResponse';
+    /**
+     * Message implementation for ondewo.t2s.ListCustomPhonemizerRequest
+     */
+    var ListCustomPhonemizerRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of ListCustomPhonemizerRequest to deeply clone from
+         */
+        function ListCustomPhonemizerRequest(_value) {
+            _value = _value || {};
+            this.pipelineIds = (_value.pipelineIds || []).slice();
+            ListCustomPhonemizerRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        ListCustomPhonemizerRequest.deserializeBinary = function (bytes) {
+            var instance = new ListCustomPhonemizerRequest();
+            ListCustomPhonemizerRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        ListCustomPhonemizerRequest.refineValues = function (_instance) {
+            _instance.pipelineIds = _instance.pipelineIds || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        ListCustomPhonemizerRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        (_instance.pipelineIds = _instance.pipelineIds || []).push(_reader.readString());
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            ListCustomPhonemizerRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        ListCustomPhonemizerRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.pipelineIds && _instance.pipelineIds.length) {
+                _writer.writeRepeatedString(1, _instance.pipelineIds);
+            }
+        };
+        Object.defineProperty(ListCustomPhonemizerRequest.prototype, "pipelineIds", {
+            get: function () {
+                return this._pipelineIds;
+            },
+            set: function (value) {
+                this._pipelineIds = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        ListCustomPhonemizerRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            ListCustomPhonemizerRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        ListCustomPhonemizerRequest.prototype.toObject = function () {
+            return {
+                pipelineIds: (this.pipelineIds || []).slice()
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        ListCustomPhonemizerRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        ListCustomPhonemizerRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                pipelineIds: (this.pipelineIds || []).slice()
+            };
+        };
+        return ListCustomPhonemizerRequest;
+    }());
+    ListCustomPhonemizerRequest.id = 'ondewo.t2s.ListCustomPhonemizerRequest';
+    /**
+     * Message implementation for ondewo.t2s.UpdateCustomPhonemizerRequest
+     */
+    exports.UpdateCustomPhonemizerRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of UpdateCustomPhonemizerRequest to deeply clone from
+         */
+        function UpdateCustomPhonemizerRequest(_value) {
+            _value = _value || {};
+            this.id = _value.id;
+            this.updateMethod = _value.updateMethod;
+            this.maps = (_value.maps || []).map(function (m) { return new Map(m); });
+            UpdateCustomPhonemizerRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        UpdateCustomPhonemizerRequest.deserializeBinary = function (bytes) {
+            var instance = new UpdateCustomPhonemizerRequest();
+            UpdateCustomPhonemizerRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        UpdateCustomPhonemizerRequest.refineValues = function (_instance) {
+            _instance.id = _instance.id || '';
+            _instance.updateMethod = _instance.updateMethod || 0;
+            _instance.maps = _instance.maps || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        UpdateCustomPhonemizerRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.id = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.updateMethod = _reader.readEnum();
+                        break;
+                    case 3:
+                        var messageInitializer3 = new Map();
+                        _reader.readMessage(messageInitializer3, Map.deserializeBinaryFromReader);
+                        (_instance.maps = _instance.maps || []).push(messageInitializer3);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            UpdateCustomPhonemizerRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        UpdateCustomPhonemizerRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.id) {
+                _writer.writeString(1, _instance.id);
+            }
+            if (_instance.updateMethod) {
+                _writer.writeEnum(2, _instance.updateMethod);
+            }
+            if (_instance.maps && _instance.maps.length) {
+                _writer.writeRepeatedMessage(3, _instance.maps, Map.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(UpdateCustomPhonemizerRequest.prototype, "id", {
+            get: function () {
+                return this._id;
+            },
+            set: function (value) {
+                this._id = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(UpdateCustomPhonemizerRequest.prototype, "updateMethod", {
+            get: function () {
+                return this._updateMethod;
+            },
+            set: function (value) {
+                this._updateMethod = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(UpdateCustomPhonemizerRequest.prototype, "maps", {
+            get: function () {
+                return this._maps;
+            },
+            set: function (value) {
+                this._maps = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        UpdateCustomPhonemizerRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            UpdateCustomPhonemizerRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        UpdateCustomPhonemizerRequest.prototype.toObject = function () {
+            return {
+                id: this.id,
+                updateMethod: this.updateMethod,
+                maps: (this.maps || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        UpdateCustomPhonemizerRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        UpdateCustomPhonemizerRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a;
+            return {
+                id: this.id,
+                updateMethod: UpdateCustomPhonemizerRequest.UpdateMethod[(_a = this.updateMethod) !== null && _a !== void 0 ? _a : 0],
+                maps: (this.maps || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return UpdateCustomPhonemizerRequest;
+    }());
+    exports.UpdateCustomPhonemizerRequest.id = 'ondewo.t2s.UpdateCustomPhonemizerRequest';
+    (function (UpdateCustomPhonemizerRequest) {
+        var UpdateMethod;
+        (function (UpdateMethod) {
+            UpdateMethod[UpdateMethod["extend_hard"] = 0] = "extend_hard";
+            UpdateMethod[UpdateMethod["extend_soft"] = 1] = "extend_soft";
+            UpdateMethod[UpdateMethod["replace"] = 2] = "replace";
+        })(UpdateMethod = UpdateCustomPhonemizerRequest.UpdateMethod || (UpdateCustomPhonemizerRequest.UpdateMethod = {}));
+    })(exports.UpdateCustomPhonemizerRequest || (exports.UpdateCustomPhonemizerRequest = {}));
+    /**
+     * Message implementation for ondewo.t2s.CreateCustomPhonemizerRequest
+     */
+    var CreateCustomPhonemizerRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of CreateCustomPhonemizerRequest to deeply clone from
+         */
+        function CreateCustomPhonemizerRequest(_value) {
+            _value = _value || {};
+            this.prefix = _value.prefix;
+            this.maps = (_value.maps || []).map(function (m) { return new Map(m); });
+            CreateCustomPhonemizerRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        CreateCustomPhonemizerRequest.deserializeBinary = function (bytes) {
+            var instance = new CreateCustomPhonemizerRequest();
+            CreateCustomPhonemizerRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        CreateCustomPhonemizerRequest.refineValues = function (_instance) {
+            _instance.prefix = _instance.prefix || '';
+            _instance.maps = _instance.maps || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        CreateCustomPhonemizerRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.prefix = _reader.readString();
+                        break;
+                    case 2:
+                        var messageInitializer2 = new Map();
+                        _reader.readMessage(messageInitializer2, Map.deserializeBinaryFromReader);
+                        (_instance.maps = _instance.maps || []).push(messageInitializer2);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            CreateCustomPhonemizerRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        CreateCustomPhonemizerRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.prefix) {
+                _writer.writeString(1, _instance.prefix);
+            }
+            if (_instance.maps && _instance.maps.length) {
+                _writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(CreateCustomPhonemizerRequest.prototype, "prefix", {
+            get: function () {
+                return this._prefix;
+            },
+            set: function (value) {
+                this._prefix = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CreateCustomPhonemizerRequest.prototype, "maps", {
+            get: function () {
+                return this._maps;
+            },
+            set: function (value) {
+                this._maps = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        CreateCustomPhonemizerRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            CreateCustomPhonemizerRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        CreateCustomPhonemizerRequest.prototype.toObject = function () {
+            return {
+                prefix: this.prefix,
+                maps: (this.maps || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        CreateCustomPhonemizerRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        CreateCustomPhonemizerRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                prefix: this.prefix,
+                maps: (this.maps || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return CreateCustomPhonemizerRequest;
+    }());
+    CreateCustomPhonemizerRequest.id = 'ondewo.t2s.CreateCustomPhonemizerRequest';
 
     /* tslint:disable */
-    /*
-      To configure the services you need to provide a configuration for each of them.
-
-      E.g. you can create a module where you configure all of them and then import this module into your AppModule:
-
-      const grpcSettings = { host: environment.grpcHost };
-
-      @NgModule({
-        providers: [
-          { provide: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, useValue: grpcSettings },
-        ],
-      })
-      export class GrpcConfigModule { }
-    */
+    /**
+     * Specific GrpcClientSettings for Text2Speech.
+     * Use it only if your default settings are not set or the service requires other settings.
+     */
     var GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_TEXT2_SPEECH_CLIENT_SETTINGS');
 
     /* tslint:disable */
+    /**
+     * Specific GrpcClientSettings for CustomPhonemizers.
+     * Use it only if your default settings are not set or the service requires other settings.
+     */
+    var GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = new i0.InjectionToken('GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS');
+
+    /* tslint:disable */
+    /**
+     * Service client implementation for ondewo.t2s.Text2Speech
+     */
     var Text2SpeechClient = /** @class */ (function () {
         function Text2SpeechClient(settings, clientFactory, handler) {
+            var _this = this;
             this.handler = handler;
+            /**
+             * Raw RPC implementation for each service client method.
+             * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+             * Attention: these methods do not throw errors when non-zero status codes are received.
+             */
+            this.$raw = {
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/Synthesize
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.SynthesizeResponse>>
+                 */
+                synthesize: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/Synthesize',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.SynthesizeRequest,
+                        responseClass: SynthesizeResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.Text2SpeechConfig>>
+                 */
+                getT2sPipeline: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/GetT2sPipeline',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: T2sPipelineId,
+                        responseClass: Text2SpeechConfig
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/CreateT2sPipeline
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.T2sPipelineId>>
+                 */
+                createT2sPipeline: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/CreateT2sPipeline',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: Text2SpeechConfig,
+                        responseClass: T2sPipelineId
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/DeleteT2sPipeline
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+                 */
+                deleteT2sPipeline: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/DeleteT2sPipeline',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: T2sPipelineId,
+                        responseClass: googleProtobuf000.Empty
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/UpdateT2sPipeline
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+                 */
+                updateT2sPipeline: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/UpdateT2sPipeline',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: Text2SpeechConfig,
+                        responseClass: googleProtobuf000.Empty
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sPipelines
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListT2sPipelinesResponse>>
+                 */
+                listT2sPipelines: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/ListT2sPipelines',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListT2sPipelinesRequest,
+                        responseClass: ListT2sPipelinesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sLanguages
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListT2sLanguagesResponse>>
+                 */
+                listT2sLanguages: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/ListT2sLanguages',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListT2sLanguagesRequest,
+                        responseClass: ListT2sLanguagesResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sDomains
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>
+                 */
+                listT2sDomains: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/ListT2sDomains',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListT2sDomainsRequest,
+                        responseClass: ListT2sDomainsResponse
+                    });
+                }
+            };
             this.client = clientFactory.createClient('ondewo.t2s.Text2Speech', settings);
         }
         /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.SynthesizeRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.SynthesizeResponse>
+         * Unary RPC for /ondewo.t2s.Text2Speech/Synthesize
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.SynthesizeResponse>
          */
         Text2SpeechClient.prototype.synthesize = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.synthesize$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .synthesize(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.SynthesizeRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.SynthesizeResponse>>
-         */
-        Text2SpeechClient.prototype.synthesize$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/Synthesize',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: exports.SynthesizeRequest,
-                responseClass: SynthesizeResponse
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.T2sPipelineId request
-         * @param Metadata metadata
-         * @return Observable<thisProto.Text2SpeechConfig>
+         * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.Text2SpeechConfig>
          */
         Text2SpeechClient.prototype.getT2sPipeline = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.getT2sPipeline$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .getT2sPipeline(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.T2sPipelineId request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.Text2SpeechConfig>>
-         */
-        Text2SpeechClient.prototype.getT2sPipeline$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/GetT2sPipeline',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: T2sPipelineId,
-                responseClass: Text2SpeechConfig
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.Text2SpeechConfig request
-         * @param Metadata metadata
-         * @return Observable<thisProto.T2sPipelineId>
+         * Unary RPC for /ondewo.t2s.Text2Speech/CreateT2sPipeline
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.T2sPipelineId>
          */
         Text2SpeechClient.prototype.createT2sPipeline = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.createT2sPipeline$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .createT2sPipeline(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.Text2SpeechConfig request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.T2sPipelineId>>
-         */
-        Text2SpeechClient.prototype.createT2sPipeline$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/CreateT2sPipeline',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: Text2SpeechConfig,
-                responseClass: T2sPipelineId
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.T2sPipelineId request
-         * @param Metadata metadata
-         * @return Observable<googleProtobuf000.Empty>
+         * Unary RPC for /ondewo.t2s.Text2Speech/DeleteT2sPipeline
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<googleProtobuf000.Empty>
          */
         Text2SpeechClient.prototype.deleteT2sPipeline = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.deleteT2sPipeline$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .deleteT2sPipeline(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.T2sPipelineId request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleProtobuf000.Empty>>
-         */
-        Text2SpeechClient.prototype.deleteT2sPipeline$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/DeleteT2sPipeline',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: T2sPipelineId,
-                responseClass: Empty
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.Text2SpeechConfig request
-         * @param Metadata metadata
-         * @return Observable<googleProtobuf000.Empty>
+         * Unary RPC for /ondewo.t2s.Text2Speech/UpdateT2sPipeline
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<googleProtobuf000.Empty>
          */
         Text2SpeechClient.prototype.updateT2sPipeline = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.updateT2sPipeline$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .updateT2sPipeline(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.Text2SpeechConfig request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<googleProtobuf000.Empty>>
-         */
-        Text2SpeechClient.prototype.updateT2sPipeline$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/UpdateT2sPipeline',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: Text2SpeechConfig,
-                responseClass: Empty
-            });
-        };
-        /**
-         * Unary RPC. Emits messages and throws errors on non-zero status codes
-         * @param thisProto.ListT2sPipelinesRequest request
-         * @param Metadata metadata
-         * @return Observable<thisProto.ListT2sPipelinesResponse>
+         * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sPipelines
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListT2sPipelinesResponse>
          */
         Text2SpeechClient.prototype.listT2sPipelines = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.listT2sPipelines$eventStream(requestData, requestMetadata).pipe(i2.throwStatusErrors(), i2.takeMessages());
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listT2sPipelines(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
-         * Unary RPC. Emits data and status events; does not throw errors by design
-         * @param thisProto.ListT2sPipelinesRequest request
-         * @param Metadata metadata
-         * @return Observable<GrpcEvent<thisProto.ListT2sPipelinesResponse>>
+         * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sLanguages
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListT2sLanguagesResponse>
          */
-        Text2SpeechClient.prototype.listT2sPipelines$eventStream = function (requestData, requestMetadata) {
-            if (requestMetadata === void 0) { requestMetadata = {}; }
-            return this.handler.handle({
-                type: common.GrpcCallType.unary,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/ListT2sPipelines',
-                requestData: requestData,
-                requestMetadata: requestMetadata,
-                requestClass: ListT2sPipelinesRequest,
-                responseClass: ListT2sPipelinesResponse
-            });
+        Text2SpeechClient.prototype.listT2sLanguages = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listT2sLanguages(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sDomains
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListT2sDomainsResponse>
+         */
+        Text2SpeechClient.prototype.listT2sDomains = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listT2sDomains(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         return Text2SpeechClient;
     }());
-    Text2SpeechClient.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function Text2SpeechClient_Factory() { return new Text2SpeechClient(i0__namespace.ɵɵinject(GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, 8), i0__namespace.ɵɵinject(i2__namespace.GRPC_CLIENT_FACTORY), i0__namespace.ɵɵinject(i2__namespace.GrpcHandler)); }, token: Text2SpeechClient, providedIn: "root" });
+    Text2SpeechClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function Text2SpeechClient_Factory() { return new Text2SpeechClient(i0.ɵɵinject(GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: Text2SpeechClient, providedIn: "any" });
     Text2SpeechClient.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root'
-                },] }
+        { type: i0.Injectable, args: [{ providedIn: 'any' },] }
     ];
     Text2SpeechClient.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
+        { type: i2.GrpcHandler }
+    ]; };
+
+    /* tslint:disable */
+    /**
+     * Service client implementation for ondewo.t2s.CustomPhonemizers
+     */
+    var CustomPhonemizersClient = /** @class */ (function () {
+        function CustomPhonemizersClient(settings, clientFactory, handler) {
+            var _this = this;
+            this.handler = handler;
+            /**
+             * Raw RPC implementation for each service client method.
+             * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+             * Attention: these methods do not throw errors when non-zero status codes are received.
+             */
+            this.$raw = {
+                /**
+                 * Unary RPC for /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+                 */
+                getCustomPhonemizer: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: PhonemizerId,
+                        responseClass: CustomPhonemizerProto
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
+                 */
+                createCustomPhonemizer: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: CreateCustomPhonemizerRequest,
+                        responseClass: PhonemizerId
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+                 */
+                deleteCustomPhonemizer: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: PhonemizerId,
+                        responseClass: googleProtobuf000.Empty
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+                 */
+                updateCustomPhonemizer: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: exports.UpdateCustomPhonemizerRequest,
+                        responseClass: CustomPhonemizerProto
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
+                 */
+                listCustomPhonemizer: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: ListCustomPhonemizerRequest,
+                        responseClass: ListCustomPhonemizerResponse
+                    });
+                }
+            };
+            this.client = clientFactory.createClient('ondewo.t2s.CustomPhonemizers', settings);
+        }
+        /**
+         * Unary RPC for /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CustomPhonemizerProto>
+         */
+        CustomPhonemizersClient.prototype.getCustomPhonemizer = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .getCustomPhonemizer(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.PhonemizerId>
+         */
+        CustomPhonemizersClient.prototype.createCustomPhonemizer = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .createCustomPhonemizer(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<googleProtobuf000.Empty>
+         */
+        CustomPhonemizersClient.prototype.deleteCustomPhonemizer = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .deleteCustomPhonemizer(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.CustomPhonemizerProto>
+         */
+        CustomPhonemizersClient.prototype.updateCustomPhonemizer = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .updateCustomPhonemizer(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.ListCustomPhonemizerResponse>
+         */
+        CustomPhonemizersClient.prototype.listCustomPhonemizer = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .listCustomPhonemizer(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        return CustomPhonemizersClient;
+    }());
+    CustomPhonemizersClient.ɵprov = i0.ɵɵdefineInjectable({ factory: function CustomPhonemizersClient_Factory() { return new CustomPhonemizersClient(i0.ɵɵinject(GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, 8), i0.ɵɵinject(i2.GRPC_CLIENT_FACTORY), i0.ɵɵinject(i2.GrpcHandler)); }, token: CustomPhonemizersClient, providedIn: "any" });
+    CustomPhonemizersClient.decorators = [
+        { type: i0.Injectable, args: [{ providedIn: 'any' },] }
+    ];
+    CustomPhonemizersClient.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: i0.Optional }, { type: i0.Inject, args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS,] }] },
         { type: undefined, decorators: [{ type: i0.Inject, args: [i2.GRPC_CLIENT_FACTORY,] }] },
         { type: i2.GrpcHandler }
     ]; };
@@ -3066,20 +5766,31 @@
     exports.Apodization = Apodization;
     exports.Caching = Caching;
     exports.CompositeInference = CompositeInference;
+    exports.CreateCustomPhonemizerRequest = CreateCustomPhonemizerRequest;
+    exports.CustomPhonemizerProto = CustomPhonemizerProto;
+    exports.CustomPhonemizersClient = CustomPhonemizersClient;
     exports.Description = Description;
-    exports.Empty = Empty;
+    exports.GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS;
     exports.GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = GRPC_TEXT2_SPEECH_CLIENT_SETTINGS;
     exports.GlowTTS = GlowTTS;
     exports.GlowTTSTriton = GlowTTSTriton;
     exports.HiFiGan = HiFiGan;
     exports.HiFiGanTriton = HiFiGanTriton;
     exports.Inference = Inference;
+    exports.ListCustomPhonemizerRequest = ListCustomPhonemizerRequest;
+    exports.ListCustomPhonemizerResponse = ListCustomPhonemizerResponse;
+    exports.ListT2sDomainsRequest = ListT2sDomainsRequest;
+    exports.ListT2sDomainsResponse = ListT2sDomainsResponse;
+    exports.ListT2sLanguagesRequest = ListT2sLanguagesRequest;
+    exports.ListT2sLanguagesResponse = ListT2sLanguagesResponse;
     exports.ListT2sPipelinesRequest = ListT2sPipelinesRequest;
     exports.ListT2sPipelinesResponse = ListT2sPipelinesResponse;
     exports.Logmnse = Logmnse;
+    exports.Map = Map;
     exports.MbMelganTriton = MbMelganTriton;
     exports.Mel2Audio = Mel2Audio;
     exports.Normalization = Normalization;
+    exports.PhonemizerId = PhonemizerId;
     exports.Postprocessing = Postprocessing;
     exports.SynthesizeResponse = SynthesizeResponse;
     exports.T2sPipelineId = T2sPipelineId;
