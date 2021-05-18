@@ -1,6 +1,19 @@
 # Release History
 *****************
 
+## Release ONDEWO-T2S Angular Client 1.5.2
+
+### New Features
+* Release on [NPM](https://www.npmjs.com/package/@ondewo/t2s-client-angular)
+
+***
+
+## Release ONDEWO-T2S Angular Client 1.5.1
+
+Skipped version due to NPM registry issues
+
+***
+
 ## Release ONDEWO-T2S Angular Client 1.5.0
 
 ### New Features
