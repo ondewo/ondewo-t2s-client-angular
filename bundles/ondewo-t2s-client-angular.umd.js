@@ -5,6 +5,15 @@
 }(this, (function (exports, common, googleProtobuf, i0, i2, googleProtobuf000) { 'use strict';
 
     /* tslint:disable */
+    (function (Pcm) {
+        Pcm[Pcm["PCM_16"] = 0] = "PCM_16";
+        Pcm[Pcm["PCM_24"] = 1] = "PCM_24";
+        Pcm[Pcm["PCM_32"] = 2] = "PCM_32";
+        Pcm[Pcm["PCM_S8"] = 3] = "PCM_S8";
+        Pcm[Pcm["PCM_U8"] = 4] = "PCM_U8";
+        Pcm[Pcm["FLOAT"] = 5] = "FLOAT";
+        Pcm[Pcm["DOUBLE"] = 6] = "DOUBLE";
+    })(exports.Pcm || (exports.Pcm = {}));
     (function (AudioFormat) {
         AudioFormat[AudioFormat["wav"] = 0] = "wav";
         AudioFormat[AudioFormat["flac"] = 1] = "flac";
@@ -17,20 +26,15 @@
     /**
      * Message implementation for ondewo.t2s.SynthesizeRequest
      */
-    exports.SynthesizeRequest = /** @class */ (function () {
+    var SynthesizeRequest = /** @class */ (function () {
         /**
          * Message constructor. Initializes the properties and applies default Protobuf values if necessary
          * @param _value initial values object or instance of SynthesizeRequest to deeply clone from
          */
         function SynthesizeRequest(_value) {
             _value = _value || {};
-            this.t2sPipelineId = _value.t2sPipelineId;
             this.text = _value.text;
-            this.lengthScale = _value.lengthScale;
-            this.noiseScale = _value.noiseScale;
-            this.sampleRate = _value.sampleRate;
-            this.pcm = _value.pcm;
-            this.audioFormat = _value.audioFormat;
+            this.config = _value.config ? new exports.RequestConfig(_value.config) : undefined;
             SynthesizeRequest.refineValues(this);
         }
         /**
@@ -47,13 +51,8 @@
          * @param _instance message instance
          */
         SynthesizeRequest.refineValues = function (_instance) {
-            _instance.t2sPipelineId = _instance.t2sPipelineId || '';
             _instance.text = _instance.text || '';
-            _instance.lengthScale = _instance.lengthScale || 0;
-            _instance.noiseScale = _instance.noiseScale || 0;
-            _instance.sampleRate = _instance.sampleRate || 0;
-            _instance.pcm = _instance.pcm || 0;
-            _instance.audioFormat = _instance.audioFormat || 0;
+            _instance.config = _instance.config || undefined;
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -66,25 +65,11 @@
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        _instance.t2sPipelineId = _reader.readString();
-                        break;
-                    case 2:
                         _instance.text = _reader.readString();
                         break;
-                    case 3:
-                        _instance.lengthScale = _reader.readFloat();
-                        break;
-                    case 4:
-                        _instance.noiseScale = _reader.readFloat();
-                        break;
-                    case 5:
-                        _instance.sampleRate = _reader.readInt32();
-                        break;
-                    case 6:
-                        _instance.pcm = _reader.readEnum();
-                        break;
-                    case 7:
-                        _instance.audioFormat = _reader.readEnum();
+                    case 2:
+                        _instance.config = new exports.RequestConfig();
+                        _reader.readMessage(_instance.config, exports.RequestConfig.deserializeBinaryFromReader);
                         break;
                     default:
                         _reader.skipField();
@@ -98,38 +83,13 @@
          * @param _writer binary writer instance
          */
         SynthesizeRequest.serializeBinaryToWriter = function (_instance, _writer) {
-            if (_instance.t2sPipelineId) {
-                _writer.writeString(1, _instance.t2sPipelineId);
-            }
             if (_instance.text) {
-                _writer.writeString(2, _instance.text);
+                _writer.writeString(1, _instance.text);
             }
-            if (_instance.lengthScale) {
-                _writer.writeFloat(3, _instance.lengthScale);
-            }
-            if (_instance.noiseScale) {
-                _writer.writeFloat(4, _instance.noiseScale);
-            }
-            if (_instance.sampleRate) {
-                _writer.writeInt32(5, _instance.sampleRate);
-            }
-            if (_instance.pcm) {
-                _writer.writeEnum(6, _instance.pcm);
-            }
-            if (_instance.audioFormat) {
-                _writer.writeEnum(7, _instance.audioFormat);
+            if (_instance.config) {
+                _writer.writeMessage(2, _instance.config, exports.RequestConfig.serializeBinaryToWriter);
             }
         };
-        Object.defineProperty(SynthesizeRequest.prototype, "t2sPipelineId", {
-            get: function () {
-                return this._t2sPipelineId;
-            },
-            set: function (value) {
-                this._t2sPipelineId = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(SynthesizeRequest.prototype, "text", {
             get: function () {
                 return this._text;
@@ -140,52 +100,12 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(SynthesizeRequest.prototype, "lengthScale", {
+        Object.defineProperty(SynthesizeRequest.prototype, "config", {
             get: function () {
-                return this._lengthScale;
+                return this._config;
             },
             set: function (value) {
-                this._lengthScale = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(SynthesizeRequest.prototype, "noiseScale", {
-            get: function () {
-                return this._noiseScale;
-            },
-            set: function (value) {
-                this._noiseScale = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(SynthesizeRequest.prototype, "sampleRate", {
-            get: function () {
-                return this._sampleRate;
-            },
-            set: function (value) {
-                this._sampleRate = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(SynthesizeRequest.prototype, "pcm", {
-            get: function () {
-                return this._pcm;
-            },
-            set: function (value) {
-                this._pcm = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(SynthesizeRequest.prototype, "audioFormat", {
-            get: function () {
-                return this._audioFormat;
-            },
-            set: function (value) {
-                this._audioFormat = value;
+                this._config = value;
             },
             enumerable: false,
             configurable: true
@@ -204,13 +124,8 @@
          */
         SynthesizeRequest.prototype.toObject = function () {
             return {
-                t2sPipelineId: this.t2sPipelineId,
                 text: this.text,
-                lengthScale: this.lengthScale,
-                noiseScale: this.noiseScale,
-                sampleRate: this.sampleRate,
-                pcm: this.pcm,
-                audioFormat: this.audioFormat
+                config: this.config ? this.config.toObject() : undefined
             };
         };
         /**
@@ -227,32 +142,551 @@
         SynthesizeRequest.prototype.toProtobufJSON = function (
         // @ts-ignore
         options) {
-            var _a, _b;
             return {
-                t2sPipelineId: this.t2sPipelineId,
                 text: this.text,
-                lengthScale: this.lengthScale,
-                noiseScale: this.noiseScale,
-                sampleRate: this.sampleRate,
-                pcm: SynthesizeRequest.Pcm[(_a = this.pcm) !== null && _a !== void 0 ? _a : 0],
-                audioFormat: exports.AudioFormat[(_b = this.audioFormat) !== null && _b !== void 0 ? _b : 0]
+                config: this.config ? this.config.toProtobufJSON(options) : null
             };
         };
         return SynthesizeRequest;
     }());
-    exports.SynthesizeRequest.id = 'ondewo.t2s.SynthesizeRequest';
-    (function (SynthesizeRequest) {
-        var Pcm;
-        (function (Pcm) {
-            Pcm[Pcm["PCM_16"] = 0] = "PCM_16";
-            Pcm[Pcm["PCM_24"] = 1] = "PCM_24";
-            Pcm[Pcm["PCM_32"] = 2] = "PCM_32";
-            Pcm[Pcm["PCM_S8"] = 3] = "PCM_S8";
-            Pcm[Pcm["PCM_U8"] = 4] = "PCM_U8";
-            Pcm[Pcm["FLOAT"] = 5] = "FLOAT";
-            Pcm[Pcm["DOUBLE"] = 6] = "DOUBLE";
-        })(Pcm = SynthesizeRequest.Pcm || (SynthesizeRequest.Pcm = {}));
-    })(exports.SynthesizeRequest || (exports.SynthesizeRequest = {}));
+    SynthesizeRequest.id = 'ondewo.t2s.SynthesizeRequest';
+    /**
+     * Message implementation for ondewo.t2s.BatchSynthesizeRequest
+     */
+    var BatchSynthesizeRequest = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchSynthesizeRequest to deeply clone from
+         */
+        function BatchSynthesizeRequest(_value) {
+            _value = _value || {};
+            this.batchRequest = (_value.batchRequest || []).map(function (m) { return new SynthesizeRequest(m); });
+            BatchSynthesizeRequest.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchSynthesizeRequest.deserializeBinary = function (bytes) {
+            var instance = new BatchSynthesizeRequest();
+            BatchSynthesizeRequest.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchSynthesizeRequest.refineValues = function (_instance) {
+            _instance.batchRequest = _instance.batchRequest || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchSynthesizeRequest.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new SynthesizeRequest();
+                        _reader.readMessage(messageInitializer1, SynthesizeRequest.deserializeBinaryFromReader);
+                        (_instance.batchRequest = _instance.batchRequest || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchSynthesizeRequest.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchSynthesizeRequest.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.batchRequest && _instance.batchRequest.length) {
+                _writer.writeRepeatedMessage(1, _instance.batchRequest, SynthesizeRequest.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchSynthesizeRequest.prototype, "batchRequest", {
+            get: function () {
+                return this._batchRequest;
+            },
+            set: function (value) {
+                this._batchRequest = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchSynthesizeRequest.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchSynthesizeRequest.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchSynthesizeRequest.prototype.toObject = function () {
+            return {
+                batchRequest: (this.batchRequest || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchSynthesizeRequest.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchSynthesizeRequest.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                batchRequest: (this.batchRequest || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchSynthesizeRequest;
+    }());
+    BatchSynthesizeRequest.id = 'ondewo.t2s.BatchSynthesizeRequest';
+    /**
+     * Message implementation for ondewo.t2s.BatchSynthesizeResponse
+     */
+    var BatchSynthesizeResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of BatchSynthesizeResponse to deeply clone from
+         */
+        function BatchSynthesizeResponse(_value) {
+            _value = _value || {};
+            this.batchResponse = (_value.batchResponse || []).map(function (m) { return new SynthesizeResponse(m); });
+            BatchSynthesizeResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        BatchSynthesizeResponse.deserializeBinary = function (bytes) {
+            var instance = new BatchSynthesizeResponse();
+            BatchSynthesizeResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        BatchSynthesizeResponse.refineValues = function (_instance) {
+            _instance.batchResponse = _instance.batchResponse || [];
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        BatchSynthesizeResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        var messageInitializer1 = new SynthesizeResponse();
+                        _reader.readMessage(messageInitializer1, SynthesizeResponse.deserializeBinaryFromReader);
+                        (_instance.batchResponse = _instance.batchResponse || []).push(messageInitializer1);
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            BatchSynthesizeResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        BatchSynthesizeResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.batchResponse && _instance.batchResponse.length) {
+                _writer.writeRepeatedMessage(1, _instance.batchResponse, SynthesizeResponse.serializeBinaryToWriter);
+            }
+        };
+        Object.defineProperty(BatchSynthesizeResponse.prototype, "batchResponse", {
+            get: function () {
+                return this._batchResponse;
+            },
+            set: function (value) {
+                this._batchResponse = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        BatchSynthesizeResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            BatchSynthesizeResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        BatchSynthesizeResponse.prototype.toObject = function () {
+            return {
+                batchResponse: (this.batchResponse || []).map(function (m) { return m.toObject(); })
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        BatchSynthesizeResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        BatchSynthesizeResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                batchResponse: (this.batchResponse || []).map(function (m) { return m.toProtobufJSON(options); })
+            };
+        };
+        return BatchSynthesizeResponse;
+    }());
+    BatchSynthesizeResponse.id = 'ondewo.t2s.BatchSynthesizeResponse';
+    /**
+     * Message implementation for ondewo.t2s.RequestConfig
+     */
+    exports.RequestConfig = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of RequestConfig to deeply clone from
+         */
+        function RequestConfig(_value) {
+            this._oneofLengthScale = RequestConfig.OneofLengthScaleCase.none;
+            this._oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.none;
+            this._oneofSampleRate = RequestConfig.OneofSampleRateCase.none;
+            this._oneofPcm = RequestConfig.OneofPcmCase.none;
+            this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.none;
+            this._oneofUseCache = RequestConfig.OneofUseCacheCase.none;
+            _value = _value || {};
+            this.t2sPipelineId = _value.t2sPipelineId;
+            this.lengthScale = _value.lengthScale;
+            this.noiseScale = _value.noiseScale;
+            this.sampleRate = _value.sampleRate;
+            this.pcm = _value.pcm;
+            this.audioFormat = _value.audioFormat;
+            this.useCache = _value.useCache;
+            RequestConfig.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        RequestConfig.deserializeBinary = function (bytes) {
+            var instance = new RequestConfig();
+            RequestConfig.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        RequestConfig.refineValues = function (_instance) {
+            _instance.t2sPipelineId = _instance.t2sPipelineId || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        RequestConfig.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.t2sPipelineId = _reader.readString();
+                        break;
+                    case 2:
+                        _instance.lengthScale = _reader.readFloat();
+                        break;
+                    case 3:
+                        _instance.noiseScale = _reader.readFloat();
+                        break;
+                    case 4:
+                        _instance.sampleRate = _reader.readInt32();
+                        break;
+                    case 5:
+                        _instance.pcm = _reader.readEnum();
+                        break;
+                    case 6:
+                        _instance.audioFormat = _reader.readEnum();
+                        break;
+                    case 7:
+                        _instance.useCache = _reader.readBool();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            RequestConfig.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        RequestConfig.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.t2sPipelineId) {
+                _writer.writeString(1, _instance.t2sPipelineId);
+            }
+            if (_instance.lengthScale || _instance.lengthScale === 0) {
+                _writer.writeFloat(2, _instance.lengthScale);
+            }
+            if (_instance.noiseScale || _instance.noiseScale === 0) {
+                _writer.writeFloat(3, _instance.noiseScale);
+            }
+            if (_instance.sampleRate || _instance.sampleRate === 0) {
+                _writer.writeInt32(4, _instance.sampleRate);
+            }
+            if (_instance.pcm || _instance.pcm === 0) {
+                _writer.writeEnum(5, _instance.pcm);
+            }
+            if (_instance.audioFormat || _instance.audioFormat === 0) {
+                _writer.writeEnum(6, _instance.audioFormat);
+            }
+            if (_instance.useCache || _instance.useCache === false) {
+                _writer.writeBool(7, _instance.useCache);
+            }
+        };
+        Object.defineProperty(RequestConfig.prototype, "t2sPipelineId", {
+            get: function () {
+                return this._t2sPipelineId;
+            },
+            set: function (value) {
+                this._t2sPipelineId = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "lengthScale", {
+            get: function () {
+                return this._lengthScale;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofLengthScale = RequestConfig.OneofLengthScaleCase.lengthScale;
+                }
+                this._lengthScale = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "noiseScale", {
+            get: function () {
+                return this._noiseScale;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.noiseScale;
+                }
+                this._noiseScale = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "sampleRate", {
+            get: function () {
+                return this._sampleRate;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofSampleRate = RequestConfig.OneofSampleRateCase.sampleRate;
+                }
+                this._sampleRate = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "pcm", {
+            get: function () {
+                return this._pcm;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofPcm = RequestConfig.OneofPcmCase.pcm;
+                }
+                this._pcm = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "audioFormat", {
+            get: function () {
+                return this._audioFormat;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.audioFormat;
+                }
+                this._audioFormat = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "useCache", {
+            get: function () {
+                return this._useCache;
+            },
+            set: function (value) {
+                if (value !== undefined && value !== null) {
+                    this._oneofUseCache = RequestConfig.OneofUseCacheCase.useCache;
+                }
+                this._useCache = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofLengthScale", {
+            get: function () {
+                return this._oneofLengthScale;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofNoiseScale", {
+            get: function () {
+                return this._oneofNoiseScale;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofSampleRate", {
+            get: function () {
+                return this._oneofSampleRate;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofPcm", {
+            get: function () {
+                return this._oneofPcm;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofAudioFormat", {
+            get: function () {
+                return this._oneofAudioFormat;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(RequestConfig.prototype, "oneofUseCache", {
+            get: function () {
+                return this._oneofUseCache;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        RequestConfig.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            RequestConfig.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        RequestConfig.prototype.toObject = function () {
+            return {
+                t2sPipelineId: this.t2sPipelineId,
+                lengthScale: this.lengthScale,
+                noiseScale: this.noiseScale,
+                sampleRate: this.sampleRate,
+                pcm: this.pcm,
+                audioFormat: this.audioFormat,
+                useCache: this.useCache
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        RequestConfig.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        RequestConfig.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            var _a, _b, _c, _d, _e;
+            return {
+                t2sPipelineId: this.t2sPipelineId,
+                lengthScale: (_a = this.lengthScale) !== null && _a !== void 0 ? _a : null,
+                noiseScale: (_b = this.noiseScale) !== null && _b !== void 0 ? _b : null,
+                sampleRate: (_c = this.sampleRate) !== null && _c !== void 0 ? _c : null,
+                pcm: this.pcm === undefined ? null : exports.Pcm[(_d = this.pcm) !== null && _d !== void 0 ? _d : 0],
+                audioFormat: this.audioFormat === undefined
+                    ? null
+                    : exports.AudioFormat[(_e = this.audioFormat) !== null && _e !== void 0 ? _e : 0],
+                useCache: this.useCache
+            };
+        };
+        return RequestConfig;
+    }());
+    exports.RequestConfig.id = 'ondewo.t2s.RequestConfig';
+    (function (RequestConfig) {
+        var OneofLengthScaleCase;
+        (function (OneofLengthScaleCase) {
+            OneofLengthScaleCase[OneofLengthScaleCase["none"] = 0] = "none";
+            OneofLengthScaleCase[OneofLengthScaleCase["lengthScale"] = 1] = "lengthScale";
+        })(OneofLengthScaleCase = RequestConfig.OneofLengthScaleCase || (RequestConfig.OneofLengthScaleCase = {}));
+        var OneofNoiseScaleCase;
+        (function (OneofNoiseScaleCase) {
+            OneofNoiseScaleCase[OneofNoiseScaleCase["none"] = 0] = "none";
+            OneofNoiseScaleCase[OneofNoiseScaleCase["noiseScale"] = 1] = "noiseScale";
+        })(OneofNoiseScaleCase = RequestConfig.OneofNoiseScaleCase || (RequestConfig.OneofNoiseScaleCase = {}));
+        var OneofSampleRateCase;
+        (function (OneofSampleRateCase) {
+            OneofSampleRateCase[OneofSampleRateCase["none"] = 0] = "none";
+            OneofSampleRateCase[OneofSampleRateCase["sampleRate"] = 1] = "sampleRate";
+        })(OneofSampleRateCase = RequestConfig.OneofSampleRateCase || (RequestConfig.OneofSampleRateCase = {}));
+        var OneofPcmCase;
+        (function (OneofPcmCase) {
+            OneofPcmCase[OneofPcmCase["none"] = 0] = "none";
+            OneofPcmCase[OneofPcmCase["pcm"] = 1] = "pcm";
+        })(OneofPcmCase = RequestConfig.OneofPcmCase || (RequestConfig.OneofPcmCase = {}));
+        var OneofAudioFormatCase;
+        (function (OneofAudioFormatCase) {
+            OneofAudioFormatCase[OneofAudioFormatCase["none"] = 0] = "none";
+            OneofAudioFormatCase[OneofAudioFormatCase["audioFormat"] = 1] = "audioFormat";
+        })(OneofAudioFormatCase = RequestConfig.OneofAudioFormatCase || (RequestConfig.OneofAudioFormatCase = {}));
+        var OneofUseCacheCase;
+        (function (OneofUseCacheCase) {
+            OneofUseCacheCase[OneofUseCacheCase["none"] = 0] = "none";
+            OneofUseCacheCase[OneofUseCacheCase["useCache"] = 1] = "useCache";
+        })(OneofUseCacheCase = RequestConfig.OneofUseCacheCase || (RequestConfig.OneofUseCacheCase = {}));
+    })(exports.RequestConfig || (exports.RequestConfig = {}));
     /**
      * Message implementation for ondewo.t2s.SynthesizeResponse
      */
@@ -263,13 +697,12 @@
          */
         function SynthesizeResponse(_value) {
             _value = _value || {};
+            this.audioUuid = _value.audioUuid;
             this.audio = _value.audio;
             this.generationTime = _value.generationTime;
             this.audioLength = _value.audioLength;
-            this.t2sPipelineId = _value.t2sPipelineId;
-            this.audioFormat = _value.audioFormat;
             this.text = _value.text;
-            this.sampleRate = _value.sampleRate;
+            this.config = _value.config ? new exports.RequestConfig(_value.config) : undefined;
             SynthesizeResponse.refineValues(this);
         }
         /**
@@ -286,13 +719,12 @@
          * @param _instance message instance
          */
         SynthesizeResponse.refineValues = function (_instance) {
+            _instance.audioUuid = _instance.audioUuid || '';
             _instance.audio = _instance.audio || new Uint8Array();
             _instance.generationTime = _instance.generationTime || 0;
             _instance.audioLength = _instance.audioLength || 0;
-            _instance.t2sPipelineId = _instance.t2sPipelineId || '';
-            _instance.audioFormat = _instance.audioFormat || 0;
             _instance.text = _instance.text || '';
-            _instance.sampleRate = _instance.sampleRate || 0;
+            _instance.config = _instance.config || undefined;
         };
         /**
          * Deserializes / reads binary message into message instance using provided binary reader
@@ -305,25 +737,23 @@
                     break;
                 switch (_reader.getFieldNumber()) {
                     case 1:
-                        _instance.audio = _reader.readBytes();
+                        _instance.audioUuid = _reader.readString();
                         break;
                     case 2:
-                        _instance.generationTime = _reader.readFloat();
+                        _instance.audio = _reader.readBytes();
                         break;
                     case 3:
-                        _instance.audioLength = _reader.readFloat();
+                        _instance.generationTime = _reader.readFloat();
                         break;
                     case 4:
-                        _instance.t2sPipelineId = _reader.readString();
+                        _instance.audioLength = _reader.readFloat();
                         break;
                     case 5:
-                        _instance.audioFormat = _reader.readEnum();
-                        break;
-                    case 6:
                         _instance.text = _reader.readString();
                         break;
-                    case 7:
-                        _instance.sampleRate = _reader.readInt32();
+                    case 6:
+                        _instance.config = new exports.RequestConfig();
+                        _reader.readMessage(_instance.config, exports.RequestConfig.deserializeBinaryFromReader);
                         break;
                     default:
                         _reader.skipField();
@@ -337,28 +767,35 @@
          * @param _writer binary writer instance
          */
         SynthesizeResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.audioUuid) {
+                _writer.writeString(1, _instance.audioUuid);
+            }
             if (_instance.audio && _instance.audio.length) {
-                _writer.writeBytes(1, _instance.audio);
+                _writer.writeBytes(2, _instance.audio);
             }
             if (_instance.generationTime) {
-                _writer.writeFloat(2, _instance.generationTime);
+                _writer.writeFloat(3, _instance.generationTime);
             }
             if (_instance.audioLength) {
-                _writer.writeFloat(3, _instance.audioLength);
-            }
-            if (_instance.t2sPipelineId) {
-                _writer.writeString(4, _instance.t2sPipelineId);
-            }
-            if (_instance.audioFormat) {
-                _writer.writeEnum(5, _instance.audioFormat);
+                _writer.writeFloat(4, _instance.audioLength);
             }
             if (_instance.text) {
-                _writer.writeString(6, _instance.text);
+                _writer.writeString(5, _instance.text);
             }
-            if (_instance.sampleRate) {
-                _writer.writeInt32(7, _instance.sampleRate);
+            if (_instance.config) {
+                _writer.writeMessage(6, _instance.config, exports.RequestConfig.serializeBinaryToWriter);
             }
         };
+        Object.defineProperty(SynthesizeResponse.prototype, "audioUuid", {
+            get: function () {
+                return this._audioUuid;
+            },
+            set: function (value) {
+                this._audioUuid = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(SynthesizeResponse.prototype, "audio", {
             get: function () {
                 return this._audio;
@@ -389,26 +826,6 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(SynthesizeResponse.prototype, "t2sPipelineId", {
-            get: function () {
-                return this._t2sPipelineId;
-            },
-            set: function (value) {
-                this._t2sPipelineId = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(SynthesizeResponse.prototype, "audioFormat", {
-            get: function () {
-                return this._audioFormat;
-            },
-            set: function (value) {
-                this._audioFormat = value;
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(SynthesizeResponse.prototype, "text", {
             get: function () {
                 return this._text;
@@ -419,12 +836,12 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(SynthesizeResponse.prototype, "sampleRate", {
+        Object.defineProperty(SynthesizeResponse.prototype, "config", {
             get: function () {
-                return this._sampleRate;
+                return this._config;
             },
             set: function (value) {
-                this._sampleRate = value;
+                this._config = value;
             },
             enumerable: false,
             configurable: true
@@ -443,13 +860,12 @@
          */
         SynthesizeResponse.prototype.toObject = function () {
             return {
+                audioUuid: this.audioUuid,
                 audio: this.audio ? this.audio.subarray(0) : new Uint8Array(),
                 generationTime: this.generationTime,
                 audioLength: this.audioLength,
-                t2sPipelineId: this.t2sPipelineId,
-                audioFormat: this.audioFormat,
                 text: this.text,
-                sampleRate: this.sampleRate
+                config: this.config ? this.config.toObject() : undefined
             };
         };
         /**
@@ -466,20 +882,124 @@
         SynthesizeResponse.prototype.toProtobufJSON = function (
         // @ts-ignore
         options) {
-            var _a;
             return {
+                audioUuid: this.audioUuid,
                 audio: this.audio ? common.uint8ArrayToBase64(this.audio) : '',
                 generationTime: this.generationTime,
                 audioLength: this.audioLength,
-                t2sPipelineId: this.t2sPipelineId,
-                audioFormat: exports.AudioFormat[(_a = this.audioFormat) !== null && _a !== void 0 ? _a : 0],
                 text: this.text,
-                sampleRate: this.sampleRate
+                config: this.config ? this.config.toProtobufJSON(options) : null
             };
         };
         return SynthesizeResponse;
     }());
     SynthesizeResponse.id = 'ondewo.t2s.SynthesizeResponse';
+    /**
+     * Message implementation for ondewo.t2s.GetServiceInfoResponse
+     */
+    var GetServiceInfoResponse = /** @class */ (function () {
+        /**
+         * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+         * @param _value initial values object or instance of GetServiceInfoResponse to deeply clone from
+         */
+        function GetServiceInfoResponse(_value) {
+            _value = _value || {};
+            this.version = _value.version;
+            GetServiceInfoResponse.refineValues(this);
+        }
+        /**
+         * Deserialize binary data to message
+         * @param instance message instance
+         */
+        GetServiceInfoResponse.deserializeBinary = function (bytes) {
+            var instance = new GetServiceInfoResponse();
+            GetServiceInfoResponse.deserializeBinaryFromReader(instance, new googleProtobuf.BinaryReader(bytes));
+            return instance;
+        };
+        /**
+         * Check all the properties and set default protobuf values if necessary
+         * @param _instance message instance
+         */
+        GetServiceInfoResponse.refineValues = function (_instance) {
+            _instance.version = _instance.version || '';
+        };
+        /**
+         * Deserializes / reads binary message into message instance using provided binary reader
+         * @param _instance message instance
+         * @param _reader binary reader instance
+         */
+        GetServiceInfoResponse.deserializeBinaryFromReader = function (_instance, _reader) {
+            while (_reader.nextField()) {
+                if (_reader.isEndGroup())
+                    break;
+                switch (_reader.getFieldNumber()) {
+                    case 1:
+                        _instance.version = _reader.readString();
+                        break;
+                    default:
+                        _reader.skipField();
+                }
+            }
+            GetServiceInfoResponse.refineValues(_instance);
+        };
+        /**
+         * Serializes a message to binary format using provided binary reader
+         * @param _instance message instance
+         * @param _writer binary writer instance
+         */
+        GetServiceInfoResponse.serializeBinaryToWriter = function (_instance, _writer) {
+            if (_instance.version) {
+                _writer.writeString(1, _instance.version);
+            }
+        };
+        Object.defineProperty(GetServiceInfoResponse.prototype, "version", {
+            get: function () {
+                return this._version;
+            },
+            set: function (value) {
+                this._version = value;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Serialize message to binary data
+         * @param instance message instance
+         */
+        GetServiceInfoResponse.prototype.serializeBinary = function () {
+            var writer = new googleProtobuf.BinaryWriter();
+            GetServiceInfoResponse.serializeBinaryToWriter(this, writer);
+            return writer.getResultBuffer();
+        };
+        /**
+         * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+         */
+        GetServiceInfoResponse.prototype.toObject = function () {
+            return {
+                version: this.version
+            };
+        };
+        /**
+         * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+         */
+        GetServiceInfoResponse.prototype.toJSON = function () {
+            return this.toObject();
+        };
+        /**
+         * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+         * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+         * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+         */
+        GetServiceInfoResponse.prototype.toProtobufJSON = function (
+        // @ts-ignore
+        options) {
+            return {
+                version: this.version
+            };
+        };
+        return GetServiceInfoResponse;
+    }());
+    GetServiceInfoResponse.id = 'ondewo.t2s.GetServiceInfoResponse';
     /**
      * Message implementation for ondewo.t2s.ListT2sPipelinesRequest
      */
@@ -2190,11 +2710,11 @@
                     case 1:
                         _instance.type = _reader.readString();
                         break;
-                    case 3:
+                    case 2:
                         _instance.glowTts = new GlowTTS();
                         _reader.readMessage(_instance.glowTts, GlowTTS.deserializeBinaryFromReader);
                         break;
-                    case 4:
+                    case 3:
                         _instance.glowTtsTriton = new GlowTTSTriton();
                         _reader.readMessage(_instance.glowTtsTriton, GlowTTSTriton.deserializeBinaryFromReader);
                         break;
@@ -2214,10 +2734,10 @@
                 _writer.writeString(1, _instance.type);
             }
             if (_instance.glowTts) {
-                _writer.writeMessage(3, _instance.glowTts, GlowTTS.serializeBinaryToWriter);
+                _writer.writeMessage(2, _instance.glowTts, GlowTTS.serializeBinaryToWriter);
             }
             if (_instance.glowTtsTriton) {
-                _writer.writeMessage(4, _instance.glowTtsTriton, GlowTTSTriton.serializeBinaryToWriter);
+                _writer.writeMessage(3, _instance.glowTtsTriton, GlowTTSTriton.serializeBinaryToWriter);
             }
         };
         Object.defineProperty(Text2Mel.prototype, "type", {
@@ -5314,8 +5834,27 @@
                         path: '/ondewo.t2s.Text2Speech/Synthesize',
                         requestData: requestData,
                         requestMetadata: requestMetadata,
-                        requestClass: exports.SynthesizeRequest,
+                        requestClass: SynthesizeRequest,
                         responseClass: SynthesizeResponse
+                    });
+                },
+                /**
+                 * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+                 *
+                 * @param requestMessage Request message
+                 * @param requestMetadata Request metadata
+                 * @returns Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>
+                 */
+                batchSynthesize: function (requestData, requestMetadata) {
+                    if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+                    return _this.handler.handle({
+                        type: common.GrpcCallType.unary,
+                        client: _this.client,
+                        path: '/ondewo.t2s.Text2Speech/BatchSynthesize',
+                        requestData: requestData,
+                        requestMetadata: requestMetadata,
+                        requestClass: BatchSynthesizeRequest,
+                        responseClass: BatchSynthesizeResponse
                     });
                 },
                 /**
@@ -5465,6 +6004,19 @@
             if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
             return this.$raw
                 .synthesize(requestData, requestMetadata)
+                .pipe(i2.throwStatusErrors(), i2.takeMessages());
+        };
+        /**
+         * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<thisProto.BatchSynthesizeResponse>
+         */
+        Text2SpeechClient.prototype.batchSynthesize = function (requestData, requestMetadata) {
+            if (requestMetadata === void 0) { requestMetadata = new common.GrpcMetadata(); }
+            return this.$raw
+                .batchSynthesize(requestData, requestMetadata)
                 .pipe(i2.throwStatusErrors(), i2.takeMessages());
         };
         /**
@@ -5764,6 +6316,8 @@
      */
 
     exports.Apodization = Apodization;
+    exports.BatchSynthesizeRequest = BatchSynthesizeRequest;
+    exports.BatchSynthesizeResponse = BatchSynthesizeResponse;
     exports.Caching = Caching;
     exports.CompositeInference = CompositeInference;
     exports.CreateCustomPhonemizerRequest = CreateCustomPhonemizerRequest;
@@ -5772,6 +6326,7 @@
     exports.Description = Description;
     exports.GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS;
     exports.GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = GRPC_TEXT2_SPEECH_CLIENT_SETTINGS;
+    exports.GetServiceInfoResponse = GetServiceInfoResponse;
     exports.GlowTTS = GlowTTS;
     exports.GlowTTSTriton = GlowTTSTriton;
     exports.HiFiGan = HiFiGan;
@@ -5792,6 +6347,7 @@
     exports.Normalization = Normalization;
     exports.PhonemizerId = PhonemizerId;
     exports.Postprocessing = Postprocessing;
+    exports.SynthesizeRequest = SynthesizeRequest;
     exports.SynthesizeResponse = SynthesizeResponse;
     exports.T2sPipelineId = T2sPipelineId;
     exports.Text2Mel = Text2Mel;

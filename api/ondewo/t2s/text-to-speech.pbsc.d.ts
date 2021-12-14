@@ -24,6 +24,14 @@ export declare class Text2SpeechClient {
          */
         synthesize: (requestData: thisProto.SynthesizeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.SynthesizeResponse>>;
         /**
+         * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>
+         */
+        batchSynthesize: (requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>;
+        /**
          * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
          *
          * @param requestMessage Request message
@@ -89,6 +97,14 @@ export declare class Text2SpeechClient {
      * @returns Observable<thisProto.SynthesizeResponse>
      */
     synthesize(requestData: thisProto.SynthesizeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.SynthesizeResponse>;
+    /**
+     * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.BatchSynthesizeResponse>
+     */
+    batchSynthesize(requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchSynthesizeResponse>;
     /**
      * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
      *

@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO-T2S Angular Client 2.0.0
+
+### New Features
+* Track version 2.0.x of [T2S-API](https://github.com/ondewo/ondewo-t2s-api)
+
+***
+
 ## Release ONDEWO-T2S Angular Client 1.5.2
 
 ### New Features
