@@ -1,6 +1,6 @@
 {
   "name": "@ondewo/t2s-client-angular",
-  "version": "1.5.2",
+  "version": "2.0.0",
   "description": "Ondewo text to speech client library for angular",
   "keywords": ["ondewo", "t2s", "api", "client", "ngx-grpc", "grpc"],
   "scripts": {
