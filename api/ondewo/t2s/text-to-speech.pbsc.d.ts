@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './text-to-speech.pb';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.t2s.Text2Speech
  */
@@ -87,6 +88,14 @@ export declare class Text2SpeechClient {
          * @returns Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>
          */
         listT2sDomains: (requestData: thisProto.ListT2sDomainsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>;
+        /**
+         * Unary RPC for /ondewo.t2s.Text2Speech/GetServiceInfo
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.T2SGetServiceInfoResponse>>
+         */
+        getServiceInfo: (requestData: googleProtobuf000.Empty, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.T2SGetServiceInfoResponse>>;
     };
     constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
     /**
@@ -161,4 +170,15 @@ export declare class Text2SpeechClient {
      * @returns Observable<thisProto.ListT2sDomainsResponse>
      */
     listT2sDomains(requestData: thisProto.ListT2sDomainsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListT2sDomainsResponse>;
+    /**
+     * Unary RPC for /ondewo.t2s.Text2Speech/GetServiceInfo
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.T2SGetServiceInfoResponse>
+     */
+    getServiceInfo(requestData: googleProtobuf000.Empty, requestMetadata?: GrpcMetadata): Observable<thisProto.T2SGetServiceInfoResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<Text2SpeechClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<Text2SpeechClient>;
 }
+//# sourceMappingURL=text-to-speech.pbsc.d.ts.map

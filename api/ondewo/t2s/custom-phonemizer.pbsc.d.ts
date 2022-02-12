@@ -3,6 +3,7 @@ import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './custom-phonemizer.pb';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
+import * as i0 from "@angular/core";
 /**
  * Service client implementation for ondewo.t2s.CustomPhonemizers
  */
@@ -97,4 +98,7 @@ export declare class CustomPhonemizersClient {
      * @returns Observable<thisProto.ListCustomPhonemizerResponse>
      */
     listCustomPhonemizer(requestData: thisProto.ListCustomPhonemizerRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListCustomPhonemizerResponse>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CustomPhonemizersClient, [{ optional: true; }, null, null]>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<CustomPhonemizersClient>;
 }
+//# sourceMappingURL=custom-phonemizer.pbsc.d.ts.map

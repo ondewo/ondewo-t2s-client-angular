@@ -513,3 +513,4 @@ export declare module CreateCustomPhonemizerRequest {
         maps?: Map.AsProtobufJSON[] | null;
     }
 }
+//# sourceMappingURL=custom-phonemizer.pb.d.ts.map
