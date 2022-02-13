@@ -1,13 +1,16 @@
 {
   "name": "@ondewo/t2s-client-angular",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Ondewo text to speech client library for angular",
   "keywords": ["ondewo", "t2s", "api", "client", "ngx-grpc", "grpc"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "git submodule update --init --recursive --remote && docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
+    "submodule_update": "git submodule update --init --recursive",
+    "build": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
+    "generate": "docker run -it -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
     "debug": "docker run -it --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
-    "publish-npm": "npm publish ../npm --access public"
+    "publish-npm": "npm publish ../npm --access public",
+    "test-in-ondewo-aim": "npm run build && rm -rf ../../ondewo-aim/node_modules/@ondewo/t2s-client-angular/* && cp ../npm/* ../../ondewo-aim/node_modules/@ondewo/t2s-client-angular/. -R"
   },
   "author": "ONDEWO GmbH",
   "homepage": "https://ondewo.com/",
