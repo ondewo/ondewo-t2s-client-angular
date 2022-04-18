@@ -289,12 +289,12 @@ export declare class RequestConfig implements GrpcMessage {
     set audioFormat(value: AudioFormat | undefined);
     get useCache(): boolean | undefined;
     set useCache(value: boolean | undefined);
-    get lengthScale(): number | undefined;
-    get noiseScale(): number | undefined;
-    get sampleRate(): number | undefined;
-    get pcm(): Pcm | undefined;
-    get audioFormat(): AudioFormat | undefined;
-    get useCache(): boolean | undefined;
+    get lengthScale(): number;
+    get noiseScale(): number;
+    get sampleRate(): number;
+    get pcm(): Pcm;
+    get audioFormat(): AudioFormat;
+    get useCache(): boolean;
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2514,4 +2514,3 @@ export declare module Apodization {
         apodizationSecs?: number;
     }
 }
-//# sourceMappingURL=text-to-speech.pb.d.ts.map

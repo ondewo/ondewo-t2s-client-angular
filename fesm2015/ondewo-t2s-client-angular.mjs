@@ -5292,7 +5292,7 @@ class CustomPhonemizersClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+             * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5310,7 +5310,7 @@ class CustomPhonemizersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+             * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5328,7 +5328,7 @@ class CustomPhonemizersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+             * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5346,7 +5346,7 @@ class CustomPhonemizersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+             * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5364,7 +5364,7 @@ class CustomPhonemizersClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+             * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5385,7 +5385,7 @@ class CustomPhonemizersClient {
         this.client = clientFactory.createClient('ondewo.t2s.CustomPhonemizers', settings);
     }
     /**
-     * Unary RPC for /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+     * Unary call @/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5397,7 +5397,7 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+     * Unary call @/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5409,7 +5409,7 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+     * Unary call @/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5421,7 +5421,7 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+     * Unary call @/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5433,7 +5433,7 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+     * Unary call @/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5445,12 +5445,13 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: CustomPhonemizersClient, deps: [{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: CustomPhonemizersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: CustomPhonemizersClient, decorators: [{
+CustomPhonemizersClient.ɵfac = function CustomPhonemizersClient_Factory(t) { return new (t || CustomPhonemizersClient)(i0.ɵɵinject(GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
+CustomPhonemizersClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: CustomPhonemizersClient, factory: CustomPhonemizersClient.ɵfac, providedIn: 'any' });
+(function () {
+    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(CustomPhonemizersClient, [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
+        }], function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -5460,7 +5461,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImpor
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    } });
+    }, null);
+})();
 
 /* tslint:disable */
 /**
@@ -5476,7 +5478,7 @@ class Text2SpeechClient {
          */
         this.$raw = {
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/Synthesize
+             * Unary call: /ondewo.t2s.Text2Speech/Synthesize
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5494,7 +5496,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+             * Unary call: /ondewo.t2s.Text2Speech/BatchSynthesize
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5512,7 +5514,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
+             * Unary call: /ondewo.t2s.Text2Speech/GetT2sPipeline
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5530,7 +5532,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/CreateT2sPipeline
+             * Unary call: /ondewo.t2s.Text2Speech/CreateT2sPipeline
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5548,7 +5550,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/DeleteT2sPipeline
+             * Unary call: /ondewo.t2s.Text2Speech/DeleteT2sPipeline
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5566,7 +5568,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/UpdateT2sPipeline
+             * Unary call: /ondewo.t2s.Text2Speech/UpdateT2sPipeline
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5584,7 +5586,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sPipelines
+             * Unary call: /ondewo.t2s.Text2Speech/ListT2sPipelines
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5602,7 +5604,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sLanguages
+             * Unary call: /ondewo.t2s.Text2Speech/ListT2sLanguages
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5620,7 +5622,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sDomains
+             * Unary call: /ondewo.t2s.Text2Speech/ListT2sDomains
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5638,7 +5640,7 @@ class Text2SpeechClient {
                 });
             },
             /**
-             * Unary RPC for /ondewo.t2s.Text2Speech/GetServiceInfo
+             * Unary call: /ondewo.t2s.Text2Speech/GetServiceInfo
              *
              * @param requestMessage Request message
              * @param requestMetadata Request metadata
@@ -5659,7 +5661,7 @@ class Text2SpeechClient {
         this.client = clientFactory.createClient('ondewo.t2s.Text2Speech', settings);
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/Synthesize
+     * Unary call @/ondewo.t2s.Text2Speech/Synthesize
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5671,7 +5673,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/BatchSynthesize
+     * Unary call @/ondewo.t2s.Text2Speech/BatchSynthesize
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5683,7 +5685,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/GetT2sPipeline
+     * Unary call @/ondewo.t2s.Text2Speech/GetT2sPipeline
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5695,7 +5697,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/CreateT2sPipeline
+     * Unary call @/ondewo.t2s.Text2Speech/CreateT2sPipeline
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5707,7 +5709,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/DeleteT2sPipeline
+     * Unary call @/ondewo.t2s.Text2Speech/DeleteT2sPipeline
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5719,7 +5721,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/UpdateT2sPipeline
+     * Unary call @/ondewo.t2s.Text2Speech/UpdateT2sPipeline
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5731,7 +5733,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sPipelines
+     * Unary call @/ondewo.t2s.Text2Speech/ListT2sPipelines
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5743,7 +5745,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sLanguages
+     * Unary call @/ondewo.t2s.Text2Speech/ListT2sLanguages
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5755,7 +5757,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/ListT2sDomains
+     * Unary call @/ondewo.t2s.Text2Speech/ListT2sDomains
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5767,7 +5769,7 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
-     * Unary RPC for /ondewo.t2s.Text2Speech/GetServiceInfo
+     * Unary call @/ondewo.t2s.Text2Speech/GetServiceInfo
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
@@ -5779,12 +5781,13 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-Text2SpeechClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImport: i0, type: Text2SpeechClient, decorators: [{
+Text2SpeechClient.ɵfac = function Text2SpeechClient_Factory(t) { return new (t || Text2SpeechClient)(i0.ɵɵinject(GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, 8), i0.ɵɵinject(GRPC_CLIENT_FACTORY), i0.ɵɵinject(i1.GrpcHandler)); };
+Text2SpeechClient.ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({ token: Text2SpeechClient, factory: Text2SpeechClient.ɵfac, providedIn: 'any' });
+(function () {
+    (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(Text2SpeechClient, [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () {
+        }], function () {
         return [{ type: undefined, decorators: [{
                         type: Optional
                     }, {
@@ -5794,7 +5797,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.2", ngImpor
                         type: Inject,
                         args: [GRPC_CLIENT_FACTORY]
                     }] }, { type: i1.GrpcHandler }];
-    } });
+    }, null);
+})();
 
 /**
  * Generated bundle index. Do not edit.
