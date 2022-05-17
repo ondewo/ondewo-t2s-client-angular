@@ -1,5 +1,5 @@
 # which branches to use for the build of the client sdk
-T2S_API_GIT_BRANCH=tags/3.0.0
+T2S_API_GIT_BRANCH=tags/4.0.1
 
 T2S_APIS_DIR=src/ondewo-t2s-api
 T2S_PROTOS_DIR=${T2S_APIS_DIR}/ondewo

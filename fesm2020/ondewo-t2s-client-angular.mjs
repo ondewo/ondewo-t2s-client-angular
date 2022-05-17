@@ -12,6 +12,11 @@ import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
  * Use it only if your default settings are not set or the service requires other settings.
  */
 const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = new InjectionToken('GRPC_TEXT2_SPEECH_CLIENT_SETTINGS');
+/**
+ * Specific GrpcClientSettings for CustomPhonemizers.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = new InjectionToken('GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS');
 
 /* tslint:disable */
 var Pcm;
@@ -367,12 +372,12 @@ class RequestConfig {
      * @param _value initial values object or instance of RequestConfig to deeply clone from
      */
     constructor(_value) {
-        this._lengthScale = RequestConfig.LengthScaleCase.none;
-        this._noiseScale = RequestConfig.NoiseScaleCase.none;
-        this._sampleRate = RequestConfig.SampleRateCase.none;
-        this._pcm = RequestConfig.PcmCase.none;
-        this._audioFormat = RequestConfig.AudioFormatCase.none;
-        this._useCache = RequestConfig.UseCacheCase.none;
+        this._oneofLengthScale = RequestConfig.OneofLengthScaleCase.none;
+        this._oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.none;
+        this._oneofSampleRate = RequestConfig.OneofSampleRateCase.none;
+        this._oneofPcm = RequestConfig.OneofPcmCase.none;
+        this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.none;
+        this._oneofUseCache = RequestConfig.OneofUseCacheCase.none;
         _value = _value || {};
         this.t2sPipelineId = _value.t2sPipelineId;
         this.lengthScale = _value.lengthScale;
@@ -475,7 +480,7 @@ class RequestConfig {
     }
     set lengthScale(value) {
         if (value !== undefined && value !== null) {
-            this._lengthScale = RequestConfig.LengthScaleCase.lengthScale;
+            this._oneofLengthScale = RequestConfig.OneofLengthScaleCase.lengthScale;
         }
         this._lengthScale = value;
     }
@@ -484,7 +489,7 @@ class RequestConfig {
     }
     set noiseScale(value) {
         if (value !== undefined && value !== null) {
-            this._noiseScale = RequestConfig.NoiseScaleCase.noiseScale;
+            this._oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.noiseScale;
         }
         this._noiseScale = value;
     }
@@ -493,7 +498,7 @@ class RequestConfig {
     }
     set sampleRate(value) {
         if (value !== undefined && value !== null) {
-            this._sampleRate = RequestConfig.SampleRateCase.sampleRate;
+            this._oneofSampleRate = RequestConfig.OneofSampleRateCase.sampleRate;
         }
         this._sampleRate = value;
     }
@@ -502,7 +507,7 @@ class RequestConfig {
     }
     set pcm(value) {
         if (value !== undefined && value !== null) {
-            this._pcm = RequestConfig.PcmCase.pcm;
+            this._oneofPcm = RequestConfig.OneofPcmCase.pcm;
         }
         this._pcm = value;
     }
@@ -511,7 +516,7 @@ class RequestConfig {
     }
     set audioFormat(value) {
         if (value !== undefined && value !== null) {
-            this._audioFormat = RequestConfig.AudioFormatCase.audioFormat;
+            this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.audioFormat;
         }
         this._audioFormat = value;
     }
@@ -520,27 +525,27 @@ class RequestConfig {
     }
     set useCache(value) {
         if (value !== undefined && value !== null) {
-            this._useCache = RequestConfig.UseCacheCase.useCache;
+            this._oneofUseCache = RequestConfig.OneofUseCacheCase.useCache;
         }
         this._useCache = value;
     }
-    get lengthScale() {
-        return this._lengthScale;
+    get oneofLengthScale() {
+        return this._oneofLengthScale;
     }
-    get noiseScale() {
-        return this._noiseScale;
+    get oneofNoiseScale() {
+        return this._oneofNoiseScale;
     }
-    get sampleRate() {
-        return this._sampleRate;
+    get oneofSampleRate() {
+        return this._oneofSampleRate;
     }
-    get pcm() {
-        return this._pcm;
+    get oneofPcm() {
+        return this._oneofPcm;
     }
-    get audioFormat() {
-        return this._audioFormat;
+    get oneofAudioFormat() {
+        return this._oneofAudioFormat;
     }
-    get useCache() {
-        return this._useCache;
+    get oneofUseCache() {
+        return this._oneofUseCache;
     }
     /**
      * Serialize message to binary data
@@ -604,36 +609,36 @@ class RequestConfig {
 }
 RequestConfig.id = 'ondewo.t2s.RequestConfig';
 (function (RequestConfig) {
-    let LengthScaleCase;
-    (function (LengthScaleCase) {
-        LengthScaleCase[LengthScaleCase["none"] = 0] = "none";
-        LengthScaleCase[LengthScaleCase["lengthScale"] = 1] = "lengthScale";
-    })(LengthScaleCase = RequestConfig.LengthScaleCase || (RequestConfig.LengthScaleCase = {}));
-    let NoiseScaleCase;
-    (function (NoiseScaleCase) {
-        NoiseScaleCase[NoiseScaleCase["none"] = 0] = "none";
-        NoiseScaleCase[NoiseScaleCase["noiseScale"] = 1] = "noiseScale";
-    })(NoiseScaleCase = RequestConfig.NoiseScaleCase || (RequestConfig.NoiseScaleCase = {}));
-    let SampleRateCase;
-    (function (SampleRateCase) {
-        SampleRateCase[SampleRateCase["none"] = 0] = "none";
-        SampleRateCase[SampleRateCase["sampleRate"] = 1] = "sampleRate";
-    })(SampleRateCase = RequestConfig.SampleRateCase || (RequestConfig.SampleRateCase = {}));
-    let PcmCase;
-    (function (PcmCase) {
-        PcmCase[PcmCase["none"] = 0] = "none";
-        PcmCase[PcmCase["pcm"] = 1] = "pcm";
-    })(PcmCase = RequestConfig.PcmCase || (RequestConfig.PcmCase = {}));
-    let AudioFormatCase;
-    (function (AudioFormatCase) {
-        AudioFormatCase[AudioFormatCase["none"] = 0] = "none";
-        AudioFormatCase[AudioFormatCase["audioFormat"] = 1] = "audioFormat";
-    })(AudioFormatCase = RequestConfig.AudioFormatCase || (RequestConfig.AudioFormatCase = {}));
-    let UseCacheCase;
-    (function (UseCacheCase) {
-        UseCacheCase[UseCacheCase["none"] = 0] = "none";
-        UseCacheCase[UseCacheCase["useCache"] = 1] = "useCache";
-    })(UseCacheCase = RequestConfig.UseCacheCase || (RequestConfig.UseCacheCase = {}));
+    let OneofLengthScaleCase;
+    (function (OneofLengthScaleCase) {
+        OneofLengthScaleCase[OneofLengthScaleCase["none"] = 0] = "none";
+        OneofLengthScaleCase[OneofLengthScaleCase["lengthScale"] = 1] = "lengthScale";
+    })(OneofLengthScaleCase = RequestConfig.OneofLengthScaleCase || (RequestConfig.OneofLengthScaleCase = {}));
+    let OneofNoiseScaleCase;
+    (function (OneofNoiseScaleCase) {
+        OneofNoiseScaleCase[OneofNoiseScaleCase["none"] = 0] = "none";
+        OneofNoiseScaleCase[OneofNoiseScaleCase["noiseScale"] = 1] = "noiseScale";
+    })(OneofNoiseScaleCase = RequestConfig.OneofNoiseScaleCase || (RequestConfig.OneofNoiseScaleCase = {}));
+    let OneofSampleRateCase;
+    (function (OneofSampleRateCase) {
+        OneofSampleRateCase[OneofSampleRateCase["none"] = 0] = "none";
+        OneofSampleRateCase[OneofSampleRateCase["sampleRate"] = 1] = "sampleRate";
+    })(OneofSampleRateCase = RequestConfig.OneofSampleRateCase || (RequestConfig.OneofSampleRateCase = {}));
+    let OneofPcmCase;
+    (function (OneofPcmCase) {
+        OneofPcmCase[OneofPcmCase["none"] = 0] = "none";
+        OneofPcmCase[OneofPcmCase["pcm"] = 1] = "pcm";
+    })(OneofPcmCase = RequestConfig.OneofPcmCase || (RequestConfig.OneofPcmCase = {}));
+    let OneofAudioFormatCase;
+    (function (OneofAudioFormatCase) {
+        OneofAudioFormatCase[OneofAudioFormatCase["none"] = 0] = "none";
+        OneofAudioFormatCase[OneofAudioFormatCase["audioFormat"] = 1] = "audioFormat";
+    })(OneofAudioFormatCase = RequestConfig.OneofAudioFormatCase || (RequestConfig.OneofAudioFormatCase = {}));
+    let OneofUseCacheCase;
+    (function (OneofUseCacheCase) {
+        OneofUseCacheCase[OneofUseCacheCase["none"] = 0] = "none";
+        OneofUseCacheCase[OneofUseCacheCase["useCache"] = 1] = "useCache";
+    })(OneofUseCacheCase = RequestConfig.OneofUseCacheCase || (RequestConfig.OneofUseCacheCase = {}));
 })(RequestConfig || (RequestConfig = {}));
 /**
  * Message implementation for ondewo.t2s.SynthesizeResponse
@@ -651,6 +656,7 @@ class SynthesizeResponse {
         this.audioLength = _value.audioLength;
         this.text = _value.text;
         this.config = _value.config ? new RequestConfig(_value.config) : undefined;
+        this.normalizedText = _value.normalizedText;
         SynthesizeResponse.refineValues(this);
     }
     /**
@@ -673,6 +679,7 @@ class SynthesizeResponse {
         _instance.audioLength = _instance.audioLength || 0;
         _instance.text = _instance.text || '';
         _instance.config = _instance.config || undefined;
+        _instance.normalizedText = _instance.normalizedText || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -703,6 +710,9 @@ class SynthesizeResponse {
                     _instance.config = new RequestConfig();
                     _reader.readMessage(_instance.config, RequestConfig.deserializeBinaryFromReader);
                     break;
+                case 7:
+                    _instance.normalizedText = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -732,6 +742,9 @@ class SynthesizeResponse {
         }
         if (_instance.config) {
             _writer.writeMessage(6, _instance.config, RequestConfig.serializeBinaryToWriter);
+        }
+        if (_instance.normalizedText) {
+            _writer.writeString(7, _instance.normalizedText);
         }
     }
     get audioUuid() {
@@ -770,6 +783,12 @@ class SynthesizeResponse {
     set config(value) {
         this._config = value;
     }
+    get normalizedText() {
+        return this._normalizedText;
+    }
+    set normalizedText(value) {
+        this._normalizedText = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -789,7 +808,8 @@ class SynthesizeResponse {
             generationTime: this.generationTime,
             audioLength: this.audioLength,
             text: this.text,
-            config: this.config ? this.config.toObject() : undefined
+            config: this.config ? this.config.toObject() : undefined,
+            normalizedText: this.normalizedText
         };
     }
     /**
@@ -812,7 +832,8 @@ class SynthesizeResponse {
             generationTime: this.generationTime,
             audioLength: this.audioLength,
             text: this.text,
-            config: this.config ? this.config.toProtobufJSON(options) : null
+            config: this.config ? this.config.toProtobufJSON(options) : null,
+            normalizedText: this.normalizedText
         };
     }
 }
@@ -2787,7 +2808,6 @@ class GlowTTSTriton {
         this.cleaners = (_value.cleaners || []).slice();
         this.maxTextLength = _value.maxTextLength;
         this.paramConfigPath = _value.paramConfigPath;
-        this.tritonUrl = _value.tritonUrl;
         this.tritonModelName = _value.tritonModelName;
         GlowTTSTriton.refineValues(this);
     }
@@ -2811,7 +2831,6 @@ class GlowTTSTriton {
         _instance.cleaners = _instance.cleaners || [];
         _instance.maxTextLength = _instance.maxTextLength || '0';
         _instance.paramConfigPath = _instance.paramConfigPath || '';
-        _instance.tritonUrl = _instance.tritonUrl || '';
         _instance.tritonModelName = _instance.tritonModelName || '';
     }
     /**
@@ -2843,9 +2862,6 @@ class GlowTTSTriton {
                     _instance.paramConfigPath = _reader.readString();
                     break;
                 case 7:
-                    _instance.tritonUrl = _reader.readString();
-                    break;
-                case 8:
                     _instance.tritonModelName = _reader.readString();
                     break;
                 default:
@@ -2878,11 +2894,8 @@ class GlowTTSTriton {
         if (_instance.paramConfigPath) {
             _writer.writeString(6, _instance.paramConfigPath);
         }
-        if (_instance.tritonUrl) {
-            _writer.writeString(7, _instance.tritonUrl);
-        }
         if (_instance.tritonModelName) {
-            _writer.writeString(8, _instance.tritonModelName);
+            _writer.writeString(7, _instance.tritonModelName);
         }
     }
     get batchSize() {
@@ -2921,12 +2934,6 @@ class GlowTTSTriton {
     set paramConfigPath(value) {
         this._paramConfigPath = value;
     }
-    get tritonUrl() {
-        return this._tritonUrl;
-    }
-    set tritonUrl(value) {
-        this._tritonUrl = value;
-    }
     get tritonModelName() {
         return this._tritonModelName;
     }
@@ -2953,7 +2960,6 @@ class GlowTTSTriton {
             cleaners: (this.cleaners || []).slice(),
             maxTextLength: this.maxTextLength,
             paramConfigPath: this.paramConfigPath,
-            tritonUrl: this.tritonUrl,
             tritonModelName: this.tritonModelName
         };
     }
@@ -2978,7 +2984,6 @@ class GlowTTSTriton {
             cleaners: (this.cleaners || []).slice(),
             maxTextLength: this.maxTextLength,
             paramConfigPath: this.paramConfigPath,
-            tritonUrl: this.tritonUrl,
             tritonModelName: this.tritonModelName
         };
     }
@@ -3309,7 +3314,6 @@ class HiFiGanTriton {
         _value = _value || {};
         this.configPath = _value.configPath;
         this.tritonModelName = _value.tritonModelName;
-        this.tritonUrl = _value.tritonUrl;
         HiFiGanTriton.refineValues(this);
     }
     /**
@@ -3328,7 +3332,6 @@ class HiFiGanTriton {
     static refineValues(_instance) {
         _instance.configPath = _instance.configPath || '';
         _instance.tritonModelName = _instance.tritonModelName || '';
-        _instance.tritonUrl = _instance.tritonUrl || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -3345,9 +3348,6 @@ class HiFiGanTriton {
                     break;
                 case 2:
                     _instance.tritonModelName = _reader.readString();
-                    break;
-                case 3:
-                    _instance.tritonUrl = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -3367,9 +3367,6 @@ class HiFiGanTriton {
         if (_instance.tritonModelName) {
             _writer.writeString(2, _instance.tritonModelName);
         }
-        if (_instance.tritonUrl) {
-            _writer.writeString(3, _instance.tritonUrl);
-        }
     }
     get configPath() {
         return this._configPath;
@@ -3382,12 +3379,6 @@ class HiFiGanTriton {
     }
     set tritonModelName(value) {
         this._tritonModelName = value;
-    }
-    get tritonUrl() {
-        return this._tritonUrl;
-    }
-    set tritonUrl(value) {
-        this._tritonUrl = value;
     }
     /**
      * Serialize message to binary data
@@ -3404,8 +3395,7 @@ class HiFiGanTriton {
     toObject() {
         return {
             configPath: this.configPath,
-            tritonModelName: this.tritonModelName,
-            tritonUrl: this.tritonUrl
+            tritonModelName: this.tritonModelName
         };
     }
     /**
@@ -3424,8 +3414,7 @@ class HiFiGanTriton {
     options) {
         return {
             configPath: this.configPath,
-            tritonModelName: this.tritonModelName,
-            tritonUrl: this.tritonUrl
+            tritonModelName: this.tritonModelName
         };
     }
 }
@@ -3773,6 +3762,7 @@ class T2SNormalization {
         this.language = _value.language;
         this.pipeline = (_value.pipeline || []).slice();
         this.customPhonemizerId = _value.customPhonemizerId;
+        this.arpabetMappping = _value.arpabetMappping;
         T2SNormalization.refineValues(this);
     }
     /**
@@ -3792,6 +3782,7 @@ class T2SNormalization {
         _instance.language = _instance.language || '';
         _instance.pipeline = _instance.pipeline || [];
         _instance.customPhonemizerId = _instance.customPhonemizerId || '';
+        _instance.arpabetMappping = _instance.arpabetMappping || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -3811,6 +3802,9 @@ class T2SNormalization {
                     break;
                 case 3:
                     _instance.customPhonemizerId = _reader.readString();
+                    break;
+                case 4:
+                    _instance.arpabetMappping = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -3833,6 +3827,9 @@ class T2SNormalization {
         if (_instance.customPhonemizerId) {
             _writer.writeString(3, _instance.customPhonemizerId);
         }
+        if (_instance.arpabetMappping) {
+            _writer.writeString(4, _instance.arpabetMappping);
+        }
     }
     get language() {
         return this._language;
@@ -3852,6 +3849,12 @@ class T2SNormalization {
     set customPhonemizerId(value) {
         this._customPhonemizerId = value;
     }
+    get arpabetMappping() {
+        return this._arpabetMappping;
+    }
+    set arpabetMappping(value) {
+        this._arpabetMappping = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -3868,7 +3871,8 @@ class T2SNormalization {
         return {
             language: this.language,
             pipeline: (this.pipeline || []).slice(),
-            customPhonemizerId: this.customPhonemizerId
+            customPhonemizerId: this.customPhonemizerId,
+            arpabetMappping: this.arpabetMappping
         };
     }
     /**
@@ -3888,7 +3892,8 @@ class T2SNormalization {
         return {
             language: this.language,
             pipeline: (this.pipeline || []).slice(),
-            customPhonemizerId: this.customPhonemizerId
+            customPhonemizerId: this.customPhonemizerId,
+            arpabetMappping: this.arpabetMappping
         };
     }
 }
@@ -4464,7 +4469,6 @@ class Apodization {
     }
 }
 Apodization.id = 'ondewo.t2s.Apodization';
-
 /**
  * Message implementation for ondewo.t2s.PhonemizerId
  */
@@ -5273,195 +5277,6 @@ CreateCustomPhonemizerRequest.id = 'ondewo.t2s.CreateCustomPhonemizerRequest';
 
 /* tslint:disable */
 /**
- * Specific GrpcClientSettings for CustomPhonemizers.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = new InjectionToken('GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS');
-
-/* tslint:disable */
-/**
- * Service client implementation for ondewo.t2s.CustomPhonemizers
- */
-class CustomPhonemizersClient {
-    constructor(settings, clientFactory, handler) {
-        this.handler = handler;
-        /**
-         * Raw RPC implementation for each service client method.
-         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-         * Attention: these methods do not throw errors when non-zero status codes are received.
-         */
-        this.$raw = {
-            /**
-             * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-             */
-            getCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer',
-                    requestData,
-                    requestMetadata,
-                    requestClass: PhonemizerId,
-                    responseClass: CustomPhonemizerProto
-                });
-            },
-            /**
-             * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
-             */
-            createCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer',
-                    requestData,
-                    requestMetadata,
-                    requestClass: CreateCustomPhonemizerRequest,
-                    responseClass: PhonemizerId
-                });
-            },
-            /**
-             * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-             */
-            deleteCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer',
-                    requestData,
-                    requestMetadata,
-                    requestClass: PhonemizerId,
-                    responseClass: googleProtobuf000.Empty
-                });
-            },
-            /**
-             * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-             */
-            updateCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer',
-                    requestData,
-                    requestMetadata,
-                    requestClass: UpdateCustomPhonemizerRequest,
-                    responseClass: CustomPhonemizerProto
-                });
-            },
-            /**
-             * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
-             *
-             * @param requestMessage Request message
-             * @param requestMetadata Request metadata
-             * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
-             */
-            listCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-                return this.handler.handle({
-                    type: GrpcCallType.unary,
-                    client: this.client,
-                    path: '/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer',
-                    requestData,
-                    requestMetadata,
-                    requestClass: ListCustomPhonemizerRequest,
-                    responseClass: ListCustomPhonemizerResponse
-                });
-            }
-        };
-        this.client = clientFactory.createClient('ondewo.t2s.CustomPhonemizers', settings);
-    }
-    /**
-     * Unary call @/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.CustomPhonemizerProto>
-     */
-    getCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .getCustomPhonemizer(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.PhonemizerId>
-     */
-    createCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .createCustomPhonemizer(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<googleProtobuf000.Empty>
-     */
-    deleteCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .deleteCustomPhonemizer(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.CustomPhonemizerProto>
-     */
-    updateCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .updateCustomPhonemizer(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Unary call @/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.ListCustomPhonemizerResponse>
-     */
-    listCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .listCustomPhonemizer(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-}
-CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, deps: [{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'any' }]
-        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
-                }] }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [GRPC_CLIENT_FACTORY]
-                }] }, { type: i1.GrpcHandler }]; } });
-
-/* tslint:disable */
-/**
  * Service client implementation for ondewo.t2s.Text2Speech
  */
 class Text2SpeechClient {
@@ -5787,6 +5602,186 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImpor
                 }, {
                     type: Inject,
                     args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [GRPC_CLIENT_FACTORY]
+                }] }, { type: i1.GrpcHandler }]; } });
+/**
+ * Service client implementation for ondewo.t2s.CustomPhonemizers
+ */
+class CustomPhonemizersClient {
+    constructor(settings, clientFactory, handler) {
+        this.handler = handler;
+        /**
+         * Raw RPC implementation for each service client method.
+         * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+         * Attention: these methods do not throw errors when non-zero status codes are received.
+         */
+        this.$raw = {
+            /**
+             * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+             */
+            getCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer',
+                    requestData,
+                    requestMetadata,
+                    requestClass: PhonemizerId,
+                    responseClass: CustomPhonemizerProto
+                });
+            },
+            /**
+             * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
+             */
+            createCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer',
+                    requestData,
+                    requestMetadata,
+                    requestClass: CreateCustomPhonemizerRequest,
+                    responseClass: PhonemizerId
+                });
+            },
+            /**
+             * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+             */
+            deleteCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer',
+                    requestData,
+                    requestMetadata,
+                    requestClass: PhonemizerId,
+                    responseClass: googleProtobuf000.Empty
+                });
+            },
+            /**
+             * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+             */
+            updateCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer',
+                    requestData,
+                    requestMetadata,
+                    requestClass: UpdateCustomPhonemizerRequest,
+                    responseClass: CustomPhonemizerProto
+                });
+            },
+            /**
+             * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
+             */
+            listCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer',
+                    requestData,
+                    requestMetadata,
+                    requestClass: ListCustomPhonemizerRequest,
+                    responseClass: ListCustomPhonemizerResponse
+                });
+            }
+        };
+        this.client = clientFactory.createClient('ondewo.t2s.CustomPhonemizers', settings);
+    }
+    /**
+     * Unary call @/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.CustomPhonemizerProto>
+     */
+    getCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .getCustomPhonemizer(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.PhonemizerId>
+     */
+    createCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .createCustomPhonemizer(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf000.Empty>
+     */
+    deleteCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .deleteCustomPhonemizer(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.CustomPhonemizerProto>
+     */
+    updateCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .updateCustomPhonemizer(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
+     * Unary call @/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListCustomPhonemizerResponse>
+     */
+    listCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .listCustomPhonemizer(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+}
+CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, deps: [{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'any' }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [GRPC_CLIENT_FACTORY]
