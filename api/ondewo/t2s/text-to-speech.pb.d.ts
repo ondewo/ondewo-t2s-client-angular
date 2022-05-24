@@ -2134,6 +2134,7 @@ export declare class T2SNormalization implements GrpcMessage {
     private _language?;
     private _pipeline?;
     private _customPhonemizerId?;
+    private _customLengthScales?;
     private _arpabetMappping?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2146,6 +2147,8 @@ export declare class T2SNormalization implements GrpcMessage {
     set pipeline(value: string[] | undefined);
     get customPhonemizerId(): string | undefined;
     set customPhonemizerId(value: string | undefined);
+    get customLengthScales(): T2SCustomLengthScales | undefined;
+    set customLengthScales(value: T2SCustomLengthScales | undefined);
     get arpabetMappping(): string | undefined;
     set arpabetMappping(value: string | undefined);
     /**
@@ -2176,6 +2179,7 @@ export declare module T2SNormalization {
         language?: string;
         pipeline?: string[];
         customPhonemizerId?: string;
+        customLengthScales?: T2SCustomLengthScales.AsObject;
         arpabetMappping?: string;
     }
     /**
@@ -2185,6 +2189,7 @@ export declare module T2SNormalization {
         language?: string;
         pipeline?: string[];
         customPhonemizerId?: string;
+        customLengthScales?: T2SCustomLengthScales.AsProtobufJSON | null;
         arpabetMappping?: string;
     }
 }
@@ -2512,6 +2517,100 @@ export declare module Apodization {
      */
     interface AsProtobufJSON {
         apodizationSecs?: number;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2SCustomLengthScales
+ */
+export declare class T2SCustomLengthScales implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2SCustomLengthScales;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2SCustomLengthScales): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2SCustomLengthScales, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2SCustomLengthScales, _writer: BinaryWriter): void;
+    private _text?;
+    private _email?;
+    private _url?;
+    private _phone?;
+    private _spell?;
+    private _spellWithNames?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2SCustomLengthScales to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2SCustomLengthScales.AsObject>);
+    get text(): number | undefined;
+    set text(value: number | undefined);
+    get email(): number | undefined;
+    set email(value: number | undefined);
+    get url(): number | undefined;
+    set url(value: number | undefined);
+    get phone(): number | undefined;
+    set phone(value: number | undefined);
+    get spell(): number | undefined;
+    set spell(value: number | undefined);
+    get spellWithNames(): number | undefined;
+    set spellWithNames(value: number | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2SCustomLengthScales.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2SCustomLengthScales.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2SCustomLengthScales.AsProtobufJSON;
+}
+export declare module T2SCustomLengthScales {
+    /**
+     * Standard JavaScript object representation for T2SCustomLengthScales
+     */
+    interface AsObject {
+        text?: number;
+        email?: number;
+        url?: number;
+        phone?: number;
+        spell?: number;
+        spellWithNames?: number;
+    }
+    /**
+     * Protobuf JSON representation for T2SCustomLengthScales
+     */
+    interface AsProtobufJSON {
+        text?: number;
+        email?: number;
+        url?: number;
+        phone?: number;
+        spell?: number;
+        spellWithNames?: number;
     }
 }
 /**

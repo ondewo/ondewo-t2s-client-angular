@@ -3762,6 +3762,9 @@ class T2SNormalization {
         this.language = _value.language;
         this.pipeline = (_value.pipeline || []).slice();
         this.customPhonemizerId = _value.customPhonemizerId;
+        this.customLengthScales = _value.customLengthScales
+            ? new T2SCustomLengthScales(_value.customLengthScales)
+            : undefined;
         this.arpabetMappping = _value.arpabetMappping;
         T2SNormalization.refineValues(this);
     }
@@ -3782,6 +3785,7 @@ class T2SNormalization {
         _instance.language = _instance.language || '';
         _instance.pipeline = _instance.pipeline || [];
         _instance.customPhonemizerId = _instance.customPhonemizerId || '';
+        _instance.customLengthScales = _instance.customLengthScales || undefined;
         _instance.arpabetMappping = _instance.arpabetMappping || '';
     }
     /**
@@ -3804,6 +3808,10 @@ class T2SNormalization {
                     _instance.customPhonemizerId = _reader.readString();
                     break;
                 case 4:
+                    _instance.customLengthScales = new T2SCustomLengthScales();
+                    _reader.readMessage(_instance.customLengthScales, T2SCustomLengthScales.deserializeBinaryFromReader);
+                    break;
+                case 5:
                     _instance.arpabetMappping = _reader.readString();
                     break;
                 default:
@@ -3827,8 +3835,11 @@ class T2SNormalization {
         if (_instance.customPhonemizerId) {
             _writer.writeString(3, _instance.customPhonemizerId);
         }
+        if (_instance.customLengthScales) {
+            _writer.writeMessage(4, _instance.customLengthScales, T2SCustomLengthScales.serializeBinaryToWriter);
+        }
         if (_instance.arpabetMappping) {
-            _writer.writeString(4, _instance.arpabetMappping);
+            _writer.writeString(5, _instance.arpabetMappping);
         }
     }
     get language() {
@@ -3848,6 +3859,12 @@ class T2SNormalization {
     }
     set customPhonemizerId(value) {
         this._customPhonemizerId = value;
+    }
+    get customLengthScales() {
+        return this._customLengthScales;
+    }
+    set customLengthScales(value) {
+        this._customLengthScales = value;
     }
     get arpabetMappping() {
         return this._arpabetMappping;
@@ -3872,6 +3889,9 @@ class T2SNormalization {
             language: this.language,
             pipeline: (this.pipeline || []).slice(),
             customPhonemizerId: this.customPhonemizerId,
+            customLengthScales: this.customLengthScales
+                ? this.customLengthScales.toObject()
+                : undefined,
             arpabetMappping: this.arpabetMappping
         };
     }
@@ -3893,6 +3913,9 @@ class T2SNormalization {
             language: this.language,
             pipeline: (this.pipeline || []).slice(),
             customPhonemizerId: this.customPhonemizerId,
+            customLengthScales: this.customLengthScales
+                ? this.customLengthScales.toProtobufJSON(options)
+                : null,
             arpabetMappping: this.arpabetMappping
         };
     }
@@ -4469,6 +4492,187 @@ class Apodization {
     }
 }
 Apodization.id = 'ondewo.t2s.Apodization';
+/**
+ * Message implementation for ondewo.t2s.T2SCustomLengthScales
+ */
+class T2SCustomLengthScales {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2SCustomLengthScales to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.text = _value.text;
+        this.email = _value.email;
+        this.url = _value.url;
+        this.phone = _value.phone;
+        this.spell = _value.spell;
+        this.spellWithNames = _value.spellWithNames;
+        T2SCustomLengthScales.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new T2SCustomLengthScales();
+        T2SCustomLengthScales.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.text = _instance.text || 0;
+        _instance.email = _instance.email || 0;
+        _instance.url = _instance.url || 0;
+        _instance.phone = _instance.phone || 0;
+        _instance.spell = _instance.spell || 0;
+        _instance.spellWithNames = _instance.spellWithNames || 0;
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.text = _reader.readFloat();
+                    break;
+                case 2:
+                    _instance.email = _reader.readFloat();
+                    break;
+                case 3:
+                    _instance.url = _reader.readFloat();
+                    break;
+                case 4:
+                    _instance.phone = _reader.readFloat();
+                    break;
+                case 5:
+                    _instance.spell = _reader.readFloat();
+                    break;
+                case 6:
+                    _instance.spellWithNames = _reader.readFloat();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        T2SCustomLengthScales.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.text) {
+            _writer.writeFloat(1, _instance.text);
+        }
+        if (_instance.email) {
+            _writer.writeFloat(2, _instance.email);
+        }
+        if (_instance.url) {
+            _writer.writeFloat(3, _instance.url);
+        }
+        if (_instance.phone) {
+            _writer.writeFloat(4, _instance.phone);
+        }
+        if (_instance.spell) {
+            _writer.writeFloat(5, _instance.spell);
+        }
+        if (_instance.spellWithNames) {
+            _writer.writeFloat(6, _instance.spellWithNames);
+        }
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    get email() {
+        return this._email;
+    }
+    set email(value) {
+        this._email = value;
+    }
+    get url() {
+        return this._url;
+    }
+    set url(value) {
+        this._url = value;
+    }
+    get phone() {
+        return this._phone;
+    }
+    set phone(value) {
+        this._phone = value;
+    }
+    get spell() {
+        return this._spell;
+    }
+    set spell(value) {
+        this._spell = value;
+    }
+    get spellWithNames() {
+        return this._spellWithNames;
+    }
+    set spellWithNames(value) {
+        this._spellWithNames = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        T2SCustomLengthScales.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            text: this.text,
+            email: this.email,
+            url: this.url,
+            phone: this.phone,
+            spell: this.spell,
+            spellWithNames: this.spellWithNames
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            text: this.text,
+            email: this.email,
+            url: this.url,
+            phone: this.phone,
+            spell: this.spell,
+            spellWithNames: this.spellWithNames
+        };
+    }
+}
+T2SCustomLengthScales.id = 'ondewo.t2s.T2SCustomLengthScales';
 /**
  * Message implementation for ondewo.t2s.PhonemizerId
  */
@@ -5795,5 +5999,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, CustomPhonemizersClient, GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, Pcm, PhonemizerId, Postprocessing, RequestConfig, SynthesizeRequest, SynthesizeResponse, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sPipelineId, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Wiener };
+export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, CustomPhonemizersClient, GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, Pcm, PhonemizerId, Postprocessing, RequestConfig, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sPipelineId, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Wiener };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map

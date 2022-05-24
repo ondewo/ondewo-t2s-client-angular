@@ -1,0 +1,21 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/arath/ondewo/ondewo-t2s-client-angular'
+echo "START checking out correct submodule versions ..."
+git submodule update --init --recursive
+git -C src/ondewo-t2s-api fetch --all
+git -C src/ondewo-t2s-api checkout tags/4.0.2
+echo "DONE checking out correct submodule versions."
+echo "START copying googleapis protos from submodules to build folder ..."
+# TODO optimize to only generate the google protos used in t2s
+# -mkdir -p src/ondewo-t2s-api/google/api
+# -mkdir -p src/ondewo-t2s-api/google/protobuf
+# cp src/ondewo-t2s-api/googleapis/google/api/annotations.proto src/ondewo-t2s-api/google/api/
+# cp src/ondewo-t2s-api/googleapis/google/protobuf/struct.proto src/ondewo-t2s-api/google/protobuf/
+# cp src/ondewo-t2s-api/googleapis/google/protobuf/empty.proto src/ondewo-t2s-api/google/protobuf/
+# cp src/ondewo-t2s-api/googleapis/google/protobuf/field_mask.proto src/ondewo-t2s-api/google/protobuf/
+echo "DONE copying googleapis protos from submodules to build folder."
+echo "START npm run build ..."
+cd src/ && npm run build && cd ..
+echo "DONE npm run build."
+make: Leaving directory '/home/arath/ondewo/ondewo-t2s-client-angular'
+ 

@@ -4,7 +4,7 @@
 
 ## Release ONDEWO T2S Angular Client 4.0.0
 
-* Track version 4.0.1 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/4.0.1)
+* Track version 4.0.2 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/4.0.2)
 
 *****************
 
