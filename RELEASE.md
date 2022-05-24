@@ -1,43 +1,51 @@
 # Release History
+
 *****************
-## Release ONDEWO-T2S Angular Client 3.0.0
 
-### New Features
-* Track version 3.0.x of [T2S-API](https://github.com/ondewo/ondewo-t2s-api)
+## Release ONDEWO T2S Angular Client 4.0.0
 
-### Breaking Changes
-* Rename Description, GetServiceInfoResponse, Inference, and Normalization messages to include T2S
+* Track version 4.0.2 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/4.0.2)
 
-***
-## Release ONDEWO-T2S Angular Client 2.0.0
+*****************
 
-### New Features
-* Track version 2.0.x of [T2S-API](https://github.com/ondewo/ondewo-t2s-api)
+## Release ONDEWO T2S Angular Client 3.0.1
 
-***
+* Track version 3.0.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/3.0.0)
+* Upgraded to Angular >= 13.x.x and ngx-grpc >=3.0.0
 
-## Release ONDEWO-T2S Angular Client 1.5.2
+*****************
 
-### New Features
-* Release on [NPM](https://www.npmjs.com/package/@ondewo/t2s-client-angular)
+## Release ONDEWO T2S Angular Client 3.0.0
 
-***
+* Track version 3.0.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/3.0.0)
 
-## Release ONDEWO-T2S Angular Client 1.5.1
+*****************
 
-Skipped version due to NPM registry issues
+## Release ONDEWO T2S Angular Client 2.0.0
 
-***
+* Track version 2.0.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/2.0.0)
 
-## Release ONDEWO-T2S Angular Client 1.5.0
+*****************
 
-### New Features
-* Compatible with ONDEWO-T2S 1.5.* GRPC server
+## Release ONDEWO T2S Angular Client 1.5.2
+
+* Track version 1.5.2 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.5.2)
+
+*****************
+
+## Release ONDEWO T2S Angular Client 1.5.1
+
+* Skipped version due to NPM registry issues
+
+*****************
+
+## Release ONDEWO T2S Angular Client 1.5.0
+
+* Track version 1.5.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.5.0)
 * Upgraded from ngx-grpc 0.3.1 to 2.1.0
 
-***
+*****************
 
-## Release ONDEWO-T2S Angular Client 1.4.0
+## Release ONDEWO T2S Angular Client 1.4.0
 
-### New Features
- * Compatible with ONDEWO-T2S 1.4.* GRPC server
+* Track version 1.4.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.4.0)

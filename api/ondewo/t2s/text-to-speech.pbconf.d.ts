@@ -4,4 +4,8 @@ import { InjectionToken } from '@angular/core';
  * Use it only if your default settings are not set or the service requires other settings.
  */
 export declare const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS: InjectionToken<any>;
-//# sourceMappingURL=text-to-speech.pbconf.d.ts.map
+/**
+ * Specific GrpcClientSettings for CustomPhonemizers.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+export declare const GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS: InjectionToken<any>;
