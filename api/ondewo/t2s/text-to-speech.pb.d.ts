@@ -264,12 +264,14 @@ export declare class RequestConfig implements GrpcMessage {
     private _pcm?;
     private _audioFormat?;
     private _useCache?;
+    private _normalizer?;
     private _oneofLengthScale;
     private _oneofNoiseScale;
     private _oneofSampleRate;
     private _oneofPcm;
     private _oneofAudioFormat;
     private _oneofUseCache;
+    private _oneofNormalizer;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of RequestConfig to deeply clone from
@@ -289,12 +291,15 @@ export declare class RequestConfig implements GrpcMessage {
     set audioFormat(value: AudioFormat | undefined);
     get useCache(): boolean | undefined;
     set useCache(value: boolean | undefined);
+    get normalizer(): string | undefined;
+    set normalizer(value: string | undefined);
     get oneofLengthScale(): RequestConfig.OneofLengthScaleCase;
     get oneofNoiseScale(): RequestConfig.OneofNoiseScaleCase;
     get oneofSampleRate(): RequestConfig.OneofSampleRateCase;
     get oneofPcm(): RequestConfig.OneofPcmCase;
     get oneofAudioFormat(): RequestConfig.OneofAudioFormatCase;
     get oneofUseCache(): RequestConfig.OneofUseCacheCase;
+    get oneofNormalizer(): RequestConfig.OneofNormalizerCase;
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -327,6 +332,7 @@ export declare module RequestConfig {
         pcm?: Pcm;
         audioFormat?: AudioFormat;
         useCache?: boolean;
+        normalizer?: string;
     }
     /**
      * Protobuf JSON representation for RequestConfig
@@ -339,6 +345,7 @@ export declare module RequestConfig {
         pcm?: string | null;
         audioFormat?: string | null;
         useCache?: boolean;
+        normalizer?: string | null;
     }
     enum OneofLengthScaleCase {
         none = 0,
@@ -363,6 +370,10 @@ export declare module RequestConfig {
     enum OneofUseCacheCase {
         none = 0,
         useCache = 1
+    }
+    enum OneofNormalizerCase {
+        none = 0,
+        normalizer = 1
     }
 }
 /**
@@ -461,6 +472,149 @@ export declare module SynthesizeResponse {
         audioLength?: number;
         text?: string;
         config?: RequestConfig.AsProtobufJSON | null;
+        normalizedText?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.NormalizeTextRequest
+ */
+export declare class NormalizeTextRequest implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): NormalizeTextRequest;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: NormalizeTextRequest): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: NormalizeTextRequest, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: NormalizeTextRequest, _writer: BinaryWriter): void;
+    private _t2sPipelineId?;
+    private _text?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of NormalizeTextRequest to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<NormalizeTextRequest.AsObject>);
+    get t2sPipelineId(): string | undefined;
+    set t2sPipelineId(value: string | undefined);
+    get text(): string | undefined;
+    set text(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): NormalizeTextRequest.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): NormalizeTextRequest.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): NormalizeTextRequest.AsProtobufJSON;
+}
+export declare module NormalizeTextRequest {
+    /**
+     * Standard JavaScript object representation for NormalizeTextRequest
+     */
+    interface AsObject {
+        t2sPipelineId?: string;
+        text?: string;
+    }
+    /**
+     * Protobuf JSON representation for NormalizeTextRequest
+     */
+    interface AsProtobufJSON {
+        t2sPipelineId?: string;
+        text?: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.NormalizeTextResponse
+ */
+export declare class NormalizeTextResponse implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): NormalizeTextResponse;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: NormalizeTextResponse): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: NormalizeTextResponse, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: NormalizeTextResponse, _writer: BinaryWriter): void;
+    private _normalizedText?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of NormalizeTextResponse to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<NormalizeTextResponse.AsObject>);
+    get normalizedText(): string | undefined;
+    set normalizedText(value: string | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): NormalizeTextResponse.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): NormalizeTextResponse.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): NormalizeTextResponse.AsProtobufJSON;
+}
+export declare module NormalizeTextResponse {
+    /**
+     * Standard JavaScript object representation for NormalizeTextResponse
+     */
+    interface AsObject {
+        normalizedText?: string;
+    }
+    /**
+     * Protobuf JSON representation for NormalizeTextResponse
+     */
+    interface AsProtobufJSON {
         normalizedText?: string;
     }
 }
@@ -2135,7 +2289,9 @@ export declare class T2SNormalization implements GrpcMessage {
     private _pipeline?;
     private _customPhonemizerId?;
     private _customLengthScales?;
-    private _arpabetMappping?;
+    private _arpabetMapping?;
+    private _numericMapping?;
+    private _callsignsMapping?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of T2SNormalization to deeply clone from
@@ -2149,8 +2305,12 @@ export declare class T2SNormalization implements GrpcMessage {
     set customPhonemizerId(value: string | undefined);
     get customLengthScales(): T2SCustomLengthScales | undefined;
     set customLengthScales(value: T2SCustomLengthScales | undefined);
-    get arpabetMappping(): string | undefined;
-    set arpabetMappping(value: string | undefined);
+    get arpabetMapping(): string | undefined;
+    set arpabetMapping(value: string | undefined);
+    get numericMapping(): string | undefined;
+    set numericMapping(value: string | undefined);
+    get callsignsMapping(): string | undefined;
+    set callsignsMapping(value: string | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2180,7 +2340,9 @@ export declare module T2SNormalization {
         pipeline?: string[];
         customPhonemizerId?: string;
         customLengthScales?: T2SCustomLengthScales.AsObject;
-        arpabetMappping?: string;
+        arpabetMapping?: string;
+        numericMapping?: string;
+        callsignsMapping?: string;
     }
     /**
      * Protobuf JSON representation for T2SNormalization
@@ -2190,7 +2352,9 @@ export declare module T2SNormalization {
         pipeline?: string[];
         customPhonemizerId?: string;
         customLengthScales?: T2SCustomLengthScales.AsProtobufJSON | null;
-        arpabetMappping?: string;
+        arpabetMapping?: string;
+        numericMapping?: string;
+        callsignsMapping?: string;
     }
 }
 /**
@@ -2552,6 +2716,8 @@ export declare class T2SCustomLengthScales implements GrpcMessage {
     private _phone?;
     private _spell?;
     private _spellWithNames?;
+    private _callsignLong?;
+    private _callsignShort?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of T2SCustomLengthScales to deeply clone from
@@ -2569,6 +2735,10 @@ export declare class T2SCustomLengthScales implements GrpcMessage {
     set spell(value: number | undefined);
     get spellWithNames(): number | undefined;
     set spellWithNames(value: number | undefined);
+    get callsignLong(): number | undefined;
+    set callsignLong(value: number | undefined);
+    get callsignShort(): number | undefined;
+    set callsignShort(value: number | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -2600,6 +2770,8 @@ export declare module T2SCustomLengthScales {
         phone?: number;
         spell?: number;
         spellWithNames?: number;
+        callsignLong?: number;
+        callsignShort?: number;
     }
     /**
      * Protobuf JSON representation for T2SCustomLengthScales
@@ -2611,6 +2783,8 @@ export declare module T2SCustomLengthScales {
         phone?: number;
         spell?: number;
         spellWithNames?: number;
+        callsignLong?: number;
+        callsignShort?: number;
     }
 }
 /**

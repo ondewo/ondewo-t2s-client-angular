@@ -1,3 +1,5 @@
 .idea
 npm
 ondewo-t2s-api/*
+node_modules
+.vscode
