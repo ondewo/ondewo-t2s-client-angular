@@ -1,9 +1,9 @@
 import * as i0 from '@angular/core';
 import { InjectionToken, Injectable, Optional, Inject } from '@angular/core';
-import { uint8ArrayToBase64, GrpcMetadata, GrpcCallType } from '@ngx-grpc/common';
-import { BinaryReader, BinaryWriter } from 'google-protobuf';
+import { uint8ArrayToBase64, GrpcCallType, GrpcMetadata } from '@ngx-grpc/common';
 import * as i1 from '@ngx-grpc/core';
 import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/core';
+import { BinaryReader, BinaryWriter } from 'google-protobuf';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
 
 /* tslint:disable */
@@ -378,6 +378,7 @@ class RequestConfig {
         this._oneofPcm = RequestConfig.OneofPcmCase.none;
         this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.none;
         this._oneofUseCache = RequestConfig.OneofUseCacheCase.none;
+        this._oneofNormalizer = RequestConfig.OneofNormalizerCase.none;
         _value = _value || {};
         this.t2sPipelineId = _value.t2sPipelineId;
         this.lengthScale = _value.lengthScale;
@@ -386,6 +387,7 @@ class RequestConfig {
         this.pcm = _value.pcm;
         this.audioFormat = _value.audioFormat;
         this.useCache = _value.useCache;
+        this.normalizer = _value.normalizer;
         RequestConfig.refineValues(this);
     }
     /**
@@ -435,6 +437,9 @@ class RequestConfig {
                 case 7:
                     _instance.useCache = _reader.readBool();
                     break;
+                case 8:
+                    _instance.normalizer = _reader.readString();
+                    break;
                 default:
                     _reader.skipField();
             }
@@ -467,6 +472,9 @@ class RequestConfig {
         }
         if (_instance.useCache || _instance.useCache === false) {
             _writer.writeBool(7, _instance.useCache);
+        }
+        if (_instance.normalizer || _instance.normalizer === '') {
+            _writer.writeString(8, _instance.normalizer);
         }
     }
     get t2sPipelineId() {
@@ -529,6 +537,15 @@ class RequestConfig {
         }
         this._useCache = value;
     }
+    get normalizer() {
+        return this._normalizer;
+    }
+    set normalizer(value) {
+        if (value !== undefined && value !== null) {
+            this._oneofNormalizer = RequestConfig.OneofNormalizerCase.normalizer;
+        }
+        this._normalizer = value;
+    }
     get oneofLengthScale() {
         return this._oneofLengthScale;
     }
@@ -546,6 +563,9 @@ class RequestConfig {
     }
     get oneofUseCache() {
         return this._oneofUseCache;
+    }
+    get oneofNormalizer() {
+        return this._oneofNormalizer;
     }
     /**
      * Serialize message to binary data
@@ -567,7 +587,8 @@ class RequestConfig {
             sampleRate: this.sampleRate,
             pcm: this.pcm,
             audioFormat: this.audioFormat,
-            useCache: this.useCache
+            useCache: this.useCache,
+            normalizer: this.normalizer
         };
     }
     /**
@@ -603,7 +624,10 @@ class RequestConfig {
                 : AudioFormat[this.audioFormat === null || this.audioFormat === undefined
                     ? 0
                     : this.audioFormat],
-            useCache: this.useCache
+            useCache: this.useCache,
+            normalizer: this.normalizer === null || this.normalizer === undefined
+                ? null
+                : this.normalizer
         };
     }
 }
@@ -639,6 +663,11 @@ RequestConfig.id = 'ondewo.t2s.RequestConfig';
         OneofUseCacheCase[OneofUseCacheCase["none"] = 0] = "none";
         OneofUseCacheCase[OneofUseCacheCase["useCache"] = 1] = "useCache";
     })(OneofUseCacheCase = RequestConfig.OneofUseCacheCase || (RequestConfig.OneofUseCacheCase = {}));
+    let OneofNormalizerCase;
+    (function (OneofNormalizerCase) {
+        OneofNormalizerCase[OneofNormalizerCase["none"] = 0] = "none";
+        OneofNormalizerCase[OneofNormalizerCase["normalizer"] = 1] = "normalizer";
+    })(OneofNormalizerCase = RequestConfig.OneofNormalizerCase || (RequestConfig.OneofNormalizerCase = {}));
 })(RequestConfig || (RequestConfig = {}));
 /**
  * Message implementation for ondewo.t2s.SynthesizeResponse
@@ -838,6 +867,224 @@ class SynthesizeResponse {
     }
 }
 SynthesizeResponse.id = 'ondewo.t2s.SynthesizeResponse';
+/**
+ * Message implementation for ondewo.t2s.NormalizeTextRequest
+ */
+class NormalizeTextRequest {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of NormalizeTextRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.t2sPipelineId = _value.t2sPipelineId;
+        this.text = _value.text;
+        NormalizeTextRequest.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new NormalizeTextRequest();
+        NormalizeTextRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.t2sPipelineId = _instance.t2sPipelineId || '';
+        _instance.text = _instance.text || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.t2sPipelineId = _reader.readString();
+                    break;
+                case 2:
+                    _instance.text = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        NormalizeTextRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.t2sPipelineId) {
+            _writer.writeString(1, _instance.t2sPipelineId);
+        }
+        if (_instance.text) {
+            _writer.writeString(2, _instance.text);
+        }
+    }
+    get t2sPipelineId() {
+        return this._t2sPipelineId;
+    }
+    set t2sPipelineId(value) {
+        this._t2sPipelineId = value;
+    }
+    get text() {
+        return this._text;
+    }
+    set text(value) {
+        this._text = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        NormalizeTextRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            t2sPipelineId: this.t2sPipelineId,
+            text: this.text
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            t2sPipelineId: this.t2sPipelineId,
+            text: this.text
+        };
+    }
+}
+NormalizeTextRequest.id = 'ondewo.t2s.NormalizeTextRequest';
+/**
+ * Message implementation for ondewo.t2s.NormalizeTextResponse
+ */
+class NormalizeTextResponse {
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of NormalizeTextResponse to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.normalizedText = _value.normalizedText;
+        NormalizeTextResponse.refineValues(this);
+    }
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new NormalizeTextResponse();
+        NormalizeTextResponse.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.normalizedText = _instance.normalizedText || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.normalizedText = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        NormalizeTextResponse.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.normalizedText) {
+            _writer.writeString(1, _instance.normalizedText);
+        }
+    }
+    get normalizedText() {
+        return this._normalizedText;
+    }
+    set normalizedText(value) {
+        this._normalizedText = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        NormalizeTextResponse.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            normalizedText: this.normalizedText
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            normalizedText: this.normalizedText
+        };
+    }
+}
+NormalizeTextResponse.id = 'ondewo.t2s.NormalizeTextResponse';
 /**
  * Message implementation for ondewo.t2s.T2SGetServiceInfoResponse
  */
@@ -3765,7 +4012,9 @@ class T2SNormalization {
         this.customLengthScales = _value.customLengthScales
             ? new T2SCustomLengthScales(_value.customLengthScales)
             : undefined;
-        this.arpabetMappping = _value.arpabetMappping;
+        this.arpabetMapping = _value.arpabetMapping;
+        this.numericMapping = _value.numericMapping;
+        this.callsignsMapping = _value.callsignsMapping;
         T2SNormalization.refineValues(this);
     }
     /**
@@ -3786,7 +4035,9 @@ class T2SNormalization {
         _instance.pipeline = _instance.pipeline || [];
         _instance.customPhonemizerId = _instance.customPhonemizerId || '';
         _instance.customLengthScales = _instance.customLengthScales || undefined;
-        _instance.arpabetMappping = _instance.arpabetMappping || '';
+        _instance.arpabetMapping = _instance.arpabetMapping || '';
+        _instance.numericMapping = _instance.numericMapping || '';
+        _instance.callsignsMapping = _instance.callsignsMapping || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -3812,7 +4063,13 @@ class T2SNormalization {
                     _reader.readMessage(_instance.customLengthScales, T2SCustomLengthScales.deserializeBinaryFromReader);
                     break;
                 case 5:
-                    _instance.arpabetMappping = _reader.readString();
+                    _instance.arpabetMapping = _reader.readString();
+                    break;
+                case 6:
+                    _instance.numericMapping = _reader.readString();
+                    break;
+                case 7:
+                    _instance.callsignsMapping = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -3838,8 +4095,14 @@ class T2SNormalization {
         if (_instance.customLengthScales) {
             _writer.writeMessage(4, _instance.customLengthScales, T2SCustomLengthScales.serializeBinaryToWriter);
         }
-        if (_instance.arpabetMappping) {
-            _writer.writeString(5, _instance.arpabetMappping);
+        if (_instance.arpabetMapping) {
+            _writer.writeString(5, _instance.arpabetMapping);
+        }
+        if (_instance.numericMapping) {
+            _writer.writeString(6, _instance.numericMapping);
+        }
+        if (_instance.callsignsMapping) {
+            _writer.writeString(7, _instance.callsignsMapping);
         }
     }
     get language() {
@@ -3866,11 +4129,23 @@ class T2SNormalization {
     set customLengthScales(value) {
         this._customLengthScales = value;
     }
-    get arpabetMappping() {
-        return this._arpabetMappping;
+    get arpabetMapping() {
+        return this._arpabetMapping;
     }
-    set arpabetMappping(value) {
-        this._arpabetMappping = value;
+    set arpabetMapping(value) {
+        this._arpabetMapping = value;
+    }
+    get numericMapping() {
+        return this._numericMapping;
+    }
+    set numericMapping(value) {
+        this._numericMapping = value;
+    }
+    get callsignsMapping() {
+        return this._callsignsMapping;
+    }
+    set callsignsMapping(value) {
+        this._callsignsMapping = value;
     }
     /**
      * Serialize message to binary data
@@ -3892,7 +4167,9 @@ class T2SNormalization {
             customLengthScales: this.customLengthScales
                 ? this.customLengthScales.toObject()
                 : undefined,
-            arpabetMappping: this.arpabetMappping
+            arpabetMapping: this.arpabetMapping,
+            numericMapping: this.numericMapping,
+            callsignsMapping: this.callsignsMapping
         };
     }
     /**
@@ -3916,7 +4193,9 @@ class T2SNormalization {
             customLengthScales: this.customLengthScales
                 ? this.customLengthScales.toProtobufJSON(options)
                 : null,
-            arpabetMappping: this.arpabetMappping
+            arpabetMapping: this.arpabetMapping,
+            numericMapping: this.numericMapping,
+            callsignsMapping: this.callsignsMapping
         };
     }
 }
@@ -4508,6 +4787,8 @@ class T2SCustomLengthScales {
         this.phone = _value.phone;
         this.spell = _value.spell;
         this.spellWithNames = _value.spellWithNames;
+        this.callsignLong = _value.callsignLong;
+        this.callsignShort = _value.callsignShort;
         T2SCustomLengthScales.refineValues(this);
     }
     /**
@@ -4530,6 +4811,8 @@ class T2SCustomLengthScales {
         _instance.phone = _instance.phone || 0;
         _instance.spell = _instance.spell || 0;
         _instance.spellWithNames = _instance.spellWithNames || 0;
+        _instance.callsignLong = _instance.callsignLong || 0;
+        _instance.callsignShort = _instance.callsignShort || 0;
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -4558,6 +4841,12 @@ class T2SCustomLengthScales {
                     break;
                 case 6:
                     _instance.spellWithNames = _reader.readFloat();
+                    break;
+                case 7:
+                    _instance.callsignLong = _reader.readFloat();
+                    break;
+                case 8:
+                    _instance.callsignShort = _reader.readFloat();
                     break;
                 default:
                     _reader.skipField();
@@ -4588,6 +4877,12 @@ class T2SCustomLengthScales {
         }
         if (_instance.spellWithNames) {
             _writer.writeFloat(6, _instance.spellWithNames);
+        }
+        if (_instance.callsignLong) {
+            _writer.writeFloat(7, _instance.callsignLong);
+        }
+        if (_instance.callsignShort) {
+            _writer.writeFloat(8, _instance.callsignShort);
         }
     }
     get text() {
@@ -4626,6 +4921,18 @@ class T2SCustomLengthScales {
     set spellWithNames(value) {
         this._spellWithNames = value;
     }
+    get callsignLong() {
+        return this._callsignLong;
+    }
+    set callsignLong(value) {
+        this._callsignLong = value;
+    }
+    get callsignShort() {
+        return this._callsignShort;
+    }
+    set callsignShort(value) {
+        this._callsignShort = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -4645,7 +4952,9 @@ class T2SCustomLengthScales {
             url: this.url,
             phone: this.phone,
             spell: this.spell,
-            spellWithNames: this.spellWithNames
+            spellWithNames: this.spellWithNames,
+            callsignLong: this.callsignLong,
+            callsignShort: this.callsignShort
         };
     }
     /**
@@ -4668,7 +4977,9 @@ class T2SCustomLengthScales {
             url: this.url,
             phone: this.phone,
             spell: this.spell,
-            spellWithNames: this.spellWithNames
+            spellWithNames: this.spellWithNames,
+            callsignLong: this.callsignLong,
+            callsignShort: this.callsignShort
         };
     }
 }
@@ -5529,6 +5840,24 @@ class Text2SpeechClient {
                 });
             },
             /**
+             * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
+             *
+             * @param requestMessage Request message
+             * @param requestMetadata Request metadata
+             * @returns Observable<GrpcEvent<thisProto.NormalizeTextResponse>>
+             */
+            normalizeText: (requestData, requestMetadata = new GrpcMetadata()) => {
+                return this.handler.handle({
+                    type: GrpcCallType.unary,
+                    client: this.client,
+                    path: '/ondewo.t2s.Text2Speech/NormalizeText',
+                    requestData,
+                    requestMetadata,
+                    requestClass: NormalizeTextRequest,
+                    responseClass: NormalizeTextResponse
+                });
+            },
+            /**
              * Unary call: /ondewo.t2s.Text2Speech/GetT2sPipeline
              *
              * @param requestMessage Request message
@@ -5700,6 +6029,18 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**
+     * Unary call @/ondewo.t2s.Text2Speech/NormalizeText
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.NormalizeTextResponse>
+     */
+    normalizeText(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .normalizeText(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
+    /**
      * Unary call @/ondewo.t2s.Text2Speech/GetT2sPipeline
      *
      * @param requestMessage Request message
@@ -5796,9 +6137,9 @@ class Text2SpeechClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-Text2SpeechClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: Text2SpeechClient, decorators: [{
+Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+Text2SpeechClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Text2SpeechClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -5978,9 +6319,9 @@ class CustomPhonemizersClient {
             .pipe(throwStatusErrors(), takeMessages());
     }
 }
-CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, deps: [{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, providedIn: 'any' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImport: i0, type: CustomPhonemizersClient, decorators: [{
+CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: CustomPhonemizersClient, deps: [{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: CustomPhonemizersClient, providedIn: 'any' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: CustomPhonemizersClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: function () {
@@ -5999,5 +6340,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.3", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, CustomPhonemizersClient, GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, Pcm, PhonemizerId, Postprocessing, RequestConfig, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sPipelineId, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Wiener };
+export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, CustomPhonemizersClient, GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, RequestConfig, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sPipelineId, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Wiener };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map

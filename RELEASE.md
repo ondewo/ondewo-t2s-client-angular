@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO T2S Angular Client 4.3.0
+
+* Track version 4.3.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/4.3.0)
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented automated release for GitHub and NPM
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Added pre-commit hooks and adjusted files to them
+
+*****************
+
 ## Release ONDEWO T2S Angular Client 4.0.0
 
 * Track version 4.0.2 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/4.0.2)

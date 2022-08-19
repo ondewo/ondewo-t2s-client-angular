@@ -33,6 +33,14 @@ export declare class Text2SpeechClient {
          */
         batchSynthesize: (requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>;
         /**
+         * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.NormalizeTextResponse>>
+         */
+        normalizeText: (requestData: thisProto.NormalizeTextRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.NormalizeTextResponse>>;
+        /**
          * Unary call: /ondewo.t2s.Text2Speech/GetT2sPipeline
          *
          * @param requestMessage Request message
@@ -114,6 +122,14 @@ export declare class Text2SpeechClient {
      * @returns Observable<thisProto.BatchSynthesizeResponse>
      */
     batchSynthesize(requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchSynthesizeResponse>;
+    /**
+     * Unary call @/ondewo.t2s.Text2Speech/NormalizeText
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.NormalizeTextResponse>
+     */
+    normalizeText(requestData: thisProto.NormalizeTextRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.NormalizeTextResponse>;
     /**
      * Unary call @/ondewo.t2s.Text2Speech/GetT2sPipeline
      *
