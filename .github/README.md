@@ -23,7 +23,9 @@ npm i --save @ondewo/t2s-client-angular
 ### Using GitHub
 
 **Run:**
+
 ```bash
 git+https://github.com/ondewo/ondewo-t2s-client-angular.git
 ```
+
 inside of your project to install the npm package of this github repository in you angular project.
