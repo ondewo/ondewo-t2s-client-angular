@@ -6055,7 +6055,7 @@ class Text2SpeechClient {
 }
 Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: Text2SpeechClient,
 	deps: [
@@ -6067,14 +6067,14 @@ Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({
 });
 Text2SpeechClient.ɵprov = i0.ɵɵngDeclareInjectable({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: Text2SpeechClient,
 	providedIn: 'any'
 });
 i0.ɵɵngDeclareClassMetadata({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: Text2SpeechClient,
 	decorators: [
@@ -6268,7 +6268,7 @@ class CustomPhonemizersClient {
 }
 CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: CustomPhonemizersClient,
 	deps: [
@@ -6280,14 +6280,14 @@ CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({
 });
 CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: CustomPhonemizersClient,
 	providedIn: 'any'
 });
 i0.ɵɵngDeclareClassMetadata({
 	minVersion: '12.0.0',
-	version: '14.2.0',
+	version: '14.2.5',
 	ngImport: i0,
 	type: CustomPhonemizersClient,
 	decorators: [
