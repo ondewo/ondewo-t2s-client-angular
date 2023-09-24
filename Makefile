@@ -15,10 +15,10 @@ export
 # 		Variables
 ########################################################
 
-ONDEWO_T2S_VERSION = 5.0.0
+ONDEWO_T2S_VERSION=5.0.1
 
 T2S_API_GIT_BRANCH=tags/5.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.2
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=latest
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 T2S_APIS_DIR=src/ondewo-t2s-api
 T2S_PROTOS_DIR=${T2S_APIS_DIR}/ondewo
@@ -212,6 +212,20 @@ update_package: ## Updates Package Version in src/package.json
 	@sed -i "s/\"version\": \"[0-9]*.[0-9]*.[0-9]\"/\"version\": \"${ONDEWO_T2S_VERSION}\"/g" src/package.json
 
 build: check_out_correct_submodule_versions build_compiler update_package npm_run_build ## Build Code with Proto-Compiler
+	@echo "################### PROMPT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
+	@for f in `find . -group root`; \
+	do \
+		sudo chown -R `whoami`:`whoami` $$f && echo $$f; \
+	done
+	@$(eval README_CUT_LINES:=$(shell cat -n src/README.md | sed -n "/START OF GITHUB README/,/END OF GITHUB README/p" | grep -o -E '[0-9]+' | sed -e 's/^0\+//' | awk 'NR==1; END{print}'))
+	@$(eval DELETE_LINES:=$(shell echo ${README_CUT_LINES}| sed -e "s/[[:space:]]/,/"))
+	@sed -i "${DELETE_LINES}d" npm/README.md
+	npm i eslint --save-dev
+	npm i prettier --save-dev
+	npm i @typescript-eslint/eslint-plugin --save-dev
+	npm i husky --save-dev
+
+build-no-checkout: build_compiler update_package npm_run_build ## Build Code with Proto-Compiler
 	@echo "################### PROMPT FOR CHANGING FILE OWNERSHIP FROM ROOT TO YOU ##########################"
 	@for f in `find . -group root`; \
 	do \
