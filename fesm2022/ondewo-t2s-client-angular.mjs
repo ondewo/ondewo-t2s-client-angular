@@ -6204,58 +6204,64 @@ class Text2SpeechClient {
 	getServiceInfo(requestData, requestMetadata = new GrpcMetadata()) {
 		return this.$raw.getServiceInfo(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
 	}
-	static ɵfac = function Text2SpeechClient_Factory(t) {
-		return new (t || Text2SpeechClient)(
-			i0.ɵɵinject(GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, 8),
-			i0.ɵɵinject(GRPC_CLIENT_FACTORY),
-			i0.ɵɵinject(i1.GrpcHandler)
-		);
-	};
-	static ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({
-		token: Text2SpeechClient,
-		factory: Text2SpeechClient.ɵfac,
+	static ɵfac = i0.ɵɵngDeclareFactory({
+		minVersion: '12.0.0',
+		version: '16.2.6',
+		ngImport: i0,
+		type: Text2SpeechClient,
+		deps: [
+			{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true },
+			{ token: GRPC_CLIENT_FACTORY },
+			{ token: i1.GrpcHandler }
+		],
+		target: i0.ɵɵFactoryTarget.Injectable
+	});
+	static ɵprov = i0.ɵɵngDeclareInjectable({
+		minVersion: '12.0.0',
+		version: '16.2.6',
+		ngImport: i0,
+		type: Text2SpeechClient,
 		providedIn: 'any'
 	});
 }
-(function () {
-	(typeof ngDevMode === 'undefined' || ngDevMode) &&
-		i0.ɵsetClassMetadata(
-			Text2SpeechClient,
-			[
-				{
-					type: Injectable,
-					args: [{ providedIn: 'any' }]
-				}
-			],
-			function () {
-				return [
+i0.ɵɵngDeclareClassMetadata({
+	minVersion: '12.0.0',
+	version: '16.2.6',
+	ngImport: i0,
+	type: Text2SpeechClient,
+	decorators: [
+		{
+			type: Injectable,
+			args: [{ providedIn: 'any' }]
+		}
+	],
+	ctorParameters: function () {
+		return [
+			{
+				type: undefined,
+				decorators: [
 					{
-						type: undefined,
-						decorators: [
-							{
-								type: Optional
-							},
-							{
-								type: Inject,
-								args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS]
-							}
-						]
+						type: Optional
 					},
 					{
-						type: undefined,
-						decorators: [
-							{
-								type: Inject,
-								args: [GRPC_CLIENT_FACTORY]
-							}
-						]
-					},
-					{ type: i1.GrpcHandler }
-				];
+						type: Inject,
+						args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS]
+					}
+				]
 			},
-			null
-		);
-})();
+			{
+				type: undefined,
+				decorators: [
+					{
+						type: Inject,
+						args: [GRPC_CLIENT_FACTORY]
+					}
+				]
+			},
+			{ type: i1.GrpcHandler }
+		];
+	}
+});
 /**
  * Service client implementation for ondewo.t2s.CustomPhonemizers
  */
@@ -6413,58 +6419,64 @@ class CustomPhonemizersClient {
 	listCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
 		return this.$raw.listCustomPhonemizer(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
 	}
-	static ɵfac = function CustomPhonemizersClient_Factory(t) {
-		return new (t || CustomPhonemizersClient)(
-			i0.ɵɵinject(GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, 8),
-			i0.ɵɵinject(GRPC_CLIENT_FACTORY),
-			i0.ɵɵinject(i1.GrpcHandler)
-		);
-	};
-	static ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({
-		token: CustomPhonemizersClient,
-		factory: CustomPhonemizersClient.ɵfac,
+	static ɵfac = i0.ɵɵngDeclareFactory({
+		minVersion: '12.0.0',
+		version: '16.2.6',
+		ngImport: i0,
+		type: CustomPhonemizersClient,
+		deps: [
+			{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true },
+			{ token: GRPC_CLIENT_FACTORY },
+			{ token: i1.GrpcHandler }
+		],
+		target: i0.ɵɵFactoryTarget.Injectable
+	});
+	static ɵprov = i0.ɵɵngDeclareInjectable({
+		minVersion: '12.0.0',
+		version: '16.2.6',
+		ngImport: i0,
+		type: CustomPhonemizersClient,
 		providedIn: 'any'
 	});
 }
-(function () {
-	(typeof ngDevMode === 'undefined' || ngDevMode) &&
-		i0.ɵsetClassMetadata(
-			CustomPhonemizersClient,
-			[
-				{
-					type: Injectable,
-					args: [{ providedIn: 'any' }]
-				}
-			],
-			function () {
-				return [
+i0.ɵɵngDeclareClassMetadata({
+	minVersion: '12.0.0',
+	version: '16.2.6',
+	ngImport: i0,
+	type: CustomPhonemizersClient,
+	decorators: [
+		{
+			type: Injectable,
+			args: [{ providedIn: 'any' }]
+		}
+	],
+	ctorParameters: function () {
+		return [
+			{
+				type: undefined,
+				decorators: [
 					{
-						type: undefined,
-						decorators: [
-							{
-								type: Optional
-							},
-							{
-								type: Inject,
-								args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
-							}
-						]
+						type: Optional
 					},
 					{
-						type: undefined,
-						decorators: [
-							{
-								type: Inject,
-								args: [GRPC_CLIENT_FACTORY]
-							}
-						]
-					},
-					{ type: i1.GrpcHandler }
-				];
+						type: Inject,
+						args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
+					}
+				]
 			},
-			null
-		);
-})();
+			{
+				type: undefined,
+				decorators: [
+					{
+						type: Inject,
+						args: [GRPC_CLIENT_FACTORY]
+					}
+				]
+			},
+			{ type: i1.GrpcHandler }
+		];
+	}
+});
 
 /**
  * Generated bundle index. Do not edit.
