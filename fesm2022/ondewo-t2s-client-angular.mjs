@@ -1,24 +1,17 @@
+import { uint8ArrayToBase64, GrpcCallType, GrpcMetadata } from '@ngx-grpc/common';
+import { BinaryReader, BinaryWriter } from 'google-protobuf';
 import * as i0 from '@angular/core';
 import { InjectionToken, Injectable, Optional, Inject } from '@angular/core';
-import { uint8ArrayToBase64, GrpcCallType, GrpcMetadata } from '@ngx-grpc/common';
 import * as i1 from '@ngx-grpc/core';
 import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/core';
-import { BinaryReader, BinaryWriter } from 'google-protobuf';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
 
 /* tslint:disable */
-/**
- * Specific GrpcClientSettings for Text2Speech.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = new InjectionToken('GRPC_TEXT2_SPEECH_CLIENT_SETTINGS');
-/**
- * Specific GrpcClientSettings for CustomPhonemizers.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-const GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = new InjectionToken('GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS');
-
-/* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
 var Pcm;
 (function (Pcm) {
 	Pcm[(Pcm['PCM_16'] = 0)] = 'PCM_16';
@@ -43,16 +36,7 @@ var AudioFormat;
  * Message implementation for ondewo.t2s.SynthesizeRequest
  */
 class SynthesizeRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of SynthesizeRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.text = _value.text;
-		this.config = _value.config ? new RequestConfig(_value.config) : undefined;
-		SynthesizeRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.SynthesizeRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -105,6 +89,18 @@ class SynthesizeRequest {
 			_writer.writeMessage(2, _instance.config, RequestConfig.serializeBinaryToWriter);
 		}
 	}
+	_text;
+	_config;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of SynthesizeRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.text = _value.text;
+		this.config = _value.config ? new RequestConfig(_value.config) : undefined;
+		SynthesizeRequest.refineValues(this);
+	}
 	get text() {
 		return this._text;
 	}
@@ -156,20 +152,11 @@ class SynthesizeRequest {
 		};
 	}
 }
-SynthesizeRequest.id = 'ondewo.t2s.SynthesizeRequest';
 /**
  * Message implementation for ondewo.t2s.BatchSynthesizeRequest
  */
 class BatchSynthesizeRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of BatchSynthesizeRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.batchRequest = (_value.batchRequest || []).map((m) => new SynthesizeRequest(m));
-		BatchSynthesizeRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.BatchSynthesizeRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -216,6 +203,16 @@ class BatchSynthesizeRequest {
 			_writer.writeRepeatedMessage(1, _instance.batchRequest, SynthesizeRequest.serializeBinaryToWriter);
 		}
 	}
+	_batchRequest;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of BatchSynthesizeRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchRequest = (_value.batchRequest || []).map((m) => new SynthesizeRequest(m));
+		BatchSynthesizeRequest.refineValues(this);
+	}
 	get batchRequest() {
 		return this._batchRequest;
 	}
@@ -259,20 +256,11 @@ class BatchSynthesizeRequest {
 		};
 	}
 }
-BatchSynthesizeRequest.id = 'ondewo.t2s.BatchSynthesizeRequest';
 /**
  * Message implementation for ondewo.t2s.BatchSynthesizeResponse
  */
 class BatchSynthesizeResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of BatchSynthesizeResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.batchResponse = (_value.batchResponse || []).map((m) => new SynthesizeResponse(m));
-		BatchSynthesizeResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.BatchSynthesizeResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -319,6 +307,16 @@ class BatchSynthesizeResponse {
 			_writer.writeRepeatedMessage(1, _instance.batchResponse, SynthesizeResponse.serializeBinaryToWriter);
 		}
 	}
+	_batchResponse;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of BatchSynthesizeResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchResponse = (_value.batchResponse || []).map((m) => new SynthesizeResponse(m));
+		BatchSynthesizeResponse.refineValues(this);
+	}
 	get batchResponse() {
 		return this._batchResponse;
 	}
@@ -362,34 +360,11 @@ class BatchSynthesizeResponse {
 		};
 	}
 }
-BatchSynthesizeResponse.id = 'ondewo.t2s.BatchSynthesizeResponse';
 /**
  * Message implementation for ondewo.t2s.RequestConfig
  */
 class RequestConfig {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of RequestConfig to deeply clone from
-	 */
-	constructor(_value) {
-		this._oneofLengthScale = RequestConfig.OneofLengthScaleCase.none;
-		this._oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.none;
-		this._oneofSampleRate = RequestConfig.OneofSampleRateCase.none;
-		this._oneofPcm = RequestConfig.OneofPcmCase.none;
-		this._oneofAudioFormat = RequestConfig.OneofAudioFormatCase.none;
-		this._oneofUseCache = RequestConfig.OneofUseCacheCase.none;
-		this._oneofNormalizer = RequestConfig.OneofNormalizerCase.none;
-		_value = _value || {};
-		this.t2sPipelineId = _value.t2sPipelineId;
-		this.lengthScale = _value.lengthScale;
-		this.noiseScale = _value.noiseScale;
-		this.sampleRate = _value.sampleRate;
-		this.pcm = _value.pcm;
-		this.audioFormat = _value.audioFormat;
-		this.useCache = _value.useCache;
-		this.normalizer = _value.normalizer;
-		RequestConfig.refineValues(this);
-	}
+	static id = 'ondewo.t2s.RequestConfig';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -475,6 +450,37 @@ class RequestConfig {
 		if (_instance.normalizer || _instance.normalizer === '') {
 			_writer.writeString(8, _instance.normalizer);
 		}
+	}
+	_t2sPipelineId;
+	_lengthScale;
+	_noiseScale;
+	_sampleRate;
+	_pcm;
+	_audioFormat;
+	_useCache;
+	_normalizer;
+	_oneofLengthScale = RequestConfig.OneofLengthScaleCase.none;
+	_oneofNoiseScale = RequestConfig.OneofNoiseScaleCase.none;
+	_oneofSampleRate = RequestConfig.OneofSampleRateCase.none;
+	_oneofPcm = RequestConfig.OneofPcmCase.none;
+	_oneofAudioFormat = RequestConfig.OneofAudioFormatCase.none;
+	_oneofUseCache = RequestConfig.OneofUseCacheCase.none;
+	_oneofNormalizer = RequestConfig.OneofNormalizerCase.none;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of RequestConfig to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.t2sPipelineId = _value.t2sPipelineId;
+		this.lengthScale = _value.lengthScale;
+		this.noiseScale = _value.noiseScale;
+		this.sampleRate = _value.sampleRate;
+		this.pcm = _value.pcm;
+		this.audioFormat = _value.audioFormat;
+		this.useCache = _value.useCache;
+		this.normalizer = _value.normalizer;
+		RequestConfig.refineValues(this);
 	}
 	get t2sPipelineId() {
 		return this._t2sPipelineId;
@@ -620,7 +626,6 @@ class RequestConfig {
 		};
 	}
 }
-RequestConfig.id = 'ondewo.t2s.RequestConfig';
 (function (RequestConfig) {
 	let OneofLengthScaleCase;
 	(function (OneofLengthScaleCase) {
@@ -662,21 +667,7 @@ RequestConfig.id = 'ondewo.t2s.RequestConfig';
  * Message implementation for ondewo.t2s.SynthesizeResponse
  */
 class SynthesizeResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of SynthesizeResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.audioUuid = _value.audioUuid;
-		this.audio = _value.audio;
-		this.generationTime = _value.generationTime;
-		this.audioLength = _value.audioLength;
-		this.text = _value.text;
-		this.config = _value.config ? new RequestConfig(_value.config) : undefined;
-		this.normalizedText = _value.normalizedText;
-		SynthesizeResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.SynthesizeResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -763,6 +754,28 @@ class SynthesizeResponse {
 		if (_instance.normalizedText) {
 			_writer.writeString(7, _instance.normalizedText);
 		}
+	}
+	_audioUuid;
+	_audio;
+	_generationTime;
+	_audioLength;
+	_text;
+	_config;
+	_normalizedText;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of SynthesizeResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.audioUuid = _value.audioUuid;
+		this.audio = _value.audio;
+		this.generationTime = _value.generationTime;
+		this.audioLength = _value.audioLength;
+		this.text = _value.text;
+		this.config = _value.config ? new RequestConfig(_value.config) : undefined;
+		this.normalizedText = _value.normalizedText;
+		SynthesizeResponse.refineValues(this);
 	}
 	get audioUuid() {
 		return this._audioUuid;
@@ -855,21 +868,11 @@ class SynthesizeResponse {
 		};
 	}
 }
-SynthesizeResponse.id = 'ondewo.t2s.SynthesizeResponse';
 /**
  * Message implementation for ondewo.t2s.NormalizeTextRequest
  */
 class NormalizeTextRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of NormalizeTextRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.t2sPipelineId = _value.t2sPipelineId;
-		this.text = _value.text;
-		NormalizeTextRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.NormalizeTextRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -920,6 +923,18 @@ class NormalizeTextRequest {
 		if (_instance.text) {
 			_writer.writeString(2, _instance.text);
 		}
+	}
+	_t2sPipelineId;
+	_text;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of NormalizeTextRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.t2sPipelineId = _value.t2sPipelineId;
+		this.text = _value.text;
+		NormalizeTextRequest.refineValues(this);
 	}
 	get t2sPipelineId() {
 		return this._t2sPipelineId;
@@ -972,20 +987,11 @@ class NormalizeTextRequest {
 		};
 	}
 }
-NormalizeTextRequest.id = 'ondewo.t2s.NormalizeTextRequest';
 /**
  * Message implementation for ondewo.t2s.NormalizeTextResponse
  */
 class NormalizeTextResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of NormalizeTextResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.normalizedText = _value.normalizedText;
-		NormalizeTextResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.NormalizeTextResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1030,6 +1036,16 @@ class NormalizeTextResponse {
 			_writer.writeString(1, _instance.normalizedText);
 		}
 	}
+	_normalizedText;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of NormalizeTextResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.normalizedText = _value.normalizedText;
+		NormalizeTextResponse.refineValues(this);
+	}
 	get normalizedText() {
 		return this._normalizedText;
 	}
@@ -1073,20 +1089,11 @@ class NormalizeTextResponse {
 		};
 	}
 }
-NormalizeTextResponse.id = 'ondewo.t2s.NormalizeTextResponse';
 /**
  * Message implementation for ondewo.t2s.T2SGetServiceInfoResponse
  */
 class T2SGetServiceInfoResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2SGetServiceInfoResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.version = _value.version;
-		T2SGetServiceInfoResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2SGetServiceInfoResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1131,6 +1138,16 @@ class T2SGetServiceInfoResponse {
 			_writer.writeString(1, _instance.version);
 		}
 	}
+	_version;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2SGetServiceInfoResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.version = _value.version;
+		T2SGetServiceInfoResponse.refineValues(this);
+	}
 	get version() {
 		return this._version;
 	}
@@ -1174,24 +1191,11 @@ class T2SGetServiceInfoResponse {
 		};
 	}
 }
-T2SGetServiceInfoResponse.id = 'ondewo.t2s.T2SGetServiceInfoResponse';
 /**
  * Message implementation for ondewo.t2s.ListT2sPipelinesRequest
  */
 class ListT2sPipelinesRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sPipelinesRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.languages = (_value.languages || []).slice();
-		this.speakerSexes = (_value.speakerSexes || []).slice();
-		this.pipelineOwners = (_value.pipelineOwners || []).slice();
-		this.speakerNames = (_value.speakerNames || []).slice();
-		this.domains = (_value.domains || []).slice();
-		ListT2sPipelinesRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sPipelinesRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1263,6 +1267,24 @@ class ListT2sPipelinesRequest {
 		if (_instance.domains && _instance.domains.length) {
 			_writer.writeRepeatedString(5, _instance.domains);
 		}
+	}
+	_languages;
+	_speakerSexes;
+	_pipelineOwners;
+	_speakerNames;
+	_domains;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sPipelinesRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.languages = (_value.languages || []).slice();
+		this.speakerSexes = (_value.speakerSexes || []).slice();
+		this.pipelineOwners = (_value.pipelineOwners || []).slice();
+		this.speakerNames = (_value.speakerNames || []).slice();
+		this.domains = (_value.domains || []).slice();
+		ListT2sPipelinesRequest.refineValues(this);
 	}
 	get languages() {
 		return this._languages;
@@ -1339,20 +1361,11 @@ class ListT2sPipelinesRequest {
 		};
 	}
 }
-ListT2sPipelinesRequest.id = 'ondewo.t2s.ListT2sPipelinesRequest';
 /**
  * Message implementation for ondewo.t2s.ListT2sPipelinesResponse
  */
 class ListT2sPipelinesResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sPipelinesResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.pipelines = (_value.pipelines || []).map((m) => new Text2SpeechConfig(m));
-		ListT2sPipelinesResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sPipelinesResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1399,6 +1412,16 @@ class ListT2sPipelinesResponse {
 			_writer.writeRepeatedMessage(1, _instance.pipelines, Text2SpeechConfig.serializeBinaryToWriter);
 		}
 	}
+	_pipelines;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sPipelinesResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.pipelines = (_value.pipelines || []).map((m) => new Text2SpeechConfig(m));
+		ListT2sPipelinesResponse.refineValues(this);
+	}
 	get pipelines() {
 		return this._pipelines;
 	}
@@ -1442,23 +1465,11 @@ class ListT2sPipelinesResponse {
 		};
 	}
 }
-ListT2sPipelinesResponse.id = 'ondewo.t2s.ListT2sPipelinesResponse';
 /**
  * Message implementation for ondewo.t2s.ListT2sLanguagesRequest
  */
 class ListT2sLanguagesRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sLanguagesRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.speakerSexes = (_value.speakerSexes || []).slice();
-		this.pipelineOwners = (_value.pipelineOwners || []).slice();
-		this.speakerNames = (_value.speakerNames || []).slice();
-		this.domains = (_value.domains || []).slice();
-		ListT2sLanguagesRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sLanguagesRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1523,6 +1534,22 @@ class ListT2sLanguagesRequest {
 		if (_instance.domains && _instance.domains.length) {
 			_writer.writeRepeatedString(4, _instance.domains);
 		}
+	}
+	_speakerSexes;
+	_pipelineOwners;
+	_speakerNames;
+	_domains;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sLanguagesRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.speakerSexes = (_value.speakerSexes || []).slice();
+		this.pipelineOwners = (_value.pipelineOwners || []).slice();
+		this.speakerNames = (_value.speakerNames || []).slice();
+		this.domains = (_value.domains || []).slice();
+		ListT2sLanguagesRequest.refineValues(this);
 	}
 	get speakerSexes() {
 		return this._speakerSexes;
@@ -1591,20 +1618,11 @@ class ListT2sLanguagesRequest {
 		};
 	}
 }
-ListT2sLanguagesRequest.id = 'ondewo.t2s.ListT2sLanguagesRequest';
 /**
  * Message implementation for ondewo.t2s.ListT2sLanguagesResponse
  */
 class ListT2sLanguagesResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sLanguagesResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.languages = (_value.languages || []).slice();
-		ListT2sLanguagesResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sLanguagesResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1649,6 +1667,16 @@ class ListT2sLanguagesResponse {
 			_writer.writeRepeatedString(1, _instance.languages);
 		}
 	}
+	_languages;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sLanguagesResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.languages = (_value.languages || []).slice();
+		ListT2sLanguagesResponse.refineValues(this);
+	}
 	get languages() {
 		return this._languages;
 	}
@@ -1692,23 +1720,11 @@ class ListT2sLanguagesResponse {
 		};
 	}
 }
-ListT2sLanguagesResponse.id = 'ondewo.t2s.ListT2sLanguagesResponse';
 /**
  * Message implementation for ondewo.t2s.ListT2sDomainsRequest
  */
 class ListT2sDomainsRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sDomainsRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.speakerSexes = (_value.speakerSexes || []).slice();
-		this.pipelineOwners = (_value.pipelineOwners || []).slice();
-		this.speakerNames = (_value.speakerNames || []).slice();
-		this.languages = (_value.languages || []).slice();
-		ListT2sDomainsRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sDomainsRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1773,6 +1789,22 @@ class ListT2sDomainsRequest {
 		if (_instance.languages && _instance.languages.length) {
 			_writer.writeRepeatedString(4, _instance.languages);
 		}
+	}
+	_speakerSexes;
+	_pipelineOwners;
+	_speakerNames;
+	_languages;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sDomainsRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.speakerSexes = (_value.speakerSexes || []).slice();
+		this.pipelineOwners = (_value.pipelineOwners || []).slice();
+		this.speakerNames = (_value.speakerNames || []).slice();
+		this.languages = (_value.languages || []).slice();
+		ListT2sDomainsRequest.refineValues(this);
 	}
 	get speakerSexes() {
 		return this._speakerSexes;
@@ -1841,20 +1873,11 @@ class ListT2sDomainsRequest {
 		};
 	}
 }
-ListT2sDomainsRequest.id = 'ondewo.t2s.ListT2sDomainsRequest';
 /**
  * Message implementation for ondewo.t2s.ListT2sDomainsResponse
  */
 class ListT2sDomainsResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListT2sDomainsResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.domains = (_value.domains || []).slice();
-		ListT2sDomainsResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListT2sDomainsResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -1899,6 +1922,16 @@ class ListT2sDomainsResponse {
 			_writer.writeRepeatedString(1, _instance.domains);
 		}
 	}
+	_domains;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListT2sDomainsResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.domains = (_value.domains || []).slice();
+		ListT2sDomainsResponse.refineValues(this);
+	}
 	get domains() {
 		return this._domains;
 	}
@@ -1942,20 +1975,11 @@ class ListT2sDomainsResponse {
 		};
 	}
 }
-ListT2sDomainsResponse.id = 'ondewo.t2s.ListT2sDomainsResponse';
 /**
  * Message implementation for ondewo.t2s.T2sPipelineId
  */
 class T2sPipelineId {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2sPipelineId to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.id = _value.id;
-		T2sPipelineId.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2sPipelineId';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2000,6 +2024,16 @@ class T2sPipelineId {
 			_writer.writeString(1, _instance.id);
 		}
 	}
+	_id;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2sPipelineId to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.id = _value.id;
+		T2sPipelineId.refineValues(this);
+	}
 	get id() {
 		return this._id;
 	}
@@ -2043,25 +2077,11 @@ class T2sPipelineId {
 		};
 	}
 }
-T2sPipelineId.id = 'ondewo.t2s.T2sPipelineId';
 /**
  * Message implementation for ondewo.t2s.Text2SpeechConfig
  */
 class Text2SpeechConfig {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Text2SpeechConfig to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.id = _value.id;
-		this.description = _value.description ? new T2SDescription(_value.description) : undefined;
-		this.active = _value.active;
-		this.inference = _value.inference ? new T2SInference(_value.inference) : undefined;
-		this.normalization = _value.normalization ? new T2SNormalization(_value.normalization) : undefined;
-		this.postprocessing = _value.postprocessing ? new Postprocessing(_value.postprocessing) : undefined;
-		Text2SpeechConfig.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Text2SpeechConfig';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2144,6 +2164,26 @@ class Text2SpeechConfig {
 		if (_instance.postprocessing) {
 			_writer.writeMessage(6, _instance.postprocessing, Postprocessing.serializeBinaryToWriter);
 		}
+	}
+	_id;
+	_description;
+	_active;
+	_inference;
+	_normalization;
+	_postprocessing;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Text2SpeechConfig to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.id = _value.id;
+		this.description = _value.description ? new T2SDescription(_value.description) : undefined;
+		this.active = _value.active;
+		this.inference = _value.inference ? new T2SInference(_value.inference) : undefined;
+		this.normalization = _value.normalization ? new T2SNormalization(_value.normalization) : undefined;
+		this.postprocessing = _value.postprocessing ? new Postprocessing(_value.postprocessing) : undefined;
+		Text2SpeechConfig.refineValues(this);
 	}
 	get id() {
 		return this._id;
@@ -2228,25 +2268,11 @@ class Text2SpeechConfig {
 		};
 	}
 }
-Text2SpeechConfig.id = 'ondewo.t2s.Text2SpeechConfig';
 /**
  * Message implementation for ondewo.t2s.T2SDescription
  */
 class T2SDescription {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2SDescription to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.language = _value.language;
-		this.speakerSex = _value.speakerSex;
-		this.pipelineOwner = _value.pipelineOwner;
-		this.comments = _value.comments;
-		this.speakerName = _value.speakerName;
-		this.domain = _value.domain;
-		T2SDescription.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2SDescription';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2325,6 +2351,26 @@ class T2SDescription {
 		if (_instance.domain) {
 			_writer.writeString(6, _instance.domain);
 		}
+	}
+	_language;
+	_speakerSex;
+	_pipelineOwner;
+	_comments;
+	_speakerName;
+	_domain;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2SDescription to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.language = _value.language;
+		this.speakerSex = _value.speakerSex;
+		this.pipelineOwner = _value.pipelineOwner;
+		this.comments = _value.comments;
+		this.speakerName = _value.speakerName;
+		this.domain = _value.domain;
+		T2SDescription.refineValues(this);
 	}
 	get language() {
 		return this._language;
@@ -2409,22 +2455,11 @@ class T2SDescription {
 		};
 	}
 }
-T2SDescription.id = 'ondewo.t2s.T2SDescription';
 /**
  * Message implementation for ondewo.t2s.T2SInference
  */
 class T2SInference {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2SInference to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.type = _value.type;
-		this.compositeInference = _value.compositeInference ? new CompositeInference(_value.compositeInference) : undefined;
-		this.caching = _value.caching ? new Caching(_value.caching) : undefined;
-		T2SInference.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2SInference';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2485,6 +2520,20 @@ class T2SInference {
 			_writer.writeMessage(3, _instance.caching, Caching.serializeBinaryToWriter);
 		}
 	}
+	_type;
+	_compositeInference;
+	_caching;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2SInference to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.type = _value.type;
+		this.compositeInference = _value.compositeInference ? new CompositeInference(_value.compositeInference) : undefined;
+		this.caching = _value.caching ? new Caching(_value.caching) : undefined;
+		T2SInference.refineValues(this);
+	}
 	get type() {
 		return this._type;
 	}
@@ -2544,21 +2593,11 @@ class T2SInference {
 		};
 	}
 }
-T2SInference.id = 'ondewo.t2s.T2SInference';
 /**
  * Message implementation for ondewo.t2s.CompositeInference
  */
 class CompositeInference {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of CompositeInference to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.text2mel = _value.text2mel ? new Text2Mel(_value.text2mel) : undefined;
-		this.mel2audio = _value.mel2audio ? new Mel2Audio(_value.mel2audio) : undefined;
-		CompositeInference.refineValues(this);
-	}
+	static id = 'ondewo.t2s.CompositeInference';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2612,6 +2651,18 @@ class CompositeInference {
 			_writer.writeMessage(2, _instance.mel2audio, Mel2Audio.serializeBinaryToWriter);
 		}
 	}
+	_text2mel;
+	_mel2audio;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of CompositeInference to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.text2mel = _value.text2mel ? new Text2Mel(_value.text2mel) : undefined;
+		this.mel2audio = _value.mel2audio ? new Mel2Audio(_value.mel2audio) : undefined;
+		CompositeInference.refineValues(this);
+	}
 	get text2mel() {
 		return this._text2mel;
 	}
@@ -2663,22 +2714,11 @@ class CompositeInference {
 		};
 	}
 }
-CompositeInference.id = 'ondewo.t2s.CompositeInference';
 /**
  * Message implementation for ondewo.t2s.Text2Mel
  */
 class Text2Mel {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Text2Mel to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.type = _value.type;
-		this.glowTts = _value.glowTts ? new GlowTTS(_value.glowTts) : undefined;
-		this.glowTtsTriton = _value.glowTtsTriton ? new GlowTTSTriton(_value.glowTtsTriton) : undefined;
-		Text2Mel.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Text2Mel';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2739,6 +2779,20 @@ class Text2Mel {
 			_writer.writeMessage(3, _instance.glowTtsTriton, GlowTTSTriton.serializeBinaryToWriter);
 		}
 	}
+	_type;
+	_glowTts;
+	_glowTtsTriton;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Text2Mel to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.type = _value.type;
+		this.glowTts = _value.glowTts ? new GlowTTS(_value.glowTts) : undefined;
+		this.glowTtsTriton = _value.glowTtsTriton ? new GlowTTSTriton(_value.glowTtsTriton) : undefined;
+		Text2Mel.refineValues(this);
+	}
 	get type() {
 		return this._type;
 	}
@@ -2798,26 +2852,11 @@ class Text2Mel {
 		};
 	}
 }
-Text2Mel.id = 'ondewo.t2s.Text2Mel';
 /**
  * Message implementation for ondewo.t2s.GlowTTS
  */
 class GlowTTS {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of GlowTTS to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.batchSize = _value.batchSize;
-		this.useGpu = _value.useGpu;
-		this.lengthScale = _value.lengthScale;
-		this.noiseScale = _value.noiseScale;
-		this.path = _value.path;
-		this.cleaners = (_value.cleaners || []).slice();
-		this.paramConfigPath = _value.paramConfigPath;
-		GlowTTS.refineValues(this);
-	}
+	static id = 'ondewo.t2s.GlowTTS';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -2903,6 +2942,28 @@ class GlowTTS {
 		if (_instance.paramConfigPath) {
 			_writer.writeString(7, _instance.paramConfigPath);
 		}
+	}
+	_batchSize;
+	_useGpu;
+	_lengthScale;
+	_noiseScale;
+	_path;
+	_cleaners;
+	_paramConfigPath;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of GlowTTS to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchSize = _value.batchSize;
+		this.useGpu = _value.useGpu;
+		this.lengthScale = _value.lengthScale;
+		this.noiseScale = _value.noiseScale;
+		this.path = _value.path;
+		this.cleaners = (_value.cleaners || []).slice();
+		this.paramConfigPath = _value.paramConfigPath;
+		GlowTTS.refineValues(this);
 	}
 	get batchSize() {
 		return this._batchSize;
@@ -2995,26 +3056,11 @@ class GlowTTS {
 		};
 	}
 }
-GlowTTS.id = 'ondewo.t2s.GlowTTS';
 /**
  * Message implementation for ondewo.t2s.GlowTTSTriton
  */
 class GlowTTSTriton {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of GlowTTSTriton to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.batchSize = _value.batchSize;
-		this.lengthScale = _value.lengthScale;
-		this.noiseScale = _value.noiseScale;
-		this.cleaners = (_value.cleaners || []).slice();
-		this.maxTextLength = _value.maxTextLength;
-		this.paramConfigPath = _value.paramConfigPath;
-		this.tritonModelName = _value.tritonModelName;
-		GlowTTSTriton.refineValues(this);
-	}
+	static id = 'ondewo.t2s.GlowTTSTriton';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3100,6 +3146,28 @@ class GlowTTSTriton {
 		if (_instance.tritonModelName) {
 			_writer.writeString(7, _instance.tritonModelName);
 		}
+	}
+	_batchSize;
+	_lengthScale;
+	_noiseScale;
+	_cleaners;
+	_maxTextLength;
+	_paramConfigPath;
+	_tritonModelName;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of GlowTTSTriton to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchSize = _value.batchSize;
+		this.lengthScale = _value.lengthScale;
+		this.noiseScale = _value.noiseScale;
+		this.cleaners = (_value.cleaners || []).slice();
+		this.maxTextLength = _value.maxTextLength;
+		this.paramConfigPath = _value.paramConfigPath;
+		this.tritonModelName = _value.tritonModelName;
+		GlowTTSTriton.refineValues(this);
 	}
 	get batchSize() {
 		return this._batchSize;
@@ -3192,23 +3260,11 @@ class GlowTTSTriton {
 		};
 	}
 }
-GlowTTSTriton.id = 'ondewo.t2s.GlowTTSTriton';
 /**
  * Message implementation for ondewo.t2s.Mel2Audio
  */
 class Mel2Audio {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Mel2Audio to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.type = _value.type;
-		this.mbMelganTriton = _value.mbMelganTriton ? new MbMelganTriton(_value.mbMelganTriton) : undefined;
-		this.hifiGan = _value.hifiGan ? new HiFiGan(_value.hifiGan) : undefined;
-		this.hifiGanTriton = _value.hifiGanTriton ? new HiFiGanTriton(_value.hifiGanTriton) : undefined;
-		Mel2Audio.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Mel2Audio';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3277,6 +3333,22 @@ class Mel2Audio {
 			_writer.writeMessage(4, _instance.hifiGanTriton, HiFiGanTriton.serializeBinaryToWriter);
 		}
 	}
+	_type;
+	_mbMelganTriton;
+	_hifiGan;
+	_hifiGanTriton;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Mel2Audio to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.type = _value.type;
+		this.mbMelganTriton = _value.mbMelganTriton ? new MbMelganTriton(_value.mbMelganTriton) : undefined;
+		this.hifiGan = _value.hifiGan ? new HiFiGan(_value.hifiGan) : undefined;
+		this.hifiGanTriton = _value.hifiGanTriton ? new HiFiGanTriton(_value.hifiGanTriton) : undefined;
+		Mel2Audio.refineValues(this);
+	}
 	get type() {
 		return this._type;
 	}
@@ -3344,23 +3416,11 @@ class Mel2Audio {
 		};
 	}
 }
-Mel2Audio.id = 'ondewo.t2s.Mel2Audio';
 /**
  * Message implementation for ondewo.t2s.HiFiGan
  */
 class HiFiGan {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of HiFiGan to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.useGpu = _value.useGpu;
-		this.batchSize = _value.batchSize;
-		this.configPath = _value.configPath;
-		this.modelPath = _value.modelPath;
-		HiFiGan.refineValues(this);
-	}
+	static id = 'ondewo.t2s.HiFiGan';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3425,6 +3485,22 @@ class HiFiGan {
 		if (_instance.modelPath) {
 			_writer.writeString(4, _instance.modelPath);
 		}
+	}
+	_useGpu;
+	_batchSize;
+	_configPath;
+	_modelPath;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of HiFiGan to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.useGpu = _value.useGpu;
+		this.batchSize = _value.batchSize;
+		this.configPath = _value.configPath;
+		this.modelPath = _value.modelPath;
+		HiFiGan.refineValues(this);
 	}
 	get useGpu() {
 		return this._useGpu;
@@ -3493,21 +3569,11 @@ class HiFiGan {
 		};
 	}
 }
-HiFiGan.id = 'ondewo.t2s.HiFiGan';
 /**
  * Message implementation for ondewo.t2s.HiFiGanTriton
  */
 class HiFiGanTriton {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of HiFiGanTriton to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.configPath = _value.configPath;
-		this.tritonModelName = _value.tritonModelName;
-		HiFiGanTriton.refineValues(this);
-	}
+	static id = 'ondewo.t2s.HiFiGanTriton';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3558,6 +3624,18 @@ class HiFiGanTriton {
 		if (_instance.tritonModelName) {
 			_writer.writeString(2, _instance.tritonModelName);
 		}
+	}
+	_configPath;
+	_tritonModelName;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of HiFiGanTriton to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.configPath = _value.configPath;
+		this.tritonModelName = _value.tritonModelName;
+		HiFiGanTriton.refineValues(this);
 	}
 	get configPath() {
 		return this._configPath;
@@ -3610,23 +3688,11 @@ class HiFiGanTriton {
 		};
 	}
 }
-HiFiGanTriton.id = 'ondewo.t2s.HiFiGanTriton';
 /**
  * Message implementation for ondewo.t2s.MbMelganTriton
  */
 class MbMelganTriton {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of MbMelganTriton to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.configPath = _value.configPath;
-		this.statsPath = _value.statsPath;
-		this.tritonModelName = _value.tritonModelName;
-		this.tritonUrl = _value.tritonUrl;
-		MbMelganTriton.refineValues(this);
-	}
+	static id = 'ondewo.t2s.MbMelganTriton';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3691,6 +3757,22 @@ class MbMelganTriton {
 		if (_instance.tritonUrl) {
 			_writer.writeString(4, _instance.tritonUrl);
 		}
+	}
+	_configPath;
+	_statsPath;
+	_tritonModelName;
+	_tritonUrl;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of MbMelganTriton to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.configPath = _value.configPath;
+		this.statsPath = _value.statsPath;
+		this.tritonModelName = _value.tritonModelName;
+		this.tritonUrl = _value.tritonUrl;
+		MbMelganTriton.refineValues(this);
 	}
 	get configPath() {
 		return this._configPath;
@@ -3759,25 +3841,11 @@ class MbMelganTriton {
 		};
 	}
 }
-MbMelganTriton.id = 'ondewo.t2s.MbMelganTriton';
 /**
  * Message implementation for ondewo.t2s.Caching
  */
 class Caching {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Caching to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.active = _value.active;
-		this.memoryCacheMaxSize = _value.memoryCacheMaxSize;
-		this.samplingRate = _value.samplingRate;
-		this.loadCache = _value.loadCache;
-		this.saveCache = _value.saveCache;
-		this.cacheSaveDir = _value.cacheSaveDir;
-		Caching.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Caching';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -3856,6 +3924,26 @@ class Caching {
 		if (_instance.cacheSaveDir) {
 			_writer.writeString(6, _instance.cacheSaveDir);
 		}
+	}
+	_active;
+	_memoryCacheMaxSize;
+	_samplingRate;
+	_loadCache;
+	_saveCache;
+	_cacheSaveDir;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Caching to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.active = _value.active;
+		this.memoryCacheMaxSize = _value.memoryCacheMaxSize;
+		this.samplingRate = _value.samplingRate;
+		this.loadCache = _value.loadCache;
+		this.saveCache = _value.saveCache;
+		this.cacheSaveDir = _value.cacheSaveDir;
+		Caching.refineValues(this);
 	}
 	get active() {
 		return this._active;
@@ -3940,28 +4028,11 @@ class Caching {
 		};
 	}
 }
-Caching.id = 'ondewo.t2s.Caching';
 /**
  * Message implementation for ondewo.t2s.T2SNormalization
  */
 class T2SNormalization {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2SNormalization to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.language = _value.language;
-		this.pipeline = (_value.pipeline || []).slice();
-		this.customPhonemizerId = _value.customPhonemizerId;
-		this.customLengthScales = _value.customLengthScales
-			? new T2SCustomLengthScales(_value.customLengthScales)
-			: undefined;
-		this.arpabetMapping = _value.arpabetMapping;
-		this.numericMapping = _value.numericMapping;
-		this.callsignsMapping = _value.callsignsMapping;
-		T2SNormalization.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2SNormalization';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4048,6 +4119,30 @@ class T2SNormalization {
 		if (_instance.callsignsMapping) {
 			_writer.writeString(7, _instance.callsignsMapping);
 		}
+	}
+	_language;
+	_pipeline;
+	_customPhonemizerId;
+	_customLengthScales;
+	_arpabetMapping;
+	_numericMapping;
+	_callsignsMapping;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2SNormalization to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.language = _value.language;
+		this.pipeline = (_value.pipeline || []).slice();
+		this.customPhonemizerId = _value.customPhonemizerId;
+		this.customLengthScales = _value.customLengthScales
+			? new T2SCustomLengthScales(_value.customLengthScales)
+			: undefined;
+		this.arpabetMapping = _value.arpabetMapping;
+		this.numericMapping = _value.numericMapping;
+		this.callsignsMapping = _value.callsignsMapping;
+		T2SNormalization.refineValues(this);
 	}
 	get language() {
 		return this._language;
@@ -4140,24 +4235,11 @@ class T2SNormalization {
 		};
 	}
 }
-T2SNormalization.id = 'ondewo.t2s.T2SNormalization';
 /**
  * Message implementation for ondewo.t2s.Postprocessing
  */
 class Postprocessing {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Postprocessing to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.silenceSecs = _value.silenceSecs;
-		this.pipeline = (_value.pipeline || []).slice();
-		this.logmmse = _value.logmmse ? new Logmnse(_value.logmmse) : undefined;
-		this.wiener = _value.wiener ? new Wiener(_value.wiener) : undefined;
-		this.apodization = _value.apodization ? new Apodization(_value.apodization) : undefined;
-		Postprocessing.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Postprocessing';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4232,6 +4314,24 @@ class Postprocessing {
 		if (_instance.apodization) {
 			_writer.writeMessage(5, _instance.apodization, Apodization.serializeBinaryToWriter);
 		}
+	}
+	_silenceSecs;
+	_pipeline;
+	_logmmse;
+	_wiener;
+	_apodization;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Postprocessing to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.silenceSecs = _value.silenceSecs;
+		this.pipeline = (_value.pipeline || []).slice();
+		this.logmmse = _value.logmmse ? new Logmnse(_value.logmmse) : undefined;
+		this.wiener = _value.wiener ? new Wiener(_value.wiener) : undefined;
+		this.apodization = _value.apodization ? new Apodization(_value.apodization) : undefined;
+		Postprocessing.refineValues(this);
 	}
 	get silenceSecs() {
 		return this._silenceSecs;
@@ -4308,22 +4408,11 @@ class Postprocessing {
 		};
 	}
 }
-Postprocessing.id = 'ondewo.t2s.Postprocessing';
 /**
  * Message implementation for ondewo.t2s.Logmnse
  */
 class Logmnse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Logmnse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.initialNoise = _value.initialNoise;
-		this.windowSize = _value.windowSize;
-		this.noiseThreshold = _value.noiseThreshold;
-		Logmnse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Logmnse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4381,6 +4470,20 @@ class Logmnse {
 		if (_instance.noiseThreshold) {
 			_writer.writeFloat(3, _instance.noiseThreshold);
 		}
+	}
+	_initialNoise;
+	_windowSize;
+	_noiseThreshold;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Logmnse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.initialNoise = _value.initialNoise;
+		this.windowSize = _value.windowSize;
+		this.noiseThreshold = _value.noiseThreshold;
+		Logmnse.refineValues(this);
 	}
 	get initialNoise() {
 		return this._initialNoise;
@@ -4441,24 +4544,11 @@ class Logmnse {
 		};
 	}
 }
-Logmnse.id = 'ondewo.t2s.Logmnse';
 /**
  * Message implementation for ondewo.t2s.Wiener
  */
 class Wiener {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Wiener to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.frameLen = _value.frameLen;
-		this.lpcOrder = _value.lpcOrder;
-		this.iterations = _value.iterations;
-		this.alpha = _value.alpha;
-		this.thresh = _value.thresh;
-		Wiener.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Wiener';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4530,6 +4620,24 @@ class Wiener {
 		if (_instance.thresh) {
 			_writer.writeFloat(5, _instance.thresh);
 		}
+	}
+	_frameLen;
+	_lpcOrder;
+	_iterations;
+	_alpha;
+	_thresh;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Wiener to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.frameLen = _value.frameLen;
+		this.lpcOrder = _value.lpcOrder;
+		this.iterations = _value.iterations;
+		this.alpha = _value.alpha;
+		this.thresh = _value.thresh;
+		Wiener.refineValues(this);
 	}
 	get frameLen() {
 		return this._frameLen;
@@ -4606,20 +4714,11 @@ class Wiener {
 		};
 	}
 }
-Wiener.id = 'ondewo.t2s.Wiener';
 /**
  * Message implementation for ondewo.t2s.Apodization
  */
 class Apodization {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Apodization to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.apodizationSecs = _value.apodizationSecs;
-		Apodization.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Apodization';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4664,6 +4763,16 @@ class Apodization {
 			_writer.writeFloat(1, _instance.apodizationSecs);
 		}
 	}
+	_apodizationSecs;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Apodization to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.apodizationSecs = _value.apodizationSecs;
+		Apodization.refineValues(this);
+	}
 	get apodizationSecs() {
 		return this._apodizationSecs;
 	}
@@ -4707,27 +4816,11 @@ class Apodization {
 		};
 	}
 }
-Apodization.id = 'ondewo.t2s.Apodization';
 /**
  * Message implementation for ondewo.t2s.T2SCustomLengthScales
  */
 class T2SCustomLengthScales {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of T2SCustomLengthScales to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.text = _value.text;
-		this.email = _value.email;
-		this.url = _value.url;
-		this.phone = _value.phone;
-		this.spell = _value.spell;
-		this.spellWithNames = _value.spellWithNames;
-		this.callsignLong = _value.callsignLong;
-		this.callsignShort = _value.callsignShort;
-		T2SCustomLengthScales.refineValues(this);
-	}
+	static id = 'ondewo.t2s.T2SCustomLengthScales';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4820,6 +4913,30 @@ class T2SCustomLengthScales {
 		if (_instance.callsignShort) {
 			_writer.writeFloat(8, _instance.callsignShort);
 		}
+	}
+	_text;
+	_email;
+	_url;
+	_phone;
+	_spell;
+	_spellWithNames;
+	_callsignLong;
+	_callsignShort;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of T2SCustomLengthScales to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.text = _value.text;
+		this.email = _value.email;
+		this.url = _value.url;
+		this.phone = _value.phone;
+		this.spell = _value.spell;
+		this.spellWithNames = _value.spellWithNames;
+		this.callsignLong = _value.callsignLong;
+		this.callsignShort = _value.callsignShort;
+		T2SCustomLengthScales.refineValues(this);
 	}
 	get text() {
 		return this._text;
@@ -4920,20 +5037,11 @@ class T2SCustomLengthScales {
 		};
 	}
 }
-T2SCustomLengthScales.id = 'ondewo.t2s.T2SCustomLengthScales';
 /**
  * Message implementation for ondewo.t2s.PhonemizerId
  */
 class PhonemizerId {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of PhonemizerId to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.id = _value.id;
-		PhonemizerId.refineValues(this);
-	}
+	static id = 'ondewo.t2s.PhonemizerId';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -4978,6 +5086,16 @@ class PhonemizerId {
 			_writer.writeString(1, _instance.id);
 		}
 	}
+	_id;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of PhonemizerId to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.id = _value.id;
+		PhonemizerId.refineValues(this);
+	}
 	get id() {
 		return this._id;
 	}
@@ -5021,21 +5139,11 @@ class PhonemizerId {
 		};
 	}
 }
-PhonemizerId.id = 'ondewo.t2s.PhonemizerId';
 /**
  * Message implementation for ondewo.t2s.CustomPhonemizerProto
  */
 class CustomPhonemizerProto {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of CustomPhonemizerProto to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.id = _value.id;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
-		CustomPhonemizerProto.refineValues(this);
-	}
+	static id = 'ondewo.t2s.CustomPhonemizerProto';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5089,6 +5197,18 @@ class CustomPhonemizerProto {
 			_writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
 		}
 	}
+	_id;
+	_maps;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of CustomPhonemizerProto to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.id = _value.id;
+		this.maps = (_value.maps || []).map((m) => new Map(m));
+		CustomPhonemizerProto.refineValues(this);
+	}
 	get id() {
 		return this._id;
 	}
@@ -5140,21 +5260,11 @@ class CustomPhonemizerProto {
 		};
 	}
 }
-CustomPhonemizerProto.id = 'ondewo.t2s.CustomPhonemizerProto';
 /**
  * Message implementation for ondewo.t2s.Map
  */
 class Map {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of Map to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.word = _value.word;
-		this.phonemeGroups = _value.phonemeGroups;
-		Map.refineValues(this);
-	}
+	static id = 'ondewo.t2s.Map';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5205,6 +5315,18 @@ class Map {
 		if (_instance.phonemeGroups) {
 			_writer.writeString(2, _instance.phonemeGroups);
 		}
+	}
+	_word;
+	_phonemeGroups;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Map to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.word = _value.word;
+		this.phonemeGroups = _value.phonemeGroups;
+		Map.refineValues(this);
 	}
 	get word() {
 		return this._word;
@@ -5257,20 +5379,11 @@ class Map {
 		};
 	}
 }
-Map.id = 'ondewo.t2s.Map';
 /**
  * Message implementation for ondewo.t2s.ListCustomPhonemizerResponse
  */
 class ListCustomPhonemizerResponse {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListCustomPhonemizerResponse to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.phonemizers = (_value.phonemizers || []).map((m) => new CustomPhonemizerProto(m));
-		ListCustomPhonemizerResponse.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListCustomPhonemizerResponse';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5317,6 +5430,16 @@ class ListCustomPhonemizerResponse {
 			_writer.writeRepeatedMessage(1, _instance.phonemizers, CustomPhonemizerProto.serializeBinaryToWriter);
 		}
 	}
+	_phonemizers;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListCustomPhonemizerResponse to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.phonemizers = (_value.phonemizers || []).map((m) => new CustomPhonemizerProto(m));
+		ListCustomPhonemizerResponse.refineValues(this);
+	}
 	get phonemizers() {
 		return this._phonemizers;
 	}
@@ -5360,20 +5483,11 @@ class ListCustomPhonemizerResponse {
 		};
 	}
 }
-ListCustomPhonemizerResponse.id = 'ondewo.t2s.ListCustomPhonemizerResponse';
 /**
  * Message implementation for ondewo.t2s.ListCustomPhonemizerRequest
  */
 class ListCustomPhonemizerRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of ListCustomPhonemizerRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.pipelineIds = (_value.pipelineIds || []).slice();
-		ListCustomPhonemizerRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.ListCustomPhonemizerRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5418,6 +5532,16 @@ class ListCustomPhonemizerRequest {
 			_writer.writeRepeatedString(1, _instance.pipelineIds);
 		}
 	}
+	_pipelineIds;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of ListCustomPhonemizerRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.pipelineIds = (_value.pipelineIds || []).slice();
+		ListCustomPhonemizerRequest.refineValues(this);
+	}
 	get pipelineIds() {
 		return this._pipelineIds;
 	}
@@ -5461,22 +5585,11 @@ class ListCustomPhonemizerRequest {
 		};
 	}
 }
-ListCustomPhonemizerRequest.id = 'ondewo.t2s.ListCustomPhonemizerRequest';
 /**
  * Message implementation for ondewo.t2s.UpdateCustomPhonemizerRequest
  */
 class UpdateCustomPhonemizerRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of UpdateCustomPhonemizerRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.id = _value.id;
-		this.updateMethod = _value.updateMethod;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
-		UpdateCustomPhonemizerRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.UpdateCustomPhonemizerRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5536,6 +5649,20 @@ class UpdateCustomPhonemizerRequest {
 		if (_instance.maps && _instance.maps.length) {
 			_writer.writeRepeatedMessage(3, _instance.maps, Map.serializeBinaryToWriter);
 		}
+	}
+	_id;
+	_updateMethod;
+	_maps;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of UpdateCustomPhonemizerRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.id = _value.id;
+		this.updateMethod = _value.updateMethod;
+		this.maps = (_value.maps || []).map((m) => new Map(m));
+		UpdateCustomPhonemizerRequest.refineValues(this);
 	}
 	get id() {
 		return this._id;
@@ -5599,7 +5726,6 @@ class UpdateCustomPhonemizerRequest {
 		};
 	}
 }
-UpdateCustomPhonemizerRequest.id = 'ondewo.t2s.UpdateCustomPhonemizerRequest';
 (function (UpdateCustomPhonemizerRequest) {
 	let UpdateMethod;
 	(function (UpdateMethod) {
@@ -5612,16 +5738,7 @@ UpdateCustomPhonemizerRequest.id = 'ondewo.t2s.UpdateCustomPhonemizerRequest';
  * Message implementation for ondewo.t2s.CreateCustomPhonemizerRequest
  */
 class CreateCustomPhonemizerRequest {
-	/**
-	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-	 * @param _value initial values object or instance of CreateCustomPhonemizerRequest to deeply clone from
-	 */
-	constructor(_value) {
-		_value = _value || {};
-		this.prefix = _value.prefix;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
-		CreateCustomPhonemizerRequest.refineValues(this);
-	}
+	static id = 'ondewo.t2s.CreateCustomPhonemizerRequest';
 	/**
 	 * Deserialize binary data to message
 	 * @param instance message instance
@@ -5675,6 +5792,18 @@ class CreateCustomPhonemizerRequest {
 			_writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
 		}
 	}
+	_prefix;
+	_maps;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of CreateCustomPhonemizerRequest to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.prefix = _value.prefix;
+		this.maps = (_value.maps || []).map((m) => new Map(m));
+		CreateCustomPhonemizerRequest.refineValues(this);
+	}
 	get prefix() {
 		return this._prefix;
 	}
@@ -5726,220 +5855,243 @@ class CreateCustomPhonemizerRequest {
 		};
 	}
 }
-CreateCustomPhonemizerRequest.id = 'ondewo.t2s.CreateCustomPhonemizerRequest';
 
 /* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
+/**
+ * Specific GrpcClientSettings for Text2Speech.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS = new InjectionToken('GRPC_TEXT2_SPEECH_CLIENT_SETTINGS');
+/**
+ * Specific GrpcClientSettings for CustomPhonemizers.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+const GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS = new InjectionToken('GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS');
+
+/* tslint:disable */
+/* eslint-disable */
+// @ts-nocheck
+//
+// THIS IS A GENERATED FILE
+// DO NOT MODIFY IT! YOUR CHANGES WILL BE LOST
 /**
  * Service client implementation for ondewo.t2s.Text2Speech
  */
 class Text2SpeechClient {
+	handler;
+	client;
+	/**
+	 * Raw RPC implementation for each service client method.
+	 * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+	 * Attention: these methods do not throw errors when non-zero status codes are received.
+	 */
+	$raw = {
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/Synthesize
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.SynthesizeResponse>>
+		 */
+		synthesize: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/Synthesize',
+				requestData,
+				requestMetadata,
+				requestClass: SynthesizeRequest,
+				responseClass: SynthesizeResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/BatchSynthesize
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>
+		 */
+		batchSynthesize: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/BatchSynthesize',
+				requestData,
+				requestMetadata,
+				requestClass: BatchSynthesizeRequest,
+				responseClass: BatchSynthesizeResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.NormalizeTextResponse>>
+		 */
+		normalizeText: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/NormalizeText',
+				requestData,
+				requestMetadata,
+				requestClass: NormalizeTextRequest,
+				responseClass: NormalizeTextResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/GetT2sPipeline
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.Text2SpeechConfig>>
+		 */
+		getT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/GetT2sPipeline',
+				requestData,
+				requestMetadata,
+				requestClass: T2sPipelineId,
+				responseClass: Text2SpeechConfig
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/CreateT2sPipeline
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.T2sPipelineId>>
+		 */
+		createT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/CreateT2sPipeline',
+				requestData,
+				requestMetadata,
+				requestClass: Text2SpeechConfig,
+				responseClass: T2sPipelineId
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/DeleteT2sPipeline
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+		 */
+		deleteT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/DeleteT2sPipeline',
+				requestData,
+				requestMetadata,
+				requestClass: T2sPipelineId,
+				responseClass: googleProtobuf000.Empty
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/UpdateT2sPipeline
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+		 */
+		updateT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/UpdateT2sPipeline',
+				requestData,
+				requestMetadata,
+				requestClass: Text2SpeechConfig,
+				responseClass: googleProtobuf000.Empty
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/ListT2sPipelines
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.ListT2sPipelinesResponse>>
+		 */
+		listT2sPipelines: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/ListT2sPipelines',
+				requestData,
+				requestMetadata,
+				requestClass: ListT2sPipelinesRequest,
+				responseClass: ListT2sPipelinesResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/ListT2sLanguages
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.ListT2sLanguagesResponse>>
+		 */
+		listT2sLanguages: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/ListT2sLanguages',
+				requestData,
+				requestMetadata,
+				requestClass: ListT2sLanguagesRequest,
+				responseClass: ListT2sLanguagesResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/ListT2sDomains
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>
+		 */
+		listT2sDomains: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/ListT2sDomains',
+				requestData,
+				requestMetadata,
+				requestClass: ListT2sDomainsRequest,
+				responseClass: ListT2sDomainsResponse
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/GetServiceInfo
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.T2SGetServiceInfoResponse>>
+		 */
+		getServiceInfo: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.Text2Speech/GetServiceInfo',
+				requestData,
+				requestMetadata,
+				requestClass: googleProtobuf000.Empty,
+				responseClass: T2SGetServiceInfoResponse
+			});
+		}
+	};
 	constructor(settings, clientFactory, handler) {
 		this.handler = handler;
-		/**
-		 * Raw RPC implementation for each service client method.
-		 * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-		 * Attention: these methods do not throw errors when non-zero status codes are received.
-		 */
-		this.$raw = {
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/Synthesize
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.SynthesizeResponse>>
-			 */
-			synthesize: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/Synthesize',
-					requestData,
-					requestMetadata,
-					requestClass: SynthesizeRequest,
-					responseClass: SynthesizeResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/BatchSynthesize
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>
-			 */
-			batchSynthesize: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/BatchSynthesize',
-					requestData,
-					requestMetadata,
-					requestClass: BatchSynthesizeRequest,
-					responseClass: BatchSynthesizeResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.NormalizeTextResponse>>
-			 */
-			normalizeText: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/NormalizeText',
-					requestData,
-					requestMetadata,
-					requestClass: NormalizeTextRequest,
-					responseClass: NormalizeTextResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/GetT2sPipeline
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.Text2SpeechConfig>>
-			 */
-			getT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/GetT2sPipeline',
-					requestData,
-					requestMetadata,
-					requestClass: T2sPipelineId,
-					responseClass: Text2SpeechConfig
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/CreateT2sPipeline
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.T2sPipelineId>>
-			 */
-			createT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/CreateT2sPipeline',
-					requestData,
-					requestMetadata,
-					requestClass: Text2SpeechConfig,
-					responseClass: T2sPipelineId
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/DeleteT2sPipeline
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-			 */
-			deleteT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/DeleteT2sPipeline',
-					requestData,
-					requestMetadata,
-					requestClass: T2sPipelineId,
-					responseClass: googleProtobuf000.Empty
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/UpdateT2sPipeline
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-			 */
-			updateT2sPipeline: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/UpdateT2sPipeline',
-					requestData,
-					requestMetadata,
-					requestClass: Text2SpeechConfig,
-					responseClass: googleProtobuf000.Empty
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/ListT2sPipelines
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.ListT2sPipelinesResponse>>
-			 */
-			listT2sPipelines: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/ListT2sPipelines',
-					requestData,
-					requestMetadata,
-					requestClass: ListT2sPipelinesRequest,
-					responseClass: ListT2sPipelinesResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/ListT2sLanguages
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.ListT2sLanguagesResponse>>
-			 */
-			listT2sLanguages: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/ListT2sLanguages',
-					requestData,
-					requestMetadata,
-					requestClass: ListT2sLanguagesRequest,
-					responseClass: ListT2sLanguagesResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/ListT2sDomains
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>
-			 */
-			listT2sDomains: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/ListT2sDomains',
-					requestData,
-					requestMetadata,
-					requestClass: ListT2sDomainsRequest,
-					responseClass: ListT2sDomainsResponse
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.Text2Speech/GetServiceInfo
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.T2SGetServiceInfoResponse>>
-			 */
-			getServiceInfo: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.Text2Speech/GetServiceInfo',
-					requestData,
-					requestMetadata,
-					requestClass: googleProtobuf000.Empty,
-					responseClass: T2SGetServiceInfoResponse
-				});
-			}
-		};
 		this.client = clientFactory.createClient('ondewo.t2s.Text2Speech', settings);
 	}
 	/**
@@ -6052,167 +6204,163 @@ class Text2SpeechClient {
 	getServiceInfo(requestData, requestMetadata = new GrpcMetadata()) {
 		return this.$raw.getServiceInfo(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
 	}
+	static ɵfac = function Text2SpeechClient_Factory(t) {
+		return new (t || Text2SpeechClient)(
+			i0.ɵɵinject(GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, 8),
+			i0.ɵɵinject(GRPC_CLIENT_FACTORY),
+			i0.ɵɵinject(i1.GrpcHandler)
+		);
+	};
+	static ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({
+		token: Text2SpeechClient,
+		factory: Text2SpeechClient.ɵfac,
+		providedIn: 'any'
+	});
 }
-Text2SpeechClient.ɵfac = i0.ɵɵngDeclareFactory({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: Text2SpeechClient,
-	deps: [
-		{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true },
-		{ token: GRPC_CLIENT_FACTORY },
-		{ token: i1.GrpcHandler }
-	],
-	target: i0.ɵɵFactoryTarget.Injectable
-});
-Text2SpeechClient.ɵprov = i0.ɵɵngDeclareInjectable({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: Text2SpeechClient,
-	providedIn: 'any'
-});
-i0.ɵɵngDeclareClassMetadata({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: Text2SpeechClient,
-	decorators: [
-		{
-			type: Injectable,
-			args: [{ providedIn: 'any' }]
-		}
-	],
-	ctorParameters: function () {
-		return [
-			{
-				type: undefined,
-				decorators: [
+(function () {
+	(typeof ngDevMode === 'undefined' || ngDevMode) &&
+		i0.ɵsetClassMetadata(
+			Text2SpeechClient,
+			[
+				{
+					type: Injectable,
+					args: [{ providedIn: 'any' }]
+				}
+			],
+			function () {
+				return [
 					{
-						type: Optional
+						type: undefined,
+						decorators: [
+							{
+								type: Optional
+							},
+							{
+								type: Inject,
+								args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS]
+							}
+						]
 					},
 					{
-						type: Inject,
-						args: [GRPC_TEXT2_SPEECH_CLIENT_SETTINGS]
-					}
-				]
+						type: undefined,
+						decorators: [
+							{
+								type: Inject,
+								args: [GRPC_CLIENT_FACTORY]
+							}
+						]
+					},
+					{ type: i1.GrpcHandler }
+				];
 			},
-			{
-				type: undefined,
-				decorators: [
-					{
-						type: Inject,
-						args: [GRPC_CLIENT_FACTORY]
-					}
-				]
-			},
-			{ type: i1.GrpcHandler }
-		];
-	}
-});
+			null
+		);
+})();
 /**
  * Service client implementation for ondewo.t2s.CustomPhonemizers
  */
 class CustomPhonemizersClient {
+	handler;
+	client;
+	/**
+	 * Raw RPC implementation for each service client method.
+	 * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
+	 * Attention: these methods do not throw errors when non-zero status codes are received.
+	 */
+	$raw = {
+		/**
+		 * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+		 */
+		getCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer',
+				requestData,
+				requestMetadata,
+				requestClass: PhonemizerId,
+				responseClass: CustomPhonemizerProto
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
+		 */
+		createCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer',
+				requestData,
+				requestMetadata,
+				requestClass: CreateCustomPhonemizerRequest,
+				responseClass: PhonemizerId
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+		 */
+		deleteCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer',
+				requestData,
+				requestMetadata,
+				requestClass: PhonemizerId,
+				responseClass: googleProtobuf000.Empty
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+		 */
+		updateCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer',
+				requestData,
+				requestMetadata,
+				requestClass: UpdateCustomPhonemizerRequest,
+				responseClass: CustomPhonemizerProto
+			});
+		},
+		/**
+		 * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
+		 */
+		listCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
+			return this.handler.handle({
+				type: GrpcCallType.unary,
+				client: this.client,
+				path: '/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer',
+				requestData,
+				requestMetadata,
+				requestClass: ListCustomPhonemizerRequest,
+				responseClass: ListCustomPhonemizerResponse
+			});
+		}
+	};
 	constructor(settings, clientFactory, handler) {
 		this.handler = handler;
-		/**
-		 * Raw RPC implementation for each service client method.
-		 * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-		 * Attention: these methods do not throw errors when non-zero status codes are received.
-		 */
-		this.$raw = {
-			/**
-			 * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-			 */
-			getCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer',
-					requestData,
-					requestMetadata,
-					requestClass: PhonemizerId,
-					responseClass: CustomPhonemizerProto
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
-			 */
-			createCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer',
-					requestData,
-					requestMetadata,
-					requestClass: CreateCustomPhonemizerRequest,
-					responseClass: PhonemizerId
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-			 */
-			deleteCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer',
-					requestData,
-					requestMetadata,
-					requestClass: PhonemizerId,
-					responseClass: googleProtobuf000.Empty
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-			 */
-			updateCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer',
-					requestData,
-					requestMetadata,
-					requestClass: UpdateCustomPhonemizerRequest,
-					responseClass: CustomPhonemizerProto
-				});
-			},
-			/**
-			 * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
-			 *
-			 * @param requestMessage Request message
-			 * @param requestMetadata Request metadata
-			 * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
-			 */
-			listCustomPhonemizer: (requestData, requestMetadata = new GrpcMetadata()) => {
-				return this.handler.handle({
-					type: GrpcCallType.unary,
-					client: this.client,
-					path: '/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer',
-					requestData,
-					requestMetadata,
-					requestClass: ListCustomPhonemizerRequest,
-					responseClass: ListCustomPhonemizerResponse
-				});
-			}
-		};
 		this.client = clientFactory.createClient('ondewo.t2s.CustomPhonemizers', settings);
 	}
 	/**
@@ -6265,64 +6413,58 @@ class CustomPhonemizersClient {
 	listCustomPhonemizer(requestData, requestMetadata = new GrpcMetadata()) {
 		return this.$raw.listCustomPhonemizer(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
 	}
+	static ɵfac = function CustomPhonemizersClient_Factory(t) {
+		return new (t || CustomPhonemizersClient)(
+			i0.ɵɵinject(GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, 8),
+			i0.ɵɵinject(GRPC_CLIENT_FACTORY),
+			i0.ɵɵinject(i1.GrpcHandler)
+		);
+	};
+	static ɵprov = /*@__PURE__*/ i0.ɵɵdefineInjectable({
+		token: CustomPhonemizersClient,
+		factory: CustomPhonemizersClient.ɵfac,
+		providedIn: 'any'
+	});
 }
-CustomPhonemizersClient.ɵfac = i0.ɵɵngDeclareFactory({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: CustomPhonemizersClient,
-	deps: [
-		{ token: GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS, optional: true },
-		{ token: GRPC_CLIENT_FACTORY },
-		{ token: i1.GrpcHandler }
-	],
-	target: i0.ɵɵFactoryTarget.Injectable
-});
-CustomPhonemizersClient.ɵprov = i0.ɵɵngDeclareInjectable({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: CustomPhonemizersClient,
-	providedIn: 'any'
-});
-i0.ɵɵngDeclareClassMetadata({
-	minVersion: '12.0.0',
-	version: '14.2.5',
-	ngImport: i0,
-	type: CustomPhonemizersClient,
-	decorators: [
-		{
-			type: Injectable,
-			args: [{ providedIn: 'any' }]
-		}
-	],
-	ctorParameters: function () {
-		return [
-			{
-				type: undefined,
-				decorators: [
+(function () {
+	(typeof ngDevMode === 'undefined' || ngDevMode) &&
+		i0.ɵsetClassMetadata(
+			CustomPhonemizersClient,
+			[
+				{
+					type: Injectable,
+					args: [{ providedIn: 'any' }]
+				}
+			],
+			function () {
+				return [
 					{
-						type: Optional
+						type: undefined,
+						decorators: [
+							{
+								type: Optional
+							},
+							{
+								type: Inject,
+								args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
+							}
+						]
 					},
 					{
-						type: Inject,
-						args: [GRPC_CUSTOM_PHONEMIZERS_CLIENT_SETTINGS]
-					}
-				]
+						type: undefined,
+						decorators: [
+							{
+								type: Inject,
+								args: [GRPC_CLIENT_FACTORY]
+							}
+						]
+					},
+					{ type: i1.GrpcHandler }
+				];
 			},
-			{
-				type: undefined,
-				decorators: [
-					{
-						type: Inject,
-						args: [GRPC_CLIENT_FACTORY]
-					}
-				]
-			},
-			{ type: i1.GrpcHandler }
-		];
-	}
-});
+			null
+		);
+})();
 
 /**
  * Generated bundle index. Do not edit.
