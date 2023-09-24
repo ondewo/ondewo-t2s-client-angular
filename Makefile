@@ -222,7 +222,7 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	npm i @typescript-eslint/eslint-plugin --save-dev
 	npm i husky --save-dev
 
-check_out_correct_submodule_versions: ## Fetches all Submodules and checksout specified branch
+check_out_correct_submodule_versions: ## Fetches all Submodules and checks out specified branch
 	@echo "START checking out correct submodule versions ..."
 	git submodule update --init --recursive
 	git -C ${T2S_APIS_DIR} fetch --all
