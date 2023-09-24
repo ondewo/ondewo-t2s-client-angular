@@ -119,6 +119,7 @@ release: ## Create Github and NPM Release
 	git add ondewo-t2s-client-angular.metadata.json
 	git add package-lock.json
 	git add package.json
+	-git add tsconfig.json
 	git add Makefile
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git add ${T2S_APIS_DIR}
