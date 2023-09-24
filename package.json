@@ -38,7 +38,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "eslint": "^8.50.0",
     "tslib": "^2.3.0"
   },
   "scripts": {
