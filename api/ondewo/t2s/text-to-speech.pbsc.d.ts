@@ -137,6 +137,61 @@ export declare class Text2SpeechClient {
 			requestData: googleProtobuf000.Empty,
 			requestMetadata?: GrpcMetadata
 		) => Observable<GrpcEvent<thisProto.T2SGetServiceInfoResponse>>;
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/GetCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+		 */
+		getCustomPhonemizer: (
+			requestData: thisProto.PhonemizerId,
+			requestMetadata?: GrpcMetadata
+		) => Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>;
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/CreateCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
+		 */
+		createCustomPhonemizer: (
+			requestData: thisProto.CreateCustomPhonemizerRequest,
+			requestMetadata?: GrpcMetadata
+		) => Observable<GrpcEvent<thisProto.PhonemizerId>>;
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/DeleteCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+		 */
+		deleteCustomPhonemizer: (
+			requestData: thisProto.PhonemizerId,
+			requestMetadata?: GrpcMetadata
+		) => Observable<GrpcEvent<googleProtobuf000.Empty>>;
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/UpdateCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
+		 */
+		updateCustomPhonemizer: (
+			requestData: thisProto.UpdateCustomPhonemizerRequest,
+			requestMetadata?: GrpcMetadata
+		) => Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>;
+		/**
+		 * Unary call: /ondewo.t2s.Text2Speech/ListCustomPhonemizer
+		 *
+		 * @param requestMessage Request message
+		 * @param requestMetadata Request metadata
+		 * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
+		 */
+		listCustomPhonemizer: (
+			requestData: thisProto.ListCustomPhonemizerRequest,
+			requestMetadata?: GrpcMetadata
+		) => Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>;
 	};
 	constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
 	/**
@@ -260,80 +315,8 @@ export declare class Text2SpeechClient {
 		requestData: googleProtobuf000.Empty,
 		requestMetadata?: GrpcMetadata
 	): Observable<thisProto.T2SGetServiceInfoResponse>;
-	static ɵfac: i0.ɵɵFactoryDeclaration<Text2SpeechClient, [{ optional: true }, null, null]>;
-	static ɵprov: i0.ɵɵInjectableDeclaration<Text2SpeechClient>;
-}
-/**
- * Service client implementation for ondewo.t2s.CustomPhonemizers
- */
-export declare class CustomPhonemizersClient {
-	private handler;
-	private client;
 	/**
-	 * Raw RPC implementation for each service client method.
-	 * The raw methods provide more control on the incoming data and events. E.g. they can be useful to read status `OK` metadata.
-	 * Attention: these methods do not throw errors when non-zero status codes are received.
-	 */
-	$raw: {
-		/**
-		 * Unary call: /ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
-		 *
-		 * @param requestMessage Request message
-		 * @param requestMetadata Request metadata
-		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-		 */
-		getCustomPhonemizer: (
-			requestData: thisProto.PhonemizerId,
-			requestMetadata?: GrpcMetadata
-		) => Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>;
-		/**
-		 * Unary call: /ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
-		 *
-		 * @param requestMessage Request message
-		 * @param requestMetadata Request metadata
-		 * @returns Observable<GrpcEvent<thisProto.PhonemizerId>>
-		 */
-		createCustomPhonemizer: (
-			requestData: thisProto.CreateCustomPhonemizerRequest,
-			requestMetadata?: GrpcMetadata
-		) => Observable<GrpcEvent<thisProto.PhonemizerId>>;
-		/**
-		 * Unary call: /ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
-		 *
-		 * @param requestMessage Request message
-		 * @param requestMetadata Request metadata
-		 * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
-		 */
-		deleteCustomPhonemizer: (
-			requestData: thisProto.PhonemizerId,
-			requestMetadata?: GrpcMetadata
-		) => Observable<GrpcEvent<googleProtobuf000.Empty>>;
-		/**
-		 * Unary call: /ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
-		 *
-		 * @param requestMessage Request message
-		 * @param requestMetadata Request metadata
-		 * @returns Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>
-		 */
-		updateCustomPhonemizer: (
-			requestData: thisProto.UpdateCustomPhonemizerRequest,
-			requestMetadata?: GrpcMetadata
-		) => Observable<GrpcEvent<thisProto.CustomPhonemizerProto>>;
-		/**
-		 * Unary call: /ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
-		 *
-		 * @param requestMessage Request message
-		 * @param requestMetadata Request metadata
-		 * @returns Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>
-		 */
-		listCustomPhonemizer: (
-			requestData: thisProto.ListCustomPhonemizerRequest,
-			requestMetadata?: GrpcMetadata
-		) => Observable<GrpcEvent<thisProto.ListCustomPhonemizerResponse>>;
-	};
-	constructor(settings: any, clientFactory: GrpcClientFactory<any>, handler: GrpcHandler);
-	/**
-	 * Unary call @/ondewo.t2s.CustomPhonemizers/GetCustomPhonemizer
+	 * Unary call @/ondewo.t2s.Text2Speech/GetCustomPhonemizer
 	 *
 	 * @param requestMessage Request message
 	 * @param requestMetadata Request metadata
@@ -344,7 +327,7 @@ export declare class CustomPhonemizersClient {
 		requestMetadata?: GrpcMetadata
 	): Observable<thisProto.CustomPhonemizerProto>;
 	/**
-	 * Unary call @/ondewo.t2s.CustomPhonemizers/CreateCustomPhonemizer
+	 * Unary call @/ondewo.t2s.Text2Speech/CreateCustomPhonemizer
 	 *
 	 * @param requestMessage Request message
 	 * @param requestMetadata Request metadata
@@ -355,7 +338,7 @@ export declare class CustomPhonemizersClient {
 		requestMetadata?: GrpcMetadata
 	): Observable<thisProto.PhonemizerId>;
 	/**
-	 * Unary call @/ondewo.t2s.CustomPhonemizers/DeleteCustomPhonemizer
+	 * Unary call @/ondewo.t2s.Text2Speech/DeleteCustomPhonemizer
 	 *
 	 * @param requestMessage Request message
 	 * @param requestMetadata Request metadata
@@ -366,7 +349,7 @@ export declare class CustomPhonemizersClient {
 		requestMetadata?: GrpcMetadata
 	): Observable<googleProtobuf000.Empty>;
 	/**
-	 * Unary call @/ondewo.t2s.CustomPhonemizers/UpdateCustomPhonemizer
+	 * Unary call @/ondewo.t2s.Text2Speech/UpdateCustomPhonemizer
 	 *
 	 * @param requestMessage Request message
 	 * @param requestMetadata Request metadata
@@ -377,7 +360,7 @@ export declare class CustomPhonemizersClient {
 		requestMetadata?: GrpcMetadata
 	): Observable<thisProto.CustomPhonemizerProto>;
 	/**
-	 * Unary call @/ondewo.t2s.CustomPhonemizers/ListCustomPhonemizer
+	 * Unary call @/ondewo.t2s.Text2Speech/ListCustomPhonemizer
 	 *
 	 * @param requestMessage Request message
 	 * @param requestMetadata Request metadata
@@ -387,6 +370,6 @@ export declare class CustomPhonemizersClient {
 		requestData: thisProto.ListCustomPhonemizerRequest,
 		requestMetadata?: GrpcMetadata
 	): Observable<thisProto.ListCustomPhonemizerResponse>;
-	static ɵfac: i0.ɵɵFactoryDeclaration<CustomPhonemizersClient, [{ optional: true }, null, null]>;
-	static ɵprov: i0.ɵɵInjectableDeclaration<CustomPhonemizersClient>;
+	static ɵfac: i0.ɵɵFactoryDeclaration<Text2SpeechClient, [{ optional: true }, null, null]>;
+	static ɵprov: i0.ɵɵInjectableDeclaration<Text2SpeechClient>;
 }

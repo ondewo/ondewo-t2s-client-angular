@@ -1,6 +1,6 @@
 {
     "name": "@ondewo/t2s-client-angular",
-    "version": "5.0.1",
+    "version": "5.2.0",
     "description": "Ondewo text to speech client library for angular",
     "keywords": [
         "ondewo",

@@ -1773,6 +1773,8 @@ export declare class GlowTTSTriton implements GrpcMessage {
 	private _maxTextLength;
 	private _paramConfigPath;
 	private _tritonModelName;
+	private _tritonServerHost;
+	private _tritonServerPort;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
 	 * @param _value initial values object or instance of GlowTTSTriton to deeply clone from
@@ -1792,6 +1794,10 @@ export declare class GlowTTSTriton implements GrpcMessage {
 	set paramConfigPath(value: string);
 	get tritonModelName(): string;
 	set tritonModelName(value: string);
+	get tritonServerHost(): string;
+	set tritonServerHost(value: string);
+	get tritonServerPort(): string;
+	set tritonServerPort(value: string);
 	/**
 	 * Serialize message to binary data
 	 * @param instance message instance
@@ -1824,6 +1830,8 @@ export declare module GlowTTSTriton {
 		maxTextLength: string;
 		paramConfigPath: string;
 		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 	/**
 	 * Protobuf JSON representation for GlowTTSTriton
@@ -1836,6 +1844,8 @@ export declare module GlowTTSTriton {
 		maxTextLength: string;
 		paramConfigPath: string;
 		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 }
 /**
@@ -2035,6 +2045,8 @@ export declare class HiFiGanTriton implements GrpcMessage {
 	static serializeBinaryToWriter(_instance: HiFiGanTriton, _writer: BinaryWriter): void;
 	private _configPath;
 	private _tritonModelName;
+	private _tritonServerHost;
+	private _tritonServerPort;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
 	 * @param _value initial values object or instance of HiFiGanTriton to deeply clone from
@@ -2044,6 +2056,10 @@ export declare class HiFiGanTriton implements GrpcMessage {
 	set configPath(value: string);
 	get tritonModelName(): string;
 	set tritonModelName(value: string);
+	get tritonServerHost(): string;
+	set tritonServerHost(value: string);
+	get tritonServerPort(): string;
+	set tritonServerPort(value: string);
 	/**
 	 * Serialize message to binary data
 	 * @param instance message instance
@@ -2071,6 +2087,8 @@ export declare module HiFiGanTriton {
 	interface AsObject {
 		configPath: string;
 		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 	/**
 	 * Protobuf JSON representation for HiFiGanTriton
@@ -2078,6 +2096,8 @@ export declare module HiFiGanTriton {
 	interface AsProtobufJSON {
 		configPath: string;
 		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 }
 /**
@@ -2110,7 +2130,8 @@ export declare class MbMelganTriton implements GrpcMessage {
 	private _configPath;
 	private _statsPath;
 	private _tritonModelName;
-	private _tritonUrl;
+	private _tritonServerHost;
+	private _tritonServerPort;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
 	 * @param _value initial values object or instance of MbMelganTriton to deeply clone from
@@ -2122,8 +2143,10 @@ export declare class MbMelganTriton implements GrpcMessage {
 	set statsPath(value: string);
 	get tritonModelName(): string;
 	set tritonModelName(value: string);
-	get tritonUrl(): string;
-	set tritonUrl(value: string);
+	get tritonServerHost(): string;
+	set tritonServerHost(value: string);
+	get tritonServerPort(): string;
+	set tritonServerPort(value: string);
 	/**
 	 * Serialize message to binary data
 	 * @param instance message instance
@@ -2152,7 +2175,8 @@ export declare module MbMelganTriton {
 		configPath: string;
 		statsPath: string;
 		tritonModelName: string;
-		tritonUrl: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 	/**
 	 * Protobuf JSON representation for MbMelganTriton
@@ -2161,7 +2185,8 @@ export declare module MbMelganTriton {
 		configPath: string;
 		statsPath: string;
 		tritonModelName: string;
-		tritonUrl: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
 	}
 }
 /**
