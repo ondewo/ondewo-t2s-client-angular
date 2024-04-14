@@ -1437,6 +1437,7 @@ export declare class T2SInference implements GrpcMessage {
 	static serializeBinaryToWriter(_instance: T2SInference, _writer: BinaryWriter): void;
 	private _type;
 	private _compositeInference?;
+	private _singleInference?;
 	private _caching?;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -1447,6 +1448,8 @@ export declare class T2SInference implements GrpcMessage {
 	set type(value: string);
 	get compositeInference(): CompositeInference | undefined;
 	set compositeInference(value: CompositeInference | undefined);
+	get singleInference(): SingleInference | undefined;
+	set singleInference(value: SingleInference | undefined);
 	get caching(): Caching | undefined;
 	set caching(value: Caching | undefined);
 	/**
@@ -1476,6 +1479,7 @@ export declare module T2SInference {
 	interface AsObject {
 		type: string;
 		compositeInference?: CompositeInference.AsObject;
+		singleInference?: SingleInference.AsObject;
 		caching?: Caching.AsObject;
 	}
 	/**
@@ -1484,6 +1488,7 @@ export declare module T2SInference {
 	interface AsProtobufJSON {
 		type: string;
 		compositeInference: CompositeInference.AsProtobufJSON | null;
+		singleInference: SingleInference.AsProtobufJSON | null;
 		caching: Caching.AsProtobufJSON | null;
 	}
 }
@@ -1559,6 +1564,75 @@ export declare module CompositeInference {
 	interface AsProtobufJSON {
 		text2mel: Text2Mel.AsProtobufJSON | null;
 		mel2audio: Mel2Audio.AsProtobufJSON | null;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.SingleInference
+ */
+export declare class SingleInference implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): SingleInference;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: SingleInference): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: SingleInference, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: SingleInference, _writer: BinaryWriter): void;
+	private _text2audio?;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of SingleInference to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<SingleInference.AsObject>);
+	get text2audio(): Text2Audio | undefined;
+	set text2audio(value: Text2Audio | undefined);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): SingleInference.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): SingleInference.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): SingleInference.AsProtobufJSON;
+}
+export declare module SingleInference {
+	/**
+	 * Standard JavaScript object representation for SingleInference
+	 */
+	interface AsObject {
+		text2audio?: Text2Audio.AsObject;
+	}
+	/**
+	 * Protobuf JSON representation for SingleInference
+	 */
+	interface AsProtobufJSON {
+		text2audio: Text2Audio.AsProtobufJSON | null;
 	}
 }
 /**
@@ -1638,6 +1712,85 @@ export declare module Text2Mel {
 		type: string;
 		glowTts: GlowTTS.AsProtobufJSON | null;
 		glowTtsTriton: GlowTTSTriton.AsProtobufJSON | null;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Text2Audio
+ */
+export declare class Text2Audio implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): Text2Audio;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: Text2Audio): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: Text2Audio, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: Text2Audio, _writer: BinaryWriter): void;
+	private _type;
+	private _vits?;
+	private _vitsTriton?;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Text2Audio to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<Text2Audio.AsObject>);
+	get type(): string;
+	set type(value: string);
+	get vits(): Vits | undefined;
+	set vits(value: Vits | undefined);
+	get vitsTriton(): VitsTriton | undefined;
+	set vitsTriton(value: VitsTriton | undefined);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): Text2Audio.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): Text2Audio.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): Text2Audio.AsProtobufJSON;
+}
+export declare module Text2Audio {
+	/**
+	 * Standard JavaScript object representation for Text2Audio
+	 */
+	interface AsObject {
+		type: string;
+		vits?: Vits.AsObject;
+		vitsTriton?: VitsTriton.AsObject;
+	}
+	/**
+	 * Protobuf JSON representation for Text2Audio
+	 */
+	interface AsProtobufJSON {
+		type: string;
+		vits: Vits.AsProtobufJSON | null;
+		vitsTriton: VitsTriton.AsProtobufJSON | null;
 	}
 }
 /**
@@ -1835,6 +1988,214 @@ export declare module GlowTTSTriton {
 	}
 	/**
 	 * Protobuf JSON representation for GlowTTSTriton
+	 */
+	interface AsProtobufJSON {
+		batchSize: string;
+		lengthScale: number;
+		noiseScale: number;
+		cleaners: string[];
+		maxTextLength: string;
+		paramConfigPath: string;
+		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Vits
+ */
+export declare class Vits implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): Vits;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: Vits): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: Vits, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: Vits, _writer: BinaryWriter): void;
+	private _batchSize;
+	private _useGpu;
+	private _lengthScale;
+	private _noiseScale;
+	private _path;
+	private _cleaners;
+	private _paramConfigPath;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Vits to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<Vits.AsObject>);
+	get batchSize(): string;
+	set batchSize(value: string);
+	get useGpu(): boolean;
+	set useGpu(value: boolean);
+	get lengthScale(): number;
+	set lengthScale(value: number);
+	get noiseScale(): number;
+	set noiseScale(value: number);
+	get path(): string;
+	set path(value: string);
+	get cleaners(): string[];
+	set cleaners(value: string[]);
+	get paramConfigPath(): string;
+	set paramConfigPath(value: string);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): Vits.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): Vits.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): Vits.AsProtobufJSON;
+}
+export declare module Vits {
+	/**
+	 * Standard JavaScript object representation for Vits
+	 */
+	interface AsObject {
+		batchSize: string;
+		useGpu: boolean;
+		lengthScale: number;
+		noiseScale: number;
+		path: string;
+		cleaners: string[];
+		paramConfigPath: string;
+	}
+	/**
+	 * Protobuf JSON representation for Vits
+	 */
+	interface AsProtobufJSON {
+		batchSize: string;
+		useGpu: boolean;
+		lengthScale: number;
+		noiseScale: number;
+		path: string;
+		cleaners: string[];
+		paramConfigPath: string;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.VitsTriton
+ */
+export declare class VitsTriton implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): VitsTriton;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: VitsTriton): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: VitsTriton, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: VitsTriton, _writer: BinaryWriter): void;
+	private _batchSize;
+	private _lengthScale;
+	private _noiseScale;
+	private _cleaners;
+	private _maxTextLength;
+	private _paramConfigPath;
+	private _tritonModelName;
+	private _tritonServerHost;
+	private _tritonServerPort;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of VitsTriton to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<VitsTriton.AsObject>);
+	get batchSize(): string;
+	set batchSize(value: string);
+	get lengthScale(): number;
+	set lengthScale(value: number);
+	get noiseScale(): number;
+	set noiseScale(value: number);
+	get cleaners(): string[];
+	set cleaners(value: string[]);
+	get maxTextLength(): string;
+	set maxTextLength(value: string);
+	get paramConfigPath(): string;
+	set paramConfigPath(value: string);
+	get tritonModelName(): string;
+	set tritonModelName(value: string);
+	get tritonServerHost(): string;
+	set tritonServerHost(value: string);
+	get tritonServerPort(): string;
+	set tritonServerPort(value: string);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): VitsTriton.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): VitsTriton.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): VitsTriton.AsProtobufJSON;
+}
+export declare module VitsTriton {
+	/**
+	 * Standard JavaScript object representation for VitsTriton
+	 */
+	interface AsObject {
+		batchSize: string;
+		lengthScale: number;
+		noiseScale: number;
+		cleaners: string[];
+		maxTextLength: string;
+		paramConfigPath: string;
+		tritonModelName: string;
+		tritonServerHost: string;
+		tritonServerPort: string;
+	}
+	/**
+	 * Protobuf JSON representation for VitsTriton
 	 */
 	interface AsProtobufJSON {
 		batchSize: string;

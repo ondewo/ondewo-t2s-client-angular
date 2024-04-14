@@ -2476,6 +2476,7 @@ class T2SInference {
 	static refineValues(_instance) {
 		_instance.type = _instance.type || '';
 		_instance.compositeInference = _instance.compositeInference || undefined;
+		_instance.singleInference = _instance.singleInference || undefined;
 		_instance.caching = _instance.caching || undefined;
 	}
 	/**
@@ -2495,6 +2496,10 @@ class T2SInference {
 					_reader.readMessage(_instance.compositeInference, CompositeInference.deserializeBinaryFromReader);
 					break;
 				case 3:
+					_instance.singleInference = new SingleInference();
+					_reader.readMessage(_instance.singleInference, SingleInference.deserializeBinaryFromReader);
+					break;
+				case 4:
 					_instance.caching = new Caching();
 					_reader.readMessage(_instance.caching, Caching.deserializeBinaryFromReader);
 					break;
@@ -2516,12 +2521,16 @@ class T2SInference {
 		if (_instance.compositeInference) {
 			_writer.writeMessage(2, _instance.compositeInference, CompositeInference.serializeBinaryToWriter);
 		}
+		if (_instance.singleInference) {
+			_writer.writeMessage(3, _instance.singleInference, SingleInference.serializeBinaryToWriter);
+		}
 		if (_instance.caching) {
-			_writer.writeMessage(3, _instance.caching, Caching.serializeBinaryToWriter);
+			_writer.writeMessage(4, _instance.caching, Caching.serializeBinaryToWriter);
 		}
 	}
 	_type;
 	_compositeInference;
+	_singleInference;
 	_caching;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -2531,6 +2540,7 @@ class T2SInference {
 		_value = _value || {};
 		this.type = _value.type;
 		this.compositeInference = _value.compositeInference ? new CompositeInference(_value.compositeInference) : undefined;
+		this.singleInference = _value.singleInference ? new SingleInference(_value.singleInference) : undefined;
 		this.caching = _value.caching ? new Caching(_value.caching) : undefined;
 		T2SInference.refineValues(this);
 	}
@@ -2545,6 +2555,12 @@ class T2SInference {
 	}
 	set compositeInference(value) {
 		this._compositeInference = value;
+	}
+	get singleInference() {
+		return this._singleInference;
+	}
+	set singleInference(value) {
+		this._singleInference = value;
 	}
 	get caching() {
 		return this._caching;
@@ -2568,6 +2584,7 @@ class T2SInference {
 		return {
 			type: this.type,
 			compositeInference: this.compositeInference ? this.compositeInference.toObject() : undefined,
+			singleInference: this.singleInference ? this.singleInference.toObject() : undefined,
 			caching: this.caching ? this.caching.toObject() : undefined
 		};
 	}
@@ -2589,6 +2606,7 @@ class T2SInference {
 		return {
 			type: this.type,
 			compositeInference: this.compositeInference ? this.compositeInference.toProtobufJSON(options) : null,
+			singleInference: this.singleInference ? this.singleInference.toProtobufJSON(options) : null,
 			caching: this.caching ? this.caching.toProtobufJSON(options) : null
 		};
 	}
@@ -2711,6 +2729,109 @@ class CompositeInference {
 		return {
 			text2mel: this.text2mel ? this.text2mel.toProtobufJSON(options) : null,
 			mel2audio: this.mel2audio ? this.mel2audio.toProtobufJSON(options) : null
+		};
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.SingleInference
+ */
+class SingleInference {
+	static id = 'ondewo.t2s.SingleInference';
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes) {
+		const instance = new SingleInference();
+		SingleInference.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+		return instance;
+	}
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance) {
+		_instance.text2audio = _instance.text2audio || undefined;
+	}
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance, _reader) {
+		while (_reader.nextField()) {
+			if (_reader.isEndGroup()) break;
+			switch (_reader.getFieldNumber()) {
+				case 1:
+					_instance.text2audio = new Text2Audio();
+					_reader.readMessage(_instance.text2audio, Text2Audio.deserializeBinaryFromReader);
+					break;
+				default:
+					_reader.skipField();
+			}
+		}
+		SingleInference.refineValues(_instance);
+	}
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance, _writer) {
+		if (_instance.text2audio) {
+			_writer.writeMessage(1, _instance.text2audio, Text2Audio.serializeBinaryToWriter);
+		}
+	}
+	_text2audio;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of SingleInference to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.text2audio = _value.text2audio ? new Text2Audio(_value.text2audio) : undefined;
+		SingleInference.refineValues(this);
+	}
+	get text2audio() {
+		return this._text2audio;
+	}
+	set text2audio(value) {
+		this._text2audio = value;
+	}
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary() {
+		const writer = new BinaryWriter();
+		SingleInference.serializeBinaryToWriter(this, writer);
+		return writer.getResultBuffer();
+	}
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject() {
+		return {
+			text2audio: this.text2audio ? this.text2audio.toObject() : undefined
+		};
+	}
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON() {
+		return this.toObject();
+	}
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(
+		// @ts-ignore
+		options
+	) {
+		return {
+			text2audio: this.text2audio ? this.text2audio.toProtobufJSON(options) : null
 		};
 	}
 }
@@ -2849,6 +2970,144 @@ class Text2Mel {
 			type: this.type,
 			glowTts: this.glowTts ? this.glowTts.toProtobufJSON(options) : null,
 			glowTtsTriton: this.glowTtsTriton ? this.glowTtsTriton.toProtobufJSON(options) : null
+		};
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Text2Audio
+ */
+class Text2Audio {
+	static id = 'ondewo.t2s.Text2Audio';
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes) {
+		const instance = new Text2Audio();
+		Text2Audio.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+		return instance;
+	}
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance) {
+		_instance.type = _instance.type || '';
+		_instance.vits = _instance.vits || undefined;
+		_instance.vitsTriton = _instance.vitsTriton || undefined;
+	}
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance, _reader) {
+		while (_reader.nextField()) {
+			if (_reader.isEndGroup()) break;
+			switch (_reader.getFieldNumber()) {
+				case 1:
+					_instance.type = _reader.readString();
+					break;
+				case 2:
+					_instance.vits = new Vits();
+					_reader.readMessage(_instance.vits, Vits.deserializeBinaryFromReader);
+					break;
+				case 3:
+					_instance.vitsTriton = new VitsTriton();
+					_reader.readMessage(_instance.vitsTriton, VitsTriton.deserializeBinaryFromReader);
+					break;
+				default:
+					_reader.skipField();
+			}
+		}
+		Text2Audio.refineValues(_instance);
+	}
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance, _writer) {
+		if (_instance.type) {
+			_writer.writeString(1, _instance.type);
+		}
+		if (_instance.vits) {
+			_writer.writeMessage(2, _instance.vits, Vits.serializeBinaryToWriter);
+		}
+		if (_instance.vitsTriton) {
+			_writer.writeMessage(3, _instance.vitsTriton, VitsTriton.serializeBinaryToWriter);
+		}
+	}
+	_type;
+	_vits;
+	_vitsTriton;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Text2Audio to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.type = _value.type;
+		this.vits = _value.vits ? new Vits(_value.vits) : undefined;
+		this.vitsTriton = _value.vitsTriton ? new VitsTriton(_value.vitsTriton) : undefined;
+		Text2Audio.refineValues(this);
+	}
+	get type() {
+		return this._type;
+	}
+	set type(value) {
+		this._type = value;
+	}
+	get vits() {
+		return this._vits;
+	}
+	set vits(value) {
+		this._vits = value;
+	}
+	get vitsTriton() {
+		return this._vitsTriton;
+	}
+	set vitsTriton(value) {
+		this._vitsTriton = value;
+	}
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary() {
+		const writer = new BinaryWriter();
+		Text2Audio.serializeBinaryToWriter(this, writer);
+		return writer.getResultBuffer();
+	}
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject() {
+		return {
+			type: this.type,
+			vits: this.vits ? this.vits.toObject() : undefined,
+			vitsTriton: this.vitsTriton ? this.vitsTriton.toObject() : undefined
+		};
+	}
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON() {
+		return this.toObject();
+	}
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(
+		// @ts-ignore
+		options
+	) {
+		return {
+			type: this.type,
+			vits: this.vits ? this.vits.toProtobufJSON(options) : null,
+			vitsTriton: this.vitsTriton ? this.vitsTriton.toProtobufJSON(options) : null
 		};
 	}
 }
@@ -3248,6 +3507,448 @@ class GlowTTSTriton {
 	serializeBinary() {
 		const writer = new BinaryWriter();
 		GlowTTSTriton.serializeBinaryToWriter(this, writer);
+		return writer.getResultBuffer();
+	}
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject() {
+		return {
+			batchSize: this.batchSize,
+			lengthScale: this.lengthScale,
+			noiseScale: this.noiseScale,
+			cleaners: (this.cleaners || []).slice(),
+			maxTextLength: this.maxTextLength,
+			paramConfigPath: this.paramConfigPath,
+			tritonModelName: this.tritonModelName,
+			tritonServerHost: this.tritonServerHost,
+			tritonServerPort: this.tritonServerPort
+		};
+	}
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON() {
+		return this.toObject();
+	}
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(
+		// @ts-ignore
+		options
+	) {
+		return {
+			batchSize: this.batchSize,
+			lengthScale: this.lengthScale,
+			noiseScale: this.noiseScale,
+			cleaners: (this.cleaners || []).slice(),
+			maxTextLength: this.maxTextLength,
+			paramConfigPath: this.paramConfigPath,
+			tritonModelName: this.tritonModelName,
+			tritonServerHost: this.tritonServerHost,
+			tritonServerPort: this.tritonServerPort
+		};
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Vits
+ */
+class Vits {
+	static id = 'ondewo.t2s.Vits';
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes) {
+		const instance = new Vits();
+		Vits.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+		return instance;
+	}
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance) {
+		_instance.batchSize = _instance.batchSize || '0';
+		_instance.useGpu = _instance.useGpu || false;
+		_instance.lengthScale = _instance.lengthScale || 0;
+		_instance.noiseScale = _instance.noiseScale || 0;
+		_instance.path = _instance.path || '';
+		_instance.cleaners = _instance.cleaners || [];
+		_instance.paramConfigPath = _instance.paramConfigPath || '';
+	}
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance, _reader) {
+		while (_reader.nextField()) {
+			if (_reader.isEndGroup()) break;
+			switch (_reader.getFieldNumber()) {
+				case 1:
+					_instance.batchSize = _reader.readInt64String();
+					break;
+				case 2:
+					_instance.useGpu = _reader.readBool();
+					break;
+				case 3:
+					_instance.lengthScale = _reader.readFloat();
+					break;
+				case 4:
+					_instance.noiseScale = _reader.readFloat();
+					break;
+				case 5:
+					_instance.path = _reader.readString();
+					break;
+				case 6:
+					(_instance.cleaners = _instance.cleaners || []).push(_reader.readString());
+					break;
+				case 7:
+					_instance.paramConfigPath = _reader.readString();
+					break;
+				default:
+					_reader.skipField();
+			}
+		}
+		Vits.refineValues(_instance);
+	}
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance, _writer) {
+		if (_instance.batchSize) {
+			_writer.writeInt64String(1, _instance.batchSize);
+		}
+		if (_instance.useGpu) {
+			_writer.writeBool(2, _instance.useGpu);
+		}
+		if (_instance.lengthScale) {
+			_writer.writeFloat(3, _instance.lengthScale);
+		}
+		if (_instance.noiseScale) {
+			_writer.writeFloat(4, _instance.noiseScale);
+		}
+		if (_instance.path) {
+			_writer.writeString(5, _instance.path);
+		}
+		if (_instance.cleaners && _instance.cleaners.length) {
+			_writer.writeRepeatedString(6, _instance.cleaners);
+		}
+		if (_instance.paramConfigPath) {
+			_writer.writeString(7, _instance.paramConfigPath);
+		}
+	}
+	_batchSize;
+	_useGpu;
+	_lengthScale;
+	_noiseScale;
+	_path;
+	_cleaners;
+	_paramConfigPath;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Vits to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchSize = _value.batchSize;
+		this.useGpu = _value.useGpu;
+		this.lengthScale = _value.lengthScale;
+		this.noiseScale = _value.noiseScale;
+		this.path = _value.path;
+		this.cleaners = (_value.cleaners || []).slice();
+		this.paramConfigPath = _value.paramConfigPath;
+		Vits.refineValues(this);
+	}
+	get batchSize() {
+		return this._batchSize;
+	}
+	set batchSize(value) {
+		this._batchSize = value;
+	}
+	get useGpu() {
+		return this._useGpu;
+	}
+	set useGpu(value) {
+		this._useGpu = value;
+	}
+	get lengthScale() {
+		return this._lengthScale;
+	}
+	set lengthScale(value) {
+		this._lengthScale = value;
+	}
+	get noiseScale() {
+		return this._noiseScale;
+	}
+	set noiseScale(value) {
+		this._noiseScale = value;
+	}
+	get path() {
+		return this._path;
+	}
+	set path(value) {
+		this._path = value;
+	}
+	get cleaners() {
+		return this._cleaners;
+	}
+	set cleaners(value) {
+		this._cleaners = value;
+	}
+	get paramConfigPath() {
+		return this._paramConfigPath;
+	}
+	set paramConfigPath(value) {
+		this._paramConfigPath = value;
+	}
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary() {
+		const writer = new BinaryWriter();
+		Vits.serializeBinaryToWriter(this, writer);
+		return writer.getResultBuffer();
+	}
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject() {
+		return {
+			batchSize: this.batchSize,
+			useGpu: this.useGpu,
+			lengthScale: this.lengthScale,
+			noiseScale: this.noiseScale,
+			path: this.path,
+			cleaners: (this.cleaners || []).slice(),
+			paramConfigPath: this.paramConfigPath
+		};
+	}
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON() {
+		return this.toObject();
+	}
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(
+		// @ts-ignore
+		options
+	) {
+		return {
+			batchSize: this.batchSize,
+			useGpu: this.useGpu,
+			lengthScale: this.lengthScale,
+			noiseScale: this.noiseScale,
+			path: this.path,
+			cleaners: (this.cleaners || []).slice(),
+			paramConfigPath: this.paramConfigPath
+		};
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.VitsTriton
+ */
+class VitsTriton {
+	static id = 'ondewo.t2s.VitsTriton';
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes) {
+		const instance = new VitsTriton();
+		VitsTriton.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+		return instance;
+	}
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance) {
+		_instance.batchSize = _instance.batchSize || '0';
+		_instance.lengthScale = _instance.lengthScale || 0;
+		_instance.noiseScale = _instance.noiseScale || 0;
+		_instance.cleaners = _instance.cleaners || [];
+		_instance.maxTextLength = _instance.maxTextLength || '0';
+		_instance.paramConfigPath = _instance.paramConfigPath || '';
+		_instance.tritonModelName = _instance.tritonModelName || '';
+		_instance.tritonServerHost = _instance.tritonServerHost || '';
+		_instance.tritonServerPort = _instance.tritonServerPort || '0';
+	}
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance, _reader) {
+		while (_reader.nextField()) {
+			if (_reader.isEndGroup()) break;
+			switch (_reader.getFieldNumber()) {
+				case 1:
+					_instance.batchSize = _reader.readInt64String();
+					break;
+				case 2:
+					_instance.lengthScale = _reader.readFloat();
+					break;
+				case 3:
+					_instance.noiseScale = _reader.readFloat();
+					break;
+				case 4:
+					(_instance.cleaners = _instance.cleaners || []).push(_reader.readString());
+					break;
+				case 5:
+					_instance.maxTextLength = _reader.readInt64String();
+					break;
+				case 6:
+					_instance.paramConfigPath = _reader.readString();
+					break;
+				case 7:
+					_instance.tritonModelName = _reader.readString();
+					break;
+				case 8:
+					_instance.tritonServerHost = _reader.readString();
+					break;
+				case 9:
+					_instance.tritonServerPort = _reader.readInt64String();
+					break;
+				default:
+					_reader.skipField();
+			}
+		}
+		VitsTriton.refineValues(_instance);
+	}
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance, _writer) {
+		if (_instance.batchSize) {
+			_writer.writeInt64String(1, _instance.batchSize);
+		}
+		if (_instance.lengthScale) {
+			_writer.writeFloat(2, _instance.lengthScale);
+		}
+		if (_instance.noiseScale) {
+			_writer.writeFloat(3, _instance.noiseScale);
+		}
+		if (_instance.cleaners && _instance.cleaners.length) {
+			_writer.writeRepeatedString(4, _instance.cleaners);
+		}
+		if (_instance.maxTextLength) {
+			_writer.writeInt64String(5, _instance.maxTextLength);
+		}
+		if (_instance.paramConfigPath) {
+			_writer.writeString(6, _instance.paramConfigPath);
+		}
+		if (_instance.tritonModelName) {
+			_writer.writeString(7, _instance.tritonModelName);
+		}
+		if (_instance.tritonServerHost) {
+			_writer.writeString(8, _instance.tritonServerHost);
+		}
+		if (_instance.tritonServerPort) {
+			_writer.writeInt64String(9, _instance.tritonServerPort);
+		}
+	}
+	_batchSize;
+	_lengthScale;
+	_noiseScale;
+	_cleaners;
+	_maxTextLength;
+	_paramConfigPath;
+	_tritonModelName;
+	_tritonServerHost;
+	_tritonServerPort;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of VitsTriton to deeply clone from
+	 */
+	constructor(_value) {
+		_value = _value || {};
+		this.batchSize = _value.batchSize;
+		this.lengthScale = _value.lengthScale;
+		this.noiseScale = _value.noiseScale;
+		this.cleaners = (_value.cleaners || []).slice();
+		this.maxTextLength = _value.maxTextLength;
+		this.paramConfigPath = _value.paramConfigPath;
+		this.tritonModelName = _value.tritonModelName;
+		this.tritonServerHost = _value.tritonServerHost;
+		this.tritonServerPort = _value.tritonServerPort;
+		VitsTriton.refineValues(this);
+	}
+	get batchSize() {
+		return this._batchSize;
+	}
+	set batchSize(value) {
+		this._batchSize = value;
+	}
+	get lengthScale() {
+		return this._lengthScale;
+	}
+	set lengthScale(value) {
+		this._lengthScale = value;
+	}
+	get noiseScale() {
+		return this._noiseScale;
+	}
+	set noiseScale(value) {
+		this._noiseScale = value;
+	}
+	get cleaners() {
+		return this._cleaners;
+	}
+	set cleaners(value) {
+		this._cleaners = value;
+	}
+	get maxTextLength() {
+		return this._maxTextLength;
+	}
+	set maxTextLength(value) {
+		this._maxTextLength = value;
+	}
+	get paramConfigPath() {
+		return this._paramConfigPath;
+	}
+	set paramConfigPath(value) {
+		this._paramConfigPath = value;
+	}
+	get tritonModelName() {
+		return this._tritonModelName;
+	}
+	set tritonModelName(value) {
+		this._tritonModelName = value;
+	}
+	get tritonServerHost() {
+		return this._tritonServerHost;
+	}
+	set tritonServerHost(value) {
+		this._tritonServerHost = value;
+	}
+	get tritonServerPort() {
+		return this._tritonServerPort;
+	}
+	set tritonServerPort(value) {
+		this._tritonServerPort = value;
+	}
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary() {
+		const writer = new BinaryWriter();
+		VitsTriton.serializeBinaryToWriter(this, writer);
 		return writer.getResultBuffer();
 	}
 	/**
@@ -6519,6 +7220,7 @@ export {
 	PhonemizerId,
 	Postprocessing,
 	RequestConfig,
+	SingleInference,
 	SynthesizeRequest,
 	SynthesizeResponse,
 	T2SCustomLengthScales,
@@ -6527,10 +7229,13 @@ export {
 	T2SInference,
 	T2SNormalization,
 	T2sPipelineId,
+	Text2Audio,
 	Text2Mel,
 	Text2SpeechClient,
 	Text2SpeechConfig,
 	UpdateCustomPhonemizerRequest,
+	Vits,
+	VitsTriton,
 	Wiener
 };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map
