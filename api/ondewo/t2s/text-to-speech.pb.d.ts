@@ -1,5 +1,6 @@
 import { GrpcMessage, RecursivePartial, ToProtobufJSONOptions } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
+import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
 export declare enum Pcm {
     PCM_16 = 0,
     PCM_24 = 1,
@@ -265,6 +266,8 @@ export declare class RequestConfig implements GrpcMessage {
     private _audioFormat;
     private _useCache;
     private _normalizer;
+    private _t2sServiceConfig?;
+    private _t2sCloudProviderConfig?;
     private _oneofLengthScale;
     private _oneofNoiseScale;
     private _oneofSampleRate;
@@ -293,6 +296,10 @@ export declare class RequestConfig implements GrpcMessage {
     set useCache(value: boolean);
     get normalizer(): string;
     set normalizer(value: string);
+    get t2sServiceConfig(): googleProtobuf001.Struct | undefined;
+    set t2sServiceConfig(value: googleProtobuf001.Struct | undefined);
+    get t2sCloudProviderConfig(): T2sCloudProviderConfig | undefined;
+    set t2sCloudProviderConfig(value: T2sCloudProviderConfig | undefined);
     get oneofLengthScale(): RequestConfig.OneofLengthScaleCase;
     get oneofNoiseScale(): RequestConfig.OneofNoiseScaleCase;
     get oneofSampleRate(): RequestConfig.OneofSampleRateCase;
@@ -333,6 +340,8 @@ export declare namespace RequestConfig {
         audioFormat: AudioFormat;
         useCache: boolean;
         normalizer: string;
+        t2sServiceConfig?: googleProtobuf001.Struct.AsObject;
+        t2sCloudProviderConfig?: T2sCloudProviderConfig.AsObject;
     }
     /**
      * Protobuf JSON representation for RequestConfig
@@ -346,6 +355,8 @@ export declare namespace RequestConfig {
         audioFormat: string | null;
         useCache: boolean;
         normalizer: string | null;
+        t2sServiceConfig: googleProtobuf001.Struct.AsProtobufJSON | null;
+        t2sCloudProviderConfig: T2sCloudProviderConfig.AsProtobufJSON | null;
     }
     enum OneofLengthScaleCase {
         none = 0,
@@ -374,6 +385,322 @@ export declare namespace RequestConfig {
     enum OneofNormalizerCase {
         none = 0,
         normalizer = 1
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudProviderConfig
+ */
+export declare class T2sCloudProviderConfig implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudProviderConfig;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudProviderConfig): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudProviderConfig, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudProviderConfig, _writer: BinaryWriter): void;
+    private _t2sCloudProviderConfigElevenlabs?;
+    private _t2sCloudProviderConfigGoogle?;
+    private _t2sCloudProviderConfigMicrosoft?;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudProviderConfig to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudProviderConfig.AsObject>);
+    get t2sCloudProviderConfigElevenlabs(): T2sCloudProviderConfigElevenLabs | undefined;
+    set t2sCloudProviderConfigElevenlabs(value: T2sCloudProviderConfigElevenLabs | undefined);
+    get t2sCloudProviderConfigGoogle(): T2sCloudProviderConfigGoogle | undefined;
+    set t2sCloudProviderConfigGoogle(value: T2sCloudProviderConfigGoogle | undefined);
+    get t2sCloudProviderConfigMicrosoft(): T2sCloudProviderConfigMicrosoft | undefined;
+    set t2sCloudProviderConfigMicrosoft(value: T2sCloudProviderConfigMicrosoft | undefined);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudProviderConfig.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudProviderConfig.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudProviderConfig.AsProtobufJSON;
+}
+export declare namespace T2sCloudProviderConfig {
+    /**
+     * Standard JavaScript object representation for T2sCloudProviderConfig
+     */
+    interface AsObject {
+        t2sCloudProviderConfigElevenlabs?: T2sCloudProviderConfigElevenLabs.AsObject;
+        t2sCloudProviderConfigGoogle?: T2sCloudProviderConfigGoogle.AsObject;
+        t2sCloudProviderConfigMicrosoft?: T2sCloudProviderConfigMicrosoft.AsObject;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudProviderConfig
+     */
+    interface AsProtobufJSON {
+        t2sCloudProviderConfigElevenlabs: T2sCloudProviderConfigElevenLabs.AsProtobufJSON | null;
+        t2sCloudProviderConfigGoogle: T2sCloudProviderConfigGoogle.AsProtobufJSON | null;
+        t2sCloudProviderConfigMicrosoft: T2sCloudProviderConfigMicrosoft.AsProtobufJSON | null;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudProviderConfigElevenLabs
+ */
+export declare class T2sCloudProviderConfigElevenLabs implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudProviderConfigElevenLabs;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudProviderConfigElevenLabs): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudProviderConfigElevenLabs, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudProviderConfigElevenLabs, _writer: BinaryWriter): void;
+    private _stability;
+    private _similarityBoost;
+    private _style;
+    private _useSpeakerBoost;
+    private _applyTextNormalization;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudProviderConfigElevenLabs to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudProviderConfigElevenLabs.AsObject>);
+    get stability(): number;
+    set stability(value: number);
+    get similarityBoost(): number;
+    set similarityBoost(value: number);
+    get style(): number;
+    set style(value: number);
+    get useSpeakerBoost(): boolean;
+    set useSpeakerBoost(value: boolean);
+    get applyTextNormalization(): string;
+    set applyTextNormalization(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudProviderConfigElevenLabs.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudProviderConfigElevenLabs.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudProviderConfigElevenLabs.AsProtobufJSON;
+}
+export declare namespace T2sCloudProviderConfigElevenLabs {
+    /**
+     * Standard JavaScript object representation for T2sCloudProviderConfigElevenLabs
+     */
+    interface AsObject {
+        stability: number;
+        similarityBoost: number;
+        style: number;
+        useSpeakerBoost: boolean;
+        applyTextNormalization: string;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudProviderConfigElevenLabs
+     */
+    interface AsProtobufJSON {
+        stability: number;
+        similarityBoost: number;
+        style: number;
+        useSpeakerBoost: boolean;
+        applyTextNormalization: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudProviderConfigMicrosoft
+ */
+export declare class T2sCloudProviderConfigMicrosoft implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudProviderConfigMicrosoft;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudProviderConfigMicrosoft): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudProviderConfigMicrosoft, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudProviderConfigMicrosoft, _writer: BinaryWriter): void;
+    private _useDefaultSpeaker;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudProviderConfigMicrosoft to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudProviderConfigMicrosoft.AsObject>);
+    get useDefaultSpeaker(): boolean;
+    set useDefaultSpeaker(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudProviderConfigMicrosoft.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudProviderConfigMicrosoft.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudProviderConfigMicrosoft.AsProtobufJSON;
+}
+export declare namespace T2sCloudProviderConfigMicrosoft {
+    /**
+     * Standard JavaScript object representation for T2sCloudProviderConfigMicrosoft
+     */
+    interface AsObject {
+        useDefaultSpeaker: boolean;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudProviderConfigMicrosoft
+     */
+    interface AsProtobufJSON {
+        useDefaultSpeaker: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudProviderConfigGoogle
+ */
+export declare class T2sCloudProviderConfigGoogle implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudProviderConfigGoogle;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudProviderConfigGoogle): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudProviderConfigGoogle, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudProviderConfigGoogle, _writer: BinaryWriter): void;
+    private _speakingRate;
+    private _volumeGainDb;
+    private _pitch;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudProviderConfigGoogle to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudProviderConfigGoogle.AsObject>);
+    get speakingRate(): number;
+    set speakingRate(value: number);
+    get volumeGainDb(): number;
+    set volumeGainDb(value: number);
+    get pitch(): number;
+    set pitch(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudProviderConfigGoogle.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudProviderConfigGoogle.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudProviderConfigGoogle.AsProtobufJSON;
+}
+export declare namespace T2sCloudProviderConfigGoogle {
+    /**
+     * Standard JavaScript object representation for T2sCloudProviderConfigGoogle
+     */
+    interface AsObject {
+        speakingRate: number;
+        volumeGainDb: number;
+        pitch: number;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudProviderConfigGoogle
+     */
+    interface AsProtobufJSON {
+        speakingRate: number;
+        volumeGainDb: number;
+        pitch: number;
     }
 }
 /**
@@ -1744,6 +2071,10 @@ export declare class Text2Audio implements GrpcMessage {
     private _type;
     private _vits?;
     private _vitsTriton?;
+    private _t2sCloudServiceElevenlabs?;
+    private _t2sCloudServiceAmazon?;
+    private _t2sCloudServiceGoogle?;
+    private _t2sCloudServiceMicrosoft?;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of Text2Audio to deeply clone from
@@ -1755,6 +2086,14 @@ export declare class Text2Audio implements GrpcMessage {
     set vits(value: Vits | undefined);
     get vitsTriton(): VitsTriton | undefined;
     set vitsTriton(value: VitsTriton | undefined);
+    get t2sCloudServiceElevenlabs(): T2sCloudServiceElevenLabs | undefined;
+    set t2sCloudServiceElevenlabs(value: T2sCloudServiceElevenLabs | undefined);
+    get t2sCloudServiceAmazon(): T2sCloudServiceAmazon | undefined;
+    set t2sCloudServiceAmazon(value: T2sCloudServiceAmazon | undefined);
+    get t2sCloudServiceGoogle(): T2sCloudServiceGoogle | undefined;
+    set t2sCloudServiceGoogle(value: T2sCloudServiceGoogle | undefined);
+    get t2sCloudServiceMicrosoft(): T2sCloudServiceMicrosoft | undefined;
+    set t2sCloudServiceMicrosoft(value: T2sCloudServiceMicrosoft | undefined);
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -1783,6 +2122,10 @@ export declare namespace Text2Audio {
         type: string;
         vits?: Vits.AsObject;
         vitsTriton?: VitsTriton.AsObject;
+        t2sCloudServiceElevenlabs?: T2sCloudServiceElevenLabs.AsObject;
+        t2sCloudServiceAmazon?: T2sCloudServiceAmazon.AsObject;
+        t2sCloudServiceGoogle?: T2sCloudServiceGoogle.AsObject;
+        t2sCloudServiceMicrosoft?: T2sCloudServiceMicrosoft.AsObject;
     }
     /**
      * Protobuf JSON representation for Text2Audio
@@ -1791,6 +2134,10 @@ export declare namespace Text2Audio {
         type: string;
         vits: Vits.AsProtobufJSON | null;
         vitsTriton: VitsTriton.AsProtobufJSON | null;
+        t2sCloudServiceElevenlabs: T2sCloudServiceElevenLabs.AsProtobufJSON | null;
+        t2sCloudServiceAmazon: T2sCloudServiceAmazon.AsProtobufJSON | null;
+        t2sCloudServiceGoogle: T2sCloudServiceGoogle.AsProtobufJSON | null;
+        t2sCloudServiceMicrosoft: T2sCloudServiceMicrosoft.AsProtobufJSON | null;
     }
 }
 /**
@@ -2207,6 +2554,411 @@ export declare namespace VitsTriton {
         tritonModelName: string;
         tritonServerHost: string;
         tritonServerPort: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudServiceElevenLabs
+ */
+export declare class T2sCloudServiceElevenLabs implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudServiceElevenLabs;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudServiceElevenLabs): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudServiceElevenLabs, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudServiceElevenLabs, _writer: BinaryWriter): void;
+    private _languageCode;
+    private _modelId;
+    private _voiceId;
+    private _voiceSettings?;
+    private _applyTextNormalization;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudServiceElevenLabs to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudServiceElevenLabs.AsObject>);
+    get languageCode(): string;
+    set languageCode(value: string);
+    get modelId(): string;
+    set modelId(value: string);
+    get voiceId(): string;
+    set voiceId(value: string);
+    get voiceSettings(): VoiceSettings | undefined;
+    set voiceSettings(value: VoiceSettings | undefined);
+    get applyTextNormalization(): string;
+    set applyTextNormalization(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudServiceElevenLabs.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudServiceElevenLabs.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudServiceElevenLabs.AsProtobufJSON;
+}
+export declare namespace T2sCloudServiceElevenLabs {
+    /**
+     * Standard JavaScript object representation for T2sCloudServiceElevenLabs
+     */
+    interface AsObject {
+        languageCode: string;
+        modelId: string;
+        voiceId: string;
+        voiceSettings?: VoiceSettings.AsObject;
+        applyTextNormalization: string;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudServiceElevenLabs
+     */
+    interface AsProtobufJSON {
+        languageCode: string;
+        modelId: string;
+        voiceId: string;
+        voiceSettings: VoiceSettings.AsProtobufJSON | null;
+        applyTextNormalization: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.VoiceSettings
+ */
+export declare class VoiceSettings implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): VoiceSettings;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: VoiceSettings): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: VoiceSettings, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: VoiceSettings, _writer: BinaryWriter): void;
+    private _stability;
+    private _similarityBoost;
+    private _style;
+    private _useSpeakerBoost;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of VoiceSettings to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<VoiceSettings.AsObject>);
+    get stability(): number;
+    set stability(value: number);
+    get similarityBoost(): number;
+    set similarityBoost(value: number);
+    get style(): number;
+    set style(value: number);
+    get useSpeakerBoost(): boolean;
+    set useSpeakerBoost(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): VoiceSettings.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): VoiceSettings.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): VoiceSettings.AsProtobufJSON;
+}
+export declare namespace VoiceSettings {
+    /**
+     * Standard JavaScript object representation for VoiceSettings
+     */
+    interface AsObject {
+        stability: number;
+        similarityBoost: number;
+        style: number;
+        useSpeakerBoost: boolean;
+    }
+    /**
+     * Protobuf JSON representation for VoiceSettings
+     */
+    interface AsProtobufJSON {
+        stability: number;
+        similarityBoost: number;
+        style: number;
+        useSpeakerBoost: boolean;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudServiceAmazon
+ */
+export declare class T2sCloudServiceAmazon implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudServiceAmazon;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudServiceAmazon): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudServiceAmazon, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudServiceAmazon, _writer: BinaryWriter): void;
+    private _voiceId;
+    private _modelId;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudServiceAmazon to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudServiceAmazon.AsObject>);
+    get voiceId(): string;
+    set voiceId(value: string);
+    get modelId(): string;
+    set modelId(value: string);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudServiceAmazon.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudServiceAmazon.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudServiceAmazon.AsProtobufJSON;
+}
+export declare namespace T2sCloudServiceAmazon {
+    /**
+     * Standard JavaScript object representation for T2sCloudServiceAmazon
+     */
+    interface AsObject {
+        voiceId: string;
+        modelId: string;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudServiceAmazon
+     */
+    interface AsProtobufJSON {
+        voiceId: string;
+        modelId: string;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudServiceGoogle
+ */
+export declare class T2sCloudServiceGoogle implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudServiceGoogle;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudServiceGoogle): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudServiceGoogle, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudServiceGoogle, _writer: BinaryWriter): void;
+    private _voiceId;
+    private _speakingRate;
+    private _volumeGainDb;
+    private _pitch;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudServiceGoogle to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudServiceGoogle.AsObject>);
+    get voiceId(): string;
+    set voiceId(value: string);
+    get speakingRate(): number;
+    set speakingRate(value: number);
+    get volumeGainDb(): number;
+    set volumeGainDb(value: number);
+    get pitch(): number;
+    set pitch(value: number);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudServiceGoogle.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudServiceGoogle.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudServiceGoogle.AsProtobufJSON;
+}
+export declare namespace T2sCloudServiceGoogle {
+    /**
+     * Standard JavaScript object representation for T2sCloudServiceGoogle
+     */
+    interface AsObject {
+        voiceId: string;
+        speakingRate: number;
+        volumeGainDb: number;
+        pitch: number;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudServiceGoogle
+     */
+    interface AsProtobufJSON {
+        voiceId: string;
+        speakingRate: number;
+        volumeGainDb: number;
+        pitch: number;
+    }
+}
+/**
+ * Message implementation for ondewo.t2s.T2sCloudServiceMicrosoft
+ */
+export declare class T2sCloudServiceMicrosoft implements GrpcMessage {
+    static id: string;
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes: ByteSource): T2sCloudServiceMicrosoft;
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance: T2sCloudServiceMicrosoft): void;
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance: T2sCloudServiceMicrosoft, _reader: BinaryReader): void;
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance: T2sCloudServiceMicrosoft, _writer: BinaryWriter): void;
+    private _voiceId;
+    private _useDefaultSpeaker;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of T2sCloudServiceMicrosoft to deeply clone from
+     */
+    constructor(_value?: RecursivePartial<T2sCloudServiceMicrosoft.AsObject>);
+    get voiceId(): string;
+    set voiceId(value: string);
+    get useDefaultSpeaker(): boolean;
+    set useDefaultSpeaker(value: boolean);
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary(): any;
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject(): T2sCloudServiceMicrosoft.AsObject;
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON(): T2sCloudServiceMicrosoft.AsObject;
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(options?: ToProtobufJSONOptions): T2sCloudServiceMicrosoft.AsProtobufJSON;
+}
+export declare namespace T2sCloudServiceMicrosoft {
+    /**
+     * Standard JavaScript object representation for T2sCloudServiceMicrosoft
+     */
+    interface AsObject {
+        voiceId: string;
+        useDefaultSpeaker: boolean;
+    }
+    /**
+     * Protobuf JSON representation for T2sCloudServiceMicrosoft
+     */
+    interface AsProtobufJSON {
+        voiceId: string;
+        useDefaultSpeaker: boolean;
     }
 }
 /**
