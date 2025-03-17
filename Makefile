@@ -17,7 +17,7 @@ export
 ONDEWO_T2S_VERSION = 6.0.0
 
 T2S_API_GIT_BRANCH=tags/6.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.0.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.3.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 T2S_APIS_DIR=src/ondewo-t2s-api
 T2S_PROTOS_DIR=${T2S_APIS_DIR}/ondewo
@@ -84,8 +84,8 @@ check_build: ## Checks if all built proto-code is there
 	do \
 		find api -iname "*pb*" | grep -q $${file}; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in api" & exit 1;fi; \
-		find esm2022 -iname "*pb*" | grep -q $${file}; \
-		if test $$? != 0; then  echo "No Proto-Code for $${file} in esm2022" & exit 1;fi; \
+		# find esm2022 -iname "*pb*" | grep -q $${file}; \
+		# if test $$? != 0; then  echo "No Proto-Code for $${file} in esm2022" & exit 1;fi; \
 		find fesm2022 -iname "*ondewo-t2s-client-angular*" | wc -l | grep -q "2"; \
 		if test $$? != 0; then  echo "No Proto-Code for $${file} in fesm2022" & exit 1;fi; \
 	done
@@ -107,7 +107,7 @@ release: ## Create Github and NPM Release
 	make run_precommit_hooks
 	git status
 	git add api
-	git add esm2022
+	-git add esm2022
 	git add fesm2022
 	git add src
 	git add README.md
