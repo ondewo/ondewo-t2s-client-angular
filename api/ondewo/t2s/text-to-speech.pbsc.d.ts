@@ -33,6 +33,14 @@ export declare class Text2SpeechClient {
          */
         batchSynthesize: (requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.BatchSynthesizeResponse>>;
         /**
+         * Bidirectional streaming: /ondewo.t2s.Text2Speech/StreamingSynthesize
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.StreamingSynthesizeResponse>>
+         */
+        streamingSynthesize: (requestData: Observable<thisProto.StreamingSynthesizeRequest>, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.StreamingSynthesizeResponse>>;
+        /**
          * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
          *
          * @param requestMessage Request message
@@ -96,6 +104,14 @@ export declare class Text2SpeechClient {
          * @returns Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>
          */
         listT2sDomains: (requestData: thisProto.ListT2sDomainsRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListT2sDomainsResponse>>;
+        /**
+         * Unary call: /ondewo.t2s.Text2Speech/ListT2sNormalizationPipelines
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<thisProto.ListT2sNormalizationPipelinesResponse>>
+         */
+        listT2sNormalizationPipelines: (requestData: thisProto.ListT2sNormalizationPipelinesRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<thisProto.ListT2sNormalizationPipelinesResponse>>;
         /**
          * Unary call: /ondewo.t2s.Text2Speech/GetServiceInfo
          *
@@ -163,6 +179,14 @@ export declare class Text2SpeechClient {
      */
     batchSynthesize(requestData: thisProto.BatchSynthesizeRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.BatchSynthesizeResponse>;
     /**
+     * Bidirectional streaming @/ondewo.t2s.Text2Speech/StreamingSynthesize
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.StreamingSynthesizeResponse>
+     */
+    streamingSynthesize(requestData: Observable<thisProto.StreamingSynthesizeRequest>, requestMetadata?: GrpcMetadata): Observable<thisProto.StreamingSynthesizeResponse>;
+    /**
      * Unary call @/ondewo.t2s.Text2Speech/NormalizeText
      *
      * @param requestMessage Request message
@@ -226,6 +250,14 @@ export declare class Text2SpeechClient {
      * @returns Observable<thisProto.ListT2sDomainsResponse>
      */
     listT2sDomains(requestData: thisProto.ListT2sDomainsRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListT2sDomainsResponse>;
+    /**
+     * Unary call @/ondewo.t2s.Text2Speech/ListT2sNormalizationPipelines
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<thisProto.ListT2sNormalizationPipelinesResponse>
+     */
+    listT2sNormalizationPipelines(requestData: thisProto.ListT2sNormalizationPipelinesRequest, requestMetadata?: GrpcMetadata): Observable<thisProto.ListT2sNormalizationPipelinesResponse>;
     /**
      * Unary call @/ondewo.t2s.Text2Speech/GetServiceInfo
      *
