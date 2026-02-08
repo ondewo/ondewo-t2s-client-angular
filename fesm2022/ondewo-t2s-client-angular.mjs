@@ -9346,10 +9346,10 @@ class Text2SpeechClient {
             .listCustomPhonemizer(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.14", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.2.14", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "21.1.3", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "21.1.3", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.14", ngImport: i0, type: Text2SpeechClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "21.1.3", ngImport: i0, type: Text2SpeechClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
