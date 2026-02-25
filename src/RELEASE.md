@@ -1,34 +1,46 @@
 # Release History
 
-***************** 
-## Release ONDEWO T2S Angular Client 6.1.0 
- 
-### Improvements 
- * Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) ) 
+*****************
 
+## Release ONDEWO T2S Angular Client 6.1.1
 
-***************** 
-## Release ONDEWO T2S Angular Client 6.0.0 
- 
-### Improvements 
- * Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) ) 
+### Improvements
 
+* Upgrade dependency to Angular < 21.0.0
 
-***************** 
-## Release ONDEWO T2S Angular Client 5.3.0 
- 
-### Improvements 
- * Tracking API Version [5.3.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.3.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) ) 
+*****************
 
+## Release ONDEWO T2S Angular Client 6.1.0
 
-***************** 
-## Release ONDEWO T2S Angular Client 5.2.0 
- 
-### Improvements 
- * Tracking API Version [5.2.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.2.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) ) 
+### Improvements
 
+* Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
 
-***************** 
+*****************
+
+## Release ONDEWO T2S Angular Client 6.0.0
+
+### Improvements
+
+* Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+
+*****************
+
+## Release ONDEWO T2S Angular Client 5.3.0
+
+### Improvements
+
+* Tracking API Version [5.3.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.3.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+
+*****************
+
+## Release ONDEWO T2S Angular Client 5.2.0
+
+### Improvements
+
+* Tracking API Version [5.2.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.2.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+
+*****************
 
 ## Release ONDEWO T2S Angular Client 5.0.1
 
@@ -38,7 +50,7 @@
 * Tracking API
   Version [5.0.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.0.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
 
-***************** 
+*****************
 
 ## Release ONDEWO T2S Angular Client 5.0.0
 
@@ -47,7 +59,7 @@
 * Tracking API
   Version [5.0.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/5.0.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
 
-***************** 
+*****************
 
 ## Release ONDEWO T2S Angular Client 5.0.0
 
