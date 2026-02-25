@@ -213,7 +213,7 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	do \
 		sudo chown -R `whoami`:`whoami` $$f && echo $$f; \
 	done
-	-cd ondewo-t2s-api && git checkout -- '**/*.proto'
+	-cd ${T2S_APIS_DIR} && git checkout -- '**/*.proto'
 	@$(eval README_CUT_LINES:=$(shell cat -n src/README.md | sed -n "/START OF GITHUB README/,/END OF GITHUB README/p" | grep -o -E '[0-9]+' | sed -e 's/^0\+//' | awk 'NR==1; END{print}'))
 	@$(eval DELETE_LINES:=$(shell echo ${README_CUT_LINES}| sed -e "s/[[:space:]]/,/"))
 	@sed -i "${DELETE_LINES}d" npm/README.md
