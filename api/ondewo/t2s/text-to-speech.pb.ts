@@ -703,6 +703,7 @@ export class RequestConfig implements GrpcMessage {
 
     _instance.wordToPhonemeMapping =
       _instance.wordToPhonemeMapping || undefined;
+    _instance.instruction = _instance.instruction || '';
   }
 
   /**
@@ -766,6 +767,9 @@ export class RequestConfig implements GrpcMessage {
             _instance.wordToPhonemeMapping,
             googleProtobuf001.Struct.deserializeBinaryFromReader
           );
+          break;
+        case 13:
+          _instance.instruction = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -833,6 +837,9 @@ export class RequestConfig implements GrpcMessage {
         googleProtobuf001.Struct.serializeBinaryToWriter
       );
     }
+    if (_instance.instruction) {
+      _writer.writeString(13, _instance.instruction);
+    }
   }
 
   private _t2sPipelineId: string;
@@ -846,6 +853,7 @@ export class RequestConfig implements GrpcMessage {
   private _t2sCloudProviderConfig?: T2sCloudProviderConfig;
   private _t2sNormalization?: T2SNormalization;
   private _wordToPhonemeMapping?: googleProtobuf001.Struct;
+  private _instruction: string;
 
   private _oneofLengthScale: RequestConfig.OneofLengthScaleCase =
     RequestConfig.OneofLengthScaleCase.none;
@@ -887,6 +895,7 @@ export class RequestConfig implements GrpcMessage {
     this.wordToPhonemeMapping = _value.wordToPhonemeMapping
       ? new googleProtobuf001.Struct(_value.wordToPhonemeMapping)
       : undefined;
+    this.instruction = _value.instruction;
     RequestConfig.refineValues(this);
   }
   get t2sPipelineId(): string {
@@ -977,6 +986,12 @@ export class RequestConfig implements GrpcMessage {
   set wordToPhonemeMapping(value: googleProtobuf001.Struct | undefined) {
     this._wordToPhonemeMapping = value;
   }
+  get instruction(): string {
+    return this._instruction;
+  }
+  set instruction(value: string) {
+    this._instruction = value;
+  }
   get oneofLengthScale() {
     return this._oneofLengthScale;
   }
@@ -1032,7 +1047,8 @@ export class RequestConfig implements GrpcMessage {
         : undefined,
       wordToPhonemeMapping: this.wordToPhonemeMapping
         ? this.wordToPhonemeMapping.toObject()
-        : undefined
+        : undefined,
+      instruction: this.instruction
     };
   }
 
@@ -1090,7 +1106,8 @@ export class RequestConfig implements GrpcMessage {
         : null,
       wordToPhonemeMapping: this.wordToPhonemeMapping
         ? this.wordToPhonemeMapping.toProtobufJSON(options)
-        : null
+        : null,
+      instruction: this.instruction
     };
   }
 }
@@ -1110,6 +1127,7 @@ export module RequestConfig {
     t2sCloudProviderConfig?: T2sCloudProviderConfig.AsObject;
     t2sNormalization?: T2SNormalization.AsObject;
     wordToPhonemeMapping?: googleProtobuf001.Struct.AsObject;
+    instruction: string;
   }
 
   /**
@@ -1127,6 +1145,7 @@ export module RequestConfig {
     t2sCloudProviderConfig: T2sCloudProviderConfig.AsProtobufJSON | null;
     t2sNormalization: T2SNormalization.AsProtobufJSON | null;
     wordToPhonemeMapping: googleProtobuf001.Struct.AsProtobufJSON | null;
+    instruction: string;
   }
   export enum OneofLengthScaleCase {
     none = 0,
@@ -5723,6 +5742,8 @@ export class Text2Audio implements GrpcMessage {
       _instance.t2sCloudServiceGoogle || undefined;
     _instance.t2sCloudServiceMicrosoft =
       _instance.t2sCloudServiceMicrosoft || undefined;
+    _instance.qwen3TtsCustomVoice = _instance.qwen3TtsCustomVoice || undefined;
+    _instance.qwen3TtsBase = _instance.qwen3TtsBase || undefined;
   }
 
   /**
@@ -5778,6 +5799,20 @@ export class Text2Audio implements GrpcMessage {
           _reader.readMessage(
             _instance.t2sCloudServiceMicrosoft,
             T2sCloudServiceMicrosoft.deserializeBinaryFromReader
+          );
+          break;
+        case 8:
+          _instance.qwen3TtsCustomVoice = new Qwen3TtsCustomVoice();
+          _reader.readMessage(
+            _instance.qwen3TtsCustomVoice,
+            Qwen3TtsCustomVoice.deserializeBinaryFromReader
+          );
+          break;
+        case 9:
+          _instance.qwen3TtsBase = new Qwen3TtsBase();
+          _reader.readMessage(
+            _instance.qwen3TtsBase,
+            Qwen3TtsBase.deserializeBinaryFromReader
           );
           break;
         default:
@@ -5839,6 +5874,20 @@ export class Text2Audio implements GrpcMessage {
         T2sCloudServiceMicrosoft.serializeBinaryToWriter
       );
     }
+    if (_instance.qwen3TtsCustomVoice) {
+      _writer.writeMessage(
+        8,
+        _instance.qwen3TtsCustomVoice as any,
+        Qwen3TtsCustomVoice.serializeBinaryToWriter
+      );
+    }
+    if (_instance.qwen3TtsBase) {
+      _writer.writeMessage(
+        9,
+        _instance.qwen3TtsBase as any,
+        Qwen3TtsBase.serializeBinaryToWriter
+      );
+    }
   }
 
   private _type: string;
@@ -5848,6 +5897,8 @@ export class Text2Audio implements GrpcMessage {
   private _t2sCloudServiceAmazon?: T2sCloudServiceAmazon;
   private _t2sCloudServiceGoogle?: T2sCloudServiceGoogle;
   private _t2sCloudServiceMicrosoft?: T2sCloudServiceMicrosoft;
+  private _qwen3TtsCustomVoice?: Qwen3TtsCustomVoice;
+  private _qwen3TtsBase?: Qwen3TtsBase;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -5871,6 +5922,12 @@ export class Text2Audio implements GrpcMessage {
       : undefined;
     this.t2sCloudServiceMicrosoft = _value.t2sCloudServiceMicrosoft
       ? new T2sCloudServiceMicrosoft(_value.t2sCloudServiceMicrosoft)
+      : undefined;
+    this.qwen3TtsCustomVoice = _value.qwen3TtsCustomVoice
+      ? new Qwen3TtsCustomVoice(_value.qwen3TtsCustomVoice)
+      : undefined;
+    this.qwen3TtsBase = _value.qwen3TtsBase
+      ? new Qwen3TtsBase(_value.qwen3TtsBase)
       : undefined;
     Text2Audio.refineValues(this);
   }
@@ -5916,6 +5973,18 @@ export class Text2Audio implements GrpcMessage {
   set t2sCloudServiceMicrosoft(value: T2sCloudServiceMicrosoft | undefined) {
     this._t2sCloudServiceMicrosoft = value;
   }
+  get qwen3TtsCustomVoice(): Qwen3TtsCustomVoice | undefined {
+    return this._qwen3TtsCustomVoice;
+  }
+  set qwen3TtsCustomVoice(value: Qwen3TtsCustomVoice | undefined) {
+    this._qwen3TtsCustomVoice = value;
+  }
+  get qwen3TtsBase(): Qwen3TtsBase | undefined {
+    return this._qwen3TtsBase;
+  }
+  set qwen3TtsBase(value: Qwen3TtsBase | undefined) {
+    this._qwen3TtsBase = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -5946,7 +6015,11 @@ export class Text2Audio implements GrpcMessage {
         : undefined,
       t2sCloudServiceMicrosoft: this.t2sCloudServiceMicrosoft
         ? this.t2sCloudServiceMicrosoft.toObject()
-        : undefined
+        : undefined,
+      qwen3TtsCustomVoice: this.qwen3TtsCustomVoice
+        ? this.qwen3TtsCustomVoice.toObject()
+        : undefined,
+      qwen3TtsBase: this.qwen3TtsBase ? this.qwen3TtsBase.toObject() : undefined
     };
   }
 
@@ -5983,6 +6056,12 @@ export class Text2Audio implements GrpcMessage {
         : null,
       t2sCloudServiceMicrosoft: this.t2sCloudServiceMicrosoft
         ? this.t2sCloudServiceMicrosoft.toProtobufJSON(options)
+        : null,
+      qwen3TtsCustomVoice: this.qwen3TtsCustomVoice
+        ? this.qwen3TtsCustomVoice.toProtobufJSON(options)
+        : null,
+      qwen3TtsBase: this.qwen3TtsBase
+        ? this.qwen3TtsBase.toProtobufJSON(options)
         : null
     };
   }
@@ -5999,6 +6078,8 @@ export module Text2Audio {
     t2sCloudServiceAmazon?: T2sCloudServiceAmazon.AsObject;
     t2sCloudServiceGoogle?: T2sCloudServiceGoogle.AsObject;
     t2sCloudServiceMicrosoft?: T2sCloudServiceMicrosoft.AsObject;
+    qwen3TtsCustomVoice?: Qwen3TtsCustomVoice.AsObject;
+    qwen3TtsBase?: Qwen3TtsBase.AsObject;
   }
 
   /**
@@ -6012,6 +6093,8 @@ export module Text2Audio {
     t2sCloudServiceAmazon: T2sCloudServiceAmazon.AsProtobufJSON | null;
     t2sCloudServiceGoogle: T2sCloudServiceGoogle.AsProtobufJSON | null;
     t2sCloudServiceMicrosoft: T2sCloudServiceMicrosoft.AsProtobufJSON | null;
+    qwen3TtsCustomVoice: Qwen3TtsCustomVoice.AsProtobufJSON | null;
+    qwen3TtsBase: Qwen3TtsBase.AsProtobufJSON | null;
   }
 }
 
@@ -8024,6 +8107,501 @@ export module T2sCloudServiceMicrosoft {
   export interface AsProtobufJSON {
     voiceId: string;
     useDefaultSpeaker: boolean;
+  }
+}
+
+/**
+ * Message implementation for ondewo.t2s.Qwen3TtsCustomVoice
+ */
+export class Qwen3TtsCustomVoice implements GrpcMessage {
+  static id = 'ondewo.t2s.Qwen3TtsCustomVoice';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new Qwen3TtsCustomVoice();
+    Qwen3TtsCustomVoice.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: Qwen3TtsCustomVoice) {
+    _instance.voiceId = _instance.voiceId || '';
+    _instance.modelName = _instance.modelName || '';
+    _instance.language = _instance.language || '';
+    _instance.qwen3TtsServerHost = _instance.qwen3TtsServerHost || '';
+    _instance.qwen3TtsServerPort = _instance.qwen3TtsServerPort || '0';
+    _instance.qwen3TtsServerHeader =
+      _instance.qwen3TtsServerHeader || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: Qwen3TtsCustomVoice,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.voiceId = _reader.readString();
+          break;
+        case 2:
+          _instance.modelName = _reader.readString();
+          break;
+        case 3:
+          _instance.language = _reader.readString();
+          break;
+        case 4:
+          _instance.qwen3TtsServerHost = _reader.readString();
+          break;
+        case 5:
+          _instance.qwen3TtsServerPort = _reader.readInt64String();
+          break;
+        case 6:
+          _instance.qwen3TtsServerHeader = new googleProtobuf001.Struct();
+          _reader.readMessage(
+            _instance.qwen3TtsServerHeader,
+            googleProtobuf001.Struct.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    Qwen3TtsCustomVoice.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: Qwen3TtsCustomVoice,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.voiceId) {
+      _writer.writeString(1, _instance.voiceId);
+    }
+    if (_instance.modelName) {
+      _writer.writeString(2, _instance.modelName);
+    }
+    if (_instance.language) {
+      _writer.writeString(3, _instance.language);
+    }
+    if (_instance.qwen3TtsServerHost) {
+      _writer.writeString(4, _instance.qwen3TtsServerHost);
+    }
+    if (_instance.qwen3TtsServerPort) {
+      _writer.writeInt64String(5, _instance.qwen3TtsServerPort);
+    }
+    if (_instance.qwen3TtsServerHeader) {
+      _writer.writeMessage(
+        6,
+        _instance.qwen3TtsServerHeader as any,
+        googleProtobuf001.Struct.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _voiceId: string;
+  private _modelName: string;
+  private _language: string;
+  private _qwen3TtsServerHost: string;
+  private _qwen3TtsServerPort: string;
+  private _qwen3TtsServerHeader?: googleProtobuf001.Struct;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of Qwen3TtsCustomVoice to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<Qwen3TtsCustomVoice.AsObject>) {
+    _value = _value || {};
+    this.voiceId = _value.voiceId;
+    this.modelName = _value.modelName;
+    this.language = _value.language;
+    this.qwen3TtsServerHost = _value.qwen3TtsServerHost;
+    this.qwen3TtsServerPort = _value.qwen3TtsServerPort;
+    this.qwen3TtsServerHeader = _value.qwen3TtsServerHeader
+      ? new googleProtobuf001.Struct(_value.qwen3TtsServerHeader)
+      : undefined;
+    Qwen3TtsCustomVoice.refineValues(this);
+  }
+  get voiceId(): string {
+    return this._voiceId;
+  }
+  set voiceId(value: string) {
+    this._voiceId = value;
+  }
+  get modelName(): string {
+    return this._modelName;
+  }
+  set modelName(value: string) {
+    this._modelName = value;
+  }
+  get language(): string {
+    return this._language;
+  }
+  set language(value: string) {
+    this._language = value;
+  }
+  get qwen3TtsServerHost(): string {
+    return this._qwen3TtsServerHost;
+  }
+  set qwen3TtsServerHost(value: string) {
+    this._qwen3TtsServerHost = value;
+  }
+  get qwen3TtsServerPort(): string {
+    return this._qwen3TtsServerPort;
+  }
+  set qwen3TtsServerPort(value: string) {
+    this._qwen3TtsServerPort = value;
+  }
+  get qwen3TtsServerHeader(): googleProtobuf001.Struct | undefined {
+    return this._qwen3TtsServerHeader;
+  }
+  set qwen3TtsServerHeader(value: googleProtobuf001.Struct | undefined) {
+    this._qwen3TtsServerHeader = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    Qwen3TtsCustomVoice.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): Qwen3TtsCustomVoice.AsObject {
+    return {
+      voiceId: this.voiceId,
+      modelName: this.modelName,
+      language: this.language,
+      qwen3TtsServerHost: this.qwen3TtsServerHost,
+      qwen3TtsServerPort: this.qwen3TtsServerPort,
+      qwen3TtsServerHeader: this.qwen3TtsServerHeader
+        ? this.qwen3TtsServerHeader.toObject()
+        : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): Qwen3TtsCustomVoice.AsProtobufJSON {
+    return {
+      voiceId: this.voiceId,
+      modelName: this.modelName,
+      language: this.language,
+      qwen3TtsServerHost: this.qwen3TtsServerHost,
+      qwen3TtsServerPort: this.qwen3TtsServerPort,
+      qwen3TtsServerHeader: this.qwen3TtsServerHeader
+        ? this.qwen3TtsServerHeader.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module Qwen3TtsCustomVoice {
+  /**
+   * Standard JavaScript object representation for Qwen3TtsCustomVoice
+   */
+  export interface AsObject {
+    voiceId: string;
+    modelName: string;
+    language: string;
+    qwen3TtsServerHost: string;
+    qwen3TtsServerPort: string;
+    qwen3TtsServerHeader?: googleProtobuf001.Struct.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for Qwen3TtsCustomVoice
+   */
+  export interface AsProtobufJSON {
+    voiceId: string;
+    modelName: string;
+    language: string;
+    qwen3TtsServerHost: string;
+    qwen3TtsServerPort: string;
+    qwen3TtsServerHeader: googleProtobuf001.Struct.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for ondewo.t2s.Qwen3TtsBase
+ */
+export class Qwen3TtsBase implements GrpcMessage {
+  static id = 'ondewo.t2s.Qwen3TtsBase';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new Qwen3TtsBase();
+    Qwen3TtsBase.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: Qwen3TtsBase) {
+    _instance.modelName = _instance.modelName || '';
+    _instance.language = _instance.language || '';
+    _instance.embeddingPath = _instance.embeddingPath || '';
+    _instance.qwen3TtsServerHost = _instance.qwen3TtsServerHost || '';
+    _instance.qwen3TtsServerPort = _instance.qwen3TtsServerPort || '0';
+    _instance.qwen3TtsServerHeader =
+      _instance.qwen3TtsServerHeader || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: Qwen3TtsBase,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.modelName = _reader.readString();
+          break;
+        case 2:
+          _instance.language = _reader.readString();
+          break;
+        case 3:
+          _instance.embeddingPath = _reader.readString();
+          break;
+        case 4:
+          _instance.qwen3TtsServerHost = _reader.readString();
+          break;
+        case 5:
+          _instance.qwen3TtsServerPort = _reader.readInt64String();
+          break;
+        case 6:
+          _instance.qwen3TtsServerHeader = new googleProtobuf001.Struct();
+          _reader.readMessage(
+            _instance.qwen3TtsServerHeader,
+            googleProtobuf001.Struct.deserializeBinaryFromReader
+          );
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    Qwen3TtsBase.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: Qwen3TtsBase,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.modelName) {
+      _writer.writeString(1, _instance.modelName);
+    }
+    if (_instance.language) {
+      _writer.writeString(2, _instance.language);
+    }
+    if (_instance.embeddingPath) {
+      _writer.writeString(3, _instance.embeddingPath);
+    }
+    if (_instance.qwen3TtsServerHost) {
+      _writer.writeString(4, _instance.qwen3TtsServerHost);
+    }
+    if (_instance.qwen3TtsServerPort) {
+      _writer.writeInt64String(5, _instance.qwen3TtsServerPort);
+    }
+    if (_instance.qwen3TtsServerHeader) {
+      _writer.writeMessage(
+        6,
+        _instance.qwen3TtsServerHeader as any,
+        googleProtobuf001.Struct.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _modelName: string;
+  private _language: string;
+  private _embeddingPath: string;
+  private _qwen3TtsServerHost: string;
+  private _qwen3TtsServerPort: string;
+  private _qwen3TtsServerHeader?: googleProtobuf001.Struct;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of Qwen3TtsBase to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<Qwen3TtsBase.AsObject>) {
+    _value = _value || {};
+    this.modelName = _value.modelName;
+    this.language = _value.language;
+    this.embeddingPath = _value.embeddingPath;
+    this.qwen3TtsServerHost = _value.qwen3TtsServerHost;
+    this.qwen3TtsServerPort = _value.qwen3TtsServerPort;
+    this.qwen3TtsServerHeader = _value.qwen3TtsServerHeader
+      ? new googleProtobuf001.Struct(_value.qwen3TtsServerHeader)
+      : undefined;
+    Qwen3TtsBase.refineValues(this);
+  }
+  get modelName(): string {
+    return this._modelName;
+  }
+  set modelName(value: string) {
+    this._modelName = value;
+  }
+  get language(): string {
+    return this._language;
+  }
+  set language(value: string) {
+    this._language = value;
+  }
+  get embeddingPath(): string {
+    return this._embeddingPath;
+  }
+  set embeddingPath(value: string) {
+    this._embeddingPath = value;
+  }
+  get qwen3TtsServerHost(): string {
+    return this._qwen3TtsServerHost;
+  }
+  set qwen3TtsServerHost(value: string) {
+    this._qwen3TtsServerHost = value;
+  }
+  get qwen3TtsServerPort(): string {
+    return this._qwen3TtsServerPort;
+  }
+  set qwen3TtsServerPort(value: string) {
+    this._qwen3TtsServerPort = value;
+  }
+  get qwen3TtsServerHeader(): googleProtobuf001.Struct | undefined {
+    return this._qwen3TtsServerHeader;
+  }
+  set qwen3TtsServerHeader(value: googleProtobuf001.Struct | undefined) {
+    this._qwen3TtsServerHeader = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    Qwen3TtsBase.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): Qwen3TtsBase.AsObject {
+    return {
+      modelName: this.modelName,
+      language: this.language,
+      embeddingPath: this.embeddingPath,
+      qwen3TtsServerHost: this.qwen3TtsServerHost,
+      qwen3TtsServerPort: this.qwen3TtsServerPort,
+      qwen3TtsServerHeader: this.qwen3TtsServerHeader
+        ? this.qwen3TtsServerHeader.toObject()
+        : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): Qwen3TtsBase.AsProtobufJSON {
+    return {
+      modelName: this.modelName,
+      language: this.language,
+      embeddingPath: this.embeddingPath,
+      qwen3TtsServerHost: this.qwen3TtsServerHost,
+      qwen3TtsServerPort: this.qwen3TtsServerPort,
+      qwen3TtsServerHeader: this.qwen3TtsServerHeader
+        ? this.qwen3TtsServerHeader.toProtobufJSON(options)
+        : null
+    };
+  }
+}
+export module Qwen3TtsBase {
+  /**
+   * Standard JavaScript object representation for Qwen3TtsBase
+   */
+  export interface AsObject {
+    modelName: string;
+    language: string;
+    embeddingPath: string;
+    qwen3TtsServerHost: string;
+    qwen3TtsServerPort: string;
+    qwen3TtsServerHeader?: googleProtobuf001.Struct.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for Qwen3TtsBase
+   */
+  export interface AsProtobufJSON {
+    modelName: string;
+    language: string;
+    embeddingPath: string;
+    qwen3TtsServerHost: string;
+    qwen3TtsServerPort: string;
+    qwen3TtsServerHeader: googleProtobuf001.Struct.AsProtobufJSON | null;
   }
 }
 
