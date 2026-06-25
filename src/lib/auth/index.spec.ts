@@ -1,7 +1,17 @@
 import * as authApi from "./index";
 
-describe("auth public API barrel", () => {
-  it("re-exports the full hand-written auth surface", () => {
+/**
+ * Guards the public barrel (`./index`): every hand-written symbol that consumers
+ * import from `@ondewo/t2s-client-angular` must remain exported with the right
+ * runtime kind, so an accidental re-export removal or rename is caught here.
+ */
+describe("auth public API barrel", (): void => {
+  /**
+   * Asserts the presence and runtime kind of each re-exported symbol — the three
+   * interceptor/provider functions, the three token-resolution helpers, the two
+   * header constants, and the `TOKEN_PROVIDER` injection token.
+   */
+  it("re-exports the full hand-written auth surface", (): void => {
     expect(typeof authApi.authHttpInterceptor).toBe("function");
     expect(typeof authApi.AuthGrpcInterceptor).toBe("function");
     expect(typeof authApi.provideOndewoT2sAuth).toBe("function");
