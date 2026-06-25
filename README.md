@@ -100,6 +100,45 @@ bootstrapApplication(AppComponent, {
 That is all the wiring required: every T2S service client request now carries `authorization: Bearer <token>`
 whenever a token is available, and is sent unchanged when it is not.
 
+### Headless option: the built-in `KeycloakTokenProvider`
+
+When the host application has no interactive `keycloak-js` session — e.g. a backend-for-frontend, a kiosk, or an
+automated client — use the ready-made `KeycloakTokenProvider` instead of writing your own. It logs in once against
+the Keycloak token endpoint (offline / refresh-token grant, or `username` + `password` with `scope=offline_access`),
+then keeps the access token fresh with a background timer that refreshes shortly **before** expiry. No OAuth library
+is needed.
+
+```ts
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import {
+  authHttpInterceptor,
+  KeycloakTokenProvider,
+  KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+  provideOndewoT2sAuth
+} from "@ondewo/t2s-client-angular";
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    {
+      provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+      useValue: {
+        keycloakUrl: "https://auth.example.com/auth",
+        realm: "ondewo-ccai-platform",
+        clientId: "ondewo-t2s-sdk-public",
+        // Provide either a long-lived offline token …
+        offlineToken: "<offline-token>"
+        // … or a 2FA-exempt technical user: username + password.
+      }
+    },
+    provideOndewoT2sAuth(KeycloakTokenProvider),
+    provideHttpClient(withInterceptors([authHttpInterceptor]))
+  ]
+});
+```
+
+SECURITY: prefer `offlineToken` in browsers — embedding `username` / `password` ships those credentials to the
+client. The provider never sends a `client_secret` (the SDK Keycloak client is public).
+
 ## Package structure
 
 ```

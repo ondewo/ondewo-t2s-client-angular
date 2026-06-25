@@ -9,7 +9,8 @@ describe("auth public API barrel", (): void => {
   /**
    * Asserts the presence and runtime kind of each re-exported symbol — the three
    * interceptor/provider functions, the three token-resolution helpers, the two
-   * header constants, and the `TOKEN_PROVIDER` injection token.
+   * header constants, the `TOKEN_PROVIDER` injection token, and the concrete
+   * `KeycloakTokenProvider` with its config token and error class.
    */
   it("re-exports the full hand-written auth surface", (): void => {
     expect(typeof authApi.authHttpInterceptor).toBe("function");
@@ -21,5 +22,8 @@ describe("auth public API barrel", (): void => {
     expect(authApi.AUTHORIZATION_HEADER).toBe("authorization");
     expect(authApi.BEARER_PREFIX).toBe("Bearer ");
     expect(authApi.TOKEN_PROVIDER).toBeDefined();
+    expect(typeof authApi.KeycloakTokenProvider).toBe("function");
+    expect(typeof authApi.KeycloakAuthenticationError).toBe("function");
+    expect(authApi.KEYCLOAK_TOKEN_PROVIDER_CONFIG).toBeDefined();
   });
 });

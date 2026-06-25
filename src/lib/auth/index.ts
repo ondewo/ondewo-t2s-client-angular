@@ -8,6 +8,12 @@
  */
 export { TOKEN_PROVIDER, TokenProvider, TokenResult } from "./token-provider";
 export {
+  KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+  KeycloakAuthenticationError,
+  KeycloakTokenProvider,
+  KeycloakTokenProviderConfig
+} from "./keycloak-token-provider";
+export {
   AUTHORIZATION_HEADER,
   BEARER_PREFIX,
   buildBearerValue,
