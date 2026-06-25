@@ -44,6 +44,62 @@ cd ondewo-t2s-client-angular                                      ## Change into
 make setup_developer_environment_locally                          ## Install dependencies
 ```
 
+## Authentication (Keycloak bearer token)
+
+The hand-written auth surface lives in [`src/lib/auth/`](src/lib/auth) and attaches the consumer's current
+Keycloak access token as an `Authorization: Bearer <token>` credential to every outgoing gRPC-web and HTTP
+request. This library performs **no** OAuth/OIDC flow itself — it never sees a password and never stores a
+token. Acquiring and refreshing the token is the responsibility of `keycloak-js` / `keycloak-angular` in the
+host application; this client only reads the current token through a `TokenProvider` and forwards it.
+
+### 1. Implement a `TokenProvider` backed by `keycloak-js`
+
+```ts
+import { Injectable } from "@angular/core";
+import Keycloak from "keycloak-js";
+import { TokenProvider, TokenResult } from "@ondewo/t2s-client-angular";
+
+@Injectable({ providedIn: "root" })
+export class KeycloakTokenProvider implements TokenProvider {
+  constructor(private readonly keycloak: Keycloak) {}
+
+  // Refresh the token if it expires within 30s, then return the current one.
+  // Returning a Promise lets the interceptor await the refresh before sending.
+  getToken(): TokenResult {
+    return this.keycloak
+      .updateToken(30)
+      .then(() => this.keycloak.token ?? null)
+      .catch(() => null);
+  }
+}
+```
+
+`getToken()` may return a `string`, `null` (unauthenticated — the request is sent without an `Authorization`
+header), a `Promise<string | null>`, or an `Observable<string | null>`. With `keycloak-angular` you would
+instead inject `KeycloakService` and call `this.keycloakService.getToken()`.
+
+### 2. Register the provider and the interceptors
+
+```ts
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { authHttpInterceptor, provideOndewoT2sAuth } from "@ondewo/t2s-client-angular";
+import { KeycloakTokenProvider } from "./keycloak-token-provider";
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    // Binds TOKEN_PROVIDER to your implementation and registers the
+    // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
+    provideOndewoT2sAuth(KeycloakTokenProvider),
+    // For plain HTTP requests, also register the functional HTTP interceptor.
+    provideHttpClient(withInterceptors([authHttpInterceptor]))
+  ]
+});
+```
+
+That is all the wiring required: every T2S service client request now carries `authorization: Bearer <token>`
+whenever a token is available, and is sent unchanged when it is not.
+
 ## Package structure
 
 ```
