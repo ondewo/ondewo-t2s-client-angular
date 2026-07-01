@@ -139,6 +139,14 @@ bootstrapApplication(AppComponent, {
 SECURITY: prefer `offlineToken` in browsers — embedding `username` / `password` ships those credentials to the
 client. The provider never sends a `client_secret` (the SDK Keycloak client is public).
 
+### Runnable example
+
+A minimal, idiomatic end-to-end example lives in
+[`src/examples/t2s-synthesis.example.ts`](src/examples/t2s-synthesis.example.ts): it registers the bearer-token auth
+providers, injects the generated `Text2SpeechClient`, calls the `Synthesize` RPC and handles the `SynthesizeResponse`.
+Its mock-based spec ([`t2s-synthesis.example.spec.ts`](src/examples/t2s-synthesis.example.spec.ts)) proves the flow
+without a live gRPC server and runs as part of `npm test`.
+
 ## Package structure
 
 ```
