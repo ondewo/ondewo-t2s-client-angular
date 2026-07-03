@@ -13,13 +13,13 @@ const TOKEN: string = "eyJhbGciOi.payload.signature";
 
 /**
  * Pins the two exported header constants used to build the bearer credential:
- * the lower-case `authorization` header name (HTTP/2 + gRPC-web requirement) and
- * the standard `"Bearer "` scheme prefix.
+ * the canonical `Authorization` header name (case-insensitive for HTTP/2 +
+ * gRPC-web) and the standard `"Bearer "` scheme prefix.
  */
 describe("constants", (): void => {
-  /** The header name must stay lower-case to be valid HTTP/2 / gRPC-web metadata. */
-  it("uses a lower-case authorization header name", (): void => {
-    expect(AUTHORIZATION_HEADER).toBe("authorization");
+  /** The header name uses the canonical `Authorization` casing. */
+  it("uses the canonical Authorization header name", (): void => {
+    expect(AUTHORIZATION_HEADER).toBe("Authorization");
   });
 
   /** The scheme prefix must be the canonical `"Bearer "` (note the trailing space). */
