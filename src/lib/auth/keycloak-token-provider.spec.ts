@@ -204,6 +204,23 @@ describe("KeycloakTokenProvider", (): void => {
     httpMock.verify();
   });
 
+  /** A failed background refresh is swallowed and the last good access token stays served. */
+  it("swallows a failed background refresh and keeps the previous token", async (): Promise<void> => {
+    const { provider, httpMock } = setup(offlineConfig());
+    const pending: Promise<string | null> = provider.getToken() as Promise<string | null>;
+    flushToken(httpMock, { access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN_S });
+    await pending;
+
+    jest.advanceTimersByTime(REFRESH_AT_MS);
+    await tick();
+    httpMock.expectOne(TOKEN_ENDPOINT).flush("nope", { status: 500, statusText: "Server Error" });
+    await tick();
+    expect(provider.getToken()).toBe(ACCESS_TOKEN);
+
+    provider.ngOnDestroy();
+    httpMock.verify();
+  });
+
   /** A refresh response omitting refresh_token keeps the previously stored one. */
   it("keeps the previous refresh token when a refresh response omits it", async (): Promise<void> => {
     const { provider, httpMock } = setup(offlineConfig());

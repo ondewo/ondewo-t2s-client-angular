@@ -17,6 +17,6 @@ module.exports = {
 	coverageDirectory: "<rootDir>/coverage",
 	coverageReporters: ["text", "text-summary", "lcov"],
 	collectCoverageFrom: ["src/lib/auth/**/*.ts", "!src/lib/auth/**/*.spec.ts"],
-	coveragePathIgnorePatterns: ["/node_modules/", "/src/ondewo-nlu-api/", "/api/", "\\.spec\\.ts$", ...GENERATED_STUB_PATTERNS],
+	coveragePathIgnorePatterns: ["/node_modules/", "/src/ondewo-t2s-api/", "/api/", "\\.spec\\.ts$", ...GENERATED_STUB_PATTERNS],
 	coverageThreshold: { global: { branches: 100, functions: 100, lines: 100, statements: 100 } },
 };

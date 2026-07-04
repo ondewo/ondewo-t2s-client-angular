@@ -111,7 +111,7 @@ describe("T2sSpeechSynthesisService", (): void => {
 /**
  * Covers the auth seam shown by the example: {@link StaticTokenProvider} feeds
  * the current bearer token (or `null` when unauthenticated) into the SDK's
- * interceptors — the current Keycloak pattern, with no cai-token / login flow.
+ * interceptors — the current Keycloak bearer pattern, with no legacy credential flow.
  */
 describe("StaticTokenProvider", (): void => {
   /** Before a token is set, the provider reports "no token" so requests go unauthenticated. */
