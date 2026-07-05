@@ -44,109 +44,6 @@ cd ondewo-t2s-client-angular                                      ## Change into
 make setup_developer_environment_locally                          ## Install dependencies
 ```
 
-## Authentication (Keycloak bearer token)
-
-The hand-written auth surface lives in [`src/lib/auth/`](src/lib/auth) and attaches the consumer's current
-Keycloak access token as an `Authorization: Bearer <token>` credential to every outgoing gRPC-web and HTTP
-request. This library performs **no** OAuth/OIDC flow itself — it never sees a password and never stores a
-token. Acquiring and refreshing the token is the responsibility of `keycloak-js` / `keycloak-angular` in the
-host application; this client only reads the current token through a `TokenProvider` and forwards it.
-
-### 1. Implement a `TokenProvider` backed by `keycloak-js`
-
-```ts
-import { Injectable } from "@angular/core";
-import Keycloak from "keycloak-js";
-import { TokenProvider, TokenResult } from "@ondewo/t2s-client-angular";
-
-@Injectable({ providedIn: "root" })
-export class KeycloakTokenProvider implements TokenProvider {
-  constructor(private readonly keycloak: Keycloak) {}
-
-  // Refresh the token if it expires within 30s, then return the current one.
-  // Returning a Promise lets the interceptor await the refresh before sending.
-  getToken(): TokenResult {
-    return this.keycloak
-      .updateToken(30)
-      .then(() => this.keycloak.token ?? null)
-      .catch(() => null);
-  }
-}
-```
-
-`getToken()` may return a `string`, `null` (unauthenticated — the request is sent without an `Authorization`
-header), a `Promise<string | null>`, or an `Observable<string | null>`. With `keycloak-angular` you would
-instead inject `KeycloakService` and call `this.keycloakService.getToken()`.
-
-### 2. Register the provider and the interceptors
-
-```ts
-import { bootstrapApplication } from "@angular/platform-browser";
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import { authHttpInterceptor, provideOndewoT2sAuth } from "@ondewo/t2s-client-angular";
-import { KeycloakTokenProvider } from "./keycloak-token-provider";
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    // Binds TOKEN_PROVIDER to your implementation and registers the
-    // @ngx-grpc AuthGrpcInterceptor for all generated *.pbsc.ts clients.
-    provideOndewoT2sAuth(KeycloakTokenProvider),
-    // For plain HTTP requests, also register the functional HTTP interceptor.
-    provideHttpClient(withInterceptors([authHttpInterceptor]))
-  ]
-});
-```
-
-That is all the wiring required: every T2S service client request now carries `authorization: Bearer <token>`
-whenever a token is available, and is sent unchanged when it is not.
-
-### Headless option: the built-in `KeycloakTokenProvider`
-
-When the host application has no interactive `keycloak-js` session — e.g. a backend-for-frontend, a kiosk, or an
-automated client — use the ready-made `KeycloakTokenProvider` instead of writing your own. It logs in once against
-the Keycloak token endpoint (offline / refresh-token grant, or `username` + `password` with `scope=offline_access`),
-then keeps the access token fresh with a background timer that refreshes shortly **before** expiry. No OAuth library
-is needed.
-
-```ts
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import {
-  authHttpInterceptor,
-  KeycloakTokenProvider,
-  KEYCLOAK_TOKEN_PROVIDER_CONFIG,
-  provideOndewoT2sAuth
-} from "@ondewo/t2s-client-angular";
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    {
-      provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
-      useValue: {
-        keycloakUrl: "https://auth.example.com/auth",
-        realm: "ondewo-ccai-platform",
-        clientId: "ondewo-t2s-sdk-public",
-        // Provide either a long-lived offline token …
-        offlineToken: "<offline-token>"
-        // … or a 2FA-exempt technical user: username + password.
-      }
-    },
-    provideOndewoT2sAuth(KeycloakTokenProvider),
-    provideHttpClient(withInterceptors([authHttpInterceptor]))
-  ]
-});
-```
-
-SECURITY: prefer `offlineToken` in browsers — embedding `username` / `password` ships those credentials to the
-client. The provider never sends a `client_secret` (the SDK Keycloak client is public).
-
-### Runnable example
-
-A minimal, idiomatic end-to-end example lives in
-[`src/examples/t2s-synthesis.example.ts`](src/examples/t2s-synthesis.example.ts): it registers the bearer-token auth
-providers, injects the generated `Text2SpeechClient`, calls the `Synthesize` RPC and handles the `SynthesizeResponse`.
-Its mock-based spec ([`t2s-synthesis.example.spec.ts`](src/examples/t2s-synthesis.example.spec.ts)) proves the flow
-without a live gRPC server and runs as part of `npm test`.
-
 ## Package structure
 
 ```
@@ -176,7 +73,7 @@ npm
 └── README.md
 ```
 
-[comment]: <> (START OF GITHUB README)
+[comment]: <> 'START OF GITHUB README'
 
 ## Build
 
@@ -228,4 +125,4 @@ TODO after PR merge:
 
 > :warning: The Release Automation checks if the build has created all the proto-code files, but it does not check the code-integrity. Please build and test the generated code prior to starting the release process.
 
-[comment]: <> (END OF GITHUB README)
+[comment]: <> 'END OF GITHUB README'

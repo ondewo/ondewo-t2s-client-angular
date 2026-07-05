@@ -14,3 +14,9 @@ ondewo-t2s-api
 ondewo-t2s-client-angular.d.ts
 ondewo-t2s-client-angular.d.ts.map
 ondewo-t2s-client-angular.metadata.json
+package-lock.json
+package.json
+npm/
+dist/
+.test-build/
+.test-build-examples/

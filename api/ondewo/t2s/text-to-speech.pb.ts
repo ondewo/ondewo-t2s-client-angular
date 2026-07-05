@@ -7784,6 +7784,7 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
     _instance.speakingRate = _instance.speakingRate || 0;
     _instance.volumeGainDb = _instance.volumeGainDb || 0;
     _instance.pitch = _instance.pitch || 0;
+    _instance.speakerLanguage = _instance.speakerLanguage || '';
   }
 
   /**
@@ -7810,6 +7811,9 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
           break;
         case 4:
           _instance.pitch = _reader.readFloat();
+          break;
+        case 5:
+          _instance.speakerLanguage = _reader.readString();
           break;
         default:
           _reader.skipField();
@@ -7840,12 +7844,16 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
     if (_instance.pitch) {
       _writer.writeFloat(4, _instance.pitch);
     }
+    if (_instance.speakerLanguage) {
+      _writer.writeString(5, _instance.speakerLanguage);
+    }
   }
 
   private _voiceId: string;
   private _speakingRate: number;
   private _volumeGainDb: number;
   private _pitch: number;
+  private _speakerLanguage: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -7857,6 +7865,7 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
     this.speakingRate = _value.speakingRate;
     this.volumeGainDb = _value.volumeGainDb;
     this.pitch = _value.pitch;
+    this.speakerLanguage = _value.speakerLanguage;
     T2sCloudServiceGoogle.refineValues(this);
   }
   get voiceId(): string {
@@ -7883,6 +7892,12 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
   set pitch(value: number) {
     this._pitch = value;
   }
+  get speakerLanguage(): string {
+    return this._speakerLanguage;
+  }
+  set speakerLanguage(value: string) {
+    this._speakerLanguage = value;
+  }
 
   /**
    * Serialize message to binary data
@@ -7902,7 +7917,8 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
       voiceId: this.voiceId,
       speakingRate: this.speakingRate,
       volumeGainDb: this.volumeGainDb,
-      pitch: this.pitch
+      pitch: this.pitch,
+      speakerLanguage: this.speakerLanguage
     };
   }
 
@@ -7926,7 +7942,8 @@ export class T2sCloudServiceGoogle implements GrpcMessage {
       voiceId: this.voiceId,
       speakingRate: this.speakingRate,
       volumeGainDb: this.volumeGainDb,
-      pitch: this.pitch
+      pitch: this.pitch,
+      speakerLanguage: this.speakerLanguage
     };
   }
 }
@@ -7939,6 +7956,7 @@ export module T2sCloudServiceGoogle {
     speakingRate: number;
     volumeGainDb: number;
     pitch: number;
+    speakerLanguage: string;
   }
 
   /**
@@ -7949,6 +7967,7 @@ export module T2sCloudServiceGoogle {
     speakingRate: number;
     volumeGainDb: number;
     pitch: number;
+    speakerLanguage: string;
   }
 }
 

@@ -5901,6 +5901,7 @@ class T2sCloudServiceGoogle {
         _instance.speakingRate = _instance.speakingRate || 0;
         _instance.volumeGainDb = _instance.volumeGainDb || 0;
         _instance.pitch = _instance.pitch || 0;
+        _instance.speakerLanguage = _instance.speakerLanguage || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -5923,6 +5924,9 @@ class T2sCloudServiceGoogle {
                     break;
                 case 4:
                     _instance.pitch = _reader.readFloat();
+                    break;
+                case 5:
+                    _instance.speakerLanguage = _reader.readString();
                     break;
                 default:
                     _reader.skipField();
@@ -5948,11 +5952,15 @@ class T2sCloudServiceGoogle {
         if (_instance.pitch) {
             _writer.writeFloat(4, _instance.pitch);
         }
+        if (_instance.speakerLanguage) {
+            _writer.writeString(5, _instance.speakerLanguage);
+        }
     }
     _voiceId;
     _speakingRate;
     _volumeGainDb;
     _pitch;
+    _speakerLanguage;
     /**
      * Message constructor. Initializes the properties and applies default Protobuf values if necessary
      * @param _value initial values object or instance of T2sCloudServiceGoogle to deeply clone from
@@ -5963,6 +5971,7 @@ class T2sCloudServiceGoogle {
         this.speakingRate = _value.speakingRate;
         this.volumeGainDb = _value.volumeGainDb;
         this.pitch = _value.pitch;
+        this.speakerLanguage = _value.speakerLanguage;
         T2sCloudServiceGoogle.refineValues(this);
     }
     get voiceId() {
@@ -5989,6 +5998,12 @@ class T2sCloudServiceGoogle {
     set pitch(value) {
         this._pitch = value;
     }
+    get speakerLanguage() {
+        return this._speakerLanguage;
+    }
+    set speakerLanguage(value) {
+        this._speakerLanguage = value;
+    }
     /**
      * Serialize message to binary data
      * @param instance message instance
@@ -6006,7 +6021,8 @@ class T2sCloudServiceGoogle {
             voiceId: this.voiceId,
             speakingRate: this.speakingRate,
             volumeGainDb: this.volumeGainDb,
-            pitch: this.pitch
+            pitch: this.pitch,
+            speakerLanguage: this.speakerLanguage
         };
     }
     /**
@@ -6027,7 +6043,8 @@ class T2sCloudServiceGoogle {
             voiceId: this.voiceId,
             speakingRate: this.speakingRate,
             volumeGainDb: this.volumeGainDb,
-            pitch: this.pitch
+            pitch: this.pitch,
+            speakerLanguage: this.speakerLanguage
         };
     }
 }
@@ -9799,10 +9816,10 @@ class Text2SpeechClient {
             .listCustomPhonemizer(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.25", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.25", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.19", ngImport: i0, type: Text2SpeechClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.25", ngImport: i0, type: Text2SpeechClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{

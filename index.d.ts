@@ -8,10 +8,10 @@ import {
 } from '@ngx-grpc/common';
 import { ByteSource, BinaryReader, BinaryWriter } from 'google-protobuf';
 import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as i0 from '@angular/core';
-import { InjectionToken } from '@angular/core';
 import { GrpcHandler } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
+import * as i0 from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 declare enum Pcm {
 	PCM_16 = 0,
@@ -355,6 +355,7 @@ declare class RequestConfig implements GrpcMessage {
 	private _t2sCloudProviderConfig?;
 	private _t2sNormalization?;
 	private _wordToPhonemeMapping?;
+	private _instruction;
 	private _oneofLengthScale;
 	private _oneofNoiseScale;
 	private _oneofSampleRate;
@@ -389,6 +390,8 @@ declare class RequestConfig implements GrpcMessage {
 	set t2sNormalization(value: T2SNormalization | undefined);
 	get wordToPhonemeMapping(): googleProtobuf001.Struct | undefined;
 	set wordToPhonemeMapping(value: googleProtobuf001.Struct | undefined);
+	get instruction(): string;
+	set instruction(value: string);
 	get oneofLengthScale(): RequestConfig.OneofLengthScaleCase;
 	get oneofNoiseScale(): RequestConfig.OneofNoiseScaleCase;
 	get oneofSampleRate(): RequestConfig.OneofSampleRateCase;
@@ -432,6 +435,7 @@ declare namespace RequestConfig {
 		t2sCloudProviderConfig?: T2sCloudProviderConfig.AsObject;
 		t2sNormalization?: T2SNormalization.AsObject;
 		wordToPhonemeMapping?: googleProtobuf001.Struct.AsObject;
+		instruction: string;
 	}
 	/**
 	 * Protobuf JSON representation for RequestConfig
@@ -448,6 +452,7 @@ declare namespace RequestConfig {
 		t2sCloudProviderConfig: T2sCloudProviderConfig.AsProtobufJSON | null;
 		t2sNormalization: T2SNormalization.AsProtobufJSON | null;
 		wordToPhonemeMapping: googleProtobuf001.Struct.AsProtobufJSON | null;
+		instruction: string;
 	}
 	enum OneofLengthScaleCase {
 		none = 0,
@@ -2413,6 +2418,8 @@ declare class Text2Audio implements GrpcMessage {
 	private _t2sCloudServiceAmazon?;
 	private _t2sCloudServiceGoogle?;
 	private _t2sCloudServiceMicrosoft?;
+	private _qwen3TtsCustomVoice?;
+	private _qwen3TtsBase?;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
 	 * @param _value initial values object or instance of Text2Audio to deeply clone from
@@ -2432,6 +2439,10 @@ declare class Text2Audio implements GrpcMessage {
 	set t2sCloudServiceGoogle(value: T2sCloudServiceGoogle | undefined);
 	get t2sCloudServiceMicrosoft(): T2sCloudServiceMicrosoft | undefined;
 	set t2sCloudServiceMicrosoft(value: T2sCloudServiceMicrosoft | undefined);
+	get qwen3TtsCustomVoice(): Qwen3TtsCustomVoice | undefined;
+	set qwen3TtsCustomVoice(value: Qwen3TtsCustomVoice | undefined);
+	get qwen3TtsBase(): Qwen3TtsBase | undefined;
+	set qwen3TtsBase(value: Qwen3TtsBase | undefined);
 	/**
 	 * Serialize message to binary data
 	 * @param instance message instance
@@ -2464,6 +2475,8 @@ declare namespace Text2Audio {
 		t2sCloudServiceAmazon?: T2sCloudServiceAmazon.AsObject;
 		t2sCloudServiceGoogle?: T2sCloudServiceGoogle.AsObject;
 		t2sCloudServiceMicrosoft?: T2sCloudServiceMicrosoft.AsObject;
+		qwen3TtsCustomVoice?: Qwen3TtsCustomVoice.AsObject;
+		qwen3TtsBase?: Qwen3TtsBase.AsObject;
 	}
 	/**
 	 * Protobuf JSON representation for Text2Audio
@@ -2476,6 +2489,8 @@ declare namespace Text2Audio {
 		t2sCloudServiceAmazon: T2sCloudServiceAmazon.AsProtobufJSON | null;
 		t2sCloudServiceGoogle: T2sCloudServiceGoogle.AsProtobufJSON | null;
 		t2sCloudServiceMicrosoft: T2sCloudServiceMicrosoft.AsProtobufJSON | null;
+		qwen3TtsCustomVoice: Qwen3TtsCustomVoice.AsProtobufJSON | null;
+		qwen3TtsBase: Qwen3TtsBase.AsProtobufJSON | null;
 	}
 }
 /**
@@ -3172,6 +3187,7 @@ declare class T2sCloudServiceGoogle implements GrpcMessage {
 	private _speakingRate;
 	private _volumeGainDb;
 	private _pitch;
+	private _speakerLanguage;
 	/**
 	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
 	 * @param _value initial values object or instance of T2sCloudServiceGoogle to deeply clone from
@@ -3185,6 +3201,8 @@ declare class T2sCloudServiceGoogle implements GrpcMessage {
 	set volumeGainDb(value: number);
 	get pitch(): number;
 	set pitch(value: number);
+	get speakerLanguage(): string;
+	set speakerLanguage(value: string);
 	/**
 	 * Serialize message to binary data
 	 * @param instance message instance
@@ -3214,6 +3232,7 @@ declare namespace T2sCloudServiceGoogle {
 		speakingRate: number;
 		volumeGainDb: number;
 		pitch: number;
+		speakerLanguage: string;
 	}
 	/**
 	 * Protobuf JSON representation for T2sCloudServiceGoogle
@@ -3223,6 +3242,7 @@ declare namespace T2sCloudServiceGoogle {
 		speakingRate: number;
 		volumeGainDb: number;
 		pitch: number;
+		speakerLanguage: string;
 	}
 }
 /**
@@ -3297,6 +3317,194 @@ declare namespace T2sCloudServiceMicrosoft {
 	interface AsProtobufJSON {
 		voiceId: string;
 		useDefaultSpeaker: boolean;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Qwen3TtsCustomVoice
+ */
+declare class Qwen3TtsCustomVoice implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): Qwen3TtsCustomVoice;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: Qwen3TtsCustomVoice): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: Qwen3TtsCustomVoice, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: Qwen3TtsCustomVoice, _writer: BinaryWriter): void;
+	private _voiceId;
+	private _modelName;
+	private _language;
+	private _qwen3TtsServerHost;
+	private _qwen3TtsServerPort;
+	private _qwen3TtsServerHeader?;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Qwen3TtsCustomVoice to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<Qwen3TtsCustomVoice.AsObject>);
+	get voiceId(): string;
+	set voiceId(value: string);
+	get modelName(): string;
+	set modelName(value: string);
+	get language(): string;
+	set language(value: string);
+	get qwen3TtsServerHost(): string;
+	set qwen3TtsServerHost(value: string);
+	get qwen3TtsServerPort(): string;
+	set qwen3TtsServerPort(value: string);
+	get qwen3TtsServerHeader(): googleProtobuf001.Struct | undefined;
+	set qwen3TtsServerHeader(value: googleProtobuf001.Struct | undefined);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): Qwen3TtsCustomVoice.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): Qwen3TtsCustomVoice.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): Qwen3TtsCustomVoice.AsProtobufJSON;
+}
+declare namespace Qwen3TtsCustomVoice {
+	/**
+	 * Standard JavaScript object representation for Qwen3TtsCustomVoice
+	 */
+	interface AsObject {
+		voiceId: string;
+		modelName: string;
+		language: string;
+		qwen3TtsServerHost: string;
+		qwen3TtsServerPort: string;
+		qwen3TtsServerHeader?: googleProtobuf001.Struct.AsObject;
+	}
+	/**
+	 * Protobuf JSON representation for Qwen3TtsCustomVoice
+	 */
+	interface AsProtobufJSON {
+		voiceId: string;
+		modelName: string;
+		language: string;
+		qwen3TtsServerHost: string;
+		qwen3TtsServerPort: string;
+		qwen3TtsServerHeader: googleProtobuf001.Struct.AsProtobufJSON | null;
+	}
+}
+/**
+ * Message implementation for ondewo.t2s.Qwen3TtsBase
+ */
+declare class Qwen3TtsBase implements GrpcMessage {
+	static id: string;
+	/**
+	 * Deserialize binary data to message
+	 * @param instance message instance
+	 */
+	static deserializeBinary(bytes: ByteSource): Qwen3TtsBase;
+	/**
+	 * Check all the properties and set default protobuf values if necessary
+	 * @param _instance message instance
+	 */
+	static refineValues(_instance: Qwen3TtsBase): void;
+	/**
+	 * Deserializes / reads binary message into message instance using provided binary reader
+	 * @param _instance message instance
+	 * @param _reader binary reader instance
+	 */
+	static deserializeBinaryFromReader(_instance: Qwen3TtsBase, _reader: BinaryReader): void;
+	/**
+	 * Serializes a message to binary format using provided binary reader
+	 * @param _instance message instance
+	 * @param _writer binary writer instance
+	 */
+	static serializeBinaryToWriter(_instance: Qwen3TtsBase, _writer: BinaryWriter): void;
+	private _modelName;
+	private _language;
+	private _embeddingPath;
+	private _qwen3TtsServerHost;
+	private _qwen3TtsServerPort;
+	private _qwen3TtsServerHeader?;
+	/**
+	 * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+	 * @param _value initial values object or instance of Qwen3TtsBase to deeply clone from
+	 */
+	constructor(_value?: RecursivePartial<Qwen3TtsBase.AsObject>);
+	get modelName(): string;
+	set modelName(value: string);
+	get language(): string;
+	set language(value: string);
+	get embeddingPath(): string;
+	set embeddingPath(value: string);
+	get qwen3TtsServerHost(): string;
+	set qwen3TtsServerHost(value: string);
+	get qwen3TtsServerPort(): string;
+	set qwen3TtsServerPort(value: string);
+	get qwen3TtsServerHeader(): googleProtobuf001.Struct | undefined;
+	set qwen3TtsServerHeader(value: googleProtobuf001.Struct | undefined);
+	/**
+	 * Serialize message to binary data
+	 * @param instance message instance
+	 */
+	serializeBinary(): any;
+	/**
+	 * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+	 */
+	toObject(): Qwen3TtsBase.AsObject;
+	/**
+	 * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+	 */
+	toJSON(): Qwen3TtsBase.AsObject;
+	/**
+	 * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+	 * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+	 * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+	 */
+	toProtobufJSON(options?: ToProtobufJSONOptions): Qwen3TtsBase.AsProtobufJSON;
+}
+declare namespace Qwen3TtsBase {
+	/**
+	 * Standard JavaScript object representation for Qwen3TtsBase
+	 */
+	interface AsObject {
+		modelName: string;
+		language: string;
+		embeddingPath: string;
+		qwen3TtsServerHost: string;
+		qwen3TtsServerPort: string;
+		qwen3TtsServerHeader?: googleProtobuf001.Struct.AsObject;
+	}
+	/**
+	 * Protobuf JSON representation for Qwen3TtsBase
+	 */
+	interface AsProtobufJSON {
+		modelName: string;
+		language: string;
+		embeddingPath: string;
+		qwen3TtsServerHost: string;
+		qwen3TtsServerPort: string;
+		qwen3TtsServerHeader: googleProtobuf001.Struct.AsProtobufJSON | null;
 	}
 }
 /**
@@ -4783,12 +4991,6 @@ declare namespace CreateCustomPhonemizerRequest {
 }
 
 /**
- * Specific GrpcClientSettings for Text2Speech.
- * Use it only if your default settings are not set or the service requires other settings.
- */
-declare const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS: InjectionToken<any>;
-
-/**
  * Service client implementation for ondewo.t2s.Text2Speech
  */
 declare class Text2SpeechClient {
@@ -5184,6 +5386,12 @@ declare class Text2SpeechClient {
 	static ɵprov: i0.ɵɵInjectableDeclaration<Text2SpeechClient>;
 }
 
+/**
+ * Specific GrpcClientSettings for Text2Speech.
+ * Use it only if your default settings are not set or the service requires other settings.
+ */
+declare const GRPC_TEXT2_SPEECH_CLIENT_SETTINGS: InjectionToken<any>;
+
 export {
 	Apodization,
 	AudioFormat,
@@ -5217,6 +5425,8 @@ export {
 	Pcm,
 	PhonemizerId,
 	Postprocessing,
+	Qwen3TtsBase,
+	Qwen3TtsCustomVoice,
 	RequestConfig,
 	SingleInference,
 	StreamingSynthesizeRequest,
