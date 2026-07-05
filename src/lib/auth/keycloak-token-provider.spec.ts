@@ -364,6 +364,54 @@ describe("KeycloakTokenProvider", (): void => {
     httpMock.verify();
   });
 
+  describe("keycloakVerifySsl (browser no-op, config -> provider parity)", (): void => {
+    /** Omitting the field defaults the stored flag to verification-ON (secure). */
+    it("defaults the stored flag to true when keycloakVerifySsl is omitted", (): void => {
+      const { provider, httpMock } = setup(offlineConfig());
+      expect(provider.keycloakVerifySsl).toBe(true);
+      httpMock.verify();
+    });
+
+    /** An explicit true is stored as true. */
+    it("stores an explicit keycloakVerifySsl: true as true", (): void => {
+      const { provider, httpMock } = setup(offlineConfig({ keycloakVerifySsl: true }));
+      expect(provider.keycloakVerifySsl).toBe(true);
+      httpMock.verify();
+    });
+
+    /** An explicit false is threaded from config through to the provider field. */
+    it("stores keycloakVerifySsl: false as false (threaded config -> provider)", (): void => {
+      const { provider, httpMock } = setup(offlineConfig({ keycloakVerifySsl: false }));
+      expect(provider.keycloakVerifySsl).toBe(false);
+      httpMock.verify();
+    });
+
+    /**
+     * The flag is inert at the transport layer: with keycloakVerifySsl: false the
+     * provider issues the SAME single POST (same URL, method, headers, body) and
+     * logs in exactly as with the field omitted — proving it is a no-op, not wired
+     * to TLS.
+     */
+    it("does not alter or break the token request when keycloakVerifySsl is false", async (): Promise<void> => {
+      const { provider, httpMock } = setup(offlineConfig({ keycloakVerifySsl: false }));
+      const pending: Promise<string | null> = provider.getToken() as Promise<string | null>;
+      const request: TestRequest = httpMock.expectOne(TOKEN_ENDPOINT);
+
+      expect(request.request.method).toBe("POST");
+      expect(request.request.headers.get("Content-Type")).toBe("application/x-www-form-urlencoded");
+      expect(request.request.body).toContain("grant_type=refresh_token");
+      expect(request.request.body).toContain(`client_id=${CLIENT_ID}`);
+      expect(request.request.body).toContain(`refresh_token=${OFFLINE_TOKEN}`);
+
+      request.flush({ access_token: ACCESS_TOKEN, refresh_token: REFRESH_TOKEN, expires_in: EXPIRES_IN_S });
+      await pending;
+
+      expect(provider.getToken()).toBe(ACCESS_TOKEN);
+      provider.ngOnDestroy();
+      httpMock.verify();
+    });
+  });
+
   describe("config validation", (): void => {
     /** Each required URL/realm/client field, when empty, throws on construction. */
     it.each(["keycloakUrl", "realm", "clientId"] as const)(
