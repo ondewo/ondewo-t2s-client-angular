@@ -1,0 +1,53 @@
+#############################################################################################
+# pre-commit — language-agnostic hooks for this non-python repo (angular/ts client).        #
+# Language-specific linting/formatting stays with the repo's own toolchain (eslint/prettier #
+# via husky). Ruff/mypy/uv are python-only and NOT included here.                           #
+#############################################################################################
+
+# Never touch generated / vendored code:
+#   node_modules/                          npm deps
+#   api/                                   generated proto TS stubs (*.pb.ts/.pbconf.ts/.pbsc.ts)
+#   fesm2022/                              angular build output (*.mjs/.mjs.map)
+#   *.d.ts / *.d.ts.map / *.metadata.json  generated type declarations / ng metadata
+#   *_pb.js / *_pb.d.ts / *_grpc_pb.*      generated grpc stubs (defensive)
+#   ondewo-proto-compiler, src/ondewo-t2s-api  git submodules
+#   package-lock.json                      npm lockfile
+exclude: '^(node_modules|api|fesm2022|coverage|dist|build)/|^(ondewo-proto-compiler|src/ondewo-.*-api|ondewo-.*-api)($|/)|(_pb\.(js|d\.ts)$|_grpc_pb\.(js|d\.ts)$)|(\.d\.ts(\.map)?|\.metadata\.json)$|^package-lock\.json$'
+
+fail_fast: false
+
+repos:
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.23.0
+    hooks:
+      - id: markdownlint-cli2
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [ maxkb=1024 ]
+      - id: check-json          # validate (does NOT reformat) json/package.json
+      - id: check-yaml
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: check-executables-have-shebangs
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/milin/giticket
+    rev: '1.92'
+    hooks:
+      - id: giticket
+        args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
+                '--format=[{ticket}] {commit_msg}',
+                '--mode=regex_match' ]
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [ commit-msg ]
