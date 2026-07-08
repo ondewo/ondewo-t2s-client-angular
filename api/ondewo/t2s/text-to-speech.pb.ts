@@ -12111,3 +12111,220 @@ export module CreateCustomPhonemizerRequest {
     maps: Map.AsProtobufJSON[] | null;
   }
 }
+
+/**
+ * Message implementation for ondewo.t2s.VoiceCloningRequest
+ */
+export class VoiceCloningRequest implements GrpcMessage {
+  static id = 'ondewo.t2s.VoiceCloningRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new VoiceCloningRequest();
+    VoiceCloningRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: VoiceCloningRequest) {
+    _instance.sampleAudio = _instance.sampleAudio || new Uint8Array();
+    _instance.transcription = _instance.transcription || '';
+    _instance.speakerName = _instance.speakerName || '';
+    _instance.speakerLanguage = _instance.speakerLanguage || '';
+    _instance.modelName = _instance.modelName || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: VoiceCloningRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.sampleAudio = _reader.readBytes();
+          break;
+        case 2:
+          _instance.transcription = _reader.readString();
+          break;
+        case 3:
+          _instance.speakerName = _reader.readString();
+          break;
+        case 4:
+          _instance.speakerLanguage = _reader.readString();
+          break;
+        case 5:
+          _instance.modelName = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    VoiceCloningRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: VoiceCloningRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.sampleAudio && _instance.sampleAudio.length) {
+      _writer.writeBytes(1, _instance.sampleAudio);
+    }
+    if (_instance.transcription) {
+      _writer.writeString(2, _instance.transcription);
+    }
+    if (_instance.speakerName) {
+      _writer.writeString(3, _instance.speakerName);
+    }
+    if (_instance.speakerLanguage) {
+      _writer.writeString(4, _instance.speakerLanguage);
+    }
+    if (_instance.modelName) {
+      _writer.writeString(5, _instance.modelName);
+    }
+  }
+
+  private _sampleAudio: Uint8Array;
+  private _transcription: string;
+  private _speakerName: string;
+  private _speakerLanguage: string;
+  private _modelName: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of VoiceCloningRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<VoiceCloningRequest.AsObject>) {
+    _value = _value || {};
+    this.sampleAudio = _value.sampleAudio;
+    this.transcription = _value.transcription;
+    this.speakerName = _value.speakerName;
+    this.speakerLanguage = _value.speakerLanguage;
+    this.modelName = _value.modelName;
+    VoiceCloningRequest.refineValues(this);
+  }
+  get sampleAudio(): Uint8Array {
+    return this._sampleAudio;
+  }
+  set sampleAudio(value: Uint8Array) {
+    this._sampleAudio = value;
+  }
+  get transcription(): string {
+    return this._transcription;
+  }
+  set transcription(value: string) {
+    this._transcription = value;
+  }
+  get speakerName(): string {
+    return this._speakerName;
+  }
+  set speakerName(value: string) {
+    this._speakerName = value;
+  }
+  get speakerLanguage(): string {
+    return this._speakerLanguage;
+  }
+  set speakerLanguage(value: string) {
+    this._speakerLanguage = value;
+  }
+  get modelName(): string {
+    return this._modelName;
+  }
+  set modelName(value: string) {
+    this._modelName = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    VoiceCloningRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): VoiceCloningRequest.AsObject {
+    return {
+      sampleAudio: this.sampleAudio
+        ? this.sampleAudio.subarray(0)
+        : new Uint8Array(),
+      transcription: this.transcription,
+      speakerName: this.speakerName,
+      speakerLanguage: this.speakerLanguage,
+      modelName: this.modelName
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): VoiceCloningRequest.AsProtobufJSON {
+    return {
+      sampleAudio: this.sampleAudio ? uint8ArrayToBase64(this.sampleAudio) : '',
+      transcription: this.transcription,
+      speakerName: this.speakerName,
+      speakerLanguage: this.speakerLanguage,
+      modelName: this.modelName
+    };
+  }
+}
+export module VoiceCloningRequest {
+  /**
+   * Standard JavaScript object representation for VoiceCloningRequest
+   */
+  export interface AsObject {
+    sampleAudio: Uint8Array;
+    transcription: string;
+    speakerName: string;
+    speakerLanguage: string;
+    modelName: string;
+  }
+
+  /**
+   * Protobuf JSON representation for VoiceCloningRequest
+   */
+  export interface AsProtobufJSON {
+    sampleAudio: string;
+    transcription: string;
+    speakerName: string;
+    speakerLanguage: string;
+    modelName: string;
+  }
+}

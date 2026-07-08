@@ -415,6 +415,27 @@ export class Text2SpeechClient {
         requestClass: thisProto.ListCustomPhonemizerRequest,
         responseClass: thisProto.ListCustomPhonemizerResponse
       });
+    },
+    /**
+     * Unary call: /ondewo.t2s.Text2Speech/VoiceCloning
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+     */
+    voiceCloning: (
+      requestData: thisProto.VoiceCloningRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/ondewo.t2s.Text2Speech/VoiceCloning',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.VoiceCloningRequest,
+        responseClass: googleProtobuf000.Empty
+      });
     }
   };
 
@@ -714,6 +735,22 @@ export class Text2SpeechClient {
   ): Observable<thisProto.ListCustomPhonemizerResponse> {
     return this.$raw
       .listCustomPhonemizer(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/ondewo.t2s.Text2Speech/VoiceCloning
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<googleProtobuf000.Empty>
+   */
+  voiceCloning(
+    requestData: thisProto.VoiceCloningRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<googleProtobuf000.Empty> {
+    return this.$raw
+      .voiceCloning(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }

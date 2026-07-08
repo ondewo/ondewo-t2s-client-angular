@@ -9240,6 +9240,178 @@ class CreateCustomPhonemizerRequest {
         };
     }
 }
+/**
+ * Message implementation for ondewo.t2s.VoiceCloningRequest
+ */
+class VoiceCloningRequest {
+    static id = 'ondewo.t2s.VoiceCloningRequest';
+    /**
+     * Deserialize binary data to message
+     * @param instance message instance
+     */
+    static deserializeBinary(bytes) {
+        const instance = new VoiceCloningRequest();
+        VoiceCloningRequest.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+        return instance;
+    }
+    /**
+     * Check all the properties and set default protobuf values if necessary
+     * @param _instance message instance
+     */
+    static refineValues(_instance) {
+        _instance.sampleAudio = _instance.sampleAudio || new Uint8Array();
+        _instance.transcription = _instance.transcription || '';
+        _instance.speakerName = _instance.speakerName || '';
+        _instance.speakerLanguage = _instance.speakerLanguage || '';
+        _instance.modelName = _instance.modelName || '';
+    }
+    /**
+     * Deserializes / reads binary message into message instance using provided binary reader
+     * @param _instance message instance
+     * @param _reader binary reader instance
+     */
+    static deserializeBinaryFromReader(_instance, _reader) {
+        while (_reader.nextField()) {
+            if (_reader.isEndGroup())
+                break;
+            switch (_reader.getFieldNumber()) {
+                case 1:
+                    _instance.sampleAudio = _reader.readBytes();
+                    break;
+                case 2:
+                    _instance.transcription = _reader.readString();
+                    break;
+                case 3:
+                    _instance.speakerName = _reader.readString();
+                    break;
+                case 4:
+                    _instance.speakerLanguage = _reader.readString();
+                    break;
+                case 5:
+                    _instance.modelName = _reader.readString();
+                    break;
+                default:
+                    _reader.skipField();
+            }
+        }
+        VoiceCloningRequest.refineValues(_instance);
+    }
+    /**
+     * Serializes a message to binary format using provided binary reader
+     * @param _instance message instance
+     * @param _writer binary writer instance
+     */
+    static serializeBinaryToWriter(_instance, _writer) {
+        if (_instance.sampleAudio && _instance.sampleAudio.length) {
+            _writer.writeBytes(1, _instance.sampleAudio);
+        }
+        if (_instance.transcription) {
+            _writer.writeString(2, _instance.transcription);
+        }
+        if (_instance.speakerName) {
+            _writer.writeString(3, _instance.speakerName);
+        }
+        if (_instance.speakerLanguage) {
+            _writer.writeString(4, _instance.speakerLanguage);
+        }
+        if (_instance.modelName) {
+            _writer.writeString(5, _instance.modelName);
+        }
+    }
+    _sampleAudio;
+    _transcription;
+    _speakerName;
+    _speakerLanguage;
+    _modelName;
+    /**
+     * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+     * @param _value initial values object or instance of VoiceCloningRequest to deeply clone from
+     */
+    constructor(_value) {
+        _value = _value || {};
+        this.sampleAudio = _value.sampleAudio;
+        this.transcription = _value.transcription;
+        this.speakerName = _value.speakerName;
+        this.speakerLanguage = _value.speakerLanguage;
+        this.modelName = _value.modelName;
+        VoiceCloningRequest.refineValues(this);
+    }
+    get sampleAudio() {
+        return this._sampleAudio;
+    }
+    set sampleAudio(value) {
+        this._sampleAudio = value;
+    }
+    get transcription() {
+        return this._transcription;
+    }
+    set transcription(value) {
+        this._transcription = value;
+    }
+    get speakerName() {
+        return this._speakerName;
+    }
+    set speakerName(value) {
+        this._speakerName = value;
+    }
+    get speakerLanguage() {
+        return this._speakerLanguage;
+    }
+    set speakerLanguage(value) {
+        this._speakerLanguage = value;
+    }
+    get modelName() {
+        return this._modelName;
+    }
+    set modelName(value) {
+        this._modelName = value;
+    }
+    /**
+     * Serialize message to binary data
+     * @param instance message instance
+     */
+    serializeBinary() {
+        const writer = new BinaryWriter();
+        VoiceCloningRequest.serializeBinaryToWriter(this, writer);
+        return writer.getResultBuffer();
+    }
+    /**
+     * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+     */
+    toObject() {
+        return {
+            sampleAudio: this.sampleAudio
+                ? this.sampleAudio.subarray(0)
+                : new Uint8Array(),
+            transcription: this.transcription,
+            speakerName: this.speakerName,
+            speakerLanguage: this.speakerLanguage,
+            modelName: this.modelName
+        };
+    }
+    /**
+     * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+     */
+    toJSON() {
+        return this.toObject();
+    }
+    /**
+     * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+     * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+     * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+     */
+    toProtobufJSON(
+    // @ts-ignore
+    options) {
+        return {
+            sampleAudio: this.sampleAudio ? uint8ArrayToBase64(this.sampleAudio) : '',
+            transcription: this.transcription,
+            speakerName: this.speakerName,
+            speakerLanguage: this.speakerLanguage,
+            modelName: this.modelName
+        };
+    }
+}
 
 /* tslint:disable */
 /* eslint-disable */
@@ -9594,6 +9766,24 @@ class Text2SpeechClient {
                 requestClass: ListCustomPhonemizerRequest,
                 responseClass: ListCustomPhonemizerResponse
             });
+        },
+        /**
+         * Unary call: /ondewo.t2s.Text2Speech/VoiceCloning
+         *
+         * @param requestMessage Request message
+         * @param requestMetadata Request metadata
+         * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
+         */
+        voiceCloning: (requestData, requestMetadata = new GrpcMetadata()) => {
+            return this.handler.handle({
+                type: GrpcCallType.unary,
+                client: this.client,
+                path: '/ondewo.t2s.Text2Speech/VoiceCloning',
+                requestData,
+                requestMetadata,
+                requestClass: VoiceCloningRequest,
+                responseClass: googleProtobuf001.Empty
+            });
         }
     };
     constructor(settings, clientFactory, handler) {
@@ -9816,6 +10006,18 @@ class Text2SpeechClient {
             .listCustomPhonemizer(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
+    /**
+     * Unary call @/ondewo.t2s.Text2Speech/VoiceCloning
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<googleProtobuf000.Empty>
+     */
+    voiceCloning(requestData, requestMetadata = new GrpcMetadata()) {
+        return this.$raw
+            .voiceCloning(requestData, requestMetadata)
+            .pipe(throwStatusErrors(), takeMessages());
+    }
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.25", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
     static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.25", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
 }
@@ -9836,5 +10038,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.25", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceSettings, Wiener };
+export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map
