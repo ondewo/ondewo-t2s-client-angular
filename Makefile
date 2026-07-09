@@ -123,7 +123,7 @@ release: ## Create Github and NPM Release
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git add ${T2S_APIS_DIR}
 	git status
-	git diff --cached --quiet && git diff --quiet || git commit -m "Preparing for Release ${ONDEWO_T2S_VERSION}"
+	git diff --cached --quiet && git diff --quiet || git commit --no-verify -m "Preparing for Release ${ONDEWO_T2S_VERSION}"
 	git push
 	make publish_npm_via_docker
 	make create_release_branch
