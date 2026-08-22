@@ -5,7 +5,7 @@
  *
  * 1. Feed the current Keycloak access token into the SDK through a
  *    {@link TokenProvider} (bearer-token auth — this client performs no
- *    OAuth/OIDC flow itself; see `src/lib/auth`).
+ *    OAuth/OIDC flow itself; see `src/auth`).
  * 2. Register that provider together with the SDK's gRPC-web and HTTP auth
  *    interceptors via {@link provideOndewoT2sAuth} + `authHttpInterceptor`.
  * 3. Inject the generated {@link Text2SpeechClient} and call a representative
@@ -24,7 +24,7 @@ import {
   SynthesizeRequest,
   SynthesizeResponse
 } from "../../api/ondewo/t2s/text-to-speech.pb";
-import { authHttpInterceptor, provideOndewoT2sAuth, TokenProvider, TokenResult } from "../lib/auth";
+import { authHttpInterceptor, provideOndewoT2sAuth, TokenProvider, TokenResult } from "../auth";
 
 /**
  * A dependency-free {@link TokenProvider} that hands the SDK a Keycloak access

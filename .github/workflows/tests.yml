@@ -20,6 +20,24 @@ jobs:
         with:
           submodules: false
 
+      # tests/hand-written-barrel-location.spec.ts reads ng-packagr's `dest` out of the
+      # proto-compiler's own ng-package.json instead of hard-coding it, so that one file has
+      # to be present. Checking the compiler out standalone at the tag the Makefile pins keeps
+      # the heavy `src/ondewo-t2s-api` submodule out of the job.
+      - name: Resolve the proto-compiler tag the Makefile pins
+        id: proto-compiler
+        run: |
+          ref="$(sed -nE 's#^ONDEWO_PROTO_COMPILER_GIT_BRANCH=(tags/)?##p' Makefile)"
+          test -n "$ref"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Check out ondewo-proto-compiler at the pinned tag
+        uses: actions/checkout@v5
+        with:
+          repository: ondewo/ondewo-proto-compiler
+          ref: ${{ steps.proto-compiler.outputs.ref }}
+          path: ondewo-proto-compiler
+
       - name: Set up Node.js 20
         uses: actions/setup-node@v5
         with:

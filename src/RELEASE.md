@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO T2S Angular Client 6.6.2
+
+### Bug Fixes
+
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) The hand-written Keycloak auth sources moved from `src/lib/auth` to `src/auth`. The angular proto-compiler's `ng-package.json` sets ng-packagr's `dest` to `lib`, and ng-packagr 20.x deletes that directory recursively *before* tsc compiles the entry point - so everything under `src/lib` was removed from the build tree while the generated barrel still exported it. `src/auth` is outside `dest` and is the first location the compiler's `generate-public-api.sh` looks for.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `ondewo-proto-compiler` moved from 5.11.0 to [5.13.0](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.13.0), which star-exports the hand-written barrel from the generated public-api. 6.6.1 announced this bump but shipped with 5.11.0 pinned, so the published package contained no `AuthGrpcInterceptor`, `KeycloakTokenProvider`, `authHttpInterceptor` or `provideOndewoT2sAuth` symbol. They are exported from the package root as of this release. The generated protobuf stubs are byte-identical across the two compiler versions.
+* [[OND221-2830]](https://ondewo.atlassian.net/browse/OND221-2830) `tests/hand-written-barrel-location.spec.ts` reads `dest` from the compiler's own `ng-package.json` and fails if any hand-written source is placed under it again. The `tests` GitHub Actions workflow checks the compiler out at the tag the `Makefile` pins so the guard has that file to read.
+
+*****************
+
 ## Release ONDEWO T2S Angular Client 6.6.1
 
 ### Bug Fixes
