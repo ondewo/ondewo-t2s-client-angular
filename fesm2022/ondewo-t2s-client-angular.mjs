@@ -2,9 +2,12 @@ import { uint8ArrayToBase64, GrpcMetadata, GrpcCallType } from '@ngx-grpc/common
 import { BinaryReader, BinaryWriter } from 'google-protobuf';
 import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
 import * as i0 from '@angular/core';
-import { InjectionToken, Optional, Inject, Injectable } from '@angular/core';
+import { InjectionToken, Optional, Inject, Injectable, inject, makeEnvironmentProviders } from '@angular/core';
 import * as i1 from '@ngx-grpc/core';
-import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY } from '@ngx-grpc/core';
+import { throwStatusErrors, takeMessages, GRPC_CLIENT_FACTORY, GRPC_INTERCEPTORS } from '@ngx-grpc/core';
+import * as i1$1 from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { firstValueFrom, isObservable, from, Observable, of, switchMap } from 'rxjs';
 
 /* tslint:disable */
 /* eslint-disable */
@@ -10035,8 +10038,600 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImpo
                 }] }, { type: i1.GrpcHandler }] });
 
 /**
+ * DI token under which the consuming application registers its
+ * {@link TokenProvider} implementation.
+ *
+ * Example:
+ *
+ * ```ts
+ * providers: [
+ *   { provide: TOKEN_PROVIDER, useExisting: KeycloakTokenProvider },
+ * ]
+ * ```
+ */
+const TOKEN_PROVIDER = new InjectionToken("ONDEWO_T2S_TOKEN_PROVIDER");
+
+/**
+ * Seconds of head-room subtracted from a token's `expires_in` so the background
+ * refresh fires *before* the access token actually lapses (covers clock skew and
+ * the round-trip to Keycloak). Mirrors the nodejs/python SDK references.
+ */
+const REFRESH_SKEW_IN_S = 30;
+/**
+ * Lower bound (in seconds) for the scheduled refresh delay so a tiny / zero
+ * `expires_in` cannot spin a hot refresh loop.
+ */
+const MIN_REFRESH_DELAY_IN_S = 1;
+/**
+ * DI token carrying the {@link KeycloakTokenProviderConfig} consumed by
+ * {@link KeycloakTokenProvider}.
+ *
+ * Example:
+ *
+ * ```ts
+ * providers: [
+ *   {
+ *     provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+ *     useValue: {
+ *       keycloakUrl: "https://auth.example.com/auth",
+ *       realm: "ondewo-ccai-platform",
+ *       clientId: "ondewo-t2s-sdk-public",
+ *       offlineToken: "<offline-token>"
+ *     } satisfies KeycloakTokenProviderConfig
+ *   }
+ * ]
+ * ```
+ */
+const KEYCLOAK_TOKEN_PROVIDER_CONFIG = new InjectionToken("ONDEWO_T2S_KEYCLOAK_TOKEN_PROVIDER_CONFIG");
+/**
+ * Error raised on any token-endpoint failure or unusable token-endpoint response.
+ */
+class KeycloakAuthenticationError extends Error {
+    /**
+     * Create a {@link KeycloakAuthenticationError} with a fixed `name`.
+     *
+     * @param message a human-readable description of the token failure.
+     */
+    constructor(message) {
+        super(message);
+        this.name = "KeycloakAuthenticationError";
+    }
+}
+/**
+ * A concrete, ready-to-use {@link TokenProvider} that performs the Keycloak
+ * offline-token flow itself, so consumers get background access-token refresh
+ * without implementing {@link TokenProvider}.
+ *
+ * On first {@link getToken} the provider logs in once against the Keycloak token
+ * endpoint (offline / refresh-token grant, or a password grant with
+ * `scope=offline_access`), then keeps the access token fresh with a background
+ * timer that refreshes shortly *before* expiry (see {@link REFRESH_SKEW_IN_S}).
+ * {@link getToken} returns the current valid access token; while the very first
+ * login is still in flight it returns the bootstrap `Promise` so the auth
+ * interceptors await it before sending the request.
+ *
+ * Register it with {@link KEYCLOAK_TOKEN_PROVIDER_CONFIG} and `provideOndewoT2sAuth`:
+ *
+ * ```ts
+ * import { provideHttpClient, withInterceptors } from "@angular/common/http";
+ * import {
+ *   authHttpInterceptor,
+ *   KeycloakTokenProvider,
+ *   KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+ *   provideOndewoT2sAuth
+ * } from "@ondewo/t2s-client-angular";
+ *
+ * bootstrapApplication(AppComponent, {
+ *   providers: [
+ *     {
+ *       provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
+ *       useValue: {
+ *         keycloakUrl: "https://auth.example.com/auth",
+ *         realm: "ondewo-ccai-platform",
+ *         clientId: "ondewo-t2s-sdk-public",
+ *         offlineToken: "<offline-token>"
+ *       }
+ *     },
+ *     provideOndewoT2sAuth(KeycloakTokenProvider),
+ *     provideHttpClient(withInterceptors([authHttpInterceptor]))
+ *   ]
+ * });
+ * ```
+ */
+class KeycloakTokenProvider {
+    http;
+    /** Pre-computed OIDC token endpoint URL for the configured realm. */
+    tokenEndpoint;
+    /** Public SDK client id sent on every token request (no `client_secret`). */
+    clientId;
+    /**
+     * Whether TLS-certificate verification is requested for the token-endpoint
+     * call. Defaults to `true`. Stored for cross-SDK config parity only — it is a
+     * NO-OP in this browser client (the browser owns the TLS handshake), so the
+     * outgoing {@link postTokenRequest} call is unaffected by its value. See
+     * {@link KeycloakTokenProviderConfig.keycloakVerifySsl}.
+     */
+    verifySsl;
+    /** Seed offline / refresh token; empty when a `username` + `password` login is used instead. */
+    offlineToken;
+    /** Technical-user name; empty when an `offlineToken` is used instead. */
+    username;
+    /** Technical-user password; empty when an `offlineToken` is used instead. */
+    password;
+    /** Optional cap (seconds) after which the auto-refresh loop stops; `undefined` means unbounded. */
+    tokenExpirationInS;
+    /** The current access token; empty before bootstrap / after the bounded loop has lapsed. */
+    accessToken = "";
+    /** The current offline / refresh token; empty before bootstrap. */
+    refreshToken = "";
+    /** Handle of the armed refresh timer, or `null` when no refresh is scheduled. */
+    timer = null;
+    /** Whether {@link ngOnDestroy} has run; suppresses any further (re-)scheduling. */
+    stopped = false;
+    /** Absolute epoch-ms deadline for the bounded loop, or `null` when unbounded. */
+    deadlineInMs = null;
+    /** The in-flight bootstrap promise, memoised so login happens exactly once. */
+    bootstrapPromise = null;
+    /**
+     * @param http the Angular {@link HttpClient} used for the token-endpoint calls.
+     * @param config the {@link KeycloakTokenProviderConfig} for the login + refresh loop.
+     */
+    constructor(http, config) {
+        this.http = http;
+        this.validateConfig(config);
+        const base = config.keycloakUrl.replace(/\/+$/, "");
+        this.tokenEndpoint = `${base}/realms/${encodeURIComponent(config.realm)}/protocol/openid-connect/token`;
+        this.clientId = config.clientId;
+        // Stored for cross-SDK config parity; a no-op on the browser transport (see field doc).
+        this.verifySsl = config.keycloakVerifySsl ?? true;
+        this.offlineToken = config.offlineToken ?? "";
+        this.username = config.username ?? "";
+        this.password = config.password ?? "";
+        this.tokenExpirationInS = config.tokenExpirationInS;
+    }
+    /**
+     * Return the current access token, kicking off the one-time login on first call.
+     *
+     * @returns the current access token synchronously once login has completed; the
+     *   bootstrap `Promise` while the first login is still in flight; or `null` once
+     *   the bounded refresh window has elapsed.
+     */
+    getToken() {
+        if (this.bootstrapPromise === null) {
+            this.bootstrapPromise = this.bootstrap();
+        }
+        return this.accessToken.length > 0 ? this.accessToken : this.bootstrapPromise;
+    }
+    /**
+     * The resolved TLS-verification setting from
+     * {@link KeycloakTokenProviderConfig.keycloakVerifySsl} (defaults to `true`).
+     *
+     * Exposed for cross-SDK config parity and introspection only. It is a NO-OP in
+     * this browser client — the browser owns the TLS handshake, so the value never
+     * reaches {@link postTokenRequest} and does not change the outgoing request.
+     *
+     * @returns `true` when TLS verification is requested (the default), `false`
+     *   when the config explicitly opted out (still inert here).
+     */
+    get keycloakVerifySsl() {
+        return this.verifySsl;
+    }
+    /** Stop the background refresh loop when the injector is destroyed. Idempotent. */
+    ngOnDestroy() {
+        this.stopped = true;
+        if (this.timer !== null) {
+            clearTimeout(this.timer);
+            this.timer = null;
+        }
+    }
+    /**
+     * Perform the one-time login (offline / refresh-token grant when `offlineToken`
+     * is set, otherwise a `password` grant with `scope=offline_access`) and arm the
+     * first background refresh.
+     *
+     * @returns a promise resolving to the freshly acquired access token.
+     * @throws {@link KeycloakAuthenticationError} if the token endpoint fails or the
+     *   response carries no `access_token` / `refresh_token`.
+     */
+    async bootstrap() {
+        const params = this.offlineToken.length > 0
+            ? {
+                grant_type: "refresh_token",
+                client_id: this.clientId,
+                refresh_token: this.offlineToken
+            }
+            : {
+                grant_type: "password",
+                client_id: this.clientId,
+                username: this.username,
+                password: this.password,
+                scope: "offline_access"
+            };
+        const response = await this.postTokenRequest(params);
+        this.storeTokens(response);
+        if (this.refreshToken.length === 0) {
+            throw new KeycloakAuthenticationError("Keycloak token response did not contain a refresh_token; the SDK client must have " +
+                "directAccessGrants + the offline_access scope");
+        }
+        if (this.tokenExpirationInS !== undefined) {
+            this.deadlineInMs = Date.now() + (this.tokenExpirationInS * 1000);
+        }
+        this.scheduleRefresh(response.expires_in);
+        return this.accessToken;
+    }
+    /**
+     * Exchange the offline / refresh token for a fresh access token and re-arm the
+     * next background refresh. No-ops once stopped or once the bounded deadline has
+     * elapsed (in which case it also stops the loop, letting the token lapse).
+     *
+     * @returns a promise that resolves once the token is refreshed and the next
+     *   refresh is armed (or once the loop has been stopped).
+     * @throws {@link KeycloakAuthenticationError} if the refresh call fails or
+     *   returns an unusable body.
+     */
+    async refresh() {
+        if (this.stopped) {
+            return;
+        }
+        if (this.deadlineInMs !== null && Date.now() >= this.deadlineInMs) {
+            this.ngOnDestroy();
+            return;
+        }
+        const response = await this.postTokenRequest({
+            grant_type: "refresh_token",
+            client_id: this.clientId,
+            refresh_token: this.refreshToken
+        });
+        this.storeTokens(response);
+        this.scheduleRefresh(response.expires_in);
+    }
+    /**
+     * Arm a single timer for the next refresh, clamped to the bounded deadline.
+     * Stops silently once `tokenExpirationInS` has elapsed (no further renewal →
+     * access lapses → a fresh provider is required).
+     *
+     * The delay is `expiresInRaw` minus {@link REFRESH_SKEW_IN_S}, floored at
+     * {@link MIN_REFRESH_DELAY_IN_S}, then clamped to the time left before the deadline.
+     *
+     * @param expiresInRaw the `expires_in` (seconds) from the latest token response;
+     *   a missing or non-positive value falls back to {@link MIN_REFRESH_DELAY_IN_S}.
+     */
+    scheduleRefresh(expiresInRaw) {
+        if (this.stopped) {
+            return;
+        }
+        const expiresInS = typeof expiresInRaw === "number" && expiresInRaw > 0 ? expiresInRaw : MIN_REFRESH_DELAY_IN_S;
+        let delayInS = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
+        if (this.deadlineInMs !== null) {
+            const remainingInMs = this.deadlineInMs - Date.now();
+            if (remainingInMs <= 0) {
+                this.ngOnDestroy();
+                return;
+            }
+            delayInS = Math.min(delayInS, remainingInMs / 1000);
+        }
+        this.timer = setTimeout(() => {
+            void this.refresh().catch(() => {
+                // Swallow a transient background-refresh failure: the next interceptor read
+                // gets the stale (possibly expired) token and the server replies
+                // UNAUTHENTICATED, prompting the consumer to re-login.
+            });
+        }, delayInS * 1000);
+    }
+    /**
+     * POST an `application/x-www-form-urlencoded` body to the token endpoint and
+     * return the parsed response.
+     *
+     * @param params the form fields to URL-encode (grant type, client id, credentials).
+     * @returns the parsed {@link KeycloakTokenResponse}.
+     * @throws {@link KeycloakAuthenticationError} on a non-2xx response or a body
+     *   without a usable `access_token`.
+     */
+    async postTokenRequest(params) {
+        const body = new URLSearchParams(params).toString();
+        let response;
+        try {
+            response = await firstValueFrom(this.http.post(this.tokenEndpoint, body, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    Accept: "application/json"
+                }
+            }));
+        }
+        catch (caught) {
+            const status = caught instanceof HttpErrorResponse ? caught.status : 0;
+            throw new KeycloakAuthenticationError(`Keycloak token endpoint request failed with HTTP ${status}`);
+        }
+        if (typeof response.access_token !== "string" || response.access_token.length === 0) {
+            throw new KeycloakAuthenticationError("Keycloak token response did not contain an access_token");
+        }
+        return response;
+    }
+    /**
+     * Store the access token and, when present, the (possibly rotated) refresh
+     * token from a token response. A response that omits `refresh_token` keeps the
+     * previous one so a same-token refresh does not blank out the offline token.
+     *
+     * @param response the parsed token-endpoint response.
+     */
+    storeTokens(response) {
+        this.accessToken = response.access_token;
+        if (typeof response.refresh_token === "string" && response.refresh_token.length > 0) {
+            this.refreshToken = response.refresh_token;
+        }
+    }
+    /**
+     * Validate the injected config: the three URL/realm/client fields are required,
+     * and a credential must be supplied as either `offlineToken` or
+     * `username` + `password`.
+     *
+     * @param config the {@link KeycloakTokenProviderConfig} to validate.
+     * @throws {@link KeycloakAuthenticationError} when a required field is missing.
+     */
+    validateConfig(config) {
+        for (const key of ["keycloakUrl", "realm", "clientId"]) {
+            if (config[key].length === 0) {
+                throw new KeycloakAuthenticationError(`KeycloakTokenProviderConfig.${key} is required and must be non-empty`);
+            }
+        }
+        const hasOfflineToken = (config.offlineToken ?? "").length > 0;
+        const hasPassword = (config.username ?? "").length > 0 && (config.password ?? "").length > 0;
+        if (!hasOfflineToken && !hasPassword) {
+            throw new KeycloakAuthenticationError("KeycloakTokenProviderConfig requires either an offlineToken or a username + password");
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, deps: [{ token: i1$1.HttpClient }, { token: KEYCLOAK_TOKEN_PROVIDER_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, providedIn: "root" });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: "root" }]
+        }], ctorParameters: () => [{ type: i1$1.HttpClient }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [KEYCLOAK_TOKEN_PROVIDER_CONFIG]
+                }] }] });
+
+/**
+ * The HTTP / gRPC header under which the bearer credential is attached.
+ *
+ * Canonical `Authorization` casing: gRPC-web and HTTP header names are
+ * case-insensitive, so this interoperates with any server, while the HTTP/2
+ * transport still lower-cases header names on the wire regardless.
+ */
+const AUTHORIZATION_HEADER = "Authorization";
+/** The credential scheme prefix prepended to the raw access token. */
+const BEARER_PREFIX = "Bearer ";
+/**
+ * Normalize the value returned by a `TokenProvider.getToken()` call — which may
+ * be a `string`, `null`, a `Promise` or an `Observable` — into a single
+ * `Observable<string | null>` that emits exactly once.
+ *
+ * A non-empty token is returned trimmed; `null`, `undefined`, an empty string
+ * and a whitespace-only string are all collapsed to `null` so callers have a
+ * single "no usable token" signal and never build an empty `Bearer` header.
+ *
+ * @param result the raw value returned by `TokenProvider.getToken()`.
+ * @returns an observable emitting the usable token, or `null` when absent.
+ */
+function resolveToken(result) {
+    const source = isObservable(result)
+        ? result
+        : from(Promise.resolve(result));
+    return new Observable((subscriber) => {
+        const subscription = source.subscribe({
+            next: (token) => subscriber.next(normalizeToken(token)),
+            error: (caughtError) => subscriber.error(caughtError),
+            complete: () => subscriber.complete()
+        });
+        return () => subscription.unsubscribe();
+    });
+}
+/**
+ * Build the `Authorization` header value for a resolved token, or `null` when
+ * the token is absent.
+ *
+ * @param token a usable token, or `null`.
+ * @returns the `"Bearer <token>"` string, or `null` when there is no token.
+ */
+function buildBearerValue(token) {
+    return token === null ? null : `${BEARER_PREFIX}${token}`;
+}
+/**
+ * Convenience wrapper: emit the ready-to-use `Authorization` header value, or
+ * `null` when no token is available.
+ *
+ * @param result the raw value returned by `TokenProvider.getToken()`.
+ * @returns an observable emitting the bearer header value, or `null`.
+ */
+function resolveBearerValue(result) {
+    return new Observable((subscriber) => {
+        const subscription = resolveToken(result).subscribe({
+            next: (token) => subscriber.next(buildBearerValue(token)),
+            error: (caughtError) => subscriber.error(caughtError),
+            complete: () => subscriber.complete()
+        });
+        return () => subscription.unsubscribe();
+    });
+}
+/**
+ * Collapse every "no usable token" value to `null` and trim a real token.
+ *
+ * @param token the raw token emitted by the source.
+ * @returns the trimmed token, or `null` when empty / whitespace-only / absent.
+ */
+function normalizeToken(token) {
+    if (token === null || token === undefined) {
+        return null;
+    }
+    const trimmed = token.trim();
+    return trimmed.length === 0 ? null : trimmed;
+}
+/**
+ * Wrap a synchronous value as a single-emission observable. Used by callers that
+ * want to stay in the observable world without importing `rxjs` `of` directly.
+ *
+ * @param value the value to emit.
+ * @returns an observable emitting `value` once and completing.
+ */
+function once(value) {
+    return of(value);
+}
+
+/**
+ * Functional Angular `HttpInterceptor` that attaches the current Keycloak access
+ * token as an `Authorization: Bearer <token>` header to outgoing HTTP requests.
+ *
+ * Behaviour:
+ * - token present  → a cloned request carrying the bearer header is forwarded.
+ * - token absent / empty → the original request is forwarded untouched (no empty
+ *   `Bearer` header is ever sent).
+ * - token source is async (Promise/Observable) → resolved before the request is
+ *   sent.
+ * - an existing `Authorization` header on the request is left untouched, so a
+ *   caller that already set credentials explicitly wins.
+ *
+ * Register it in the application's HTTP pipeline:
+ *
+ * ```ts
+ * provideHttpClient(withInterceptors([authHttpInterceptor]))
+ * ```
+ *
+ * Errors raised by the `TokenProvider` propagate to the caller (the request is
+ * not sent) so an authentication failure surfaces rather than silently issuing
+ * an unauthenticated request.
+ *
+ * @param req the outgoing HTTP request.
+ * @param next the next handler in the interceptor chain.
+ * @returns the stream of HTTP events for the (possibly authorized) request.
+ */
+function authHttpInterceptor(req, next) {
+    if (req.headers.has(AUTHORIZATION_HEADER)) {
+        return next(req);
+    }
+    const tokenProvider = inject(TOKEN_PROVIDER);
+    return resolveBearerValue(tokenProvider.getToken()).pipe(switchMap((bearerValue) => {
+        if (bearerValue === null) {
+            return next(req);
+        }
+        const authorizedRequest = req.clone({
+            setHeaders: { [AUTHORIZATION_HEADER]: bearerValue }
+        });
+        return next(authorizedRequest);
+    }));
+}
+
+/**
+ * `@ngx-grpc` interceptor that attaches the current Keycloak access token as an
+ * `authorization: Bearer <token>` entry on the gRPC-web request metadata. This
+ * is the gRPC-web counterpart of {@link authHttpInterceptor} and matches the
+ * `@ngx-grpc` client style used by every generated `*.pbsc.ts` service client in
+ * this library.
+ *
+ * Behaviour mirrors the HTTP interceptor:
+ * - token present → the bearer credential is set on `requestMetadata`.
+ * - token absent / empty → the request metadata is left untouched (no empty
+ *   `Bearer` value is ever attached).
+ * - token source is async (Promise/Observable) → resolved before the request is
+ *   handed to the next handler.
+ * - an `authorization` entry already present on the request metadata is left
+ *   untouched, so an explicitly-set credential wins.
+ *
+ * Register it via the standard `@ngx-grpc` multi-provider:
+ *
+ * ```ts
+ * providers: [
+ *   { provide: GRPC_INTERCEPTORS, useClass: AuthGrpcInterceptor, multi: true },
+ * ]
+ * ```
+ */
+class AuthGrpcInterceptor {
+    tokenProvider;
+    /**
+     * @param tokenProvider the application-supplied {@link TokenProvider},
+     *   resolved through the {@link TOKEN_PROVIDER} DI token.
+     */
+    constructor(tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
+    /**
+     * Attach the bearer credential (when available) to the request metadata, then
+     * delegate to the next handler in the chain.
+     *
+     * @param request the intercepted gRPC request.
+     * @param next the next handler to pass the request through.
+     * @returns the stream of gRPC events for the (possibly authorized) request.
+     */
+    intercept(request, next) {
+        if (request.requestMetadata.has(AUTHORIZATION_HEADER)) {
+            return next.handle(request);
+        }
+        return resolveBearerValue(this.tokenProvider.getToken()).pipe(switchMap((bearerValue) => {
+            if (bearerValue !== null) {
+                request.requestMetadata.set(AUTHORIZATION_HEADER, bearerValue);
+            }
+            return next.handle(request);
+        }));
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, deps: [{ token: TOKEN_PROVIDER }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, decorators: [{
+            type: Injectable
+        }], ctorParameters: () => [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [TOKEN_PROVIDER]
+                }] }] });
+
+/**
+ * Wire a consuming application's {@link TokenProvider} implementation into this
+ * library and register the `@ngx-grpc` {@link AuthGrpcInterceptor} that uses it.
+ *
+ * This covers the gRPC-web side. For HTTP requests, additionally register the
+ * functional `authHttpInterceptor`:
+ *
+ * ```ts
+ * provideHttpClient(withInterceptors([authHttpInterceptor]))
+ * ```
+ *
+ * Usage in an application's `providers` (standalone bootstrap or `AppModule`):
+ *
+ * ```ts
+ * import { provideOndewoT2sAuth } from "@ondewo/t2s-client-angular";
+ *
+ * bootstrapApplication(AppComponent, {
+ *   providers: [
+ *     provideOndewoT2sAuth(KeycloakTokenProvider),
+ *     provideHttpClient(withInterceptors([authHttpInterceptor])),
+ *   ],
+ * });
+ * ```
+ *
+ * @param tokenProvider the application's `TokenProvider` class (e.g. one that
+ *   wraps `keycloak-js` / `keycloak-angular`).
+ * @returns environment providers binding the token provider and the gRPC
+ *   interceptor.
+ */
+function provideOndewoT2sAuth(tokenProvider) {
+    const providers = [
+        tokenProvider,
+        { provide: TOKEN_PROVIDER, useExisting: tokenProvider },
+        { provide: GRPC_INTERCEPTORS, useClass: AuthGrpcInterceptor, multi: true }
+    ];
+    return makeEnvironmentProviders(providers);
+}
+
+/**
+ * Public auth surface for `@ondewo/t2s-client-angular`.
+ *
+ * The consuming application supplies the current Keycloak access token through a
+ * {@link TokenProvider} (fed from `keycloak-js` / `keycloak-angular`); this
+ * library attaches it as an `Authorization: Bearer <token>` credential to
+ * outgoing gRPC-web and HTTP requests. No OAuth/OIDC flow is performed here.
+ */
+
+/**
  * Generated bundle index. Do not edit.
  */
 
-export { Apodization, AudioFormat, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener };
+export { AUTHORIZATION_HEADER, Apodization, AudioFormat, AuthGrpcInterceptor, BEARER_PREFIX, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeycloakAuthenticationError, KeycloakTokenProvider, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, TOKEN_PROVIDER, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener, authHttpInterceptor, buildBearerValue, provideOndewoT2sAuth, resolveBearerValue, resolveToken };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map
