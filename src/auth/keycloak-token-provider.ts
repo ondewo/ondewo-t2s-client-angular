@@ -233,7 +233,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     if (this.bootstrapPromise === null) {
       this.bootstrapPromise = this.bootstrap();
     }
-    return this.accessToken.length > 0 ? this.accessToken : this.bootstrapPromise;
+    if (this.accessToken.length > 0) {
+      return this.accessToken;
+    }
+    return this.bootstrapPromise;
   }
 
   /**
@@ -270,20 +273,22 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
    *   response carries no `access_token` / `refresh_token`.
    */
   private async bootstrap(): Promise<string | null> {
-    const params: Record<string, string> =
-      this.offlineToken.length > 0
-        ? {
-            grant_type: "refresh_token",
-            client_id: this.clientId,
-            refresh_token: this.offlineToken
-          }
-        : {
-            grant_type: "password",
-            client_id: this.clientId,
-            username: this.username,
-            password: this.password,
-            scope: "offline_access"
-          };
+    let params: Record<string, string>;
+    if (this.offlineToken.length > 0) {
+      params = {
+        grant_type: "refresh_token",
+        client_id: this.clientId,
+        refresh_token: this.offlineToken
+      };
+    } else {
+      params = {
+        grant_type: "password",
+        client_id: this.clientId,
+        username: this.username,
+        password: this.password,
+        scope: "offline_access"
+      };
+    }
 
     const response: KeycloakTokenResponse = await this.postTokenRequest(params);
     this.storeTokens(response);
@@ -343,8 +348,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
     if (this.stopped) {
       return;
     }
-    const expiresInS: number =
-      typeof expiresInRaw === "number" && expiresInRaw > 0 ? expiresInRaw : MIN_REFRESH_DELAY_IN_S;
+    let expiresInS: number = MIN_REFRESH_DELAY_IN_S;
+    if (typeof expiresInRaw === "number" && expiresInRaw > 0) {
+      expiresInS = expiresInRaw;
+    }
     let delayInS: number = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
 
     if (this.deadlineInMs !== null) {
@@ -387,7 +394,10 @@ export class KeycloakTokenProvider implements TokenProvider, OnDestroy {
         })
       );
     } catch (caught: unknown) {
-      const status: number = caught instanceof HttpErrorResponse ? caught.status : 0;
+      let status: number = 0;
+      if (caught instanceof HttpErrorResponse) {
+        status = caught.status;
+      }
       throw new KeycloakAuthenticationError(`Keycloak token endpoint request failed with HTTP ${status}`);
     }
     if (typeof response.access_token !== "string" || response.access_token.length === 0) {

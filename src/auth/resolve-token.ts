@@ -26,9 +26,12 @@ export const BEARER_PREFIX: string = "Bearer ";
  * @returns an observable emitting the usable token, or `null` when absent.
  */
 export function resolveToken(result: TokenResult): Observable<string | null> {
-  const source: Observable<string | null> = isObservable(result)
-    ? result
-    : from(Promise.resolve(result));
+  let source: Observable<string | null>;
+  if (isObservable(result)) {
+    source = result;
+  } else {
+    source = from(Promise.resolve(result));
+  }
 
   return new Observable<string | null>((subscriber: Subscriber<string | null>): (() => void) => {
     const subscription: Subscription = source.subscribe({
@@ -48,7 +51,10 @@ export function resolveToken(result: TokenResult): Observable<string | null> {
  * @returns the `"Bearer <token>"` string, or `null` when there is no token.
  */
 export function buildBearerValue(token: string | null): string | null {
-  return token === null ? null : `${BEARER_PREFIX}${token}`;
+  if (token === null) {
+    return null;
+  }
+  return `${BEARER_PREFIX}${token}`;
 }
 
 /**
@@ -80,7 +86,10 @@ function normalizeToken(token: string | null | undefined): string | null {
     return null;
   }
   const trimmed: string = token.trim();
-  return trimmed.length === 0 ? null : trimmed;
+  if (trimmed.length === 0) {
+    return null;
+  }
+  return trimmed;
 }
 
 /**
