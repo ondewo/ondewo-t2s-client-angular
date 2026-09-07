@@ -16,7 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "submodule_update": "git submodule update --init --recursive",
-    "build": "docker run -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
+    "build": "npm run generate && npm run postbuild",
+    "postbuild": "cp README.md ../. && cp RELEASE.md ../.",
     "generate": "docker run -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler ondewo-t2s-api ondewo",
     "debug": "docker run --entrypoint /bin/bash -v ${PWD}:/input-volume -v ${PWD}/..:/output-volume ondewo-angular-proto-compiler",
     "publish-npm": "npm publish ../npm --access public",
