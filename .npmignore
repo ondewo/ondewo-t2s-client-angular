@@ -1,1 +1,14 @@
+# Once an .npmignore exists, npm stops consulting .gitignore entirely, so the
+# `coverage` / `npm` entries there are inert for packing. The official release
+# publishes ./npm from inside the utils docker image and never sees this repo
+# root, but a root-level `npm pack`/`npm publish` would otherwise ship the whole
+# test/dev surface. Keep the test material listed here.
+# Do NOT add a `files` array to package.json — npm ignores .npmignore when one
+# is present, which would silently neuter this guard.
 src/ondewo-t2s-api
+*.spec.ts
+coverage/
+jest.config.js
+jest.setup.ts
+setup-jest.ts
+tsconfig.spec.json
