@@ -18,9 +18,17 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.0
+    rev: v0.23.2
     hooks:
+      # require_serial IS LOAD-BEARING, not a performance knob. `.markdownlint-cli2.yaml`
+      # declares `globs: ['*.md']`, so EVERY invocation additionally lints all root markdown
+      # on top of the filenames pre-commit hands it. Without require_serial pre-commit splits
+      # the file list across parallel processes, two of them fix-and-write README.md /
+      # RELEASE.md at the same time, and the interleaved writes silently corrupt the files
+      # (observed: "ONDEWO" -> "ONDEW", "Version" -> "Vesion", `## Release` demoted to `#`,
+      # and a whole "Tracking API Version" bullet dropped).
       - id: markdownlint-cli2
+        require_serial: true
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
