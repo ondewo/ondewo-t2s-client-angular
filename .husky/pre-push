@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Local equivalent of the CI gate: run every spec and enforce the 100% coverage
-# threshold on the hand-written sources (src/lib/auth + src/examples) before anything
+# threshold on the hand-written sources (src/auth + src/examples) before anything
 # leaves this machine. `npm test` is `jest --config jest.config.js`, and jest.config.js
 # sets `collectCoverage: true` plus the 100% `coverageThreshold`, so the gate runs even
 # without an explicit --coverage flag.
