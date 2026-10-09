@@ -38,6 +38,32 @@
 
 *****************
 
+## Release ONDEWO T2S Angular Client 6.4.2
+
+### Improvements
+
+* Tracking API Version [6.4.2](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.4.2) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+
+*****************
+
+## Release ONDEWO T2S Angular Client 6.4.1
+
+### Improvements
+
+* Tracking API Version [6.4.1](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.4.1) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+
+*****************
+
+## Release ONDEWO T2S Angular Client 6.4.0
+
+### Improvements
+
+* Tracking API Version [6.4.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.4.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+* Keycloak bearer authentication: `TokenProvider` with gRPC-web and HTTP interceptors, and a ready-made `KeycloakTokenProvider` with background offline-token refresh
+* Generated with [ondewo-proto-compiler 5.11.0](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.11.0)
+
+*****************
+
 ## Release ONDEWO T2S Angular Client 6.2.0
 
 ### Improvements
@@ -138,6 +164,10 @@
 
 * Track version 3.0.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/3.0.0)
 
+### Breaking Changes
+
+* Rename Description, GetServiceInfoResponse, Inference, and Normalization messages to include T2S
+
 *****************
 
 ## Release ONDEWO T2S Angular Client 2.0.0
@@ -149,6 +179,7 @@
 ## Release ONDEWO T2S Angular Client 1.5.2
 
 * Track version 1.5.2 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.5.2)
+* Release on [NPM](https://www.npmjs.com/package/@ondewo/t2s-client-angular)
 
 *****************
 
@@ -161,6 +192,7 @@
 ## Release ONDEWO T2S Angular Client 1.5.0
 
 * Track version 1.5.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.5.0)
+* Compatible with ONDEWO-T2S 1.5.* GRPC server
 * Upgraded from ngx-grpc 0.3.1 to 2.1.0
 
 *****************
@@ -168,3 +200,6 @@
 ## Release ONDEWO T2S Angular Client 1.4.0
 
 * Track version 1.4.0 of [ONDEWO T2S API](https://github.com/ondewo/ondewo-t2s-api/releases/tag/1.4.0)
+* Compatible with ONDEWO-T2S 1.4.* GRPC server
+
+*****************
