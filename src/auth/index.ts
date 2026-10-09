@@ -23,3 +23,9 @@ export {
 export { authHttpInterceptor } from "./auth-http.interceptor";
 export { AuthGrpcInterceptor } from "./auth-grpc.interceptor";
 export { provideOndewoT2sAuth } from "./auth.providers";
+export {
+  BROWSER_UNSUPPORTED_TLS_FIELDS,
+  buildGrpcWebHost,
+  GrpcWebEndpointConfig,
+  GrpcWebEndpointError
+} from "./grpc-web-endpoint";
