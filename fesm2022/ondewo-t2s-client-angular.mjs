@@ -9482,24 +9482,6 @@ class Text2SpeechClient {
             });
         },
         /**
-         * Bidirectional streaming: /ondewo.t2s.Text2Speech/StreamingSynthesize
-         *
-         * @param requestMessage Request message
-         * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<thisProto.StreamingSynthesizeResponse>>
-         */
-        streamingSynthesize: (requestData, requestMetadata = new GrpcMetadata()) => {
-            return this.handler.handle({
-                type: GrpcCallType.bidiStream,
-                client: this.client,
-                path: '/ondewo.t2s.Text2Speech/StreamingSynthesize',
-                requestData,
-                requestMetadata,
-                requestClass: StreamingSynthesizeRequest,
-                responseClass: StreamingSynthesizeResponse
-            });
-        },
-        /**
          * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
          *
          * @param requestMessage Request message
@@ -9814,18 +9796,6 @@ class Text2SpeechClient {
     batchSynthesize(requestData, requestMetadata = new GrpcMetadata()) {
         return this.$raw
             .batchSynthesize(requestData, requestMetadata)
-            .pipe(throwStatusErrors(), takeMessages());
-    }
-    /**
-     * Bidirectional streaming @/ondewo.t2s.Text2Speech/StreamingSynthesize
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.StreamingSynthesizeResponse>
-     */
-    streamingSynthesize(requestData, requestMetadata = new GrpcMetadata()) {
-        return this.$raw
-            .streamingSynthesize(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
     /**

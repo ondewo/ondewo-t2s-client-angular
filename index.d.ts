@@ -5108,14 +5108,6 @@ declare class Text2SpeechClient {
          */
         batchSynthesize: (requestData: BatchSynthesizeRequest, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<BatchSynthesizeResponse>>;
         /**
-         * Bidirectional streaming: /ondewo.t2s.Text2Speech/StreamingSynthesize
-         *
-         * @param requestMessage Request message
-         * @param requestMetadata Request metadata
-         * @returns Observable<GrpcEvent<thisProto.StreamingSynthesizeResponse>>
-         */
-        streamingSynthesize: (requestData: Observable<StreamingSynthesizeRequest>, requestMetadata?: GrpcMetadata) => Observable<GrpcEvent<StreamingSynthesizeResponse>>;
-        /**
          * Unary call: /ondewo.t2s.Text2Speech/NormalizeText
          *
          * @param requestMessage Request message
@@ -5261,14 +5253,6 @@ declare class Text2SpeechClient {
      * @returns Observable<thisProto.BatchSynthesizeResponse>
      */
     batchSynthesize(requestData: BatchSynthesizeRequest, requestMetadata?: GrpcMetadata): Observable<BatchSynthesizeResponse>;
-    /**
-     * Bidirectional streaming @/ondewo.t2s.Text2Speech/StreamingSynthesize
-     *
-     * @param requestMessage Request message
-     * @param requestMetadata Request metadata
-     * @returns Observable<thisProto.StreamingSynthesizeResponse>
-     */
-    streamingSynthesize(requestData: Observable<StreamingSynthesizeRequest>, requestMetadata?: GrpcMetadata): Observable<StreamingSynthesizeResponse>;
     /**
      * Unary call @/ondewo.t2s.Text2Speech/NormalizeText
      *
