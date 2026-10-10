@@ -2,6 +2,19 @@
 
 *****************
 
+## Release ONDEWO T2S Angular Client 6.6.4
+
+### Bug Fixes
+
+* Removed `Text2SpeechClient.streamingSynthesize` (plain and `$raw`), the method of the bidirectional-streaming RPC `StreamingSynthesize`. It never worked in a browser: gRPC-web, the protocol this library speaks, carries unary and server-streaming calls only, and the js and typescript SDKs never generated it. `StreamingSynthesizeRequest` and `StreamingSynthesizeResponse` are still exported, and every other method is unchanged. **Migration:** use `synthesize` from a browser; a client that has to send a request stream uses a native SDK such as `ondewo-t2s-client` (python, PyPI) or `@ondewo/t2s-client-nodejs`.
+* Release automation: the GitHub and npm tokens no longer reach a process argv. `run_release_with_devops` exports them into the sub-make's environment instead of passing `NAME=<value>` on `make`'s command line, the docker runs forward them with `-e NAME`, `login_to_gh` reads the token from the environment, npm reads `${NPM_AUTOMATION_TOKEN}` from `.npmrc`, and `make TEST` no longer prints the npm user name. `tests/release-credentials.spec.ts` pins it.
+
+### Build
+
+* Generated with ondewo-proto-compiler [5.15.7](https://github.com/ondewo/ondewo-proto-compiler/releases/tag/5.15.7) (6.6.3 was generated with 5.15.2), which omits client-streaming and bidirectional-streaming methods for the angular target. `tests/no-client-streaming.spec.ts` fails if the public typings (`index.d.ts`) expose a method whose request is an `Observable`.
+
+*****************
+
 ## Release ONDEWO T2S Angular Client 6.6.3
 
 ### Improvements
