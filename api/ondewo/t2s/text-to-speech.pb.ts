@@ -703,7 +703,6 @@ export class RequestConfig implements GrpcMessage {
 
     _instance.wordToPhonemeMapping =
       _instance.wordToPhonemeMapping || undefined;
-    _instance.instruction = _instance.instruction || '';
   }
 
   /**
@@ -837,7 +836,7 @@ export class RequestConfig implements GrpcMessage {
         googleProtobuf001.Struct.serializeBinaryToWriter
       );
     }
-    if (_instance.instruction) {
+    if (_instance.instruction !== undefined && _instance.instruction !== null) {
       _writer.writeString(13, _instance.instruction);
     }
   }

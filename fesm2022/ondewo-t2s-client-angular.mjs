@@ -508,7 +508,6 @@ class RequestConfig {
             _instance.t2sCloudProviderConfig || undefined;
         _instance.wordToPhonemeMapping =
             _instance.wordToPhonemeMapping || undefined;
-        _instance.instruction = _instance.instruction || '';
     }
     /**
      * Deserializes / reads binary message into message instance using provided binary reader
@@ -605,7 +604,7 @@ class RequestConfig {
         if (_instance.wordToPhonemeMapping) {
             _writer.writeMessage(12, _instance.wordToPhonemeMapping, googleProtobuf001.Struct.serializeBinaryToWriter);
         }
-        if (_instance.instruction) {
+        if (_instance.instruction !== undefined && _instance.instruction !== null) {
             _writer.writeString(13, _instance.instruction);
         }
     }
@@ -10021,10 +10020,10 @@ class Text2SpeechClient {
             .voiceCloning(requestData, requestMetadata)
             .pipe(throwStatusErrors(), takeMessages());
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: Text2SpeechClient, deps: [{ token: GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, optional: true }, { token: GRPC_CLIENT_FACTORY }, { token: i1.GrpcHandler }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: Text2SpeechClient, providedIn: 'any' });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: Text2SpeechClient, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: Text2SpeechClient, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'any' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -10200,7 +10199,10 @@ class KeycloakTokenProvider {
         if (this.bootstrapPromise === null) {
             this.bootstrapPromise = this.bootstrap();
         }
-        return this.accessToken.length > 0 ? this.accessToken : this.bootstrapPromise;
+        if (this.accessToken.length > 0) {
+            return this.accessToken;
+        }
+        return this.bootstrapPromise;
     }
     /**
      * The resolved TLS-verification setting from
@@ -10234,19 +10236,23 @@ class KeycloakTokenProvider {
      *   response carries no `access_token` / `refresh_token`.
      */
     async bootstrap() {
-        const params = this.offlineToken.length > 0
-            ? {
+        let params;
+        if (this.offlineToken.length > 0) {
+            params = {
                 grant_type: "refresh_token",
                 client_id: this.clientId,
                 refresh_token: this.offlineToken
-            }
-            : {
+            };
+        }
+        else {
+            params = {
                 grant_type: "password",
                 client_id: this.clientId,
                 username: this.username,
                 password: this.password,
                 scope: "offline_access"
             };
+        }
         const response = await this.postTokenRequest(params);
         this.storeTokens(response);
         if (this.refreshToken.length === 0) {
@@ -10300,7 +10306,10 @@ class KeycloakTokenProvider {
         if (this.stopped) {
             return;
         }
-        const expiresInS = typeof expiresInRaw === "number" && expiresInRaw > 0 ? expiresInRaw : MIN_REFRESH_DELAY_IN_S;
+        let expiresInS = MIN_REFRESH_DELAY_IN_S;
+        if (typeof expiresInRaw === "number" && expiresInRaw > 0) {
+            expiresInS = expiresInRaw;
+        }
         let delayInS = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
         if (this.deadlineInMs !== null) {
             const remainingInMs = this.deadlineInMs - Date.now();
@@ -10339,7 +10348,10 @@ class KeycloakTokenProvider {
             }));
         }
         catch (caught) {
-            const status = caught instanceof HttpErrorResponse ? caught.status : 0;
+            let status = 0;
+            if (caught instanceof HttpErrorResponse) {
+                status = caught.status;
+            }
             throw new KeycloakAuthenticationError(`Keycloak token endpoint request failed with HTTP ${status}`);
         }
         if (typeof response.access_token !== "string" || response.access_token.length === 0) {
@@ -10380,10 +10392,10 @@ class KeycloakTokenProvider {
             throw new KeycloakAuthenticationError("KeycloakTokenProviderConfig requires either an offlineToken or a username + password");
         }
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, deps: [{ token: i1$1.HttpClient }, { token: KEYCLOAK_TOKEN_PROVIDER_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, providedIn: "root" });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: KeycloakTokenProvider, deps: [{ token: i1$1.HttpClient }, { token: KEYCLOAK_TOKEN_PROVIDER_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: KeycloakTokenProvider, providedIn: "root" });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: KeycloakTokenProvider, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: KeycloakTokenProvider, decorators: [{
             type: Injectable,
             args: [{ providedIn: "root" }]
         }], ctorParameters: () => [{ type: i1$1.HttpClient }, { type: undefined, decorators: [{
@@ -10414,9 +10426,13 @@ const BEARER_PREFIX = "Bearer ";
  * @returns an observable emitting the usable token, or `null` when absent.
  */
 function resolveToken(result) {
-    const source = isObservable(result)
-        ? result
-        : from(Promise.resolve(result));
+    let source;
+    if (isObservable(result)) {
+        source = result;
+    }
+    else {
+        source = from(Promise.resolve(result));
+    }
     return new Observable((subscriber) => {
         const subscription = source.subscribe({
             next: (token) => subscriber.next(normalizeToken(token)),
@@ -10434,7 +10450,10 @@ function resolveToken(result) {
  * @returns the `"Bearer <token>"` string, or `null` when there is no token.
  */
 function buildBearerValue(token) {
-    return token === null ? null : `${BEARER_PREFIX}${token}`;
+    if (token === null) {
+        return null;
+    }
+    return `${BEARER_PREFIX}${token}`;
 }
 /**
  * Convenience wrapper: emit the ready-to-use `Authorization` header value, or
@@ -10464,7 +10483,10 @@ function normalizeToken(token) {
         return null;
     }
     const trimmed = token.trim();
-    return trimmed.length === 0 ? null : trimmed;
+    if (trimmed.length === 0) {
+        return null;
+    }
+    return trimmed;
 }
 /**
  * Wrap a synchronous value as a single-emission observable. Used by callers that
@@ -10572,10 +10594,10 @@ class AuthGrpcInterceptor {
             return next.handle(request);
         }));
     }
-    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, deps: [{ token: TOKEN_PROVIDER }], target: i0.ɵɵFactoryTarget.Injectable });
-    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor });
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: AuthGrpcInterceptor, deps: [{ token: TOKEN_PROVIDER }], target: i0.ɵɵFactoryTarget.Injectable });
+    static ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: AuthGrpcInterceptor });
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.29", ngImport: i0, type: AuthGrpcInterceptor, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "20.3.33", ngImport: i0, type: AuthGrpcInterceptor, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
@@ -10621,6 +10643,131 @@ function provideOndewoT2sAuth(tokenProvider) {
 }
 
 /**
+ * Builds the gRPC-web endpoint URL (`host` setting of `@ngx-grpc/grpc-web-client`) from the
+ * same `host` / `port` / `useSecureChannel` fields every ONDEWO SDK takes.
+ *
+ * In a browser the TLS handshake belongs to the user agent: it verifies the server against
+ * its own (OS / browser) trust store and presents a client certificate only from the
+ * browser's certificate store. Application code can neither add a CA nor attach a client
+ * identity, and a private key must never be shipped to a browser. The certificate fields the
+ * other SDKs accept (`grpcCert`, `grpcClientCert`, `grpcClientKey`) are therefore refused
+ * here instead of being silently dropped.
+ */
+/**
+ * Certificate / key fields of the other ONDEWO SDKs' configs (camelCase and snake_case) that a
+ * browser cannot use. A non-empty value in any of them makes {@link buildGrpcWebHost} throw.
+ */
+const BROWSER_UNSUPPORTED_TLS_FIELDS = [
+    "grpcCert",
+    "grpcClientCert",
+    "grpcClientKey",
+    "grpc_cert",
+    "grpc_client_cert",
+    "grpc_client_key"
+];
+/** Raised for an unusable {@link GrpcWebEndpointConfig}. The message names fields, never their values. */
+class GrpcWebEndpointError extends Error {
+    /**
+     * @param message a description of the problem that names the offending field.
+     */
+    constructor(message) {
+        super(message);
+        this.name = "GrpcWebEndpointError";
+    }
+}
+/** A URL scheme at the start of `host` (`https://…`). */
+const SCHEME_PATTERN = /^[a-z][a-z0-9+.-]*:\/\//i;
+/** A bare IPv6 literal: hex digits, dots (embedded IPv4) and at least two colons. */
+const BARE_IPV6_PATTERN = /^(?=(?:[^:]*:){2})[0-9a-f:.]+$/i;
+/**
+ * Return the gRPC-web base URL for `config`: `https://host:port` by default, `http://host:port`
+ * when `useSecureChannel` is `false` (with a warning naming `host:port`). A bare IPv6 literal is
+ * bracketed (`https://[::1]:8443`); a bracketed host or a host that already carries a scheme is
+ * left alone.
+ *
+ * ```ts
+ * GrpcWebClientModule.forRoot({ settings: { host: buildGrpcWebHost({ host: "nlu.example.com", port: 443 }) } })
+ * ```
+ *
+ * @param config the endpoint settings.
+ * @returns the base URL to pass as the gRPC-web client's `host` setting.
+ * @throws GrpcWebEndpointError when a certificate / key field is set, the host is empty or
+ *   carries a port, the port is invalid, or an `http://` URL is combined with
+ *   `useSecureChannel: true`.
+ */
+function buildGrpcWebHost(config) {
+    const fields = config;
+    for (const field of BROWSER_UNSUPPORTED_TLS_FIELDS) {
+        const value = fields[field];
+        if (value !== undefined && value !== null && value !== "") {
+            throw new GrpcWebEndpointError(`GrpcWebEndpointConfig.${field} is not supported by a browser gRPC-web client: the browser owns the TLS ` +
+                "handshake, trusts its own certificate store and presents a client certificate only from the browser/OS " +
+                "store. Remove the field (never ship a private key to a browser); see the README section " +
+                "'TLS, mutual TLS and certificates'.");
+        }
+    }
+    const host = config.host;
+    if (typeof host !== "string" || host.trim() === "") {
+        throw new GrpcWebEndpointError("GrpcWebEndpointConfig.host must be a non-empty string");
+    }
+    const secure = config.useSecureChannel !== false;
+    if (SCHEME_PATTERN.test(host)) {
+        if (config.port !== undefined) {
+            throw new GrpcWebEndpointError("GrpcWebEndpointConfig.port must be omitted when GrpcWebEndpointConfig.host is a URL; put the port in the URL");
+        }
+        let url;
+        try {
+            url = new URL(host);
+        }
+        catch {
+            throw new GrpcWebEndpointError("GrpcWebEndpointConfig.host is not a valid URL");
+        }
+        if (url.protocol !== "https:" && url.protocol !== "http:") {
+            throw new GrpcWebEndpointError("GrpcWebEndpointConfig.host must use the http:// or https:// scheme");
+        }
+        if (url.protocol === "http:") {
+            if (secure) {
+                throw new GrpcWebEndpointError("GrpcWebEndpointConfig.host uses http:// but useSecureChannel is true; use an https:// URL " +
+                    "or set useSecureChannel: false");
+            }
+            // URL.host leaves out any user:password@ part, so the warning cannot leak credentials
+            warnInsecure(url.host);
+        }
+        return host;
+    }
+    let bareHost = host;
+    if (!host.startsWith("[") && host.includes(":")) {
+        if (!BARE_IPV6_PATTERN.test(host)) {
+            throw new GrpcWebEndpointError("GrpcWebEndpointConfig.host must not contain a port; set GrpcWebEndpointConfig.port instead");
+        }
+        bareHost = `[${host}]`;
+    }
+    let authority = bareHost;
+    if (config.port !== undefined) {
+        const port = Number(config.port);
+        if (String(config.port).trim() === "" || !Number.isInteger(port) || port < 1 || port > 65535) {
+            throw new GrpcWebEndpointError("GrpcWebEndpointConfig.port must be an integer between 1 and 65535");
+        }
+        authority = `${bareHost}:${port}`;
+    }
+    if (secure) {
+        return `https://${authority}`;
+    }
+    warnInsecure(authority);
+    return `http://${authority}`;
+}
+/**
+ * Warn, through the console the host application already uses, that requests (and bearer
+ * tokens) to `authority` travel unencrypted.
+ *
+ * @param authority the `host:port` the insecure channel targets.
+ */
+function warnInsecure(authority) {
+    console.warn(`ONDEWO gRPC-web: insecure http:// endpoint ${authority}; requests and bearer tokens are sent unencrypted. ` +
+        "Use useSecureChannel: true (https://) outside local development.");
+}
+
+/**
  * Public auth surface for `@ondewo/t2s-client-angular`.
  *
  * The consuming application supplies the current Keycloak access token through a
@@ -10633,5 +10780,5 @@ function provideOndewoT2sAuth(tokenProvider) {
  * Generated bundle index. Do not edit.
  */
 
-export { AUTHORIZATION_HEADER, Apodization, AudioFormat, AuthGrpcInterceptor, BEARER_PREFIX, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, HiFiGan, HiFiGanTriton, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeycloakAuthenticationError, KeycloakTokenProvider, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, TOKEN_PROVIDER, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener, authHttpInterceptor, buildBearerValue, provideOndewoT2sAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, Apodization, AudioFormat, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, GrpcWebEndpointError, HiFiGan, HiFiGanTriton, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeycloakAuthenticationError, KeycloakTokenProvider, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, TOKEN_PROVIDER, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoT2sAuth, resolveBearerValue, resolveToken };
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map
