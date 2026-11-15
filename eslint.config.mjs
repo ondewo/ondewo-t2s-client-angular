@@ -25,7 +25,8 @@ export default [
 			'src/ondewo-t2s-api',
 			'**/ondewo-proto-compiler',
 			'**/*.mjs',
-			'**/index.d.ts'
+			'**/index.d.ts',
+			'types/'
 		]
 	},
 	...compat.extends(
