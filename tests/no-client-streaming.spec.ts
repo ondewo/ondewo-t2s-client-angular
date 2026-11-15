@@ -25,7 +25,12 @@ function findRepoRoot(start: string): string {
 }
 
 const REPO_ROOT: string = findRepoRoot(String(__dirname));
-const TYPINGS: string = String(readFileSync(join(REPO_ROOT, 'index.d.ts'), 'utf8'));
+const TYPINGS: string = String(
+	readFileSync(
+		join(REPO_ROOT, JSON.parse(String(readFileSync(join(REPO_ROOT, 'package.json'), 'utf8'))).typings),
+		'utf8'
+	)
+);
 
 /** The client/bidi streaming RPCs of the compiled protos, as ngx-grpc names their methods. */
 const REQUEST_STREAMING_METHODS: string[] = ['streamingSynthesize'];
