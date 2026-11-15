@@ -27,7 +27,10 @@ function findRepoRoot(start: string): string {
 const REPO_ROOT: string = findRepoRoot(String(__dirname));
 const TYPINGS: string = String(
 	readFileSync(
-		join(REPO_ROOT, JSON.parse(String(readFileSync(join(REPO_ROOT, 'package.json'), 'utf8'))).typings),
+		join(
+			REPO_ROOT,
+			(JSON.parse(String(readFileSync(join(REPO_ROOT, 'package.json'), 'utf8'))) as { typings: string }).typings
+		),
 		'utf8'
 	)
 );
