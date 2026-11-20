@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO T2S Angular Client 6.7.0
+
+### Breaking Changes
+
+* Tracking API Version [6.7.0](https://github.com/ondewo/ondewo-t2s-api/releases/tag/6.7.0) ( [Documentation](https://ondewo.github.io/ondewo-t2s-api/) )
+* Generated with ondewo-proto-compiler 5.17.0 (protoc 35.1). New runtime floors: `grpc-web` 2.1.1 (peer; the installing app needs `"grpc-web": "2.1.1"` as an exact direct dependency plus `"overrides": { "grpc-web": "$grpc-web" }`, because `@ngx-grpc/grpc-web-client` declares `grpc-web ^1.2.1`), `@ngx-grpc/*` `~3.1.2`, `google-protobuf ~3.21.4`.
+
+*****************
+
 ## Release ONDEWO T2S Angular Client 6.6.5
 
 ### Bug Fixes
