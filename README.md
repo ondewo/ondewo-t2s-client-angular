@@ -79,14 +79,14 @@ npm
 
 For a technical user the built-in `KeycloakTokenProvider` logs in against the *public* SDK Keycloak client
 (no `client_secret` is ever sent) and keeps the access token fresh. It behaves exactly like the token
-provider of every other ONDEWO client SDK. Supply its configuration under `KEYCLOAK_TOKEN_provideOndewoT2sAuthR_CONFIG`
+provider of every other ONDEWO client SDK. Supply its configuration under `KEYCLOAK_TOKEN_PROVIDER_CONFIG`
 and register it with `provideOndewoT2sAuth(KeycloakTokenProvider)`:
 
 ```ts
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import {
   authHttpInterceptor,
-  KEYCLOAK_TOKEN_provideOndewoT2sAuthR_CONFIG,
+  KEYCLOAK_TOKEN_PROVIDER_CONFIG,
   KeycloakTokenProvider,
   KeycloakTokenProviderConfig,
   provideOndewoT2sAuth
@@ -96,7 +96,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptors([authHttpInterceptor])),
     {
-      provide: KEYCLOAK_TOKEN_provideOndewoT2sAuthR_CONFIG,
+      provide: KEYCLOAK_TOKEN_PROVIDER_CONFIG,
       useValue: {
         keycloakUrl: "https://keycloak.example.com",
         realm: "ondewo",
