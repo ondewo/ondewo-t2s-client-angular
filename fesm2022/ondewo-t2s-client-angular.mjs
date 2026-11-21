@@ -3,11 +3,10 @@ import { BinaryReader, BinaryWriter } from "google-protobuf";
 import * as googleProtobuf001 from "@ngx-grpc/well-known-types";
 import * as i0 from "@angular/core";
 import { Inject, Injectable, InjectionToken, Optional, inject, makeEnvironmentProviders } from "@angular/core";
-import * as i1$1 from "@ngx-grpc/core";
+import * as i1 from "@ngx-grpc/core";
 import { GRPC_CLIENT_FACTORY, GRPC_INTERCEPTORS, takeMessages, throwStatusErrors } from "@ngx-grpc/core";
-import * as i1 from "@angular/common/http";
-import { HttpErrorResponse } from "@angular/common/http";
-import { Observable, firstValueFrom, from, isObservable, switchMap } from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { Observable, catchError, firstValueFrom, from, isObservable, map, of, switchMap, throwError, timeout } from "rxjs";
 var Pcm;
 (function(Pcm) {
 	Pcm[Pcm["PCM_16"] = 0] = "PCM_16";
@@ -5508,8 +5507,8 @@ var CustomPhonemizerProto = class CustomPhonemizerProto {
 					_instance.id = _reader.readString();
 					break;
 				case 2:
-					const messageInitializer2 = new Map();
-					_reader.readMessage(messageInitializer2, Map.deserializeBinaryFromReader);
+					const messageInitializer2 = new Map$1();
+					_reader.readMessage(messageInitializer2, Map$1.deserializeBinaryFromReader);
 					(_instance.maps = _instance.maps || []).push(messageInitializer2);
 					break;
 				default: _reader.skipField();
@@ -5519,14 +5518,14 @@ var CustomPhonemizerProto = class CustomPhonemizerProto {
 	}
 	static serializeBinaryToWriter(_instance, _writer) {
 		if (_instance.id) _writer.writeString(1, _instance.id);
-		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
+		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(2, _instance.maps, Map$1.serializeBinaryToWriter);
 	}
 	_id;
 	_maps;
 	constructor(_value) {
 		_value = _value || {};
 		this.id = _value.id;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
+		this.maps = (_value.maps || []).map((m) => new Map$1(m));
 		CustomPhonemizerProto.refineValues(this);
 	}
 	get id() {
@@ -5562,11 +5561,11 @@ var CustomPhonemizerProto = class CustomPhonemizerProto {
 		};
 	}
 };
-var Map = class Map {
+var Map$1 = class Map$1 {
 	static id = "ondewo.t2s.Map";
 	static deserializeBinary(bytes) {
-		const instance = new Map();
-		Map.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+		const instance = new Map$1();
+		Map$1.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
 		return instance;
 	}
 	static refineValues(_instance) {
@@ -5586,7 +5585,7 @@ var Map = class Map {
 				default: _reader.skipField();
 			}
 		}
-		Map.refineValues(_instance);
+		Map$1.refineValues(_instance);
 	}
 	static serializeBinaryToWriter(_instance, _writer) {
 		if (_instance.word) _writer.writeString(1, _instance.word);
@@ -5598,7 +5597,7 @@ var Map = class Map {
 		_value = _value || {};
 		this.word = _value.word;
 		this.phonemeGroups = _value.phonemeGroups;
-		Map.refineValues(this);
+		Map$1.refineValues(this);
 	}
 	get word() {
 		return this._word;
@@ -5614,7 +5613,7 @@ var Map = class Map {
 	}
 	serializeBinary() {
 		const writer = new BinaryWriter();
-		Map.serializeBinaryToWriter(this, writer);
+		Map$1.serializeBinaryToWriter(this, writer);
 		return writer.getResultBuffer();
 	}
 	toObject() {
@@ -5762,8 +5761,8 @@ var UpdateCustomPhonemizerRequest = class UpdateCustomPhonemizerRequest {
 					_instance.updateMethod = _reader.readEnum();
 					break;
 				case 3:
-					const messageInitializer3 = new Map();
-					_reader.readMessage(messageInitializer3, Map.deserializeBinaryFromReader);
+					const messageInitializer3 = new Map$1();
+					_reader.readMessage(messageInitializer3, Map$1.deserializeBinaryFromReader);
 					(_instance.maps = _instance.maps || []).push(messageInitializer3);
 					break;
 				default: _reader.skipField();
@@ -5774,7 +5773,7 @@ var UpdateCustomPhonemizerRequest = class UpdateCustomPhonemizerRequest {
 	static serializeBinaryToWriter(_instance, _writer) {
 		if (_instance.id) _writer.writeString(1, _instance.id);
 		if (_instance.updateMethod) _writer.writeEnum(2, _instance.updateMethod);
-		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(3, _instance.maps, Map.serializeBinaryToWriter);
+		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(3, _instance.maps, Map$1.serializeBinaryToWriter);
 	}
 	_id;
 	_updateMethod;
@@ -5783,7 +5782,7 @@ var UpdateCustomPhonemizerRequest = class UpdateCustomPhonemizerRequest {
 		_value = _value || {};
 		this.id = _value.id;
 		this.updateMethod = _value.updateMethod;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
+		this.maps = (_value.maps || []).map((m) => new Map$1(m));
 		UpdateCustomPhonemizerRequest.refineValues(this);
 	}
 	get id() {
@@ -5853,8 +5852,8 @@ var CreateCustomPhonemizerRequest = class CreateCustomPhonemizerRequest {
 					_instance.prefix = _reader.readString();
 					break;
 				case 2:
-					const messageInitializer2 = new Map();
-					_reader.readMessage(messageInitializer2, Map.deserializeBinaryFromReader);
+					const messageInitializer2 = new Map$1();
+					_reader.readMessage(messageInitializer2, Map$1.deserializeBinaryFromReader);
 					(_instance.maps = _instance.maps || []).push(messageInitializer2);
 					break;
 				default: _reader.skipField();
@@ -5864,14 +5863,14 @@ var CreateCustomPhonemizerRequest = class CreateCustomPhonemizerRequest {
 	}
 	static serializeBinaryToWriter(_instance, _writer) {
 		if (_instance.prefix) _writer.writeString(1, _instance.prefix);
-		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(2, _instance.maps, Map.serializeBinaryToWriter);
+		if (_instance.maps && _instance.maps.length) _writer.writeRepeatedMessage(2, _instance.maps, Map$1.serializeBinaryToWriter);
 	}
 	_prefix;
 	_maps;
 	constructor(_value) {
 		_value = _value || {};
 		this.prefix = _value.prefix;
-		this.maps = (_value.maps || []).map((m) => new Map(m));
+		this.maps = (_value.maps || []).map((m) => new Map$1(m));
 		CreateCustomPhonemizerRequest.refineValues(this);
 	}
 	get prefix() {
@@ -6296,7 +6295,7 @@ var Text2SpeechClient = class Text2SpeechClient {
 				optional: true
 			},
 			{ token: GRPC_CLIENT_FACTORY },
-			{ token: i1$1.GrpcHandler }
+			{ token: i1.GrpcHandler }
 		],
 		target: i0.ɵɵFactoryTarget.Injectable
 	});
@@ -6332,149 +6331,717 @@ i0.ɵɵngDeclareClassMetadata({
 				args: [GRPC_CLIENT_FACTORY]
 			}]
 		},
-		{ type: i1$1.GrpcHandler }
+		{ type: i1.GrpcHandler }
 	]
 });
 const TOKEN_PROVIDER = new InjectionToken("ONDEWO_T2S_TOKEN_PROVIDER");
+const ROUND_CONSTANTS = [
+	1116352408,
+	1899447441,
+	3049323471,
+	3921009573,
+	961987163,
+	1508970993,
+	2453635748,
+	2870763221,
+	3624381080,
+	310598401,
+	607225278,
+	1426881987,
+	1925078388,
+	2162078206,
+	2614888103,
+	3248222580,
+	3835390401,
+	4022224774,
+	264347078,
+	604807628,
+	770255983,
+	1249150122,
+	1555081692,
+	1996064986,
+	2554220882,
+	2821834349,
+	2952996808,
+	3210313671,
+	3336571891,
+	3584528711,
+	113926993,
+	338241895,
+	666307205,
+	773529912,
+	1294757372,
+	1396182291,
+	1695183700,
+	1986661051,
+	2177026350,
+	2456956037,
+	2730485921,
+	2820302411,
+	3259730800,
+	3345764771,
+	3516065817,
+	3600352804,
+	4094571909,
+	275423344,
+	430227734,
+	506948616,
+	659060556,
+	883997877,
+	958139571,
+	1322822218,
+	1537002063,
+	1747873779,
+	1955562222,
+	2024104815,
+	2227730452,
+	2361852424,
+	2428436474,
+	2756734187,
+	3204031479,
+	3329325298
+];
+const INITIAL_HASH = [
+	1779033703,
+	3144134277,
+	1013904242,
+	2773480762,
+	1359893119,
+	2600822924,
+	528734635,
+	1541459225
+];
+function rotateRight(word, bits) {
+	return word >>> bits | word << 32 - bits;
+}
+function utf8Bytes(text) {
+	const bytes = [];
+	for (const character of text) {
+		let codePoint = Number(character.codePointAt(0));
+		if (codePoint >= 55296 && codePoint <= 57343) codePoint = 65533;
+		if (codePoint < 128) bytes.push(codePoint);
+		else if (codePoint < 2048) bytes.push(192 | codePoint >> 6, 128 | codePoint & 63);
+		else if (codePoint < 65536) bytes.push(224 | codePoint >> 12, 128 | codePoint >> 6 & 63, 128 | codePoint & 63);
+		else bytes.push(240 | codePoint >> 18, 128 | codePoint >> 12 & 63, 128 | codePoint >> 6 & 63, 128 | codePoint & 63);
+	}
+	return bytes;
+}
+function sha256Hex(text) {
+	const bytes = utf8Bytes(text);
+	const bitLength = bytes.length * 8;
+	bytes.push(128);
+	while (bytes.length % 64 !== 56) bytes.push(0);
+	const highBits = Math.floor(bitLength / 4294967296);
+	for (const word of [highBits, bitLength >>> 0]) bytes.push(word >>> 24 & 255, word >>> 16 & 255, word >>> 8 & 255, word & 255);
+	const hash = INITIAL_HASH.slice();
+	const schedule = new Array(64);
+	for (let offset = 0; offset < bytes.length; offset += 64) {
+		for (let index = 0; index < 16; index++) {
+			const at = offset + index * 4;
+			schedule[index] = bytes[at] << 24 | bytes[at + 1] << 16 | bytes[at + 2] << 8 | bytes[at + 3];
+		}
+		for (let index = 16; index < 64; index++) {
+			const before15 = schedule[index - 15];
+			const before2 = schedule[index - 2];
+			const sigma0 = rotateRight(before15, 7) ^ rotateRight(before15, 18) ^ before15 >>> 3;
+			const sigma1 = rotateRight(before2, 17) ^ rotateRight(before2, 19) ^ before2 >>> 10;
+			schedule[index] = schedule[index - 16] + sigma0 + schedule[index - 7] + sigma1 | 0;
+		}
+		let [a, b, c, d, e, f, g, h] = hash;
+		for (let index = 0; index < 64; index++) {
+			const sum1 = rotateRight(e, 6) ^ rotateRight(e, 11) ^ rotateRight(e, 25);
+			const choice = e & f ^ ~e & g;
+			const temp1 = h + sum1 + choice + ROUND_CONSTANTS[index] + schedule[index] | 0;
+			const temp2 = (rotateRight(a, 2) ^ rotateRight(a, 13) ^ rotateRight(a, 22)) + (a & b ^ a & c ^ b & c) | 0;
+			h = g;
+			g = f;
+			f = e;
+			e = d + temp1 | 0;
+			d = c;
+			c = b;
+			b = a;
+			a = temp1 + temp2 | 0;
+		}
+		const working = [
+			a,
+			b,
+			c,
+			d,
+			e,
+			f,
+			g,
+			h
+		];
+		for (let index = 0; index < 8; index++) hash[index] = hash[index] + working[index] | 0;
+	}
+	return hash.map((word) => (word >>> 0).toString(16).padStart(8, "0")).join("");
+}
 const REFRESH_SKEW_IN_S = 30;
 const MIN_REFRESH_DELAY_IN_S = 1;
-const KEYCLOAK_TOKEN_PROVIDER_CONFIG = new InjectionToken("ONDEWO_T2S_KEYCLOAK_TOKEN_PROVIDER_CONFIG");
+const REFRESH_RETRY_BASE_DELAY_IN_S = 5;
+const REFRESH_RETRY_MAX_DELAY_IN_S = 300;
+const MAX_REFRESH_RETRY_EXPONENT = 6;
+const HTTP_TIMEOUT_IN_S = 10;
+const MAX_ERROR_BODY_CHARS = 500;
+const REDACTED = "***REDACTED***";
+const DEFAULT_KEYCLOAK_TIMINGS = Object.freeze({
+	expiryLeewayInS: 30,
+	minRefreshDelayInS: 1,
+	retryBaseDelayInS: 5,
+	retryMaxDelayInS: 300,
+	maxRetryExponent: 6,
+	httpTimeoutInS: 10,
+	maxErrorBodyChars: 500
+});
 var KeycloakAuthenticationError = class extends Error {
-	constructor(message) {
-		super(message);
+	constructor(message, options = {}) {
+		super(message, options);
 		this.name = "KeycloakAuthenticationError";
 	}
 };
-var KeycloakTokenProvider = class KeycloakTokenProvider {
-	http;
-	tokenEndpoint;
+var KeycloakTransportError = class extends Error {
+	constructor(message, options = {}) {
+		super(message, options);
+		this.name = "KeycloakTransportError";
+	}
+};
+const CONSOLE_KEYCLOAK_LOGGER = {
+	warn: (message) => console.warn(message),
+	info: (message) => console.info(message),
+	debug: (message) => console.debug(message)
+};
+const GLOBAL_KEYCLOAK_SCHEDULER = {
+	setTimeout: (fn, delayInMs) => setTimeout(fn, delayInMs),
+	clearTimeout: (handle) => clearTimeout(handle)
+};
+function backoffDelayInS(consecutiveFailures, randomFn, timings = DEFAULT_KEYCLOAK_TIMINGS) {
+	const exponent = Math.min(Math.max(consecutiveFailures, 1) - 1, timings.maxRetryExponent);
+	const ceilingInS = Math.min(timings.retryBaseDelayInS * 2 ** exponent, timings.retryMaxDelayInS);
+	const fraction = Math.min(Math.max(randomFn(), 0), 1);
+	return timings.retryBaseDelayInS + fraction * (ceilingInS - timings.retryBaseDelayInS);
+}
+function describeError(error) {
+	if (typeof error === "object" && error !== null && typeof error.message === "string") {
+		const errorLike = error;
+		return `${errorLike.name ?? "Error"}: ${errorLike.message}`;
+	}
+	return `${typeof error}: ${String(error)}`;
+}
+function jsonTypeName(value) {
+	if (Array.isArray(value)) return "array";
+	if (value === null) return "null";
+	return typeof value;
+}
+function asAuthenticationError(error, action) {
+	if (error instanceof KeycloakAuthenticationError) return error;
+	return new KeycloakAuthenticationError(`Keycloak token ${action} failed (${describeError(error)})`, { cause: error });
+}
+function redactSecret(value) {
+	if (value === void 0 || value === null || value.length === 0) return "";
+	return REDACTED;
+}
+function keycloakSessionRegistryKey(fields) {
+	let tokenExpiration = "";
+	if (fields.tokenExpirationInS !== void 0 && fields.tokenExpirationInS !== null) tokenExpiration = String(fields.tokenExpirationInS);
+	let verifySsl = "True";
+	if (fields.verifySsl === false) verifySsl = "False";
+	return sha256Hex([
+		fields.keycloakUrl,
+		fields.realm,
+		fields.clientId,
+		fields.username ?? "",
+		fields.password ?? "",
+		tokenExpiration,
+		verifySsl,
+		fields.refreshToken ?? ""
+	].join("\0"));
+}
+var KeycloakTokenSession = class KeycloakTokenSession {
+	keycloakUrl;
+	realm;
 	clientId;
-	verifySsl;
-	offlineToken;
 	username;
-	password;
 	tokenExpirationInS;
-	accessToken = "";
-	refreshToken = "";
+	verifySsl;
+	password;
+	configuredRefreshToken;
+	tokenEndpoint;
+	transport;
+	timeFn;
+	randomFn;
+	scheduler;
+	logger;
+	timings;
+	currentAccessToken = "";
+	currentRefreshToken;
+	expiresAt = 0;
+	loginDeadline = null;
+	failures = 0;
+	nextAttemptAt = 0;
+	inFlight = null;
 	timer = null;
-	stopped = false;
-	deadlineInMs = null;
-	bootstrapPromise = null;
-	constructor(http, config) {
-		this.http = http;
-		this.validateConfig(config);
-		const base = config.keycloakUrl.replace(/\/+$/, "");
-		this.tokenEndpoint = `${base}/realms/${encodeURIComponent(config.realm)}/protocol/openid-connect/token`;
-		this.clientId = config.clientId;
-		this.verifySsl = config.keycloakVerifySsl ?? true;
-		this.offlineToken = config.offlineToken ?? "";
-		this.username = config.username ?? "";
-		this.password = config.password ?? "";
-		this.tokenExpirationInS = config.tokenExpirationInS;
+	timerArmed = false;
+	backgroundStopped = true;
+	stopCalled = false;
+	constructor(options) {
+		this.keycloakUrl = options.keycloakUrl.replace(/\/+$/, "");
+		this.realm = options.realm;
+		this.clientId = options.clientId;
+		this.username = options.username ?? "";
+		this.password = options.password ?? "";
+		this.tokenExpirationInS = options.tokenExpirationInS ?? null;
+		this.verifySsl = options.verifySsl ?? true;
+		this.transport = options.transport;
+		this.timeFn = options.timeFn ?? (() => performance.now() / 1e3);
+		this.randomFn = options.randomFn ?? Math.random;
+		this.scheduler = options.scheduler ?? GLOBAL_KEYCLOAK_SCHEDULER;
+		this.logger = options.logger ?? CONSOLE_KEYCLOAK_LOGGER;
+		this.timings = {
+			...DEFAULT_KEYCLOAK_TIMINGS,
+			...options.timings ?? {}
+		};
+		this.configuredRefreshToken = options.refreshToken ?? "";
+		this.currentRefreshToken = this.configuredRefreshToken;
+		this.tokenEndpoint = `${this.keycloakUrl}/realms/${encodeURIComponent(this.realm)}/protocol/openid-connect/token`;
 	}
-	getToken() {
-		if (this.bootstrapPromise === null) this.bootstrapPromise = this.bootstrap();
-		if (this.accessToken.length > 0) return this.accessToken;
-		return this.bootstrapPromise;
+	static async create(options) {
+		const session = new KeycloakTokenSession(options);
+		await session.acquireInitialToken();
+		if (options.startBackgroundRefresh ?? true) {
+			session.backgroundStopped = false;
+			session.scheduleNextBackgroundRefresh();
+		}
+		return session;
 	}
-	get keycloakVerifySsl() {
-		return this.verifySsl;
+	get accessToken() {
+		return this.currentAccessToken;
 	}
-	ngOnDestroy() {
-		this.stopped = true;
-		if (this.timer !== null) {
-			clearTimeout(this.timer);
+	get accessTokenExpiresAt() {
+		return this.expiresAt;
+	}
+	get autoRefreshDeadline() {
+		return this.loginDeadline;
+	}
+	get consecutiveFailures() {
+		return this.failures;
+	}
+	get nextRefreshAttemptAt() {
+		return this.nextAttemptAt;
+	}
+	get backgroundRefreshActive() {
+		return !this.backgroundStopped;
+	}
+	get closed() {
+		return this.stopCalled;
+	}
+	peekAccessToken() {
+		const now = this.timeFn();
+		if (this.loginDeadline !== null && now >= this.loginDeadline) return this.currentAccessToken;
+		if (now < this.expiresAt - this.timings.expiryLeewayInS) return this.currentAccessToken;
+		return null;
+	}
+	async getAccessToken(options = {}) {
+		await this.refreshIfWithinWindow(options.force ?? false);
+		return this.currentAccessToken;
+	}
+	async authorizationMetadata() {
+		return ["authorization", `Bearer ${await this.getAccessToken()}`];
+	}
+	stop() {
+		this.stopCalled = true;
+		this.backgroundStopped = true;
+		this.disarmTimer();
+	}
+	close() {
+		this.stop();
+	}
+	toJSON() {
+		return {
+			keycloakUrl: this.keycloakUrl,
+			realm: this.realm,
+			clientId: this.clientId,
+			username: this.username,
+			password: redactSecret(this.password),
+			tokenExpirationInS: this.tokenExpirationInS,
+			verifySsl: this.verifySsl,
+			refreshToken: redactSecret(this.configuredRefreshToken)
+		};
+	}
+	toString() {
+		return `KeycloakTokenSession(${JSON.stringify(this.toJSON())})`;
+	}
+	async acquireInitialToken() {
+		const useRefreshToken = this.configuredRefreshToken.length > 0;
+		let action = "login";
+		if (useRefreshToken) action = "refresh";
+		try {
+			if (useRefreshToken) await this.refreshGrant();
+			else await this.passwordGrant();
+		} catch (error) {
+			throw asAuthenticationError(error, action);
+		}
+		if (this.tokenExpirationInS !== null) this.loginDeadline = this.timeFn() + this.tokenExpirationInS;
+	}
+	async refreshIfWithinWindow(force) {
+		let skipValidityShortcut = force;
+		for (;;) {
+			if (this.inFlight !== null) {
+				await this.inFlight;
+				skipValidityShortcut = false;
+				continue;
+			}
+			const now = this.timeFn();
+			if (this.loginDeadline !== null && now >= this.loginDeadline) return;
+			if (!skipValidityShortcut && now < this.expiresAt - this.timings.expiryLeewayInS) return;
+			if (now < this.nextAttemptAt) {
+				if (now < this.expiresAt) return;
+				throw new KeycloakAuthenticationError(`The Keycloak access token has expired and the refresh is backing off after ${this.failures} consecutive failure(s); the next attempt is due in ${(this.nextAttemptAt - now).toFixed(1)}s`);
+			}
+			const attempt = this.refreshGrant().then(() => {
+				this.recordSuccess();
+				return {
+					failed: false,
+					error: null
+				};
+			}, (error) => {
+				this.recordFailure(error);
+				return {
+					failed: true,
+					error
+				};
+			});
+			this.inFlight = attempt;
+			let outcome;
+			try {
+				outcome = await attempt;
+			} finally {
+				this.inFlight = null;
+			}
+			if (!outcome.failed) return;
+			if (this.timeFn() < this.expiresAt) return;
+			throw asAuthenticationError(outcome.error, "refresh");
+		}
+	}
+	recordFailure(error) {
+		const now = this.timeFn();
+		this.failures += 1;
+		const delayInS = backoffDelayInS(this.failures, this.randomFn, this.timings);
+		this.nextAttemptAt = now + delayInS;
+		const remainingInS = this.expiresAt - now;
+		let validity = "the current access token has expired";
+		if (remainingInS > 0) validity = `the current access token stays valid for ${remainingInS.toFixed(1)}s`;
+		this.logger.warn(`Keycloak token refresh failed (attempt ${this.failures}); retrying in ${delayInS.toFixed(1)}s, ${validity} (${describeError(error)})`);
+	}
+	recordSuccess() {
+		if (this.failures > 0) this.logger.info(`Keycloak token refresh recovered after ${this.failures} failed attempt(s)`);
+		this.failures = 0;
+		this.nextAttemptAt = 0;
+	}
+	scheduleNextBackgroundRefresh() {
+		if (this.backgroundStopped) return;
+		const now = this.timeFn();
+		const deadline = this.loginDeadline;
+		if (deadline !== null && now >= deadline) {
+			this.backgroundStopped = true;
+			return;
+		}
+		let delayInS = this.expiresAt - this.timings.expiryLeewayInS - now;
+		if (this.failures > 0) delayInS = this.nextAttemptAt - now;
+		delayInS = Math.max(delayInS, this.timings.minRefreshDelayInS);
+		if (deadline !== null) delayInS = Math.min(delayInS, deadline - now);
+		this.timerArmed = true;
+		this.timer = this.scheduler.setTimeout(() => {
+			this.timerArmed = false;
+			this.timer = null;
+			if (this.backgroundStopped) return;
+			this.refreshIfWithinWindow(false).catch((error) => {
+				this.logger.debug(`Keycloak background refresh will be retried (${describeError(error)})`);
+			}).finally(() => this.scheduleNextBackgroundRefresh());
+		}, delayInS * 1e3);
+	}
+	disarmTimer() {
+		if (this.timerArmed) {
+			this.scheduler.clearTimeout(this.timer);
+			this.timerArmed = false;
 			this.timer = null;
 		}
 	}
-	async bootstrap() {
-		let params;
-		if (this.offlineToken.length > 0) params = {
-			grant_type: "refresh_token",
-			client_id: this.clientId,
-			refresh_token: this.offlineToken
-		};
-		else params = {
+	async passwordGrant() {
+		const payload = await this.postTokenRequest({
 			grant_type: "password",
 			client_id: this.clientId,
 			username: this.username,
 			password: this.password,
 			scope: "offline_access"
-		};
-		const response = await this.postTokenRequest(params);
-		this.storeTokens(response);
-		if (this.refreshToken.length === 0) throw new KeycloakAuthenticationError("Keycloak token response did not contain a refresh_token; the SDK client must have directAccessGrants + the offline_access scope");
-		if (this.tokenExpirationInS !== void 0) this.deadlineInMs = Date.now() + this.tokenExpirationInS * 1e3;
-		this.scheduleRefresh(response.expires_in);
-		return this.accessToken;
+		}, "login");
+		this.storeTokens(payload);
 	}
-	async refresh() {
-		if (this.stopped) return;
-		if (this.deadlineInMs !== null && Date.now() >= this.deadlineInMs) {
-			this.ngOnDestroy();
-			return;
-		}
-		const response = await this.postTokenRequest({
+	async refreshGrant() {
+		const payload = await this.postTokenRequest({
 			grant_type: "refresh_token",
 			client_id: this.clientId,
-			refresh_token: this.refreshToken
-		});
-		this.storeTokens(response);
-		this.scheduleRefresh(response.expires_in);
+			refresh_token: this.currentRefreshToken
+		}, "refresh");
+		this.storeTokens(payload);
 	}
-	scheduleRefresh(expiresInRaw) {
-		if (this.stopped) return;
-		let expiresInS = MIN_REFRESH_DELAY_IN_S;
-		if (typeof expiresInRaw === "number" && expiresInRaw > 0) expiresInS = expiresInRaw;
-		let delayInS = Math.max(expiresInS - REFRESH_SKEW_IN_S, MIN_REFRESH_DELAY_IN_S);
-		if (this.deadlineInMs !== null) {
-			const remainingInMs = this.deadlineInMs - Date.now();
-			if (remainingInMs <= 0) {
-				this.ngOnDestroy();
-				return;
-			}
-			delayInS = Math.min(delayInS, remainingInMs / 1e3);
-		}
-		this.timer = setTimeout(() => {
-			this.refresh().catch(() => {});
-		}, delayInS * 1e3);
-	}
-	async postTokenRequest(params) {
-		const body = new URLSearchParams(params).toString();
+	async postTokenRequest(form, action) {
 		let response;
 		try {
-			response = await firstValueFrom(this.http.post(this.tokenEndpoint, body, { headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-				Accept: "application/json"
-			} }));
-		} catch (caught) {
-			let status = 0;
-			if (caught instanceof HttpErrorResponse) status = caught.status;
-			throw new KeycloakAuthenticationError(`Keycloak token endpoint request failed with HTTP ${status}`);
+			response = await this.transport({
+				url: this.tokenEndpoint,
+				form,
+				timeoutInS: this.timings.httpTimeoutInS,
+				verifySsl: this.verifySsl
+			});
+		} catch (error) {
+			if (error instanceof KeycloakTransportError) {
+				let reason = error;
+				if (error.cause !== void 0) reason = error.cause;
+				throw new KeycloakAuthenticationError(`Keycloak token ${action} could not reach the token endpoint (${describeError(reason)})`, { cause: error });
+			}
+			throw error;
 		}
-		if (typeof response.access_token !== "string" || response.access_token.length === 0) throw new KeycloakAuthenticationError("Keycloak token response did not contain an access_token");
-		return response;
+		if (response.status < 200 || response.status >= 300) throw new KeycloakAuthenticationError(`Keycloak token ${action} failed with status ${response.status}: ${response.body.slice(0, this.timings.maxErrorBodyChars)}`);
+		let body;
+		try {
+			body = JSON.parse(response.body);
+		} catch (error) {
+			throw new KeycloakAuthenticationError(`Keycloak token ${action} returned status ${response.status} with a body that is not JSON`, { cause: error });
+		}
+		if (typeof body !== "object" || body === null || Array.isArray(body)) throw new KeycloakAuthenticationError(`Keycloak token ${action} returned a JSON ${jsonTypeName(body)} instead of an object`);
+		return body;
 	}
-	storeTokens(response) {
-		this.accessToken = response.access_token;
-		if (typeof response.refresh_token === "string" && response.refresh_token.length > 0) this.refreshToken = response.refresh_token;
+	storeTokens(payload) {
+		const accessToken = payload["access_token"];
+		if (typeof accessToken !== "string" || accessToken.length === 0) throw new KeycloakAuthenticationError(`Keycloak token response did not contain an access_token; the response carried the fields [${Object.keys(payload).sort().map((name) => `'${name}'`).join(", ")}] (values withheld: a token response is credential material)`);
+		let expiresInRaw = 0;
+		if ("expires_in" in payload) expiresInRaw = payload["expires_in"];
+		let expiresIn = NaN;
+		if (typeof expiresInRaw === "number") expiresIn = expiresInRaw;
+		else if (typeof expiresInRaw === "string" && expiresInRaw.trim().length > 0) expiresIn = Number(expiresInRaw);
+		if (Number.isNaN(expiresIn)) throw new KeycloakAuthenticationError("Keycloak token response carried a non-numeric expires_in (value withheld)");
+		this.currentAccessToken = accessToken;
+		const refreshToken = payload["refresh_token"];
+		if (typeof refreshToken === "string" && refreshToken.length > 0) this.currentRefreshToken = refreshToken;
+		this.expiresAt = this.timeFn() + Math.max(expiresIn, 0);
 	}
-	validateConfig(config) {
-		for (const key of [
-			"keycloakUrl",
-			"realm",
-			"clientId"
-		]) if (config[key].length === 0) throw new KeycloakAuthenticationError(`KeycloakTokenProviderConfig.${key} is required and must be non-empty`);
-		const hasOfflineToken = (config.offlineToken ?? "").length > 0;
-		const hasPassword = (config.username ?? "").length > 0 && (config.password ?? "").length > 0;
-		if (!hasOfflineToken && !hasPassword) throw new KeycloakAuthenticationError("KeycloakTokenProviderConfig requires either an offlineToken or a username + password");
+};
+const SESSION_REGISTRY = /* @__PURE__ */ new WeakMap();
+async function acquireKeycloakTokenSession(options, scope = options.transport) {
+	const key = keycloakSessionRegistryKey(options);
+	let sessions = SESSION_REGISTRY.get(scope);
+	if (sessions === void 0) {
+		sessions = /* @__PURE__ */ new Map();
+		SESSION_REGISTRY.set(scope, sessions);
+	}
+	const scoped = sessions;
+	let entry = scoped.get(key);
+	if (entry === void 0 || entry.session !== null && entry.session.closed) {
+		const created = {
+			promise: KeycloakTokenSession.create(options),
+			session: null,
+			holders: 0
+		};
+		created.promise.then((started) => {
+			created.session = started;
+		}, () => {
+			scoped.delete(key);
+		});
+		scoped.set(key, created);
+		entry = created;
+	}
+	const held = entry;
+	held.holders += 1;
+	let session;
+	try {
+		session = await held.promise;
+	} catch (error) {
+		held.holders -= 1;
+		throw error;
+	}
+	let released = false;
+	return {
+		session,
+		release: () => {
+			if (released) return;
+			released = true;
+			held.holders -= 1;
+			if (held.holders === 0) {
+				session.stop();
+				if (scoped.get(key) === held) scoped.delete(key);
+			}
+		}
+	};
+}
+const KEYCLOAK_TOKEN_PROVIDER_CONFIG = new InjectionToken("ONDEWO_T2S_KEYCLOAK_TOKEN_PROVIDER_CONFIG");
+function resolveCredentials(config) {
+	const keycloakUrl = config.keycloakUrl ?? "";
+	const realm = config.realm ?? "";
+	const clientId = config.clientId ?? "";
+	const configured = [
+		keycloakUrl,
+		realm,
+		clientId
+	].filter((value) => value.length > 0).length;
+	if (configured === 0) return null;
+	if (configured < 3) throw new KeycloakAuthenticationError("The Keycloak fields `keycloakUrl`, `realm`, and `clientId` must be provided together in KeycloakTokenProviderConfig.");
+	const refreshToken = config.refreshToken || config.offlineToken || "";
+	const password = config.password ?? "";
+	const username = config.username ?? "";
+	if (refreshToken.length === 0 && password.length === 0) throw new KeycloakAuthenticationError("Either the field `password` or the field `refreshToken` (refresh_token; deprecated alias `offlineToken`) is mandatory in KeycloakTokenProviderConfig.");
+	if (refreshToken.length === 0 && username.length === 0) throw new KeycloakAuthenticationError("KeycloakTokenProvider requires either an offlineToken or a username + password pair");
+	return {
+		keycloakUrl,
+		realm,
+		clientId,
+		username,
+		password,
+		tokenExpirationInS: config.tokenExpirationInS ?? null,
+		verifySsl: config.keycloakVerifySsl ?? true,
+		refreshToken
+	};
+}
+var KeycloakTokenProvider = class KeycloakTokenProvider {
+	http = inject(HttpClient);
+	config = inject(KEYCLOAK_TOKEN_PROVIDER_CONFIG, { optional: true });
+	verifySsl = true;
+	session = null;
+	lease = null;
+	starting = null;
+	generation = 0;
+	destroyed = false;
+	ready;
+	resolveReady;
+	rejectReady;
+	transport = (request) => {
+		const headers = new HttpHeaders({
+			"Content-Type": "application/x-www-form-urlencoded",
+			Accept: "application/json"
+		});
+		const response$ = this.http.post(request.url, new URLSearchParams(request.form).toString(), {
+			headers,
+			observe: "response",
+			responseType: "text"
+		}).pipe(timeout({ first: request.timeoutInS * 1e3 }), map((response) => ({
+			status: response.status,
+			body: response.body ?? ""
+		})), catchError((error) => {
+			if (error instanceof HttpErrorResponse && error.status !== 0) {
+				let body = "";
+				if (typeof error.error === "string") body = error.error;
+				return of({
+					status: error.status,
+					body
+				});
+			}
+			return throwError(() => new KeycloakTransportError("the token endpoint gave no HTTP answer", { cause: error }));
+		}));
+		return firstValueFrom(response$);
+	};
+	constructor() {
+		this.ready = new Promise((resolve, reject) => {
+			this.resolveReady = resolve;
+			this.rejectReady = reject;
+		});
+		this.ready.catch(() => void 0);
+		if (this.config === null) return;
+		this.start(this.config).then(() => this.resolveReady(), (error) => this.rejectReady(error));
+	}
+	async configure(config) {
+		this.destroyed = false;
+		try {
+			await this.start(config);
+		} catch (error) {
+			this.rejectReady(error);
+			throw error;
+		}
+		this.resolveReady();
+	}
+	async ensureFreshToken(options = {}) {
+		if (this.config === null) return null;
+		if (this.session === null) await (this.starting ?? this.start(this.config));
+		if (this.session === null) return null;
+		return this.session.getAccessToken({ force: options.force ?? false });
+	}
+	getToken() {
+		if (this.session === null) {
+			if (this.starting === null) return null;
+			return this.starting.then(() => {
+				if (this.session === null) return null;
+				return this.session.getAccessToken();
+			}, () => null);
+		}
+		const token = this.session.peekAccessToken();
+		if (token !== null) return token;
+		return this.session.getAccessToken();
+	}
+	get keycloakVerifySsl() {
+		return this.verifySsl;
+	}
+	whenReady() {
+		return this.ready;
+	}
+	ngOnDestroy() {
+		this.destroyed = true;
+		this.releaseLease();
+	}
+	toJSON() {
+		if (this.config === null) return {};
+		return {
+			...this.config,
+			password: redactSecret(this.config.password),
+			offlineToken: redactSecret(this.config.offlineToken),
+			refreshToken: redactSecret(this.config.refreshToken)
+		};
+	}
+	toString() {
+		return `KeycloakTokenProvider(${JSON.stringify(this.toJSON())})`;
+	}
+	releaseLease() {
+		if (this.lease !== null) {
+			this.lease.release();
+			this.lease = null;
+		}
+	}
+	start(config) {
+		this.generation += 1;
+		const generation = this.generation;
+		this.releaseLease();
+		this.session = null;
+		this.config = config;
+		this.verifySsl = config.keycloakVerifySsl ?? true;
+		const starting = this.startSession(config, generation).finally(() => {
+			if (this.starting === starting) this.starting = null;
+		});
+		this.starting = starting;
+		return starting;
+	}
+	async startSession(config, generation) {
+		const credentials = resolveCredentials(config);
+		if (credentials === null) return;
+		const lease = await acquireKeycloakTokenSession({
+			...credentials,
+			transport: this.transport,
+			randomFn: config.randomFraction,
+			logger: config.logger
+		}, this.http);
+		if (generation !== this.generation) {
+			lease.release();
+			return;
+		}
+		this.session = lease.session;
+		if (this.destroyed) {
+			lease.release();
+			return;
+		}
+		this.lease = lease;
 	}
 	static ɵfac = i0.ɵɵngDeclareFactory({
 		minVersion: "12.0.0",
 		version: "22.3.0",
 		ngImport: i0,
 		type: KeycloakTokenProvider,
-		deps: [{ token: i1.HttpClient }, { token: KEYCLOAK_TOKEN_PROVIDER_CONFIG }],
+		deps: [],
 		target: i0.ɵɵFactoryTarget.Injectable
 	});
 	static ɵprov = i0.ɵɵngDeclareInjectable({
@@ -6494,13 +7061,7 @@ i0.ɵɵngDeclareClassMetadata({
 		type: Injectable,
 		args: [{ providedIn: "root" }]
 	}],
-	ctorParameters: () => [{ type: i1.HttpClient }, {
-		type: void 0,
-		decorators: [{
-			type: Inject,
-			args: [KEYCLOAK_TOKEN_PROVIDER_CONFIG]
-		}]
-	}]
+	ctorParameters: () => []
 });
 const AUTHORIZATION_HEADER = "Authorization";
 const BEARER_PREFIX = "Bearer ";
@@ -6657,6 +7218,6 @@ function buildGrpcWebHost(config) {
 function warnInsecure(authority) {
 	console.warn(`ONDEWO gRPC-web: insecure http:// endpoint ${authority}; requests and bearer tokens are sent unencrypted. Use useSecureChannel: true (https://) outside local development.`);
 }
-export { AUTHORIZATION_HEADER, Apodization, AudioFormat, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BatchSynthesizeRequest, BatchSynthesizeResponse, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, GrpcWebEndpointError, HiFiGan, HiFiGanTriton, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeycloakAuthenticationError, KeycloakTokenProvider, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, TOKEN_PROVIDER, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener, authHttpInterceptor, buildBearerValue, buildGrpcWebHost, provideOndewoT2sAuth, resolveBearerValue, resolveToken };
+export { AUTHORIZATION_HEADER, Apodization, AudioFormat, AuthGrpcInterceptor, BEARER_PREFIX, BROWSER_UNSUPPORTED_TLS_FIELDS, BatchSynthesizeRequest, BatchSynthesizeResponse, CONSOLE_KEYCLOAK_LOGGER, Caching, CompositeInference, CreateCustomPhonemizerRequest, CustomPhonemizerProto, DEFAULT_KEYCLOAK_TIMINGS, GLOBAL_KEYCLOAK_SCHEDULER, GRPC_TEXT2_SPEECH_CLIENT_SETTINGS, GlowTTS, GlowTTSTriton, GrpcWebEndpointError, HTTP_TIMEOUT_IN_S, HiFiGan, HiFiGanTriton, KEYCLOAK_TOKEN_PROVIDER_CONFIG, KeycloakAuthenticationError, KeycloakTokenProvider, KeycloakTokenSession, KeycloakTransportError, ListCustomPhonemizerRequest, ListCustomPhonemizerResponse, ListT2sDomainsRequest, ListT2sDomainsResponse, ListT2sLanguagesRequest, ListT2sLanguagesResponse, ListT2sNormalizationPipelinesRequest, ListT2sNormalizationPipelinesResponse, ListT2sPipelinesRequest, ListT2sPipelinesResponse, Logmnse, MAX_ERROR_BODY_CHARS, MAX_REFRESH_RETRY_EXPONENT, MIN_REFRESH_DELAY_IN_S, Map$1 as Map, MbMelganTriton, Mel2Audio, NormalizeTextRequest, NormalizeTextResponse, Pcm, PhonemizerId, Postprocessing, Qwen3TtsBase, Qwen3TtsCustomVoice, REDACTED, REFRESH_RETRY_BASE_DELAY_IN_S, REFRESH_RETRY_MAX_DELAY_IN_S, REFRESH_SKEW_IN_S, RequestConfig, SingleInference, StreamingSynthesizeRequest, StreamingSynthesizeResponse, SynthesizeRequest, SynthesizeResponse, T2SCustomLengthScales, T2SDescription, T2SGetServiceInfoResponse, T2SInference, T2SNormalization, T2sCloudProviderConfig, T2sCloudProviderConfigElevenLabs, T2sCloudProviderConfigGoogle, T2sCloudProviderConfigMicrosoft, T2sCloudServiceAmazon, T2sCloudServiceElevenLabs, T2sCloudServiceGoogle, T2sCloudServiceMicrosoft, T2sPipelineId, TOKEN_PROVIDER, Text2Audio, Text2Mel, Text2SpeechClient, Text2SpeechConfig, UpdateCustomPhonemizerRequest, Vits, VitsTriton, VoiceCloningRequest, VoiceSettings, Wiener, acquireKeycloakTokenSession, authHttpInterceptor, backoffDelayInS, buildBearerValue, buildGrpcWebHost, keycloakSessionRegistryKey, provideOndewoT2sAuth, redactSecret, resolveBearerValue, resolveToken };
 
 //# sourceMappingURL=ondewo-t2s-client-angular.mjs.map
